@@ -1,0 +1,53 @@
+{
+    "name": "tarantool/client",
+    "description": "PHP client for Tarantool.",
+    "keywords": ["tarantool", "client", "pure", "nosql"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eugene Leonovich",
+            "email": "gen.work@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5|^8",
+        "rybakit/msgpack": "^0.9",
+        "symfony/uid": "^5.1|^6"
+    },
+    "require-dev": {
+        "ext-json": "*",
+        "ext-sockets": "*",
+        "friendsofphp/php-cs-fixer": "^2.19",
+        "monolog/monolog": "^1.24|^2.0",
+        "psr/log": "^1.1",
+        "tarantool/phpunit-extras": "^0.1.10",
+        "vimeo/psalm": "^3.9|^4"
+    },
+    "suggest": {
+        "ext-decimal": "For using decimals with Tarantool 2.3+",
+        "ext-uuid": "For better performance when using UUIDs with Tarantool 2.4+",
+        "psr/log": "For using LoggingMiddleware"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tarantool\\Client\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tarantool\\Client\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9.x-dev"
+        }
+    }
+}
