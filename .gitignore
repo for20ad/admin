@@ -1,5 +1,5 @@
 /.vscode
-/public/*
+
 /writable/*
 /.git/*
 /.github/*

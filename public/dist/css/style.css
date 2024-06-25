@@ -1,0 +1,91 @@
+.lg_step{}
+.lg_step ul{list-style:none;padding:0;}
+.lg_step ul li{float:left;width:50%;background-color:#f1f1f1;text-align:center;padding:10px 0;color:#555;}
+.lg_step ul li.on{background-color:var(--tblr-primary);color:#fff;}
+.txt_underline{text-decoration:underline !important}
+@media (min-width: 768px) {
+.navbar .navbar-nav .nav-item:hover{position: relative;}
+.navbar .navbar-nav .nav-item:hover .dropdown-menu{display:block;top:100%;left:0;}
+}
+
+.lst-notice .subject{display:inline-block;max-width:calc(100% - 70px);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.lst-qna .subject{display:inline-block;max-width:calc(100% - 75px);overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+@media (max-width: 992px) {
+  .card-header{padding-left:12px;padding-right:12px;}
+  .card-body{padding-left:12px;padding-right:12px;}
+}
+
+.aside-open{display:none;}
+@media (max-width: 992px) {
+  .aside-search{position:fixed;left:-100%;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.5);z-index:999;margin:0;padding:0;}
+  .aside-search.open{left:0;}
+  .aside-search .card{border:0;position:fixed;left:-100%;top:0;width:85%;height:100%;overflow-y:auto;background-color:#fff;z-index:999;margin:0;padding:0 0 10px 0;}
+  .aside-search.open .card{left:0;}
+  .aside-open{display:block;position:fixed;left:20px;bottom:20px;border:0;background-color:var(--tblr-primary);width:50px;height:50px;border-radius:50%;box-shadow: 0 0 10px rgba(0,0,0,.2);text-indent: -999em;overflow: hidden;
+  background-repeat: no-repeat;background-position: center center;background-size: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 24 24'%3E%3Ctitle%3Etext-search%3C/title%3E%3Cpath d='M19.31 18.9L22.39 22L21 23.39L17.88 20.32C17.19 20.75 16.37 21 15.5 21C13 21 11 19 11 16.5C11 14 13 12 15.5 12C18 12 20 14 20 16.5C20 17.38 19.75 18.21 19.31 18.9M15.5 19C16.88 19 18 17.88 18 16.5C18 15.12 16.88 14 15.5 14C14.12 14 13 15.12 13 16.5C13 17.88 14.12 19 15.5 19M21 4V6H3V4H21M3 16V14H9V16H3M3 11V9H21V11H18.97C17.96 10.37 16.77 10 15.5 10C14.23 10 13.04 10.37 12.03 11H3Z' /%3E%3C/svg%3E");}
+}
+.aside-search .card-body{padding-left:12px;padding-right:12px;}
+.display-flex{display:flex;}
+
+.list-btns{display:flex;}
+@media (max-width: 992px) {
+  .list-btns{flex-direction: column;}
+  .list-btns > div + div{margin-top:5px;}
+  .list-btns .ms-1{margin-left:0 !important;margin-right:3px;}
+}
+.table-mb .tm_tit{display:none;}
+.card-table tr .list-empty{padding:140px 0;}
+.table-mb tfoot tr{background-color:rgba(var(--tblr-primary-rgb), 0.16);font-size:15px;}
+.table-mb tfoot .tm_tit{color:#000;font-size:15px;}
+.table-mb tfoot .tm_cnt{font-size:15px;}
+
+@media (max-width: 992px) {
+  .table-mb-card{background-color:transparent;border:0;}
+  .card-table tr td:first-child, .card-table tr th:first-child{padding:4px;}
+  .card-table tr td:last-child, .card-table tr th:last-child{padding:4px;}
+  .table-mb{display:block;width:100%;border:0;}
+  .table-mb caption{display:block;background-color:#fff;    border-color: #ddd;border-radius:5px;
+    border-style: solid;
+    border-width: var(--tblr-border-width);
+    margin-bottom:7px;}
+  .table-mb thead{display:block;text-align: left;}
+  .table-mb thead tr{display:block;}
+  .table-mb thead th{display:none;}
+  .table-mb thead th.check-all-box{display:block;background-color:#fff;padding:10px 15px;margin-bottom: 12px;border:1px solid #ddd !important;border-radius:5px;}
+  .table-mb thead th.check-all-box label:after{content:"전체선택";font-weight: 500;color:#000;}
+
+  .table-mb tbody{display:block;border:0;}
+  .table-mb tbody tr{display:block;padding:12px;background-color: #fff;border:1px solid #ddd !important;border-radius:5px;}
+  .table-mb tbody tr + tr{margin-top:7px;}
+  .table-mb tbody tr td{display:flex;align-items: center;justify-content: space-between;border:0;padding:4px;}
+
+
+  .table-mb tfoot{display:block;border:0;margin-top:7px;}
+  .table-mb tfoot tr{display:block;padding:12px;border:0 !important;border-radius:5px;}
+  .table-mb tfoot tr + tr{margin-top:7px;}
+  .table-mb tfoot tr td{display:flex;align-items: center;justify-content: space-between;border:0;padding:4px;}
+  .table-mb tfoot .tm_tit{color:#000;font-size:14px;}
+  .table-mb tfoot .tm_cnt{font-size:14px;}
+
+  .table-mb .tm_tit{display:block;text-align:left;color:#555;}
+  .table-mb .tm_cnt{flex:1 1;width:1%;text-align:right;color:#000;}
+  .card-table tr .list-empty,
+  .table-mb tbody tr .list-empty{padding:70px 0;text-align: center;justify-content: center;}
+
+}
+.table-list-subject{display:inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+@media (max-width: 992px) {
+  .table-list-subject{max-width: 80% !important;}
+}
+
+.page-history{display:flex;flex-wrap:wrap;border-bottom:1px solid #d3d3d3;background-color:#ddd;}
+.page-history .item{border-right:1px solid #ddd;background-color:#f1f1f1;padding:7px 10px;}
+.page-history .item.active{border-right:1px solid #ddd;background-color:#fff;}
+.page-history .item.active .name{color:#000;}
+.page-history .item .name{font-size:13px;color:#555;display:inline-block;margin-right:5px;vertical-align: middle;max-width:130px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.page-history .item button{width:15px;height:15px;border:0;background-color:transparent;text-indent: -999em;overflow: hidden;
+background-repeat: no-repeat;background-position: center center;background-size:15px;vertical-align: middle;position: relative;top:-1px;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-x' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'%3E%3C/path%3E%3Cpath d='M18 6l-12 12'%3E%3C/path%3E%3Cpath d='M6 6l12 12'%3E%3C/path%3E%3C/svg%3E");}
+.accordion-button{font-size:1.2rem;font-weight:400;background-color:#fff;}
+.accordion .card-table{border-top:1px solid rgba(97,104,118,.2);}
