@@ -19,10 +19,10 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache; no-store; no-save">
     <!-- Summary -->
-    <meta property="og:title" content="산사유람 API">
-    <meta property="og:description" content="산수유람 API">
+    <meta property="og:title" content="산사유람 ADMIN">
+    <meta property="og:description" content="산수유람 ADMIN">
 
-    <title>산수유람 API</title>
+    <title>산수유람 ADMIN</title>
 
     <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-5/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery-ui.min.css" />
@@ -33,10 +33,20 @@
     <link rel="stylesheet" type="text/css" href="/plugins/toastr/toastr.min.css" />
 
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" /> -->
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css" />
+    <!-- <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css" /> -->
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/contents.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/css/common.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/css/contents.css" /> -->
+
+    <!-- CSS files -->
+    <link href="/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/dist/css/tabler-flags.css" rel="stylesheet"/>
+    <link href="/dist/css/tabler-payments.css" rel="stylesheet"/>
+    <link href="/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/dist/css/style.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/dist/favicon.ico" type="image/x-icon">
+    <script src="/dist/js/jquery-3.6.0.min.js"></script>
 
     <?php
     echo $this->getHeaderCss();
@@ -45,7 +55,7 @@
         <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript">
     var site = '';
-<?php echo $this->getHeaderScriptVar(); ?>
+    <?php echo $this->getHeaderScriptVar(); ?>
     </script>
 </head>
 <body>

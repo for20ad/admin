@@ -17,7 +17,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL =  "https://admin.localhost";
+    public string $baseURL =  "https://api.localhost";
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -505,7 +505,7 @@ class App extends BaseConfig
         // 웹 환경과 CLI 환경을 구분하여 baseURL 설정
         if (php_sapi_name() === 'cli' || defined('STDIN')) {
             // CLI 환경일 때
-            $this->baseURL = 'https://admin.localhost/';
+            $this->baseURL = 'https://api.localhost/';
         }else{
             $this->baseURL = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             $_ENV['CI_ENVIRONMENT'] = 'development';
