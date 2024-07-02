@@ -20,11 +20,11 @@ function _form_error(id, error_message)
 }
 
 function submitSuccess(response) {
-    var boxType = 'warning';
+    var boxType = 'w';
 
     if (response.status == '200')
     {
-        boxType = 'success';
+        boxType = 's';
     }
     else
     {

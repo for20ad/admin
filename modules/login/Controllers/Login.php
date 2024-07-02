@@ -42,6 +42,6 @@ class Login extends CoreController
         // ---------------------------------------------------------------------
         // 로그아웃 후 이동
         // ---------------------------------------------------------------------
-        return redirect()->to('/login');
+        return $this->response->redirect('/login');
     }
 }

@@ -1,8 +1,12 @@
 <?php
 namespace App\Libraries;
 
+use Config\Paths;
+use Config\View;
+
 use CodeIgniter\View\View as BaseView;
 use Psr\Log\LoggerInterface;
+use App\Libraries\MenuLib as menu;
 
 class OwensView extends BaseView
 {
@@ -16,6 +20,8 @@ class OwensView extends BaseView
     private $_aFooterScript    = [];
     private $_aViewDatas       = [];
     private $_aViewClass       = [];
+    protected $session           ='';
+
 
     public function __construct($config = null, string $viewPath = null, $loader = null, bool $debug = null, LoggerInterface $logger = null)
     {
@@ -26,9 +32,15 @@ class OwensView extends BaseView
 
         if (is_null($viewPath))
         {
-            $paths = config('Paths');
+            $paths = new Paths();
+            if (!$paths) {
+                throw new \RuntimeException('Unable to load the "Paths" configuration file.');
+            }
+            $viewPath = $paths->viewDirectory ?? null;
+            if (!$viewPath) {
+                throw new \RuntimeException('The "viewDirectory" property is not defined in the "Paths" configuration.');
+            }
 
-            $viewPath = $paths->viewDirectory;
         }
 
         parent::__construct($config, $viewPath, $loader, $debug, $logger);
@@ -40,7 +52,8 @@ class OwensView extends BaseView
 
     public function view(string $name, array $data = [], array $options = []): string
     {
-        $saveData = config(View::class)->saveData ?? true;
+        $view     = new View();
+        $saveData = $view->saveData ?? true;
 
 
         if (array_key_exists('saveData', $options))
@@ -332,6 +345,9 @@ class OwensView extends BaseView
 
         $pageLayout              = 'layout' . $pageLayout;
         $pageParam['pageLayout'] = $pageLayout;
+
+        $pageParam['owensView'] = $this;
+        $pageParam['menuLib']   = new menu();
 
         $sReturn = $this->view($siteLayout . '\\' . $pageLayout, $pageParam);
 

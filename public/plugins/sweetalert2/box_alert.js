@@ -1,25 +1,54 @@
+const typeShort = {
+    s: 'success',
+    e: 'error',
+    w: 'warning',
+    i: 'info',
+    q: 'question'
+};
+
+const typeColors = {
+    success: '#2FB344',
+    error: '#D63939',
+    warning: '#F76707',
+    info: '#206BC4',
+    question: '#87adbd'
+};
 function box_remove()
 {
     Swal.close();
 }
 
 // success, warning, info, error, question
-function box_alert(txt, boxType, boxTitle, callbackMethod, jsonData)
+function box_alert(boxText, boxType, subTxt, callbackMethod, jsonData)
 {
     if (boxType == '' || boxType == undefined) boxType = null;
-    if (boxTitle == undefined) boxTitle = '알림';
+    if (boxText == undefined) boxText = '알림';
 
     $(':focus').blur();
 
     setTimeout(function() {
+        const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
         Swal.fire({
-            icon: boxType,
-            title: boxTitle,
-            html: txt,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#666',
+            icon: typeShort[boxType],
+            title: boxText,
+            html: subTxt,
             allowOutsideClick: false,
-            confirmButtonText: '확인'
+            showCancelButton: true,
+            confirmButtonText: '확인',
+            confirmButtonColor: color,
+            reverseButtons:true,
+            cancelButtonColor: '#fff',
+            cancelButtonText: '취소',
+            customClass: {
+                popup: 'custom-popup',
+                cancelButton: 'custom-cancel-button'
+            },
+            didOpen: () => {
+                const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
+                const styleElement = document.createElement('style');
+                styleElement.innerHTML = `.custom-popup::before { background-color: ${color} !important; }`;
+                document.head.appendChild(styleElement);
+            }
         }).then((result) => {
             if (result.isConfirmed)
             {
@@ -32,43 +61,67 @@ function box_alert(txt, boxType, boxTitle, callbackMethod, jsonData)
     }, 150);
 }
 
-function box_alert_autoclose(txt, boxType, boxTitle)
+function box_alert_autoclose(boxText, boxType, subTxt)
 {
     if (boxType == '' || boxType == undefined) boxType = null;
-    if (boxTitle == undefined) boxTitle = '알림';
+    if (boxText == undefined) boxText = '알림';
 
     $(':focus').blur();
 
     setTimeout(function() {
+        const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
         Swal.fire({
-            icon: boxType,
-            title: boxTitle,
-            html: txt,
-            confirmButtonColor: '#3085d6',
+            icon: typeShort[boxType],
+            title: boxText,
+            html: subTxt,
+            confirmButtonColor: color,
             cancelButtonColor: '#666',
             allowOutsideClick: false,
             confirmButtonText: '확인',
-            timer: ((txt.length * 32) < 1500) ? 1500 : (txt.length * 32)
+            reverseButtons:true,
+            timer: ((boxText.length * 32) < 1500) ? 1500 : (boxText.length * 32),
+            customClass: {
+                popup: 'custom-popup',
+                cancelButton: 'custom-cancel-button'
+            },
+            didOpen: () => {
+                const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
+                const styleElement = document.createElement('style');
+                styleElement.innerHTML = `.custom-popup::before { background-color: ${color} !important; }`;
+                document.head.appendChild(styleElement);
+            }
         });
     }, 150);
 }
 
-function box_alert_focus(txt, obj, boxType, boxTitle)
+function box_alert_focus(boxText, obj, boxType, subTxt)
 {
     if (boxType == '' || boxType == undefined) boxType = null;
-    if (boxTitle == undefined) boxTitle = '알림';
+    if (boxText == undefined) boxText = '알림';
 
     $(':focus').blur();
 
     setTimeout(function() {
+        const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
         Swal.fire({
-            icon: boxType,
-            title: boxTitle,
-            html: txt,
-            confirmButtonColor: '#3085d6',
+            icon: typeShort[boxType],
+            title: boxText,
+            html: subTxt,
+            confirmButtonColor: color,
             cancelButtonColor: '#666',
             allowOutsideClick: false,
-            confirmButtonText: '확인'
+            confirmButtonText: '확인',
+            reverseButtons:true,
+            customClass: {
+                popup: 'custom-popup',
+                cancelButton: 'custom-cancel-button'
+            },
+            didOpen: () => {
+                const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
+                const styleElement = document.createElement('style');
+                styleElement.innerHTML = `.custom-popup::before { background-color: ${color} !important; }`;
+                document.head.appendChild(styleElement);
+            }
         }).then((result) => {
             if (result.isConfirmed)
             {
@@ -79,22 +132,35 @@ function box_alert_focus(txt, obj, boxType, boxTitle)
 }
 
 // confirm, prompt
-function box_confirm(txt, boxType, boxTitle, callbackMethod, jsonData)
+function box_confirm(boxText, boxType, subTxt, callbackMethod, jsonData)
 {
     if (boxType == '' || boxType == undefined) boxType = null;
-    if (boxTitle == undefined) boxTitle = '알림';
+    if (boxText == undefined) boxText = '알림';
 
     $(':focus').blur();
 
     setTimeout(function() {
+        const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
         Swal.fire({
-            icon: boxType,
-            title: boxTitle,
-            html: txt,
+            icon: typeShort[boxType],
+            title: boxText,
+            html: subTxt,
             allowOutsideClick: false,
             showCancelButton: true,
+            confirmButtonColor: color,
             confirmButtonText: '확인',
-            cancelButtonText: '취소'
+            cancelButtonText: '취소',
+            reverseButtons:true,
+            customClass: {
+                popup: 'custom-popup',
+                cancelButton: 'custom-cancel-button'
+            },
+            didOpen: () => {
+                const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
+                const styleElement = document.createElement('style');
+                styleElement.innerHTML = `.custom-popup::before { background-color: ${color} !important; }`;
+                document.head.appendChild(styleElement);
+            }
         }).then((result) => {
             if (result.isConfirmed)
             {
@@ -107,18 +173,18 @@ function box_confirm(txt, boxType, boxTitle, callbackMethod, jsonData)
     }, 150);
 }
 
-function box_loading(txt, boxType, boxTitle)
+function box_loading(boxText, boxType, subTxt)
 {
     if (boxType == '' || boxType == undefined) boxType = null;
-    if (boxTitle == undefined) boxTitle = '알림';
+    if (boxText == undefined) boxText = '알림';
 
     $(':focus').blur();
 
     setTimeout(function() {
         Swal.fire({
-            icon: boxType,
-            title: boxTitle,
-            html: txt,
+            icon: typeShort[boxType],
+            title: boxText,
+            html: subTxt,
             showConfirmButton: false,
             allowOutsideClick: false,
             allowEscapeKey: false,
@@ -134,9 +200,9 @@ function box_back()
     history.go(-1);
 }
 
-function box_alert_back(txt, boxType, boxTitle)
+function box_alert_back(boxText, boxType, subTxt)
 {
-    box_alert(txt, boxType, boxTitle, box_back);
+    box_alert(boxText, boxType, subTxt, box_back);
 }
 
 function box_close()
@@ -144,9 +210,9 @@ function box_close()
     window.close();
 }
 
-function box_alert_close(txt, boxType, boxTitle)
+function box_alert_close(boxText, boxType, subTxt)
 {
-    box_alert(txt, boxType, boxTitle, box_close);
+    box_alert(boxText, boxType, subTxt, box_close);
 }
 
 function box_redirect(data)
@@ -158,9 +224,9 @@ function box_redirect(data)
     return false;
 }
 
-function box_alert_redirect(txt, url, boxType, boxTitle)
+function box_alert_redirect(boxText, url, boxType, subTxt)
 {
-    box_alert(txt, boxType, boxTitle, box_redirect, {url: url});
+    box_alert(boxText, boxType, subTxt, box_redirect, {url: url});
 }
 
 
@@ -174,9 +240,9 @@ function box_opener_redirect(data)
     return false;
 }
 
-function box_alert_opener_redirect(txt, url, boxType, boxTitle)
+function box_alert_opener_redirect(boxText, url, subTxt, boxTitle)
 {
-    box_alert(txt, boxType, boxTitle, box_opener_redirect, {url: url});
+    box_alert(boxText, boxType, subTxt, box_opener_redirect, {url: url});
 }
 
 function box_replace(data)
@@ -188,9 +254,9 @@ function box_replace(data)
     return false;
 }
 
-function box_alert_replace(txt, url, boxType, boxTitle)
+function box_alert_replace(boxText, url, boxType, subTxt)
 {
-    box_alert(txt, boxType, boxTitle, box_replace, {url: url});
+    box_alert(boxText, boxType, subTxt, box_replace, {url: url});
 }
 
 function box_reload()
@@ -199,7 +265,7 @@ function box_reload()
     window.location.href = window.location.href;
 }
 
-function box_alert_reload(txt, boxType, boxTitle)
+function box_alert_reload(boxText, boxType, subTxt)
 {
-    box_alert(txt, boxType, boxTitle, box_reload);
+    box_alert(boxText, boxType, subTxt, box_reload);
 }

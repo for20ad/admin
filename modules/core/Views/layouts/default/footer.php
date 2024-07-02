@@ -1,44 +1,40 @@
-<script type="text/javascript" src="/plugins/underscore/underscore-umd-min.js"></script>
 
-<!-- <script type="text/javascript" src="/plugins/jquery-modal/jquery.modal.js"></script>
-<script type="text/javascript" src="/plugins/jquery-modal/box_alert.js"></script> -->
-<script type="text/javascript" src="/plugins/sweetalert2/sweetalert2.all.min.js"></script>
-<script type="text/javascript" src="/plugins/sweetalert2/box_alert.js"></script>
 
 <script type="text/javascript" src="/plugins/toastr/toastr.min.js"></script>
-
+<script type="text/javascript" src="/plugins/sweetalert2/sweetalert2.all.js" <?php csp_script_nonce()?>></script>
+<script type="text/javascript" src="/plugins/sweetalert2/box_alert.js" <?php csp_script_nonce()?>></script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-<script src="/dist/libs/apexcharts/dist/apexcharts.min.js?1674944402" defer></script>
-<script src="/dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1674944402" defer></script>
-<script src="/dist/libs/jsvectormap/dist/maps/world.js?1674944402" defer></script>
-<script src="/dist/libs/jsvectormap/dist/maps/world-merc.js?1674944402" defer></script>
-<script src="/dist/libs/litepicker/dist/litepicker.js?1674944402" defer></script>
 <!-- Tabler Core -->
-<script src="/dist/js/tabler.min.js?1674944402" defer></script>
+<script src="/dist/js/tabler.min.js" defer></script>
 <script src="/dist/js/common.js" defer></script>
 
 
 <?php
 $this->setFooterJs('/dist/js/core/global.js', 0);
-$this->setFooterJs('/dist/js/core/infinity.js', 0);
+$uriString = \Config\Services::request()->uri->getPath();
+
+if ( strpos( $uriString, '/login' ) === false && strpos( $uriString, 'test' ) === false){
+    $this->setFooterJs('/dist/js/core/admin/infinity.js', 0);
+}
+
 
 echo $this->getFooterJs();
 ?>
 
-<script>
+<script <?php echo csp_script_nonce()?>>
 <?php echo $this->getFooterScript(); ?>
 </script>
 
 <script src="/plugins/lazyload/lazyload.min.js"></script>
-<script>
+<script <?php echo csp_script_nonce()?>>
 var lazyLoadInstance = new LazyLoad({
     elements_selector: ".lazy"
 });
 </script>
-<footer class="footer footer-transparent d-print-none">
+<!-- <footer class="footer footer-transparent d-print-none">
             <div class="container-xl">
                 <div class="row text-center align-items-center flex-row-reverse">
                     <div class="col-12 col-lg-auto mt-3 mt-lg-0">
@@ -59,6 +55,6 @@ var lazyLoadInstance = new LazyLoad({
             </div>
         </footer>
     </div>
-</div>
+</div> -->
 </body>
 </html>

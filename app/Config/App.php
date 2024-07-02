@@ -17,7 +17,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL =  "https://api.localhost";
+    public string $baseURL =  "";
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -466,7 +466,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $CSRFSameSite = 'Lax';
+    public $CSRFSameSite = 'None';
 
     /**
      * --------------------------------------------------------------------------
@@ -486,7 +486,7 @@ class App extends BaseConfig
      *
      * @var bool
      */
-    public $CSPEnabled = true;
+    public $CSPEnabled = false;
 
     public  $debug = false;
     // -------------------------------------------------------------------------
@@ -505,7 +505,7 @@ class App extends BaseConfig
         // 웹 환경과 CLI 환경을 구분하여 baseURL 설정
         if (php_sapi_name() === 'cli' || defined('STDIN')) {
             // CLI 환경일 때
-            $this->baseURL = 'https://api.localhost/';
+            $this->baseURL = 'https://api.brav.co.kr/';
         }else{
             $this->baseURL = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             $_ENV['CI_ENVIRONMENT'] = 'development';

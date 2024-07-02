@@ -15,43 +15,50 @@ function infinityTimer(duration, id)
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        $('#' + id).text(minutes + ':' + seconds);
+        $('#' + id).text(hours + ':' +minutes + ':' + seconds);
 
         if (--timer < 0) {
             timer = 0;
             clearInterval(infinity_timer);
 
-            document.location.href = admin_admin_url + 'logout';
+            document.location.href = "/logOut";
         }
     }, 1000);
 }
 
-function check_login()
-{
+function check_login() {
+    console.log('check_login called');
     $.ajax({
-        url: admin_admin_url + "apis/adminMemberApi/checkLogin",
+        url: "/api/login/checkLogin",
         method: "GET",
         dataType: "json",
         cache: false,
-        beforeSend: function() { },
-        success: function(response)
-        {
-            submitSuccess(response);
-            return false;
+        beforeSend: function() {
+            console.log('Before send check_login');
         },
-        error: function()
-        {
-            // document.location.href = admin_admin_url + 'logout';
-            return false;
+        success: function(response) {
+            console.log('check_login success:', response);
+            if (response.status == "true" ) {
+                console.log('User is logged in');
+            } else {
+                console.log('User is not logged in, redirecting to /logOut');
+                document.location.href = "/login";
+            }
         },
-        complete: function() { }
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('check_login error', textStatus, errorThrown);
+            document.location.href = "/login";
+        },
+        complete: function() {
+            console.log('check_login complete');
+        }
     });
 }
 
 function delay_login()
 {
     $.ajax({
-        url: admin_admin_url + "apis/adminMemberApi/delayLogin",
+        url: "/api/login/delayLogin",
         method: "GET",
         dataType: "json",
         cache: false,
@@ -69,7 +76,7 @@ function delay_login()
         },
         error: function()
         {
-            document.location.href = admin_admin_url + 'login';
+           // document.location.href = "/login";
             return false;
         },
         complete: function() { }
@@ -79,6 +86,7 @@ function delay_login()
 $(document).ready(function() {
     if (site_is_admin_login == '1')
     {
+
         if ($('#admin_auth_timer').length > 0)
         {
             if (typeof admin_auth_time !== 'undefined')
@@ -95,6 +103,6 @@ $(document).ready(function() {
     }
     else
     {
-        document.location.href = admin_admin_url + 'login';
+        document.location.href = "/login";
     }
 });

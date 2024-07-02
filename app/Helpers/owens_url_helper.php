@@ -75,6 +75,7 @@ if (! function_exists('_link_url'))
             if (strpos($uri, '/' . $subDomain) === 0)
             {
                 $uri = substr_replace($uri, '', 0, strlen('/' . $subDomain));
+
             }
         }
 

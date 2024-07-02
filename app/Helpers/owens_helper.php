@@ -6,6 +6,57 @@ use CodeIgniter\HTTP\IncomingRequest;
  * @Desc   : owens 공용 helper
 */
 
+use  Module\setting\Models\MemberModel;
+use  App\Libraries\MenuLib;
+use Config\Site as SiteConfig;
+
+if(!function_exists('getMemuData')){
+    function getMemuData()
+    {
+        $session = \Config\Services::session();
+        $menuLib = new MenuLib();
+        $menu    = [];
+        $site_config = new SiteConfig;
+        if (!empty($session->get('_memberInfo')))
+        {
+            $admin_group = _elm( $session->get('_memberInfo'), 'member_group_idx' );
+            $_menus        = $menuLib->getAdminGroupMenu( $admin_group );
+            if( empty( $_menus ) === false ){
+                foreach( $_menus as  $key => $_menu ){
+
+                    $menuConf = [];
+                    $menuConf = _elm($site_config->adminMenuRules , _elm( $_menu, 'MENU_GROUP_ID') );
+                    $_menus[$key]['WIDTH'] = _elm( $menuConf, 'width' );
+                    $_menus[$key]['HEIGHT'] = _elm( $menuConf, 'height' );
+                    $_menus[$key]['VIEWBOX'] = _elm( $menuConf, 'viewBox' );
+                    $_menus[$key]['PATH'] = _elm( $menuConf, 'path' );
+
+                }
+            }
+            $menu = $_menus;
+        }
+        return $menu;
+    }
+}
+
+
+if(!function_exists('getGrantName')){
+    function getGrantName()
+    {
+        $session = \Config\Services::session();
+        $levelTxt = '';
+        if (!empty($session->get('_memberInfo')))
+        {
+            $admin_level = _elm( $session->get('_memberInfo'), 'member_level' );
+            $memberModel = new MemberModel();
+            $levelTxt    = $memberModel->getAdminMemberGroup($admin_level);
+
+
+        }
+        return $levelTxt;
+    }
+}
+
 if (!function_exists('contains_banned_words')) {
     function contains_banned_words($text){
         $bannedWords = getenv('BANNED_WORDS');

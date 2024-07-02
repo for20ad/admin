@@ -12,7 +12,7 @@ use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;
 use App\Libraries\OwensCache;
-use Module\member\Libraries\Member;
+use Module\setting\Libraries\Member;
 use Module\core\Models\LogModel;
 
 class ApiController extends ResourceController

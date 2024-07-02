@@ -24,6 +24,9 @@ class ContentSecurityPolicy extends BaseConfig
      */
     public bool $reportOnly = false;
 
+
+
+
     /**
      * Specifies a URL where a browser will send reports
      * when a content security policy is violated.
@@ -47,28 +50,28 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $defaultSrc;
+    public $defaultSrc = ['self'];
 
     /**
      * Lists allowed scripts' URLs.
      *
      * @var list<string>|string
      */
-    public $scriptSrc = 'self';
+    public $scriptSrc = ['self', 'unsafe-inline', 'https://*.cloudflare.com'];
 
     /**
      * Lists allowed stylesheets' URLs.
      *
      * @var list<string>|string
      */
-    public $styleSrc = 'self';
+    public $styleSrc = [ 'self', 'https://*.googleapis.com/', 'https://cdn.tailwindcss.com', 'https://*.jsdelivr.net' ];
 
     /**
      * Defines the origins from which images can be loaded.
      *
      * @var list<string>|string
      */
-    public $imageSrc = 'self';
+    public $imageSrc = ['self', 'data: w3.org/svg/2000', 'https://www.google.com', 'https://cdn.tailwindcss.com' ];
 
     /**
      * Restricts the URLs that can appear in a page's `<base>` element.
@@ -99,7 +102,8 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $fontSrc;
+    public $fontSrc = ['self', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
+
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
