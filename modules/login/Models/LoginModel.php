@@ -13,13 +13,11 @@ class LoginModel extends Model
         }
 
         $builder = $this->db->table('ADMIN_MEMBER');
-        $builder->where( 'MB_USERID', _elm( $param, 'MB_USERID' ) );
+        $builder->where( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
         if( empty( _elm( $param, 'MB_LOGIN_STATUS') ) === false ){
             $builder->set('MB_LOGIN_STATUS', _elm( $param, 'MB_LOGIN_STATUS') );
         }
-
         $builder->set('MB_PASS_ERR_COUNT', _elm( $param, 'MB_PASS_ERR_COUNT') );
-
 
         $aReturn = $builder->update();
 
@@ -31,8 +29,8 @@ class LoginModel extends Model
 
         $builder = $this->db->table('ADMIN_MEMBER');
         $builder->where( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
-
-        $builder->set('MB_LAST_LOGIN_AT', _elm( $param, 'MB_LAST_LOGIN_DATETIME') );
+        $builder->set( 'MB_LOGIN_COUNT', 'IFNULL(MB_LOGIN_COUNT, 0) + 1', false );
+        $builder->set('MB_LAST_LOGIN_AT', _elm( $param, 'MB_LAST_LOGIN_AT') );
         $builder->set('MB_LAST_LOGIN_IP', _elm( $param, 'MB_LAST_LOGIN_IP') );
 
         $aReturn = $builder->update();

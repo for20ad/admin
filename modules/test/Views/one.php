@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-5/css/bootstrap.css" />
     <link href="/dist/css/tabler.css" rel="stylesheet" />
     <link href="/dist/css/tabler-flags.css" rel="stylesheet" />
@@ -756,7 +756,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="body2-c">
+                                                <td class="body2-c nowrap">
                                                     <a href="#" class="text-reset">[공지] 4월 13일 시스템 점검 안내</a>
                                                 </td>
                                                 <td class="text-dark body2-c">
@@ -764,7 +764,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="body2-c">
+                                                <td class="body2-c nowrap">
                                                     <a href="#" class="text-reset">[공지] 4월 13일 시스템 점검 안내</a>
                                                 </td>
                                                 <td class="text-dark body2-c">
@@ -772,7 +772,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="body2-c">
+                                                <td class="body2-c nowrap">
                                                     <a href="#" class="text-reset">[공지] 4월 13일 시스템 점검 안내</a>
                                                 </td>
                                                 <td class="text-dark body2-c">
@@ -780,7 +780,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="body2-c">
+                                                <td class="body2-c nowrap">
                                                     <a href="#" class="text-reset">[공지] 4월 13일 시스템 점검 안내</a>
                                                 </td>
                                                 <td class="text-dark body2-c">

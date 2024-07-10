@@ -330,7 +330,9 @@ class LoginApi extends ApiController
 
 
         session_write_close();
-        $modelParam['MB_USERID']                   = _elm( $memberInfo, 'MB_USERID' );
+
+
+        $modelParam['MB_IDX']                      = _elm( $memberInfo, 'MB_IDX' );
         $modelParam['MB_PASS_ERR_COUNT']           = 0;
         $loginModel->updateLoginCnt( $modelParam );
 
@@ -380,7 +382,7 @@ class LoginApi extends ApiController
 
         if ($memberLib->isAdminLogin() === true)
         {
-            $admin_expire_time                      = (int)_elm($site_config, 'admin_expire_time', 7200);
+            $admin_expire_time                      = (int)_elm($site_config, 'adminExpireTime', 7200);
 
             $this->session->set('TEMP_ADMIN_LOGIN_TIME', time(), $admin_expire_time);
 

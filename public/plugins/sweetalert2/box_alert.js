@@ -3,7 +3,8 @@ const typeShort = {
     e: 'error',
     w: 'warning',
     i: 'info',
-    q: 'question'
+    q: 'question',
+    c: 'confirm',
 };
 
 const typeColors = {
@@ -11,7 +12,8 @@ const typeColors = {
     error: '#D63939',
     warning: '#F76707',
     info: '#206BC4',
-    question: '#87adbd'
+    question: '#87adbd',
+    confirm: '#C29183'
 };
 function box_remove()
 {

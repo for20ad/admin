@@ -9,55 +9,40 @@
 
 namespace Module\setting\Controllers;
 
-use App\Libraries\MemberLib;
-use App\Libraries\MenuLib;
-use Module\core\Controllers\CoreController;
+use Module\setting\Controllers\Setting;
 use Module\setting\Models\MemberModel;
 use Module\setting\Models\MenuModel;
 
-use Config\Services;
-use DOMDocument;
 
-use Module\setting\Config\Config as memberConfig;
-use Config\Site;
-
-use CodeIgniter\Debug\Toolbar\Collectors\Views;
-use Predis\Command\Argument\Server\To;
-
-class Menu extends CoreController
+class Menu extends Setting
 {
-
-    protected $memberlib;
-    protected $menulib;
 
     public function __construct()
     {
         parent::__construct();
-        $this->memberlib                         = new MemberLib();
-        $this->menulib                           = new MenuLib();
 
         #------------------------------------------------------------------
         # TODO: 일반 관리자 권한 체크
         #------------------------------------------------------------------
-        // if ($this->memberlib->isLogin() === true)
-        // {
-        //     if ($this->menulib->isGrant(2) === false)
-        //     {
-        //         $this->response->redirect(_link_url('/main'));
-        //     }
-        // }
+        if ($this->memberlib->isLogin() === true)
+        {
+            if ($this->menulib->isGrant(2) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
 
         #------------------------------------------------------------------
         # TODO: 최고관리자 권한체크
         #------------------------------------------------------------------
         // 권한 체크
-        // if ($this->memberlib->isSuperAdmin() === false)
-        // {
-        //     if ($this->menulib->isGrant(2) === false)
-        //     {
-        //         $this->response->redirect(_link_url('/main'));
-        //     }
-        // }
+        if ($this->memberlib->isSuperAdmin() === false)
+        {
+            if ($this->menulib->isGrant(2) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
     }
     public function index()
     {
@@ -82,9 +67,9 @@ class Menu extends CoreController
         #------------------------------------------------------------------
         # TODO: Config 세팅
         #------------------------------------------------------------------
-        $mConfig                                   = new memberConfig();
 
-        $pageDatas['config']                       = $mConfig->menu;
+
+        $pageDatas['config']                       = $this->mConfig->menu;
 
         $menu_lists                                = $menuModel->getMenuLists();
 
@@ -120,9 +105,6 @@ class Menu extends CoreController
         #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
-
-
-
 
         $pageParam                                 = [];
         $pageParam['file']                         = '\Module\setting\Views\menu\menu';

@@ -10,6 +10,8 @@ use  Module\setting\Models\MemberModel;
 use  App\Libraries\MenuLib;
 use Config\Site as SiteConfig;
 
+
+
 if(!function_exists('getMemuData')){
     function getMemuData()
     {
@@ -38,6 +40,7 @@ if(!function_exists('getMemuData')){
         return $menu;
     }
 }
+
 
 
 if(!function_exists('getGrantName')){
@@ -116,7 +119,6 @@ if( ! function_exists( '_parseJsonFormData' ) )
                             if (preg_match('/name="([^"]*)"/', $header, $matches)) {
                                 $name = $matches[1];
                                 if (preg_match('/filename="([^"]*)"/', $header, $matches)) {
-                                    // 파일 처리
                                     // 파일 처리
                                     $filename = $matches[1];
                                     $tmpName = tempnam(sys_get_temp_dir(), 'php');

@@ -8,9 +8,7 @@
     $aConfig          = _elm($pageDatas, 'config', []);
     $aMenu            = _elm($pageDatas, 'menu', []);
     $aMenuTreeLists   = _elm($pageDatas, 'menu_tree_lists', []);
-    $aMemeberGroup    = _elm($pageDatas, 'member_group', []);
-
-
+    $aMemberGroup    = _elm($pageDatas, 'member_group', []);
 ?>
 <!-- 콘텐츠 시작 -->
 <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_menu_write', 'onSubmit' => 'return false;', 'autocomplete' => 'off']); ?>
@@ -18,7 +16,7 @@
     <div class="card-title">
         <h3 class="h3-c">메뉴관리</h3>
         <p class="body2-c" style="color: #616876"></p>
-        <div>일반 alert
+        <!-- <div>일반 alert
         <button onclick="box_alert('success','s')">success</button>
         <button onclick="box_alert('error','e')">error</button>
         <button onclick="box_alert('warning','w')">warning</button>
@@ -47,7 +45,7 @@
         <button onclick="box_confirm('warning','w')">warning</button>
         <button onclick="box_confirm('info','i')">info</button>
         <button onclick="box_confirm('question','q')">question</button>
-        </div>
+        </div> -->
     </div>
     <div class="table-responsive">
         <table class="table table-vcenter table-bordered mb-0 text-center nowrap">
@@ -97,7 +95,7 @@
                 </td>
                 <td>
                     <?php
-                    $options  = $aMemeberGroup;
+                    $options  = $aMemberGroup;
                     $extras   = ['i_display_member_group', 'class' => 'select2 form-control size_lg', 'multiple' => 'multiple'];
                     $selected = '';
                     echo form_dropdown('i_display_member_group[]', $options, $selected, $extras);
@@ -154,7 +152,7 @@
 
 
     <div class="table-responsive">
-        <table class="table table-vcenter table-bordered table-striped mb-0 text-center nowrap">
+        <table class="table table-vcenter table-bordered table-striped mb-0 text-center nowrap ">
             <colgroup>
                 <col style="width:3%;">
                 <col style="width:3%;">
@@ -169,7 +167,24 @@
             </colgroup>
             <thead class="thead-light">
             <tr>
-                <th><div class="checkbox checkbox-single"><input type="checkbox" id="" value="" aria-label="Single checkbox One" class="checkAll"><label></label></div></th>
+                <th>
+                    <div class="checkbox checkbox-single">
+                        <?php
+                        $setParam = [
+                            'name' => '',
+                            'id' => 'checkAll',
+                            'value' => '',
+                            'label' => '',
+                            'checked' => false,
+                            'extraAttributes' => [
+                                'class'=>'checkAll',
+                                'aria-label' => 'Single checkbox One'
+                            ]
+                        ];
+                        echo getCheckBox( $setParam );
+                        ?>
+                    </div>
+                </th>
                 <th>IDX</th>
                 <th>메뉴그룹아이디</th>
                 <th>메뉴명<span class="text-danger">*</span></th>
@@ -192,7 +207,20 @@
             <tr class="table-primary">
                 <td>
                     <div class="checkbox checkbox-single">
-                        <input type="checkbox" id="i_menu_idx_<?php echo $menu_idx; ?>" name="i_menu_idx[]" value="<?php echo $menu_idx; ?>" aria-label="Single checkbox One"><label></label>
+                        <?php
+                        $setParam = [
+                            'name' => 'i_menu_idx[]',
+                            'id' => 'i_menu_idx_'.$menu_idx,
+                            'value' =>  $menu_idx,
+                            'label' => '',
+                            'checked' => false,
+                            'extraAttributes' => [
+                                'aria-label' => 'Single checkbox One',
+                                'class'=>'check-item',
+                            ]
+                        ];
+                        echo getCheckBox( $setParam );
+                        ?>
                     </div>
                 </td>
                 <td><?php echo $menu_idx; ?></td>
@@ -211,7 +239,7 @@
                     <?php
                     $aMemberGroups = explode(',', _elm($vMENU, 'MENU_DISPLAY_MEMBER_GROUP', ''));
 
-                    $options  = $aMemeberGroup;
+                    $options  = $aMemberGroup;
                     $extras   = ['id' => 'i_display_member_group_' . _elm($vMENU, 'MENU_IDX', ''), 'class' => 'select2 form-control size_lg', 'multiple' => 'multiple'];
                     $selected = $aMemberGroups;
                     echo form_dropdown('i_display_member_group[' .$menu_idx . '][]', $options, $selected, $extras);
@@ -234,7 +262,15 @@
                     ?>
                 </td>
                 <td>
-                    <a href="javascript:;" class="btn btn-secondary btn-danger" style="width: 42px; height: 30px" onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">삭제</a>
+                    <a href="javascript:;"onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                 </td>
             </tr>
                 <?php
@@ -247,7 +283,20 @@
                 <tr>
                     <td>
                         <div class="checkbox checkbox-single">
-                            <input type="checkbox" id="i_menu_idx_<?php echo $menu_idx; ?>" name="i_menu_idx[]" value="<?php echo $menu_idx; ?>" aria-label="Single checkbox One"><label></label>
+                            <?php
+                            $setParam = [
+                                'name' => 'i_menu_idx[]',
+                                'id' => 'i_menu_idx_'.$menu_idx,
+                                'value' =>  $menu_idx,
+                                'label' => '',
+                                'checked' => false,
+                                'extraAttributes' => [
+                                    'aria-label' => 'Single checkbox One',
+                                    'class'=>'check-item',
+                                ]
+                            ];
+                            echo getCheckBox( $setParam );
+                            ?>
                         </div>
                     </td>
                     <td>
@@ -271,11 +320,11 @@
                     </td>
                     <td>
                         <?php
-                        $aMemeberGroups = explode(',', _elm($vMENU_CHILD, 'MENU_DISPLAY_MEMBER_GROUP', ''));
+                        $aMemberGroups = explode(',', _elm($vMENU_CHILD, 'MENU_DISPLAY_MEMBER_GROUP', ''));
 
-                        $options  = $aMemeberGroup;
+                        $options  = $aMemberGroup;
                         $extras   = ['id' => 'i_display_member_group_' . _elm($vMENU_CHILD, 'MENU_IDX', ''), 'class' => 'select2 form-control size_lg', 'multiple' => 'multiple'];
-                        $selected = $aMemeberGroups;
+                        $selected = $aMemberGroups;
                         echo form_dropdown('i_display_member_group[' .$menu_idx . '][]', $options, $selected, $extras);
                         ?>
                     </td>
@@ -296,7 +345,15 @@
                         ?>
                     </td>
                     <td>
-                        <a href="javascript:;" class="btn btn-secondary btn-danger" style="width: 42px; height: 30px" onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">삭제</a>
+                        <a href="javascript:;"onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
                     </td>
                 </tr>
                     <?php
@@ -309,8 +366,20 @@
                     <tr>
                         <td>
                             <div class="checkbox checkbox-single">
-                                &nbsp;
-                                <input type="checkbox" id="i_menu_idx_<?php echo $menu_idx; ?>" name="i_menu_idx[]" value="<?php echo $menu_idx; ?>" aria-label="Single checkbox One"><label></label>
+                            <?php
+                            $setParam = [
+                                'name' => 'i_menu_idx[]',
+                                'id' => 'i_menu_idx_'.$menu_idx,
+                                'value' =>  $menu_idx,
+                                'label' => '',
+                                'checked' => false,
+                                'extraAttributes' => [
+                                    'aria-label' => 'Single checkbox One',
+                                    'class'=>'check-item',
+                                ]
+                            ];
+                            echo getCheckBox( $setParam );
+                            ?>
                             </div>
                         </td>
                         <td>
@@ -336,11 +405,11 @@
                         </td>
                         <td>
                             <?php
-                            $aMemeberGroups = explode(',', _elm($vMENU_GRAND_CHILD, 'MENU_DISPLAY_MEMBER_GROUP', ''));
+                            $aMemberGroups = explode(',', _elm($vMENU_GRAND_CHILD, 'MENU_DISPLAY_MEMBER_GROUP', ''));
 
-                            $options  = $aMemeberGroup;
+                            $options  = $aMemberGroup;
                             $extras   = ['id' => 'i_display_member_group_' . _elm($vMENU_GRAND_CHILD, 'MENU_IDX', ''), 'class' => 'select2 form-control size_lg', 'multiple' => 'multiple'];
-                            $selected = $aMemeberGroups;
+                            $selected = $aMemberGroups;
                             echo form_dropdown('i_display_member_group[' .$menu_idx . '][]', $options, $selected, $extras);
                             ?>
                         </td>
@@ -361,7 +430,15 @@
                             ?>
                         </td>
                         <td>
-                            <a href="javascript:;" class="btn btn-secondary btn-danger" style="width: 42px; height: 30px" onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">삭제</a>
+                            <a href="javascript:;"onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
                         </td>
                     </tr>
                     <?php
@@ -392,199 +469,15 @@
     </div>
 </div>
 <!-- 콘텐츠 끝 -->
-<script>
-const menuData = <?php echo json_encode($aMenuTreeLists); ?>;
-
-function findSort() {
-    const parentIdx = parseInt($('#frm_menu_write #i_parent_idx').val());
-    let maxSort = 0;
-
-    function findMaxSort(menuArray, parentIdx) {
-        $.each(menuArray, function(index, menu) {
-            if (parseInt(menu.MENU_PARENT_IDX) === parentIdx) {
-                if (parseInt(menu.MENU_SORT) > maxSort) {
-                    maxSort = parseInt(menu.MENU_SORT);
-                }
-            }
-            // Recursive call for child menus
-            if (menu.CHILD && menu.CHILD.length > 0) {
-                findMaxSort(menu.CHILD, parentIdx);
-            }
-        });
-    }
-
-    findMaxSort(menuData, parentIdx);
-
-    // Set the found maximum value + 1 to i_sort input
-    $('#frm_menu_write #i_sort').val(maxSort + 1);
-}
-
-findSort()
-
-// -----------------------------------------------------------------------------
-// 메뉴
-// -----------------------------------------------------------------------------
-function modifyMenuConfirm()
-{
-    if ($('input:checkbox[name="i_menu_idx[]"]:checked').length > 0)
-    {
-        box_confirm('선택된 메뉴를 수정하시겠습니까?', 'confirm', '', modifyMenu);
-    }
-    else
-    {
-        box_alert('선택된 메뉴가 없습니다.', 'info');
-    }
-}
-
-function modifyMenu()
-{
-    $.ajax({
-        url: '<?php echo _link_url('/apis/setting/modifyMenu')?>',
-        type: 'post',
-        data: $('#frm_menu_lists').serialize(),
-        dataType: 'json',
-        processData: false,
-        cache: false,
-        beforeSend: function() { },
-        success: function(response) {
-            submitSuccess(response);
-
-            if (response.status == 'false')
-            {
-                var error_message = '';
-                error_message = error_lists.join('<br />');
-                if (error_message != '') {
-                    box_alert(error_message, 'info');
-                }
-
-                return false;
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            submitError(jqXHR.status, errorThrown);
-            console.log(textStatus);
-
-            return false;
-        },
-        complete: function() { }
-    });
-}
-
-function deleteMenuConfirm(menu_idx)
-{
-    box_confirm('메뉴를 삭제하시겠습니까?', 'confirm', '', deleteMenu, {'menu_idx': menu_idx});
-}
-
-function deleteMenu(param)
-{
-    $('#menu_idx').val(param.menu_idx);
-
-    $.ajax({
-        url: '<?php echo _link_url('/apis/setting/deleteMenu')?>',
-        type: 'post',
-        data: $('#frm_menu_lists').serialize(),
-        dataType: 'json',
-        processData: false,
-        cache: false,
-        beforeSend: function() { },
-        success: function(response) {
-            submitSuccess(response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            submitError(jqXHR.status, errorThrown);
-            console.log(textStatus);
-
-            return false;
-        },
-        complete: function() { }
-    });
-}
-
-$(document).ready(function () {
-    $('#frm_menu_write').on('submit', function(event) {
-        event.preventDefault();
-
-        error_lists = [];
-        $('.error_txt').html('');
-
-        var inputs = $(this).find('input, button');
-        var isSubmit = true;
-
-        if ($.trim($('#i_name').val()) == '')
-        {
-            _form_error('i_name', '메뉴명을 입력하세요.');
-            isSubmit = false;
-        }
-
-        if ($.trim($('#i_link').val()) == '')
-        {
-            _form_error('i_link', '링크를 입력하세요.');
-            isSubmit = false;
-        }
-
-        if (isSubmit == false)
-        {
-            var error_message = '';
-            error_message = error_lists.join('<br />');
-            box_alert(error_message, 'info');
-
-            inputs.prop('disabled', false);
-            return false;
-        }
-
-        $.ajax({
-            url: '<?php echo _link_url('/apis/setting/writeMenu')?>',
-            method: 'POST',
-            data: new FormData(this),
-            dataType: 'json',
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function()
-            {
-                inputs.prop('disabled', true);
-                setTimeout(function() { inputs.prop('disabled', false); }, 3000);
-            },
-            success: function(response)
-            {
-                submitSuccess(response);
-
-                inputs.prop('disabled', false);
-
-                if (response.status == 'false')
-                {
-                    var error_message = '';
-                    error_message = error_lists.join('<br />');
-                    if (error_message != '') {
-                        box_alert(error_message, 'info');
-                    }
-
-                    return false;
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                submitError(jqXHR.status, errorThrown);
-                console.log(textStatus);
-
-                inputs.prop('disabled', false);
-                return false;
-            },
-            complete: function() { }
-        });
-    });
-});
-
-</script>
 
 <?php echo form_close(); ?>
-
+<script>
+var menuData = <?php echo json_encode($aMenuTreeLists)?>;
+</script>
 <?php
 $owensView->setFooterJs('/assets/js/setting/menu.js');
-
 $owensView->setHeaderCss('/plugins/select2/select2.css');
 $owensView->setFooterJs('/plugins/select2/select2.js');
-
 $script = "
 $(document).ready(function () {
     $('.select2').select2({

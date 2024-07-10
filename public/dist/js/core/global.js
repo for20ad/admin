@@ -22,7 +22,7 @@ function _form_error(id, error_message)
 function submitSuccess(response) {
     var boxType = 'w';
 
-    if (response.status == '200')
+    if ( parseInt( response.status )  == 200)
     {
         boxType = 's';
     }

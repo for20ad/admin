@@ -64,7 +64,7 @@ letter-spacing: -0.096px;
 .body2-c {
 font-size: 14px;
 font-weight: 400;
-line-height: 20px; 
+line-height: 20px;
 letter-spacing: -0.084px;
 }
 
@@ -79,12 +79,12 @@ letter-spacing: -0.096px;
 font-size: 12px;
 font-style: normal;
 font-weight: 500;
-line-height: 16px; 
+line-height: 16px;
 letter-spacing: -0.072px;
 }
 
 .text-primary {
-  color: color: #206BC4 !important; 
+  color: #206BC4 !important;
 }
 
 /* ------------------- logo ------------------- */
@@ -100,7 +100,9 @@ letter-spacing: -0.072px;
   height: 24px;
 }
 /* ----------------------------------------------- */
-
+.container-fluid{
+    margin-top: 6.2em;
+}
 
 /* ------------------- header ------------------- */
 .header {
@@ -108,6 +110,10 @@ letter-spacing: -0.072px;
   display: flex;
   justify-content: space-between;
   padding: 8px 12px;
+  width: 100%;
+  position: fixed;
+  background-color: #ffffff;
+  z-index: 9999;
 }
 
 .header .header-right {
@@ -177,7 +183,10 @@ letter-spacing: -0.072px;
     justify-content: space-between;
     align-items: center;
     padding: 12px;
+    position: fixed;
+    width: 100%;
     background-color: #fff;
+    z-index: 9999;
   }
 
   .m-header .user-btn{
@@ -195,27 +204,25 @@ letter-spacing: -0.072px;
     display: none;
   }
 
-
-
 }
 
-
 /* ---------------------------------------------- */
-
 
 
 /* ------------------ side bar ------------------ */
 .side-bar-area {
   display: flex;
+  position: fixed;
+  top: 53px;
 }
 
 .side-bar {
   position: relative;
   width: 290px;
-  height: inherit;
+  height: -webkit-fill-available;
   background: #206bc4;
   color: #fff;
-  min-height: 1050px;
+  min-height: auto;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -242,8 +249,8 @@ letter-spacing: -0.072px;
 }
 
 .side-bar .category.bottom {
-  margin-top: 50px;
   position: absolute;
+  margin-top: 50px;
   bottom: 0;
 }
 
@@ -300,6 +307,26 @@ letter-spacing: -0.072px;
   background: rgba(0, 0, 0, 0.2);
 }
 
+
+@media screen and (max-width: 640px) {
+  .side-bar-wrapper {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+  }
+  .side-bar {
+    height: 100vh;
+  }
+
+  .side-bar .category.bottom {
+    position: relative;
+  }
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+  }
+}
 /* ----------------------------------------------- */
 
 
@@ -348,6 +375,11 @@ letter-spacing: -0.072px;
   border-left: 2px solid #6DF6FF;
 }
 
+@media (max-width:640px) {
+  .mini-side-bar {
+    display: none;
+  }
+}
 /* ---------------------------------------------- */
 
 
@@ -466,7 +498,7 @@ letter-spacing: -0.072px;
 }
 
 .table-responsive tbody > tr > td.nowrap{
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 150px;
@@ -514,7 +546,7 @@ letter-spacing: -0.072px;
   color: #616876;
   font-size: 14px;
   font-weight: 500;
-  line-height: 20px; 
+  line-height: 20px;
   letter-spacing: -0.084px;
   }
 
@@ -558,7 +590,7 @@ letter-spacing: -0.072px;
 }
 
 .input-group .form-control {
-  /* max-width: 916px; */
+  max-width: 916px;
 }
 
 .input-group .form-check-label {
@@ -574,7 +606,7 @@ letter-spacing: -0.072px;
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-left: 132px; 
+  margin-left: 132px;
   margin-bottom: 16px;
   color: #616876;
 }
@@ -598,7 +630,7 @@ letter-spacing: -0.072px;
 @media (max-width: 640px) {
  .footer {
   flex-direction: column;
- } 
+ }
 }
 /* ---------------------------------------------- */
 
@@ -646,7 +678,7 @@ letter-spacing: -0.072px;
   padding: 8px 16px;
   width: fit-content;
   height: 32px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
@@ -655,6 +687,7 @@ letter-spacing: -0.072px;
   border-radius: 4px;
   border: none;
   box-shadow: 0px 1px 0px 0px rgba(29, 39, 59, 0.00) inset, 0px -1px 0px 0px rgba(29, 39, 59, 0.40) inset;
+
 }
 
 .btn-md {
@@ -664,7 +697,7 @@ letter-spacing: -0.072px;
   padding: 8px 16px;
   width: fit-content;
   height: 36px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
@@ -673,6 +706,7 @@ letter-spacing: -0.072px;
   border-radius: 4px;
   border: none;
   box-shadow: 0px 1px 0px 0px rgba(29, 39, 59, 0.00) inset, 0px -1px 0px 0px rgba(29, 39, 59, 0.40) inset;
+  text-wrap: nowrap;
 }
 
 .btn-lg {
@@ -680,9 +714,9 @@ letter-spacing: -0.072px;
   justify-content: center;
   align-items: center;
   padding: 8px 16px;
-  width: 180px;
+  width: 11.25rem;
   height: 46px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
@@ -691,6 +725,7 @@ letter-spacing: -0.072px;
   border-radius: 4px;
   border: none;
   box-shadow: 0px 1px 0px 0px rgba(29, 39, 59, 0.00) inset, 0px -1px 0px 0px rgba(29, 39, 59, 0.40) inset;
+  text-wrap: nowrap;
 }
 
 .btn-sm:hover,
@@ -727,24 +762,24 @@ letter-spacing: -0.072px;
   background-color: #2FB344;
 }
 
-.btn-blue:focus {
-  box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.5);
+.btn-green:focus {
+  box-shadow: 0 0 0 0.25rem rgba(47, 179, 68, 0.5);
 }
 
 .btn-sky {
   background-color: #4299E1;
 }
 
-.btn-blue:focus {
-  box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.5);
+.btn-sky:focus {
+  box-shadow: 0 0 0 0.25rem rgba(66, 153, 225, 0.5);
 }
 
 .btn-orange {
   background-color: #F76707;
 }
 
-.btn-blue:focus {
-  box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.5);
+.btn-orange:focus {
+  box-shadow: 0 0 0 0.25rem rgba(247, 103, 7, 0.5);
 }
 
 .btn-white {
@@ -753,14 +788,60 @@ letter-spacing: -0.072px;
   color: #1D273B;
 }
 
-.btn-blue:focus {
-  box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.5);
+.btn-white:focus {
+border: 1px solid  #9BA9BE;
 }
 
-/* ---------------------------------------------- */
+/* -------------------- dropbox -------------------------- */
 
+.dropbox {
+  position: absolute;
+  right: 20px;
+  top: 52px;
+  width: 176px;
+  display: inline-block;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.12), 2px 6px 12px 0px rgba(0, 0, 0, 0.12);
+}
 
+.dropbox .dropbox-conateiner {
+  width: 176px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  z-index: 1;
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.12), 2px 6px 12px 0px rgba(0, 0, 0, 0.12);
 
+}
+
+.dropbox .dropbox-conateiner::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 87%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+.dropbox .dropbox-menu {
+  display: flex;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dropbox .dropbox-menu:not(:last-of-type) {
+  border-bottom: 1px solid #F2F3F4
+}
+
+.form-inline{
+    display: flex; align-items: center;
+}
 
 
 

@@ -223,7 +223,7 @@ class MenuApi extends ApiController
     {
         $pageDatas                                     = [];
         $requests                                      = $this->request->getPost();
-        $menuModel                                 = new MenuModel();
+        $menuModel                                     = new MenuModel();
         if( empty( _elm( $param, 'post' ) ) === false ){
             $requests                                  = _elm( $param, 'post' );
         }
@@ -233,6 +233,11 @@ class MenuApi extends ApiController
         $modelParam                                    = [];
         $modelParam['MENU_IDX']                        = _elm( $requests, 'menu_idx' );
         $aData                                         = $menuModel->getAdminMenuListsByIdx( _elm( $requests, 'menu_idx' ) );
+        if( empty( $aData ) === true ){
+            $response['status']                        = 400;
+            $response['messages']                      = '메뉴 데이터가 없습니다. 다시 시도해주세요.';
+            return $this->respond( $response, 400 );
+        }
         $this->db->transBegin();
         #------------------------------------------------------------------
         # TODO: run
@@ -241,8 +246,8 @@ class MenuApi extends ApiController
 
         if ( $this->db->transStatus() === false ) {
             $this->db->transRollback();
-            $response['status']                              = 400;
-            $response['messages']                            = '처리중 오류발생.. 다시 시도해주세요.';
+            $response['status']                        = 400;
+            $response['messages']                      = '처리중 오류발생.. 다시 시도해주세요.';
             return $this->respond( $response, 400 );
         }
 
@@ -252,9 +257,9 @@ class MenuApi extends ApiController
         #------------------------------------------------------------------
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
-        $logParam                                  = [];
-        $logParam['MB_HISTORY_CONTENT']            = '메뉴 삭제 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
-        $logParam['MB_IDX']                        = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+        $logParam                                      = [];
+        $logParam['MB_HISTORY_CONTENT']                = '메뉴 삭제 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_IDX']                            = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
         #------------------------------------------------------------------

@@ -15,6 +15,105 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+function formatMobileNumber(numbersOnly) {
+    let formattedNumber = numbersOnly;
+
+    if (numbersOnly.length > 3 && numbersOnly.length <= 7) {
+        formattedNumber = numbersOnly.replace(/(\d{3})(\d{1,4})/, '$1-$2');
+    } else if (numbersOnly.length > 7) {
+        formattedNumber = numbersOnly.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
+    }
+
+    return formattedNumber;
+}
+$('input[data-max-length]').each(function() {
+    const $inputField = $(this);
+    const $wordCount = $inputField.siblings('.wordCount');
+    const maxLength = $inputField.data('max-length');
+
+    $inputField.on('input', function() {
+        const currentLength = $inputField.val().length;
+        $wordCount.text(`${currentLength}/${maxLength}`);
+    });
+
+    // 초기 글자 수 설정
+    const initialLength = $inputField.val().length;
+    $wordCount.text(`${initialLength}/${maxLength}`);
+});
+
+$('input[data-mobile]').on('input', function() {
+    const $inputField = $(this);
+    const inputVal = $inputField.val();
+
+    // 숫자만 남기기
+    const numbersOnly = inputVal.replace(/\D/g, '').slice(0, 11);
+
+    // 하이픈 넣기
+    const formattedNumber = formatMobileNumber(numbersOnly);
+
+    $inputField.val(formattedNumber);
+});
+
+$('input[data-password]').on('input', function() {
+    const $input = $(this);
+    const password = $input.val();
+
+    // 정규표현식을 사용하여 비밀번호 유효성 검사
+    const isValid = /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,20}$/.test(password);
+
+    // 비밀번호 유효성 검사에 따라 클래스 추가/제거
+    if (isValid) {
+        $input.removeClass('error');
+    } else {
+        $input.addClass('error');
+    }
+});
+
+ // 이메일 형식 검사
+ function validateEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+}
+
+
+$('input[data-email]').on('input', function() {
+    const $inputField = $(this);
+    const emailVal = $inputField.val();
+    const $errorSpan = $inputField.siblings('.email-error');
+
+    if (!validateEmail(emailVal)) {
+        $inputField.addClass('error');
+    } else {
+        $inputField.removeClass('error');
+    }
+});
+
+// 기존 값이 있는 경우 초기 이메일 형식 검사
+$('input[data-email]').each(function() {
+    const $inputField = $(this);
+    const emailVal = $inputField.val();
+    const $errorSpan = $inputField.siblings('.email-error');
+
+    if (!validateEmail(emailVal)) {
+        $errorSpan.show();
+    } else {
+        $errorSpan.hide();
+    }
+});
+
+
+
+// 기존 값이 있는 경우 초기 형식 설정
+$('input[data-mobile]').each(function() {
+    const $inputField = $(this);
+    const inputVal = $inputField.val();
+
+    const numbersOnly = inputVal.replace(/\D/g, '').slice(0, 11);
+    const formattedNumber = formatMobileNumber(numbersOnly);
+
+    $inputField.val(formattedNumber);
+});
+
 
 //리스트 검색 레이어 (모바일)
 const asideSearch = document.getElementById("asideSearch");
@@ -50,6 +149,8 @@ document.addEventListener("input", function (event) {
     }
   }
 });
+
+
 
 //input 최대값 계산 - 페이지 로드 시 최대값 계산해서 출력
 const maxLenSpans = document.querySelectorAll(".max-len");
@@ -99,6 +200,31 @@ document.querySelectorAll(".label-control").forEach(function (labelControl) {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    // 체크박스 전체 체크
+
+    if( document.querySelector('#checkAll') != null ){
+        document.querySelector('#checkAll').addEventListener('change', function () {
+            const isChecked = this.checked;
+            document.querySelectorAll('.check-item').forEach(function (checkbox) {
+                checkbox.checked = isChecked;
+            });
+        });
+
+        // 개별 체크박스 체크/체크 해제 시 전체 체크박스 상태 업데이트
+        document.querySelectorAll('.check-item').forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                const allChecked = document.querySelectorAll('.check-item:checked').length === document.querySelectorAll('.check-item').length;
+                document.querySelector('#checkAll').checked = allChecked;
+            });
+        });
+    }
+
+
+});
+
+
 
 /* 년도 셀렉트박스
 data-start-year가 빈값이면 현재 년도부터 data-end-year까지 출력
@@ -316,6 +442,44 @@ function displayPageHistory() {
     pageHistory.appendChild(item);
   });
 }
+
+function toggleForm( obj ){
+    event.preventDefault();
+
+    var $cardBody = obj.closest('.col-12').find('.card-body');
+
+    if ($cardBody.is(':visible')) {
+        $cardBody.slideUp();
+        obj.find('svg > path').attr('d', 'M1 1L7 7L13 1'); // 반대 방향 아이콘
+    } else {
+        $cardBody.slideDown();
+        obj.find('svg > path').attr('d', 'M1 7L7 1L13 7'); // 원래 방향 아이콘
+    }
+}
+var Pagination = (function() {
+    function pagingNumFunc(callbackMethod) {
+        $(document).on('click', '.page-item a', function(e) {
+            e.preventDefault();
+            callbackMethod($(this).data('page'));
+        });
+    }
+
+    function pagingSelectFunc(callbackMethod) {
+        $(document).on('change', '.pagination-goto select', function(e) {
+            e.preventDefault();
+            callbackMethod($(this).val());
+        });
+    }
+
+    return {
+        initPagingNumFunc: function(callbackMethod) {
+            pagingNumFunc(callbackMethod);
+        },
+        initPagingSelectFunc: function(callbackMethod) {
+            pagingSelectFunc(callbackMethod);
+        }
+    };
+})();
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const pageTitleElement = document.querySelector(".page-title");

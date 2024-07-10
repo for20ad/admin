@@ -15,8 +15,7 @@ function infinityTimer(duration, id)
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        $('#' + id).text(hours + ':' +minutes + ':' + seconds);
-
+        $('.' + id).text(hours + ':' +minutes + ':' + seconds);
         if (--timer < 0) {
             timer = 0;
             clearInterval(infinity_timer);
@@ -87,7 +86,7 @@ $(document).ready(function() {
     if (site_is_admin_login == '1')
     {
 
-        if ($('#admin_auth_timer').length > 0)
+        if ($('.admin_auth_timer').length > 0)
         {
             if (typeof admin_auth_time !== 'undefined')
             {

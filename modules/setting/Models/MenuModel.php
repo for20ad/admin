@@ -58,6 +58,7 @@ class MenuModel extends Model
         $builder->orWhere( 'MENU_PARENT_IDX', _elm( $param, 'MENU_IDX' ) );
 
         $aReturn = $builder->delete();
+
         return $aReturn;
     }
 
