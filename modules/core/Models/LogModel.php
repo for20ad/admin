@@ -4,20 +4,21 @@ use CodeIgniter\Model;
 
 class LogModel extends Model
 {
+
     public function __construct()
     {
-        $this->db = \Config\Database::connect();
+        $this->db                                   = \Config\Database::connect();
     }
     public function setRequestApiLog( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
 
         if (empty($param) === true)
         {
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'RECIVE_API_METHOD' );
+        $builder                                    = $this->db->table( 'RECIVE_API_METHOD' );
 
         foreach( $param as $key => $val ){
             $builder->set( $key, $val );
@@ -29,7 +30,7 @@ class LogModel extends Model
     }
     public function insertUserLog($param = [])
     {
-        $aReturn = false;
+        $aReturn                                    = false;
 
         if (empty($param) === true)
         {
@@ -41,28 +42,27 @@ class LogModel extends Model
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'MEMBER_HISTORY' );
-
+        $builder                                    = $this->db->table( 'MEMBER_HISTORY' );
         $builder->set( 'MB_IDX', _elm($param, 'MB_IDX') );
         $builder->set( 'MB_HISTORY_CONTENT', _elm($param, 'MB_HISTORY_CONTENT') );
         $builder->set( 'MB_HISTORY_DATETIME', date("Y-m-d H:i:s") );
         $builder->set( 'MB_HISTORY_IP', $_SERVER['REMOTE_ADDR'] );
 
 
-        $aReturn = $builder->insert();
+        $aReturn                                    = $builder->insert();
 
         return $aReturn;
     }
 
     public function insertAdminLog( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if (empty($param) === true)
         {
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MEMBER_HISTORY' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER_HISTORY' );
 
         $builder->set( 'MB_IDX', _elm($param, 'MB_IDX') );
         $builder->set( 'MB_HISTORY_CONTENT', _elm($param, 'MB_HISTORY_CONTENT') );
@@ -70,7 +70,7 @@ class LogModel extends Model
         $builder->set( 'MB_HISTORY_IP', $_SERVER['REMOTE_ADDR'] );
 
 
-        $aReturn = $builder->insert();
+        $aReturn                                    = $builder->insert();
         return $aReturn;
 
     }

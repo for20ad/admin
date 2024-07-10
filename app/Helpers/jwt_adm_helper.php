@@ -11,7 +11,7 @@ function getJWTFromRequest($authenticationHeader): string
     if (is_null($authenticationHeader)) { //JWT is absent
         throw new Exception('Missing or invalid JWT in request11');
     }
-    $tokenInfo = explode(' ', $authenticationHeader)[1];
+    $tokenInfo                                      = explode(' ', $authenticationHeader)[1];
 
     checkPermitions( $tokenInfo );
 
@@ -23,9 +23,9 @@ function getJWTFromRequest($authenticationHeader): string
 function checkPermitions( string $encodedToken )
 {
 
-    $aReturn = [];
-    $key = Services::getSecretKey();
-    $decodedToken = JWT::decode($encodedToken, new Key($key, 'HS256'));
+    $aReturn                                        = [];
+    $key                                            = Services::getSecretKey();
+    $decodedToken                                   = JWT::decode($encodedToken, new Key($key, 'HS256'));
 
     if( $decodedToken->data->perm != 'admin' ){
         throw new Exception('permition denined');
@@ -36,15 +36,12 @@ function checkPermitions( string $encodedToken )
 function decodeToken(string $encodedToken)
 {
 
-    $aReturn = [];
-    $key = Services::getSecretKey();
+    $aReturn                                        = [];
+    $key                                            = Services::getSecretKey();
     try {
-        $decodedToken = JWT::decode($encodedToken, new Key($key, 'HS256'));
-
-
-
+        $decodedToken                               = JWT::decode($encodedToken, new Key($key, 'HS256'));
     } catch (Exception $e) {
-        $aReturn['error'] = $e->getMessage();
+        $aReturn['error']                           = $e->getMessage();
         return $aReturn;
     }
 
@@ -53,32 +50,30 @@ function decodeToken(string $encodedToken)
 
 function validateJWTFromRequest(string $encodedToken)
 {
-    $aReturn = [];
-    $key = Services::getSecretKey();
+    $aReturn                                        = [];
+    $key                                            = Services::getSecretKey();
 
     try {
-        $decodedToken = JWT::decode($encodedToken, new Key($key, 'HS256'));
-        $memberModel = new MemberModel();
-        $modelParam = [];
-        $_decodedToken = json_decode(json_encode($decodedToken), true);
+        $decodedToken                               = JWT::decode($encodedToken, new Key($key, 'HS256'));
+        $memberModel                                = new MemberModel();
+        $modelParam                                 = [];
+        $_decodedToken                              = json_decode(json_encode($decodedToken), true);
 
         if(empty($_decodedToken['data']['uid']) === false) {
-            $modelParam['u_id']         = $_decodedToken['data']['uid'];
-            $modelParam['u_pwd']        = 'jwtAuth';
-            $modelParam['pass_login']   = true;
+            $modelParam['u_id']                     = $_decodedToken['data']['uid'];
+            $modelParam['u_pwd']                    = 'jwtAuth';
+            $modelParam['pass_login']               = true;
         }
 
-        $aReturn = $memberModel->findUserById($modelParam);
+        $aReturn                                    = $memberModel->findUserById($modelParam);
 
         if( empty($aReturn) === true  ){
             throw new Exception('User does not exist for specified userid');
         }
     } catch (Exception $e) {
-        $aReturn['error'] = $e->getMessage();
+        $aReturn['error']                           = $e->getMessage();
         return $aReturn;
     }
-
-
     return $aReturn;
 }
 
@@ -86,26 +81,26 @@ function setAccessToken(array $data)
 {
     date_default_timezone_set('Asia/Seoul');
 
-    $tokenTimeToLive = getenv('JWT_TIME_TO_LIVE');
+    $tokenTimeToLive                                = getenv('JWT_TIME_TO_LIVE');
 
-    $now = time();
-    $exp = $now + $tokenTimeToLive;
-    $payload = [
-        "iss"  => $_SERVER["SERVER_NAME"],
-        "aud"  => "timber",
-        "sub"  => '',
-        "nbf"  => $now,
-        'iat'  => $now,
-        'exp'  => $exp,
-        "data" => array(
-            'uid'          => _elm( $data, 'MB_USERID' ),
-            'sessionId'    => session_id(),
-            'perm'         => 'admin'
+    $now                                            = time();
+    $exp                                            = $now + $tokenTimeToLive;
+    $payload                                        = [
+        "iss"                                       => $_SERVER["SERVER_NAME"],
+        "aud"                                       => "timber",
+        "sub"                                       => '',
+        "nbf"                                       => $now,
+        'iat'                                       => $now,
+        'exp'                                       => $exp,
+        "data"                                      => array(
+            'uid'                                   => _elm( $data, 'MB_USERID' ),
+            'sessionId'                             => session_id(),
+            'perm'                                  => 'admin'
         )
     ];
 
 
-    $jwt = JWT::encode($payload, Services::getSecretKey(), 'HS256');
+    $jwt                                            = JWT::encode($payload, Services::getSecretKey(), 'HS256');
     return $jwt;
 }
 
@@ -113,26 +108,26 @@ function setRefreshToken(array $data)
 {
     date_default_timezone_set('Asia/Seoul');
 
-    $tokenTimeToLive = getenv('JWT_TIME_TO_REFRESH');
+    $tokenTimeToLive                                = getenv('JWT_TIME_TO_REFRESH');
 
-    $now = time();
-    $exp = _elm( $data, 'isAutoSignin' ) === 'true' ? $now + ($tokenTimeToLive * 21)  : $now + $tokenTimeToLive;
-    $payload = [
-        "iss"  => $_SERVER["SERVER_NAME"],
-        "aud"  => "timber",
-        "sub"  => '',
-        "nbf"  => $now,
-        'iat'  => $now,
-        'exp'  => $exp,
-        "data" => array(
-            'uid'          => _elm( $data, 'MB_USERID' ),
-            'sessionId'    => session_id(),
-            'perm'         => 'admin'
+    $now                                            = time();
+    $exp                                            = _elm( $data, 'isAutoSignin' ) === 'true' ? $now + ($tokenTimeToLive * 21)  : $now + $tokenTimeToLive;
+    $payload                                        = [
+        "iss"                                       => $_SERVER["SERVER_NAME"],
+        "aud"                                       => "timber",
+        "sub"                                       => '',
+        "nbf"                                       => $now,
+        'iat'                                       => $now,
+        'exp'                                       => $exp,
+        "data"                                      => array(
+            'uid'                                   => _elm( $data, 'MB_USERID' ),
+            'sessionId'                             => session_id(),
+            'perm'                                  => 'admin'
         )
     ];
 
 
-    $jwt = JWT::encode($payload, Services::getSecretKey(), 'HS256');
+    $jwt                                            = JWT::encode($payload, Services::getSecretKey(), 'HS256');
     return $jwt;
 }
 
@@ -141,26 +136,26 @@ function getSignedJWTForUser(array $data)
 {
     date_default_timezone_set('Asia/Seoul');
 
-    $tokenTimeToLive = getenv('JWT_TIME_TO_LIVE');
+    $tokenTimeToLive                                = getenv('JWT_TIME_TO_LIVE');
 
-    $now = time();
-    $exp = $now + $tokenTimeToLive;
-    $payload = [
-        "iss" => $_SERVER["SERVER_NAME"],
-        "aud" => "timber",
-        "sub" => _elm( $data, 'MB_USERID' )."_JWT",
-        "nbf" => $now,
-        'iat' => $now,
-        'exp' => $exp,
-        "data" => array(
-            'uid'          => _elm( $data, 'MB_USERID' ),
-            'sessionId'    => session_id(),
-            'perm'         => 'admin'
+    $now                                            = time();
+    $exp                                            = $now + $tokenTimeToLive;
+    $payload                                        = [
+        "iss"                                       => $_SERVER["SERVER_NAME"],
+        "aud"                                       => "timber",
+        "sub"                                       => _elm( $data, 'MB_USERID' )."_JWT",
+        "nbf"                                       => $now,
+        'iat'                                       => $now,
+        'exp'                                       => $exp,
+        "data"                                      => array(
+            'uid'                                   => _elm( $data, 'MB_USERID' ),
+            'sessionId'                             => session_id(),
+            'perm'                                  => 'admin'
         )
     ];
 
 
-    $jwt = JWT::encode($payload, Services::getSecretKey(), 'HS256');
+    $jwt                                            = JWT::encode($payload, Services::getSecretKey(), 'HS256');
     return $jwt;
 }
 
@@ -168,34 +163,34 @@ function getRefreshJWTForUser(array $data)
 {
     date_default_timezone_set('Asia/Seoul');
 
-    $tokenTimeToLive = getenv('JWT_TIME_TO_REFRESH');
-    $now = time();
-    $exp = $now + $tokenTimeToLive;
-    $payload = [
-        "iss" => $_SERVER["SERVER_NAME"],
-        "aud" => "timber",
-        "sub" => _elm( $data, 'MB_USERID' )."_JWT",
-        "nbf" => $now,
-        'iat' => $now,
-        'exp' => $exp,
-        "data" => array(
-            'uid'          => _elm( $data, 'MB_USERID' ),
-            'sessionId'    => session_id(),
-            'perm'         => 'admin'
+    $tokenTimeToLive                                = getenv('JWT_TIME_TO_REFRESH');
+    $now                                            = time();
+    $exp                                            = $now + $tokenTimeToLive;
+    $payload                                        = [
+        "iss"                                       => $_SERVER["SERVER_NAME"],
+        "aud"                                       => "timber",
+        "sub"                                       => _elm( $data, 'MB_USERID' )."_JWT",
+        "nbf"                                       => $now,
+        'iat'                                       => $now,
+        'exp'                                       => $exp,
+        "data"                                      => array(
+            'uid'                                   => _elm( $data, 'MB_USERID' ),
+            'sessionId'                             => session_id(),
+            'perm'                                  => 'admin'
         )
     ];
 
-    $jwt = JWT::encode($payload, Services::getSecretKey(), 'HS256');
+    $jwt                                            = JWT::encode($payload, Services::getSecretKey(), 'HS256');
     return $jwt;
 }
 
 function jwtAccessTokenExpired($token)
 {
-    $secret_key =  Services::getSecretKey();
+    $secret_key                                     =  Services::getSecretKey();
 
     try {
-        $decoded = JWT::decode($token, new Key($secret_key, 'HS256') );
-        $current_time = time();
+        $decoded                                    = JWT::decode($token, new Key($secret_key, 'HS256') );
+        $current_time                               = time();
 
         if ($decoded->exp < $current_time) {
             return true; // Access token is expired

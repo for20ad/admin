@@ -14,15 +14,15 @@ class Member
 
     public function __construct()
     {
-        $this->response = Services::response();
-        $this->request = Services::request();
-        $this->session = Services::session();
-        $this->uri = Services::uri();
+        $this->response                             = Services::response();
+        $this->request                              = Services::request();
+        $this->session                              = Services::session();
+        $this->uri                                  = Services::uri();
 
         // fix : delayed call helper
         helper($this->helpers);
 
-        $this->memberInfo = $this->session->get('_memberInfo') ?? [];
+        $this->memberInfo                           = $this->session->get('_memberInfo') ?? [];
     }
 
     public function isLogin()

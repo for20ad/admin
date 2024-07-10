@@ -108,7 +108,6 @@
                         </div>
                         <?php echo form_close();?>
                         <div style="text-align: center; margin-top: 52px">
-
                         <?php
                         echo getIconButton([
                             'txt' => '검색',
@@ -221,14 +220,6 @@
         </div>
     </div>
 </div>
-
-<script>
-
-
-
-
-</script>
-
 
 <?php
 $owensView->setFooterJs('/assets/js/setting/member/lists.js');

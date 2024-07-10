@@ -843,6 +843,29 @@ border: 1px solid  #9BA9BE;
     display: flex; align-items: center;
 }
 
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-image {
+    display: block;
+}
+
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    display: none;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.image-container:hover .delete-button {
+    display: block;
+}
 
 
 

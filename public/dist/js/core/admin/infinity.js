@@ -41,12 +41,12 @@ function check_login() {
                 console.log('User is logged in');
             } else {
                 console.log('User is not logged in, redirecting to /logOut');
-                document.location.href = "/login";
+                //document.location.href = "/login";
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log('check_login error', textStatus, errorThrown);
-            document.location.href = "/login";
+            //document.location.href = "/login";
         },
         complete: function() {
             console.log('check_login complete');
@@ -56,6 +56,7 @@ function check_login() {
 
 function delay_login()
 {
+
     $.ajax({
         url: "/api/login/delayLogin",
         method: "GET",
@@ -104,4 +105,6 @@ $(document).ready(function() {
     {
         document.location.href = "/login";
     }
+
+
 });

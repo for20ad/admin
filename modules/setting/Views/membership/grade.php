@@ -46,7 +46,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="card-body" >
+                <div class="card-body" style="margin-top:-2vh">
 
                     <div class="table-responsive">
                         <table class="table table-vcenter">
@@ -104,7 +104,7 @@
                         </table>
                     </div>
 
-                    <div style="display:flex;justify-content: center;text-align: center; margin-top: 52px">
+                    <div style="display:flex;justify-content: center;text-align: center; margin-top: 15px">
                         <?php
                         echo getIconButton([
                             'txt' => '추가',
@@ -169,131 +169,134 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table table-vcenter">
-                                <colgroup>
-                                    <col styel="width:5%;">
-                                    <col style="width:10%;">
-                                    <col style="width:40;">
-                                    <col style="width:15%;">
-                                    <col style="width:15%;">
-                                    <col style="width:10%;">
-                                </colgroup>
-                                <thead class="thead-light">
-                                <tr>
-                                    <th style="padding-left:2em">
-                                        <div class="checkbox checkbox-single">
-                                            <?php
-                                            $setParam = [
-                                                'name' => '',
-                                                'id' => 'checkAll',
-                                                'value' => '',
-                                                'label' => '',
-                                                'checked' => false,
-                                                'extraAttributes' => [
-                                                    'class'=>'checkAll',
-                                                    'aria-label' => 'Single checkbox One'
-                                                ]
-                                            ];
-                                            echo getCheckBox( $setParam );
-                                            ?>
-                                        </div>
-                                    </th>
-                                    <th style="padding-left:2em">회원등급</th>
-                                    <th style="padding-left:2em">등급아이콘</th>
-                                    <th style="padding-left:2em">마일리지 적립율</th>
-                                    <th style="padding-left:2em">배송비 무료</th>
-                                    <th style="padding-left:2em">수정/삭제</th>
-                                </tr>
-                                </thead>
-                                <tbody id="sortable">
-                                <?php
-                                if( empty( $aData ) === false ){
-                                    foreach( $aData as $key => $lists ){
-                                ?>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox checkbox-single">
-                                            <?php
-                                            $setParam = [
-                                                'name' => 'i_grade_idx[]',
-                                                'id' => 'i_grade_idx_'._elm( $lists, 'G_IDX' ),
-                                                'value' =>  _elm( $lists, 'G_IDX' ),
-                                                'label' => '',
-                                                'checked' => false,
-                                                'extraAttributes' => [
-                                                    'aria-label' => 'Single checkbox One',
-                                                    'class'=>'check-item',
-                                                ]
-                                            ];
-                                            echo getCheckBox( $setParam );
-                                            ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-inline">
-                                            <input type="text" class="form-control" name="i_name[<?php echo _elm( $lists, 'G_IDX' )?>]" id="i_name_<?php echo _elm( $lists, 'G_IDX' )?>" value="<?php echo _elm( $lists, 'G_NAME' )?>">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-inline">
-                                            <input type="file" class="form-control" name="i_icon[<?php echo _elm( $lists, 'G_IDX' )?>]" id="i_icon" >
-                                            <span>
-                                                <?php
-                                                if( !empty(_elm( $lists, 'G_ICON_NAME' ) ) ){
-                                                ?>
-                                                    <img src="<?php echo base_url()._elm( $lists, 'G_ICON_PATH' )?>">
-                                                <?php
-                                                }
-                                                ?>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-inline">
-                                            <input type="text" class="form-control" name="i_save_rate[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_SAVE_RATE' )?>" >
-                                            <span class="wordCount input-group-text"
-                                                style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
-                                                %
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-inline">
-                                            <?php
-                                            $checked = false;
-                                            if( _elm( $lists, 'G_DELIVERY_FREE' ) == 'Y' ){
-                                                $checked = true;
-                                            }
-                                            $setParam = [
-                                                'name' => 'i_delivery_free['.$lists['G_IDX'].']',
-                                                'id' => 'i_delivery_free',
-                                                'value' => 'Y',
-                                                'label' => '',
-                                                'checked' => $checked,
-                                                'extraAttributes' => []
-                                            ];
+                            <colgroup>
+                                <col styel="width:5%;">
+                                <col style="width:10%;">
+                                <col style="width:40;">
+                                <col style="width:15%;">
+                                <col style="width:15%;">
+                                <col style="width:10%;">
+                            </colgroup>
+                            <thead class="thead-light">
+                            <tr>
+                                <th style="padding-left:2em">
+                                    <div class="checkbox checkbox-single">
+                                        <?php
+                                        $setParam = [
+                                            'name' => '',
+                                            'id' => 'checkAll',
+                                            'value' => '',
+                                            'label' => '',
+                                            'checked' => false,
+                                            'extraAttributes' => [
+                                                'class'=>'checkAll',
+                                                'aria-label' => 'Single checkbox One'
+                                            ]
+                                        ];
+                                        echo getCheckBox( $setParam );
+                                        ?>
+                                    </div>
+                                </th>
+                                <th style="padding-left:2em">회원등급</th>
+                                <th style="padding-left:2em">등급아이콘</th>
+                                <th style="padding-left:2em">마일리지 적립율</th>
+                                <th style="padding-left:2em">배송비 무료</th>
+                                <th style="padding-left:2em">수정/삭제</th>
+                            </tr>
+                            </thead>
+                            <tbody id="sortable">
+                            <?php
+                            if( empty( $aData ) === false ){
+                                foreach( $aData as $key => $lists ){
+                            ?>
+                            <tr>
+                                <td>
+                                    <div class="checkbox checkbox-single">
+                                        <?php
+                                        $setParam = [
+                                            'name' => 'i_grade_idx[]',
+                                            'id' => 'i_grade_idx_'._elm( $lists, 'G_IDX' ),
+                                            'value' =>  _elm( $lists, 'G_IDX' ),
+                                            'label' => '',
+                                            'checked' => false,
+                                            'extraAttributes' => [
+                                                'aria-label' => 'Single checkbox One',
+                                                'class'=>'check-item',
+                                            ]
+                                        ];
+                                        echo getCheckBox( $setParam );
+                                        ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="form-control" name="i_name[<?php echo _elm( $lists, 'G_IDX' )?>]" id="i_name_<?php echo _elm( $lists, 'G_IDX' )?>" value="<?php echo _elm( $lists, 'G_NAME' )?>">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="file" class="form-control" name="i_icon[<?php echo _elm( $lists, 'G_IDX' )?>]" id="i_icon" >
+                                        <?php
+                                        if( !empty(_elm( $lists, 'G_ICON_NAME' ) ) ){
+                                        ?>
+                                        <span class="image-container">
+                                            <img src="<?php echo base_url()._elm( $lists, 'G_ICON_PATH' )?>"  class="icon-image">
+                                            <svg class="delete-button" xmlns="http://www.w3.org/2000/svg" onclick="deleteIconConfirm( '<?php echo _elm( $lists, 'G_IDX' )?>' )" viewBox="0 0 24 24" width="24" height="24" fill="red">
+                                                <path d="M18 6L6 18M6 6l12 12" stroke="black" />
+                                            </svg>
+                                        </span>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="form-control" name="i_save_rate[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_SAVE_RATE' )?>" >
+                                        <span class="wordCount input-group-text"
+                                            style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
+                                            %
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <?php
+                                        $checked = false;
+                                        if( _elm( $lists, 'G_DELIVERY_FREE' ) == 'Y' ){
+                                            $checked = true;
+                                        }
+                                        $setParam = [
+                                            'name' => 'i_delivery_free['.$lists['G_IDX'].']',
+                                            'id' => 'i_delivery_free',
+                                            'value' => 'Y',
+                                            'label' => '',
+                                            'checked' => $checked,
+                                            'extraAttributes' => []
+                                        ];
 
-                                            echo getCheckBox($setParam);
-                                            ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                    <a href="javascript:;" onclick="deleteGradeConfirm('<?php echo _elm( $lists, 'G_IDX' ) ?>');">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </a>
+                                        echo getCheckBox($setParam);
+                                        ?>
+                                    </div>
+                                </td>
+                                <td>
+                                <a href="javascript:;" onclick="deleteGradeConfirm('<?php echo _elm( $lists, 'G_IDX' ) ?>');">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
 
-                                    </td>
-                                </tr>
-                                <?php
-                                    }
+                                </td>
+                            </tr>
+                            <?php
                                 }
-                                ?>
-                                </tbody>
+                            }
+                            ?>
+                            </tbody>
                         </table>
                     </div>
                     <div style="padding:0.5em 0.5em">
@@ -310,48 +313,24 @@
             </div>
         </div>
 
-
-
     </div>
 </div>
 <script>
-function modifyGradeConfirm()
+function deleteIconConfirm( g_idx )
 {
-    if ($('input:checkbox[name="i_grade_idx[]"]:checked').length > 0)
-    {
-        box_confirm('선택된 등급을 수정하시겠습니까?', 'c', '', modifyGrade);
-    }
-    else
-    {
-        box_alert('선택된 등급이 없습니다.', 'info');
-    }
+    box_confirm('아이콘을 삭제하시겠습니까?', 'q', '', deleteIcon, {'g_idx': g_idx});
 }
-
-function modifyGrade()
-{
-    const frm = $('#frm_grade_lists')
+function deleteIcon( param ){
     $.ajax({
-        url: '/apis/setting/modifyMembershipGrade',
+        url: '/apis/setting/deleteMembershipGradeIcon',
         type: 'post',
-        data: new FormData( frm[0] ),
+        data: 'g_idx='+param.g_idx,
         dataType: 'json',
         processData: false,
-        contentType: false,
         cache: false,
         beforeSend: function() { },
         success: function(response) {
             submitSuccess(response);
-
-            if (response.status == 'false')
-            {
-                var error_message = '';
-                error_message = error_lists.join('<br />');
-                if (error_message != '') {
-                    box_alert(error_message, 'info');
-                }
-
-                return false;
-            }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
@@ -362,117 +341,19 @@ function modifyGrade()
         complete: function() { }
     });
 }
+</script>
 
-function addMembershipGrade(){
-    event.preventDefault();
-        const frm = $('#frm_register')
-        error_lists = [];
-        $('.error_txt').html('');
+<?php
+$owensView->setFooterJs('/assets/js/setting/membership/grade.js');
 
-        var inputs = frm.find('input, button');
-        var isSubmit = true;
-
-        if ($.trim(frm.find('#i_name').val()) == '')
-        {
-            _form_error('i_user_id', '등급명을 입력하세요.');
-            isSubmit = false;
-        }
-
-        if (isSubmit == false)
-        {
-            var error_message = '';
-            error_message = error_lists.join('<br />');
-            box_alert(error_message, 'info');
-
-            inputs.prop('disabled', false);
-            return false;
-        }
-        $.ajax({
-            url: '/apis/setting/addMembershipGrade',
-            method: 'POST',
-            data: new FormData(frm[0]),
-            dataType: 'json',
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function()
-            {
-                inputs.prop('disabled', true);
-                setTimeout(function() { inputs.prop('disabled', false); }, 3000);
-            },
-            success: function(response)
-            {
-                submitSuccess(response);
-
-                inputs.prop('disabled', false);
-
-                if (response.status == 'false')
-                {
-                    var error_message = '';
-                    error_message = error_lists.join('<br />');
-                    if (error_message != '') {
-                        box_alert(error_message, 'info');
-                    }
-
-                    return false;
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                submitError(jqXHR.status, errorThrown);
-                console.log(textStatus);
-
-                inputs.prop('disabled', false);
-                return false;
-            },
-            complete: function() { }
-        });
-
-}
-
-
-function updateGradrSort()
-{
-    var s_data = new FormData();
-
-    $("[name='i_grade_idx[]']").each(function() {
-        s_data.append('sort[]', $(this).val());
-    });
-
-    $.ajax({
-        url: "/apis/setting/updateGradeSort",
-        type: 'post',
-        data: s_data,
-        dataType: 'json',
-        processData:false,
-        contentType: false,
-        cache:false,
-        success: function(response) {
-            submitSuccess(response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
-            return submitError(jqXHR.status, errorThrown);
-        }
-    });
-}
-
-$(function(){
-    $("#sortable").sortable({
+$script = "
+    $('#sortable').sortable({
         update: function(event, ui) {
-            var idsInOrder = $("#sortable").sortable("toArray",{ attribute : 'data-idx'});
+            var idsInOrder = $('#sortable').sortable('toArray',{ attribute : 'data-idx'});
             updateGradrSort(idsInOrder);
             console.log(idsInOrder);
         }
     });
-});
-
-</script>
-
-<?php
-$owensView->setFooterJs('/assets/js/setting/policy/member.js');
-
-$script = "
 ";
 
 $owensView->setFooterScript($script);

@@ -29,8 +29,9 @@ class Setting extends CoreController
     public function __construct()
     {
         parent::__construct();
-        $this->memberlib                         = new MemberLib();
-        $this->menulib                           = new MenuLib();
-        $this->mConfig                           = new memberConfig();
+        $this->memberlib                           = new MemberLib();
+        $this->menulib                             = new MenuLib();
+        $this->mConfig                             = new memberConfig();
+
     }
 }

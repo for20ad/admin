@@ -20,7 +20,7 @@ $routes->group('setting', ['namespace' => 'Module\setting\Controllers'], static 
     $routes->get('cart', 'Cart::defaultSetting' );
 
     $routes->get('membershipGrade', 'Membership::grade' );
-
+    $routes->get('membershipValuation', 'Membership::valuation' );
 
 });
 $routes->group('apis/setting', ['namespace' => 'Module\setting\Controllers\apis'], static function($routes) {
@@ -42,6 +42,9 @@ $routes->group('apis/setting', ['namespace' => 'Module\setting\Controllers\apis'
     $routes->post('addMembershipGrade', 'MembershipApi::addGrade');
     $routes->post('modifyMembershipGrade', 'MembershipApi::modifyGrade');
     $routes->post('updateGradeSort', 'MembershipApi::updateGradeSort');
+    $routes->post('deleteMembershipGrade', 'MembershipApi::deleteMembershipGrade');
+    $routes->post('deleteMembershipGradeIcon', 'MembershipApi::deleteMembershipGradeIcon');
+
 
 
 

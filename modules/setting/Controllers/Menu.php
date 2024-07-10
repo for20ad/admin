@@ -46,42 +46,43 @@ class Menu extends Setting
     }
     public function index()
     {
+
         #------------------------------------------------------------------
         # TODO: 기본 페이지 변수 세팅
         #------------------------------------------------------------------
-        $pageDatas                                 = [];
-        $menu                                      = [];
-        $pageDatas['menu_tree_lists']              = [];
+        $pageDatas                                  = [];
+        $menu                                       = [];
+        $pageDatas['menu_tree_lists']               = [];
 
         #------------------------------------------------------------------
         # TODO: request 데이터 세팅
         #------------------------------------------------------------------
-        $requests                                  = $this->request->getPost();
+        $requests                                   = $this->request->getPost();
 
         #------------------------------------------------------------------
         # TODO: 모델 로드
         #------------------------------------------------------------------
-        $menuModel                                 = new MenuModel();
-        $memberModel                               = new MemberModel();
+        $menuModel                                  = new MenuModel();
+        $memberModel                                = new MemberModel();
 
         #------------------------------------------------------------------
         # TODO: Config 세팅
         #------------------------------------------------------------------
 
 
-        $pageDatas['config']                       = $this->mConfig->menu;
+        $pageDatas['config']                        = $this->mConfig->menu;
 
-        $menu_lists                                = $menuModel->getMenuLists();
+        $menu_lists                                 = $menuModel->getMenuLists();
 
         if( empty( $menu_lists ) === false  ){
             #------------------------------------------------------------------
             # TODO: 트리형식으로 리스트 변경
             #------------------------------------------------------------------
-            $pageDatas['menu_tree_lists']          = _build_tree($menu_lists);
+            $pageDatas['menu_tree_lists']           = _build_tree($menu_lists);
 
             foreach (_elm($pageDatas, 'menu_tree_lists', []) as $kIDX => $vMENU)
             {
-                $menu[_elm($vMENU, 'MENU_IDX')]    = _elm($vMENU, 'MENU_NAME');
+                $menu[_elm($vMENU, 'MENU_IDX')]     = _elm($vMENU, 'MENU_NAME');
 
                 if (empty($vMENU['CHILD']) === false)
                 {
@@ -95,21 +96,21 @@ class Menu extends Setting
         #------------------------------------------------------------------
         # TODO: 메뉴 트리 적용
         #------------------------------------------------------------------
-        $pageDatas['menu']                         = $menu;
+        $pageDatas['menu']                          = $menu;
 
         #------------------------------------------------------------------
         # TODO: 그룹 로드
         #------------------------------------------------------------------
-        $pageDatas['member_group']                 = $memberModel->getMemberGroup();
+        $pageDatas['member_group']                  = $memberModel->getMemberGroup();
 
         #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
 
-        $pageParam                                 = [];
-        $pageParam['file']                         = '\Module\setting\Views\menu\menu';
-        $pageParam['pageLayout']                   = '';
-        $pageParam['pageDatas']                    = $pageDatas;
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\setting\Views\menu\menu';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
 
         //$pageParam['owensView']                    = $this->owensView;
 

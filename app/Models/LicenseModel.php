@@ -9,36 +9,33 @@ class LicenseModel extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->db = \Config\Database::connect();
+        $this->db                                   = \Config\Database::connect();
     }
+
 
     public function getEduCategory()
     {
-        $aReturn = [];
+        $aReturn                                     = [];
 
-        $builder = $this->db->table('EDU_CATEGORY');
+        $builder                                     = $this->db->table('EDU_CATEGORY');
         $builder->where( 'C_STATUS', '2' );
-        $query = $builder->get();
-
-
+        $query                                       = $builder->get();
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-
         return $aReturn;
     }
 
     public function getUserLicenseCateWaitList( $param = [] )
     {
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->select('EDC.C_NAME');
@@ -54,13 +51,12 @@ class LicenseModel extends Model
 
         $builder->orderBy('CI.I_REG_DATE', 'DESC');
 
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
         //echo $this->db->getLastQuery();
 
@@ -70,12 +66,12 @@ class LicenseModel extends Model
 
     public function getUserLicenseCatePickUseList( $param = [] )
     {
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->select('EDC.C_NAME');
@@ -91,16 +87,13 @@ class LicenseModel extends Model
 
         $builder->orderBy('CI.I_REG_DATE', 'DESC');
 
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-        //echo $this->db->getLastQuery();
-
         return $aReturn;
     }
 
@@ -108,12 +101,12 @@ class LicenseModel extends Model
 
     public function getUserLicenseCateAllUseList( $param = [] )
     {
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->select('EDC.C_NAME');
@@ -131,28 +124,25 @@ class LicenseModel extends Model
 
         $builder->limit(1);
 
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-        // echo $this->db->getLastQuery();
-
         return $aReturn;
     }
 
 
     public function getUserLicenseCatePickNotUseList( $param = [] )
     {
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->select('EDC.C_NAME');
@@ -167,16 +157,13 @@ class LicenseModel extends Model
 
         $builder->orderBy('CI.I_REG_DATE', 'DESC');
 
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-        //echo $this->db->getLastQuery();
-
         return $aReturn;
     }
 
@@ -184,12 +171,12 @@ class LicenseModel extends Model
 
     public function getUserLicenseCateAllNotUseList( $param = [] )
     {
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->select('EDC.C_NAME');
@@ -210,54 +197,26 @@ class LicenseModel extends Model
 
         $builder->limit(1);
 
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-        //echo $this->db->getLastQuery();
 
         return $aReturn;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function getUserLicenseUseList( $param = [] )
     {
 
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->join( 'COUPON CP', 'CI.I_CP_IDX = CP.CP_IDX', 'INNER' );
@@ -268,44 +227,26 @@ class LicenseModel extends Model
         $builder->where( 'CI.I_END_DATE >= ', 'now()', false );
 
         $builder->orderBy('CI.I_REG_DATE', 'DESC');
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-        //echo $this->db->getLastQuery();
 
         return $aReturn;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function getUserLicenseNotUseList( $param = [] )
     {
 
-        $aReturn          = [];
+        $aReturn                                     = [];
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE CI');
+        $builder                                     = $this->db->table('COUPON_ISSUE CI');
         $builder->select( 'CI.*' );
         $builder->select( 'CP.CP_L_CATE_IDX, CP.CP_LECTURE_IDX, CP.CP_STATUS, CP.CP_START_DATE, CP.CP_END_DATE, CP.CP_USE_DAYS' );
         $builder->join( 'COUPON CP', 'CI.I_CP_IDX = CP.CP_IDX', 'INNER' );
@@ -319,29 +260,25 @@ class LicenseModel extends Model
 
 
         $builder->orderBy('CI.I_REG_DATE', 'DESC');
-        $query = $builder->get();
+        $query                                       = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getResultArray();
-
-            $aReturn = $result;
+            $result                                  = $query->getResultArray();
+            $aReturn                                 = $result;
         }
-        echo $this->db->getLastQuery();
-
         return $aReturn;
     }
 
     public function licenseUseRegist( $param = [] )
     {
-
-       $aReturn = false;
+        $aReturn                                     = false;
 
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table('COUPON_ISSUE');
+        $builder                                     = $this->db->table('COUPON_ISSUE');
 
         foreach( $param as $key => $value ){
             if( $key == 'I_IDX' ){
@@ -351,12 +288,10 @@ class LicenseModel extends Model
             }
         }
 
-        $aReturn = $builder->update();
-        echo $this->db->getLastQuery();
+        $aReturn                                     = $builder->update();
+
         return $aReturn;
     }
-
-
 
 }
 

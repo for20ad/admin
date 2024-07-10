@@ -13,7 +13,7 @@ function countdown() {
         seconds--;
     } else {
         clearInterval(countdownInterval); // 타이머 멈추기
-        box_alert("입력시간이 초과되었습니다. 재발송버튼을 눌러 다시 인증해주세요.");
+        box_alert("입력시간이 초과되었습니다. 재발송버튼을 눌러 다시 인증해주세요.", 'i');
     }
 }
 
@@ -47,7 +47,7 @@ function resendAuthNum() {
                 var error_message = '';
                 error_message = response.errors.join('<br />');
                 if (error_message != '') {
-                    alert(error_message);
+                    box_alert(error_message, 'e');
                 }
                 return false;
             }
@@ -62,11 +62,11 @@ function resendAuthNum() {
 
 function loginProc() {
     if ($('[name=i_auth_number]').val() == '') {
-        box_alert('인증번호를 입력하세요.');
+        box_alert('인증번호를 입력하세요.', 'i');
         return false;
     }
     if (seconds < 1) {
-        box_alert('인증시간이 초과되었습니다. 재발송 버튼을 눌러주세요.');
+        box_alert('인증시간이 초과되었습니다. 재발송 버튼을 눌러주세요.', 'i');
         return false;
     }
 
@@ -87,7 +87,7 @@ function loginProc() {
                 var error_message = '';
                 error_message = response.errors.join('<br />');
                 if (error_message != '') {
-                    alert(error_message);
+                    box_alert(error_message, 'e');
                 }
                 return false;
             }

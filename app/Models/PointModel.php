@@ -8,28 +8,23 @@ class PointModel extends Model
 
     public function getPointBalance( int $mb_idx )
     {
-        $aReturn = false;
+
+        $aReturn                                    = false;
 
         if( empty( $mb_idx ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table('POINT_BALANCE');
+        $builder                                    = $this->db->table('POINT_BALANCE');
         $builder->select('BALANCE');
         $builder->where( 'MEMBER_IDX', $mb_idx );
 
-
-
-        $query = $builder->get();
-
-        //echo $this->db->getLastQuery();
+        $query                                      = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $result = $query->getRowArray();
-
-            $aReturn = $result;
+            $result                                 = $query->getRowArray();
+            $aReturn                                = $result;
         }
-
 
         return $aReturn;
 
@@ -37,21 +32,21 @@ class PointModel extends Model
 
     public function insertPointHistory( array $param )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( _elm( $param, 'MEMBER_IDX' ) ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table('POINT_HISTORY');
+        $builder                                    = $this->db->table('POINT_HISTORY');
         $builder->insert( $param );
         //echo $this->db->getLastQuery();
-        $aReturn = $this->db->insertID();
+        $aReturn                                    = $this->db->insertID();
         return $aReturn;
 
     }
 
     public function updateBalance( array $param )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( _elm( $param, 'MEMBER_IDX' ) ) === true ){
             return $aReturn;
         }
@@ -62,7 +57,7 @@ class PointModel extends Model
                 MEMBER_IDX = '"._elm( $param, 'MEMBER_IDX' )."' ,
                 BALANCE = '"._elm( $param, 'BALANCE' )."'
         ";
-        $aReturn = $this->db->query( $_query );
+        $aReturn                                    = $this->db->query( $_query );
         return $aReturn;
     }
 }

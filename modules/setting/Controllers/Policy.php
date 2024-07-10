@@ -44,9 +44,9 @@ class Policy extends Setting
 
     public function index()
     {
-        $pageParam               = [];
-        $pageParam['file']       = '\Module\core\Views\errors\error_404';
-        $pageParam['pageLayout'] = 'blank';
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\core\Views\errors\error_404';
+        $pageParam['pageLayout']                    = 'blank';
 
         $this->owensView->loadLayoutView($pageParam);
     }
@@ -56,32 +56,32 @@ class Policy extends Setting
         #------------------------------------------------------------------
         # TODO: 기본 페이지 변수 세팅
         #------------------------------------------------------------------
-        $pageDatas                                 = [];
-        $requests                                  = $this->request->getGet();
+        $pageDatas                                  = [];
+        $requests                                   = $this->request->getGet();
         #------------------------------------------------------------------
         # TODO: 모델 로드
         #------------------------------------------------------------------
-        $policyModel                               = new PolicyModel();
+        $policyModel                                = new PolicyModel();
 
         #------------------------------------------------------------------
         # TODO: Config 세팅
         #------------------------------------------------------------------
-        $aConfig                                   = new settingConfig();
-        $pageDatas['aConfig']                      = $aConfig->policy['member'];
+        $aConfig                                    = new settingConfig();
+        $pageDatas['aConfig']                       = $aConfig->policy['member'];
 
         #------------------------------------------------------------------
         # TODO: 정책관리 데이터 로드
         #------------------------------------------------------------------
-        $pageDatas['policyData']                   = $policyModel->getPolicy();
+        $pageDatas['policyData']                    = $policyModel->getPolicy();
 
          #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
 
-        $pageParam                                 = [];
-        $pageParam['file']                         = '\Module\setting\Views\policy\member';
-        $pageParam['pageLayout']                   = '';
-        $pageParam['pageDatas']                    = $pageDatas;
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\setting\Views\policy\member';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
 
 
         $this->owensView->loadLayoutView($pageParam);
@@ -93,32 +93,32 @@ class Policy extends Setting
         #------------------------------------------------------------------
         # TODO: 기본 페이지 변수 세팅
         #------------------------------------------------------------------
-        $pageDatas                                 = [];
-        $requests                                  = $this->request->getGet();
+        $pageDatas                                  = [];
+        $requests                                   = $this->request->getGet();
         #------------------------------------------------------------------
         # TODO: 모델 로드
         #------------------------------------------------------------------
-        $policyModel                               = new PolicyModel();
+        $policyModel                                = new PolicyModel();
 
         #------------------------------------------------------------------
         # TODO: Config 세팅
         #------------------------------------------------------------------
-        $aConfig                                   = new settingConfig();
-        $pageDatas['aConfig']                      = $aConfig->policy['purchase'];
+        $aConfig                                    = new settingConfig();
+        $pageDatas['aConfig']                       = $aConfig->policy['purchase'];
 
         #------------------------------------------------------------------
         # TODO: 정책관리 데이터 로드
         #------------------------------------------------------------------
-        $pageDatas['policyData']                   = $policyModel->getPolicy();
+        $pageDatas['policyData']                    = $policyModel->getPolicy();
 
          #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
 
-        $pageParam                                 = [];
-        $pageParam['file']                         = '\Module\setting\Views\policy\purchase';
-        $pageParam['pageLayout']                   = '';
-        $pageParam['pageDatas']                    = $pageDatas;
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\setting\Views\policy\purchase';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
 
 
         $this->owensView->loadLayoutView($pageParam);

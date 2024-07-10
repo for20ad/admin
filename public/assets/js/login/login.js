@@ -1,19 +1,19 @@
 
 $(document).on( 'click', '#loginButton', function(e){
-    loginAuth();
     e.preventDefault();
+    loginAuth();
 });
 
 
 
 function loginAuth(){
     if( $('[name=i_member_id]').val() == '' ){
-        alert('아이디를 입력하세요.');
+        box_alert('아이디를 입력하세요.', 'i');
         return false;
     }
 
     if( $('[name=i_member_password]').val() == '' ){
-        alert('비밀번호를 입력하세요.');
+        box_alert('비밀번호를 입력하세요.', 'i');
         return false;
     }
 
@@ -36,7 +36,7 @@ function loginAuth(){
                 var error_message = '';
                 error_message = response.errors.join('<br />');
                 if (error_message != '') {
-                    alert(error_message);
+                    box_alert(error_message, 'e');
                 }
                 return false;
             }

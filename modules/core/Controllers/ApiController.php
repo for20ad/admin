@@ -30,32 +30,33 @@ class ApiController extends ResourceController
 
     public function __construct()
     {
-        $this->response = Services::response();
-        $this->request = Services::request();
-        $this->session = Services::session();
-        $this->uri = Services::uri();
-        $this->LogModel = new LogModel();
-        $this->baseURL = base_url();
+
+        $this->response                             = Services::response();
+        $this->request                              = Services::request();
+        $this->session                              = Services::session();
+        $this->uri                                  = Services::uri();
+        $this->LogModel                             = new LogModel();
+        $this->baseURL                              = base_url();
 
         helper($this->helpers);
 
-        $this->owensCache = new OwensCache();
+        $this->owensCache                           = new OwensCache();
         #------------------------------------------------------------------
         # TODO: 요청 API 데이터 저장
         #------------------------------------------------------------------
-        $reciveParam                               = [];
+        $reciveParam                                = [];
 
-        $reciveParam['REQUEST_URI']                = (string) current_url(true);
-        $reciveParam['METHOD']                     = $this->request->getMethod();
-        $_params                                   = json_encode( $this->request->getVar(), JSON_UNESCAPED_UNICODE) ;
-        $_params                                   = (array)json_decode( str_replace( '\n____', '', $_params ) );
+        $reciveParam['REQUEST_URI']                 = (string) current_url(true);
+        $reciveParam['METHOD']                      = $this->request->getMethod();
+        $_params                                    = json_encode( $this->request->getVar(), JSON_UNESCAPED_UNICODE) ;
+        $_params                                    = (array)json_decode( str_replace( '\n____', '', $_params ) );
 
 
-        $reciveParam['PARAMETERS']                 = json_encode( $_params, JSON_UNESCAPED_UNICODE );
+        $reciveParam['PARAMETERS']                  = json_encode( $_params, JSON_UNESCAPED_UNICODE );
 
-        $reciveParam['SENDER_IP']                  = $this->request->getIPAddress();
-        $reciveParam['AGENT']                      = (string) $this->request->getUserAgent();
-        $reciveParam['SEND_AT']                    = date( 'Y-m-d H:i:s' );
+        $reciveParam['SENDER_IP']                   = $this->request->getIPAddress();
+        $reciveParam['AGENT']                       = (string) $this->request->getUserAgent();
+        $reciveParam['SEND_AT']                     = date( 'Y-m-d H:i:s' );
 
         $this->LogModel->setRequestApiLog( $reciveParam );
 
@@ -84,7 +85,7 @@ class ApiController extends ResourceController
     {
         // If the data is already an array, we can safely apply json_encode with JSON_NUMERIC_CHECK
         if (is_array($data) || is_object($data)) {
-            $data = json_decode(json_encode($data, JSON_NUMERIC_CHECK), true);
+            $data                                   = json_decode(json_encode($data, JSON_NUMERIC_CHECK), true);
         }
 
         return parent::respond($data, $status, $message);
@@ -92,10 +93,10 @@ class ApiController extends ResourceController
 
     protected function _initApiResponse()
     {
-        $response                                  = [];
-        $response['status']                        = 400; // 500, 200, 201
-        $response['error']                         = null;
-        $response['messages']                      = null;
+        $response                                   = [];
+        $response['status']                         = 400; // 500, 200, 201
+        $response['error']                          = null;
+        $response['messages']                       = null;
         //$response['time']     = time();
         //$response['data']    = [];
 
@@ -104,15 +105,15 @@ class ApiController extends ResourceController
 
     protected function _initResponse()
     {
-        $response                                  = [];
-        $response['status']                        = false;
-        $response['messages']                      = [];
-        $response['alert']                         = '';
+        $response                                   = [];
+        $response['status']                         = false;
+        $response['messages']                       = [];
+        $response['alert']                          = '';
         $response['redirect_url']                  = '';
         $response['replace_url']                   = '';
         $response['goback']                        = false;
         $response['reload']                        = false;
-        $response['time']                          = time();
+        $response['time']                           = time();
 
         return $response;
     }
@@ -124,7 +125,8 @@ class ApiController extends ResourceController
 
     protected function _upload_put($file, $_config)
     {
-        $config = [
+
+        $config                                     = [
             'upload_path' => WRITEPATH . 'uploads/' . _elm($_config, 'path'), // 파일이 업로드될 경로
             'allowed_types' => _elm($_config, 'mimes') ?? 'jpg|jpeg|png|gif|csv|xls|xlsx|zip|hwp|pdf|svg', // 허용된 파일 확장자
             'max_size' => _elm($_config, 'max_size') ?? '10240', // 업로드할 파일의 최대 크기 (KB)
@@ -132,8 +134,8 @@ class ApiController extends ResourceController
 
         // 파일 크기 검사를 수행합니다.
         if ($file['size'] > ($config['max_size'] * 1024)) { // KB 단위로 비교
-            $return['status'] = false;
-            $return['error'] = '최대 사이즈 오류발생 ' . $config['max_size'] . ' KB';
+            $return['status']                       = false;
+            $return['error']                        = '최대 사이즈 오류발생 ' . $config['max_size'] . ' KB';
             return $return;
         }
 
@@ -143,25 +145,25 @@ class ApiController extends ResourceController
         }
 
         $return['org_name'] = $file['name'];
-        $realFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
-        $uploadPath = $config['upload_path'] . '/' . $realFilename;
+        $realFilename                               = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
+        $uploadPath                                 = $config['upload_path'] . '/' . $realFilename;
 
         // 파일을 업로드합니다.
         if (is_uploaded_file($file['tmp_name']) || file_exists($file['tmp_name'])) {
             if (move_uploaded_file($file['tmp_name'], $uploadPath) || rename($file['tmp_name'], $uploadPath)) {
-                $return['url'] = base_url() . 'uploads/' . _elm($_config, 'path') . '/' . $realFilename;
-                $return['uploaded_path'] = 'uploads/' . _elm($_config, 'path') . '/' . $realFilename;
-                $return['status'] = true;
-                $return['type'] = mime_content_type($uploadPath);
-                $return['size'] = filesize($uploadPath); // in bytes
-                $return['ext'] = pathinfo($uploadPath, PATHINFO_EXTENSION);
+                $return['url']                      = base_url() . 'uploads/' . _elm($_config, 'path') . '/' . $realFilename;
+                $return['uploaded_path']            = 'uploads/' . _elm($_config, 'path') . '/' . $realFilename;
+                $return['status']                   = true;
+                $return['type']                     = mime_content_type($uploadPath);
+                $return['size']                     = filesize($uploadPath); // in bytes
+                $return['ext']                      = pathinfo($uploadPath, PATHINFO_EXTENSION);
             } else {
-                $return['status'] = false;
-                $return['error'] = '파일 업로드 실패';
+                $return['status']                   = false;
+                $return['error']                    = '파일 업로드 실패';
             }
         } else {
-            $return['status'] = false;
-            $return['error'] = '파일 업로드 중 오류 발생';
+            $return['status']                       = false;
+            $return['error']                        = '파일 업로드 중 오류 발생';
         }
 
         return $return;
@@ -171,18 +173,18 @@ class ApiController extends ResourceController
 
     protected function _upload( $file , $_config  )
     {
-        $uploader                                  = Services::upload();
+        $uploader                                   = Services::upload();
 
-        $config                                    = [
-            'upload_path'                          => WRITEPATH.'uploads/'._elm( $_config, 'path' ), // 파일이 업로드될 경로
-            'allowed_types'                        => _elm( $_config, 'mimes' )??'jpg|jpeg|png|gif|csv|xls|xlsx|zip|hwp|pdf|svg', // 허용된 파일 확장자
-            'max_size'                             => _elm( $_config, 'max_size' )??'10240', // 업로드할 파일의 최대 크기 (KB)
+        $config                                     = [
+            'upload_path'                           => WRITEPATH.'uploads/'._elm( $_config, 'path' ), // 파일이 업로드될 경로
+            'allowed_types'                         => _elm( $_config, 'mimes' )??'jpg|jpeg|png|gif|csv|xls|xlsx|zip|hwp|pdf|svg', // 허용된 파일 확장자
+            'max_size'                              => _elm( $_config, 'max_size' )??'10240', // 업로드할 파일의 최대 크기 (KB)
         ];
 
         // 파일 크기 검사를 수행합니다.
         if ($file->getSize() > ($config['max_size']*1024) )  { // KB 단위로 비교
-            $return['status'] = false;
-            $return['error'] = '최대 사이즈 오류발생 ' . $config['max_size'] . ' KB';
+            $return['status']                       = false;
+            $return['error']                        = '최대 사이즈 오류발생 ' . $config['max_size'] . ' KB';
             return $return;
         }
         if (is_dir($config['upload_path']) === false)
@@ -195,19 +197,19 @@ class ApiController extends ResourceController
             mkdir($config['upload_path'], 0777, true);
         }
 
-        $return['org_name']                        = $file->getName();
-        $realFilename                              = $file->getRandomName();
+        $return['org_name']                         = $file->getName();
+        $realFilename                               = $file->getRandomName();
 
         // 파일을 업로드합니다.
         $file->move($config['upload_path'], $realFilename);
 
-        $return['url']                             = base_url().'uploads/'._elm( $_config, 'path' ).'/'.$realFilename;
-        $return['uploaded_path']                   = 'uploads/'._elm( $_config, 'path' ).'/'.$realFilename;
-        $return['status']                          = 'true';
+        $return['url']                              = base_url().'uploads/'._elm( $_config, 'path' ).'/'.$realFilename;
+        $return['uploaded_path']                    = 'uploads/'._elm( $_config, 'path' ).'/'.$realFilename;
+        $return['status']                           = 'true';
 
-        $return['type']                        = mime_content_type( $return['uploaded_path'] );
-        $return['size']                        = filesize( $return['uploaded_path'] ); // in bytes
-        $return['ext']                         = pathinfo( $return['uploaded_path'] , PATHINFO_EXTENSION );
+        $return['type']                             = mime_content_type( $return['uploaded_path'] );
+        $return['size']                             = filesize( $return['uploaded_path'] ); // in bytes
+        $return['ext']                              = pathinfo( $return['uploaded_path'] , PATHINFO_EXTENSION );
 
 
         return $return;
@@ -216,12 +218,12 @@ class ApiController extends ResourceController
 
     protected function _upload_base64( $file_data , $org_name , $_config  )
     {
-        $uploader                                  = Services::upload();
+        $uploader                                   = Services::upload();
 
-        $config                                    = [
-            'upload_path'                          => WRITEPATH.'uploads/'._elm( $_config, 'path' ), // 파일이 업로드될 경로
-            'allowed_types'                        => _elm( $_config, 'mimes' )??'jpg|jpeg|png|gif|csv|xls|xlsx|zip|hwp|pdf|svg', // 허용된 파일 확장자
-            'max_size'                             => _elm( $_config, 'max_size' )??'10240', // 업로드할 파일의 최대 크기 (KB)
+        $config                                     = [
+            'upload_path'                           => WRITEPATH.'uploads/'._elm( $_config, 'path' ), // 파일이 업로드될 경로
+            'allowed_types'                         => _elm( $_config, 'mimes' )??'jpg|jpeg|png|gif|csv|xls|xlsx|zip|hwp|pdf|svg', // 허용된 파일 확장자
+            'max_size'                              => _elm( $_config, 'max_size' )??'10240', // 업로드할 파일의 최대 크기 (KB)
         ];
 
         if (is_dir($config['upload_path']) === false)
@@ -234,24 +236,24 @@ class ApiController extends ResourceController
             mkdir($config['upload_path'], 0777, true);
         }
 
-        $return['org_name']                        = $org_name;
+        $return['org_name']                         = $org_name;
 
 
-        $fileName                                  = uniqid() . '.jpg'; // 파일 이름 생성
-        $filepath                                  = $config['upload_path'].'/'.$fileName;
+        $fileName                                   = uniqid() . '.jpg'; // 파일 이름 생성
+        $filepath                                   = $config['upload_path'].'/'.$fileName;
 
-        $bStatus                                   = file_put_contents($filepath, $file_data);
+        $bStatus                                    = file_put_contents($filepath, $file_data);
         if( $bStatus ){
-            $return['url']                         = base_url().'uploads/'._elm( $_config, 'path' ).'/'.$fileName;
-            $return['uploaded_path']               = 'uploads/'._elm( $_config, 'path' ).'/'.$fileName;
-            $return['status']                      = true;
+            $return['url']                          = base_url().'uploads/'._elm( $_config, 'path' ).'/'.$fileName;
+            $return['uploaded_path']                = 'uploads/'._elm( $_config, 'path' ).'/'.$fileName;
+            $return['status']                       = true;
 
-            $return['type']                        = mime_content_type($filepath);
-            $return['size']                        = filesize($filepath); // in bytes
-            $return['ext']                         = pathinfo($filepath, PATHINFO_EXTENSION);
+            $return['type']                         = mime_content_type($filepath);
+            $return['size']                         = filesize($filepath); // in bytes
+            $return['ext']                          = pathinfo($filepath, PATHINFO_EXTENSION);
 
         }else{
-            $return['status']                      = false;
+            $return['status']                       = false;
         }
 
 
@@ -303,66 +305,67 @@ class ApiController extends ResourceController
 
     protected function _pagination($param = [])
     {
-        $pager = \Config\Services::pager();
 
-        $currentPage = $param['cur_page'] ?? 1;
-        $perPage = $param['per_page'] ?? 10;
-        $totalRows = $param['total_rows'] ?? 0;
-        $baseUrl = $param['base_url'] ?? '';
+        $pager                                      = \Config\Services::pager();
 
-        $totalPages = ceil($totalRows / $perPage);
+        $currentPage                                = $param['cur_page'] ?? 1;
+        $perPage                                    = $param['per_page'] ?? 10;
+        $totalRows                                  = $param['total_rows'] ?? 0;
+        $baseUrl                                    = $param['base_url'] ?? '';
 
-        $html = '<ul class="pagination align-items-center body2-c">';
+        $totalPages                                 = ceil($totalRows / $perPage);
+
+        $html                                       = '<ul class="pagination align-items-center body2-c">';
 
         // 이전 페이지 버튼
         if ($currentPage > 1) {
-            $prev = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage - 1) : 'javascript:void(0);';
-            $html .= '<li class="page-item">
-                        <a href="' . $prev . '" data-page="'.($currentPage - 1).'" class="page-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M10 4L6 8L10 12" stroke="#ADB5BD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>';
+            $prev                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage - 1) : 'javascript:void(0);';
+            $html                                  .= '<li class="page-item">
+                                                        <a href="' . $prev . '" data-page="'.($currentPage - 1).'" class="page-link">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                <path d="M10 4L6 8L10 12" stroke="#ADB5BD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    </li>';
         }
 
         // 페이지 번호
         for ($i = 1; $i <= $totalPages; $i++) {
             if ($i == $currentPage) {
-                $html .= '<li class="page-item active"><a href="javascript:void(0);" class="">' . $i . '</a></li>';
+                $html                              .= '<li class="page-item active"><a href="javascript:void(0);" class="">' . $i . '</a></li>';
             } else {
-                $nums = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($i) : 'javascript:void(0);';
-                $html .= '<li class="page-item"><a href="' . $nums.'" data-page="'.$i.'"class="page-link">' . $i . '</a></li>';
+                $nums                               = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($i) : 'javascript:void(0);';
+                $html                              .= '<li class="page-item"><a href="' . $nums.'" data-page="'.$i.'"class="page-link">' . $i . '</a></li>';
             }
         }
 
         // 다음 페이지 버튼
         if ($currentPage < $totalPages) {
-            $next = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage + 1) : 'javascript:void(0);';
-            $html .= '<li class="page-item">
-                        <a href="' . $next .'" data-page="'.( $currentPage + 1 ).'" class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M6 4L10 8L6 12" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>';
+            $next                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage + 1) : 'javascript:void(0);';
+            $html                                  .= '<li class="page-item">
+                                                        <a href="' . $next .'" data-page="'.( $currentPage + 1 ).'" class="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                <path d="M6 4L10 8L6 12" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    </li>';
         }
 
-        $html .= '</ul>';
+        $html                                      .= '</ul>';
 
         // 총 페이지 및 이동 드롭다운
-        $html .= '<div class="pagination-goto" style="gap: 8px">';
-        $html .= '<p>페이지</p>';
-        $html .= '<select class="form-select">';
+        $html                                      .= '<div class="pagination-goto" style="gap: 8px">';
+        $html                                      .= '<p>페이지</p>';
+        $html                                      .= '<select class="form-select">';
 
         for ($i = 1; $i <= $totalPages; $i++) {
-            $selected = ($i == $currentPage) ? ' selected' : '';
-            $html .= '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
+            $selected                               = ($i == $currentPage) ? ' selected' : '';
+            $html                                  .= '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
         }
 
-        $html .= '</select>';
-        $html .= '<p>총 ' . $totalPages . '</p>';
-        $html .= '</div>';
+        $html                                      .= '</select>';
+        $html                                      .= '<p>총 ' . $totalPages . '</p>';
+        $html                                      .= '</div>';
 
         return $html;
     }

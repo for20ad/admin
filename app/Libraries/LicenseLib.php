@@ -8,29 +8,25 @@ class LicenseLib
 {
     public function getUserLicense($param = [])
     {
-        $return_value = [];
-        $model = new LicenseModel();
-        $userData = _elm($GLOBALS, 'userInfo');
-
-
+        $return_value                               = [];
+        $model                                      = new LicenseModel();
+        $userData                                   = _elm($GLOBALS, 'userInfo');
 
         if (!empty($param)) {
-            $userData = $param;
+            $userData                               = $param;
         }
 
-
-
-        $cData = $model->getEduCategory();
+        $cData                                      = $model->getEduCategory();
 
         if (!empty($cData)) {
 
             foreach ($cData as $key => $cate) {
 
-                $return_value[_elm($cate, 'C_CODE')] = [];
+                $return_value[_elm($cate, 'C_CODE')]= [];
 
-                $dataParam = [];
-                $dataParam['I_BR_MB_IDX']                   = _elm($userData, 'IDX');
-                $dataParam['CP_L_CATE_IDX']                 = _elm($cate, 'C_IDX');
+                $dataParam                          = [];
+                $dataParam['I_BR_MB_IDX']           = _elm($userData, 'IDX');
+                $dataParam['CP_L_CATE_IDX']         = _elm($cate, 'C_IDX');
 
                 /**
                  * 실수 방지위해 쿼리 분리...
@@ -38,7 +34,7 @@ class LicenseLib
                  * 2.사용중인 쿠폰중 일부만 가능한 쿠폰있으면 데이터 합쳐서 출력
                  */
 
-                $useAllData = $model->getUserLicenseCateAllUseList($dataParam);
+                $useAllData                         = $model->getUserLicenseCateAllUseList($dataParam);
 
                 /**
                  * 전부 시청 가능한 쿠폰 데이터 있으면
@@ -57,12 +53,12 @@ class LicenseLib
                  * 전부 시청 가능한 쿠폰 데이터 없으면 단건 데이터
                  */
                 else{
-                    $usePickData = $model->getUserLicenseCatePickUseList($dataParam);
+                    $usePickData                    = $model->getUserLicenseCatePickUseList($dataParam);
                     /**
                      * 데이터 있으면 모두 돌림
                      */
                     if( empty( $usePickData ) === false ){
-                        $aPickLecture = [];
+                        $aPickLecture               = [];
                         foreach( $usePickData as $key => $plicense ){
                             $aPickLecture[] =  _elm($plicense, 'CP_LECTURE_IDX');
                             $return_value[_elm($cate, 'C_CODE')]['cateName']    = _elm($plicense, 'C_NAME');
@@ -87,7 +83,7 @@ class LicenseLib
                  * 4.자동 사용등록
                 */
 
-                $notUseAllData = $model->getUserLicenseCateAllNotUseList($dataParam);
+                $notUseAllData                      = $model->getUserLicenseCateAllNotUseList($dataParam);
 
 
                 /**
@@ -100,20 +96,20 @@ class LicenseLib
                     */
                     foreach( $notUseAllData as $nalicense ){
                         $modelParam = [];
-                        $modelParam['I_IDX']                    = _elm($nalicense, 'I_IDX');
-                        $modelParam['I_BR_MB_IDX']              = _elm($nalicense, 'I_BR_MB_IDX');
-                        $modelParam['I_BR_MB_UID']              = _elm($nalicense, 'I_BR_MB_UID');
-                        $modelParam['I_STATUS']                 = 1;
-                        $useDays                                = strtotime("+" . _elm($nalicense, 'CP_USE_DAYS') . " days", time());
-                        $modelParam['I_START_DATE']             = date('Y-m-d');
-                        $modelParam['I_END_DATE']               = date('Y-m-d', $useDays);
-                        $modelParam['I_USE_DATE']               = date('Y-m-d H:i:s');
-                        $modelParam['I_USE_GUBUN']              = 1;
-                        $modelParam['I_USE_MB_IDX']             = _elm($userData, 'IDX');
+                        $modelParam['I_IDX']        = _elm($nalicense, 'I_IDX');
+                        $modelParam['I_BR_MB_IDX']  = _elm($nalicense, 'I_BR_MB_IDX');
+                        $modelParam['I_BR_MB_UID']  = _elm($nalicense, 'I_BR_MB_UID');
+                        $modelParam['I_STATUS']     = 1;
+                        $useDays                    = strtotime("+" . _elm($nalicense, 'CP_USE_DAYS') . " days", time());
+                        $modelParam['I_START_DATE'] = date('Y-m-d');
+                        $modelParam['I_END_DATE']   = date('Y-m-d', $useDays);
+                        $modelParam['I_USE_DATE']   = date('Y-m-d H:i:s');
+                        $modelParam['I_USE_GUBUN']  = 1;
+                        $modelParam['I_USE_MB_IDX'] = _elm($userData, 'IDX');
 
                         $model->licenseUseRegist($modelParam);
 
-                        $useOrgPick                                         =  $return_value[_elm($cate, 'C_CODE')]['pickLecture'] ?? 0 ;
+                        $useOrgPick                 =  $return_value[_elm($cate, 'C_CODE')]['pickLecture'] ?? 0 ;
 
                         $return_value[_elm($cate, 'C_CODE')]['cateName']    = _elm($nalicense, 'C_NAME');
                         $return_value[_elm($cate, 'C_CODE')]['licenseCode'] = _elm($nalicense, 'I_CODE');
@@ -128,7 +124,7 @@ class LicenseLib
                     /**
                      * 미사용 단건 조회하여 기존 정의된 배열에서 없는것들만 사용 등록해준다.
                     */
-                    $notUsePickData = $model->getUserLicenseCatePickNotUseList($dataParam);
+                    $notUsePickData                 = $model->getUserLicenseCatePickNotUseList($dataParam);
 
                     /**
                      * 데이터 있으면 모두 돌림
@@ -137,8 +133,8 @@ class LicenseLib
 
 
                     if( empty( $notUsePickData ) === false ){
-                        $chkPickLectureArray                    = explode( ',', $return_value[_elm($cate, 'C_CODE')]['pickLecture'] );
-                        $naPickLecture                          = $chkPickLectureArray;
+                        $chkPickLectureArray        = explode( ',', $return_value[_elm($cate, 'C_CODE')]['pickLecture'] );
+                        $naPickLecture              = $chkPickLectureArray;
                         foreach( $notUsePickData as $key => $nplicense ){
 
                             if(!in_array(_elm($nplicense, 'CP_LECTURE_IDX'), $chkPickLectureArray)){
@@ -157,7 +153,7 @@ class LicenseLib
                                 $model->licenseUseRegist($modelParam);
 
 
-                                $aPickLecture[] =  _elm($nplicense, 'CP_LECTURE_IDX');
+                                $aPickLecture[]     =  _elm($nplicense, 'CP_LECTURE_IDX');
 
                                 $return_value[_elm($cate, 'C_CODE')]['cateName']    = _elm($nplicense, 'C_NAME');
                                 $return_value[_elm($cate, 'C_CODE')]['licenseCode'] = _elm($nplicense, 'I_CODE');
@@ -189,25 +185,26 @@ class LicenseLib
 
     public function getUserLicenseWait( $param = [] )
     {
-        $return_value = [];
-        $model = new LicenseModel();
-        $userData = _elm($GLOBALS, 'userInfo');
+
+        $return_value                               = [];
+        $model                                      = new LicenseModel();
+        $userData                                   = _elm($GLOBALS, 'userInfo');
 
         if (!empty($param)) {
-            $userData = $param;
+            $userData                               = $param;
         }
 
-        $cData = $model->getEduCategory();
+        $cData                                      = $model->getEduCategory();
 
         if (!empty($cData)) {
             foreach ($cData as $key => $cate) {
                 $return_value[_elm($cate, 'C_CODE')] = [];
 
-                $dataParam = [];
-                $dataParam['I_BR_MB_IDX']                   = _elm($userData, 'IDX');
-                $dataParam['CP_L_CATE_IDX']                 = _elm($cate, 'C_IDX');
+                $dataParam                          = [];
+                $dataParam['I_BR_MB_IDX']           = _elm($userData, 'IDX');
+                $dataParam['CP_L_CATE_IDX']         = _elm($cate, 'C_IDX');
 
-                $waitData = $model->getUserLicenseCateWaitList($dataParam);
+                $waitData                           = $model->getUserLicenseCateWaitList($dataParam);
 
                 if( empty( $waitData ) === false ){
                     foreach( $waitData as $waitLicense ){
@@ -228,26 +225,26 @@ class LicenseLib
 
     public function getUserLicense2($param = [])
     {
-        $return_value = [];
-        $model = new LicenseModel();
-        $userData = _elm($GLOBALS, 'userInfo');
+        $return_value                               = [];
+        $model                                      = new LicenseModel();
+        $userData                                   = _elm($GLOBALS, 'userInfo');
 
         if (!empty($param)) {
-            $userData = $param;
+            $userData                               = $param;
         }
 
-        $cData = $model->getEduCategory();
+        $cData                                      = $model->getEduCategory();
 
         if (!empty($cData)) {
             foreach ($cData as $key => $cate) {
-                $return_value[_elm($cate, 'C_CODE')] = [];
+                $return_value[_elm($cate, 'C_CODE')]= [];
 
-                $useParam = [];
-                $useParam['I_BR_MB_IDX'] = _elm($userData, 'IDX');
-                $useParam['CP_L_CATE_IDX'] = _elm($cate, 'C_IDX');
+                $useParam                           = [];
+                $useParam['I_BR_MB_IDX']            = _elm($userData, 'IDX');
+                $useParam['CP_L_CATE_IDX']          = _elm($cate, 'C_IDX');
 
 
-                $lData = $model->getUserLicenseUseList($useParam);
+                $lData                              = $model->getUserLicenseUseList($useParam);
 
                 $aPickLecture = [];
                 if (!empty($lData)) {
@@ -257,7 +254,6 @@ class LicenseLib
                      * 쿠폰이 하나이면 그 쿠폰을 넣으면 되지만 2개 이상의 row가 나오면 체크해야한다.
                      */
                     if( count( $lData ) > 1 ){
-
                         foreach ($lData as $idx => $license) {
                             $endDate = _elm($license, 'I_END_DATE') != null ? date('Ymd', strtotime(_elm($license, 'I_END_DATE'))) : '';
                             $curDate = date('Ymd');
@@ -360,9 +356,9 @@ class LicenseLib
 
     public function getUserLicense_org($param = [])
     {
-        $return_value = [];
-        $model = new LicenseModel();
-        $userData = _elm($GLOBALS, 'userInfo');
+        $return_value                               = [];
+        $model                                      = new LicenseModel();
+        $userData                                   = _elm($GLOBALS, 'userInfo');
 
         if (!empty($param)) {
             $userData = $param;
@@ -372,22 +368,22 @@ class LicenseLib
 
         if (!empty($cData)) {
             foreach ($cData as $key => $cate) {
-                $return_value[_elm($cate, 'C_CODE')] = [];
+                $return_value[_elm($cate, 'C_CODE')]= [];
 
-                $useParam = [];
-                $useParam['I_BR_MB_IDX'] = _elm($userData, 'IDX');
-                $useParam['CP_L_CATE_IDX'] = _elm($cate, 'C_IDX');
-                $useParam['CHKUSE'] = true;
+                $useParam                           = [];
+                $useParam['I_BR_MB_IDX']            = _elm($userData, 'IDX');
+                $useParam['CP_L_CATE_IDX']          = _elm($cate, 'C_IDX');
+                $useParam['CHKUSE']                 = true;
 
-                $lData = $model->getUserLicenseUseList($useParam);
+                $lData                              = $model->getUserLicenseUseList($useParam);
 
                 if (!empty($lData)) {
                     echo "===사용중인 쿠폰===";
-                    $pickLectures = [];
+                    $pickLectures                   = [];
 
                     foreach ($lData as $idx => $license) {
-                        $endDate = _elm($license, 'I_END_DATE') != null ? date('Ymd', strtotime(_elm($license, 'I_END_DATE'))) : '';
-                        $curDate = date('Ymd');
+                        $endDate                    = _elm($license, 'I_END_DATE') != null ? date('Ymd', strtotime(_elm($license, 'I_END_DATE'))) : '';
+                        $curDate                    = date('Ymd');
 
                         if ($endDate >= $curDate) {
                             if (empty(_elm($license, 'CP_LECTURE_IDX')) === true) {
@@ -424,10 +420,10 @@ class LicenseLib
                     $return_value[_elm($cate, 'C_CODE')]['pickLecture'] = implode(',', $pickLectures);
 
                 } else {
-                    $emptyParam = [];
-                    $emptyParam['I_BR_MB_IDX'] = _elm($userData, 'IDX');
-                    $emptyParam['CP_L_CATE_IDX'] = _elm($cate, 'C_IDX');
-                    $emptyParam['CHKUSE'] = false;
+                    $emptyParam                     = [];
+                    $emptyParam['I_BR_MB_IDX']      = _elm($userData, 'IDX');
+                    $emptyParam['CP_L_CATE_IDX']    = _elm($cate, 'C_IDX');
+                    $emptyParam['CHKUSE']           = false;
 
                     $eData = $model->getUserLicenseNotUseList($emptyParam);
 
@@ -435,15 +431,15 @@ class LicenseLib
                         echo "===미!!!사용중인 쿠폰===";
 
                         $modelParam = [];
-                        $modelParam['I_IDX'] = _elm(_elm($eData, 0), 'I_IDX');
-                        $modelParam['I_BR_MB_IDX'] = _elm($userData, 'IDX');
-                        $modelParam['I_BR_MB_UID'] = _elm($userData, 'UID');
-                        $modelParam['I_STATUS'] = 1;
-                        $useDays = strtotime("+" . _elm(_elm($eData, 0), 'CP_USE_DAYS') . " days", time());
+                        $modelParam['I_IDX']        = _elm(_elm($eData, 0), 'I_IDX');
+                        $modelParam['I_BR_MB_IDX']  = _elm($userData, 'IDX');
+                        $modelParam['I_BR_MB_UID']  = _elm($userData, 'UID');
+                        $modelParam['I_STATUS']     = 1;
+                        $useDays                    = strtotime("+" . _elm(_elm($eData, 0), 'CP_USE_DAYS') . " days", time());
                         $modelParam['I_START_DATE'] = date('Y-m-d');
-                        $modelParam['I_END_DATE'] = date('Y-m-d', $useDays);
-                        $modelParam['I_USE_DATE'] = date('Y-m-d H:i:s');
-                        $modelParam['I_USE_GUBUN'] = 1;
+                        $modelParam['I_END_DATE']   = date('Y-m-d', $useDays);
+                        $modelParam['I_USE_DATE']   = date('Y-m-d H:i:s');
+                        $modelParam['I_USE_GUBUN']  = 1;
                         $modelParam['I_USE_MB_IDX'] = _elm($userData, 'IDX');
 
                         if (empty(_elm(_elm($eData, 0), 'I_END_DATE')) === true) {
@@ -463,9 +459,9 @@ class LicenseLib
         // 배열의 값들을 문자열로 변환
         foreach ($return_value as $cateCode => &$data) {
             if (isset($data['pickLecture']) && is_array($data['pickLecture']) && count($data['pickLecture']) > 0) {
-                $data['pickLecture'] = implode(',', $data['pickLecture']);
+                $data['pickLecture']                = implode(',', $data['pickLecture']);
             } else {
-                $data['pickLecture'] = ''; // 또는 다른 기본값으로 설정
+                $data['pickLecture']                = ''; // 또는 다른 기본값으로 설정
             }
         }
 

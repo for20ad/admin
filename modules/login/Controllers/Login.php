@@ -19,15 +19,16 @@ class Login extends CoreController
 
     public function index()
     {
-        $pageDatas = [];
+
+        $pageDatas                                  = [];
 
         // ---------------------------------------------------------------------
         // 메인뷰 처리
         // ---------------------------------------------------------------------
-        $pageParam               = [];
-        $pageParam['file']       = '\Module\login\Views\login';
-        $pageParam['pageLayout'] = 'login';
-        $pageParam['pageDatas']  = $pageDatas;
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\login\Views\login';
+        $pageParam['pageLayout']                    = 'login';
+        $pageParam['pageDatas']                     = $pageDatas;
 
         $this->owensView->loadLayoutView($pageParam);
     }

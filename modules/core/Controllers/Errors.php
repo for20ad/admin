@@ -12,9 +12,9 @@ class Errors extends CoreController
 
     public function show404()
     {
-        $pageParam               = [];
-        $pageParam['file']       = '\Module\core\Views\errors\error_404';
-        $pageParam['pageLayout'] = 'blank';
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\core\Views\errors\error_404';
+        $pageParam['pageLayout']                    = 'blank';
 
         $this->owensView->loadLayoutView($pageParam);
     }

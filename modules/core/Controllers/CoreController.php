@@ -15,20 +15,21 @@ use App\Libraries\OwensCache;
 
 class CoreController extends BaseController
 {
-    protected $_encryption_key = 'ZIeAzykfMrqDKwtKTjk573t0ovtQS1Xn'; // 256bit
-    protected $helpers = ['owens', 'owens_form', 'owens_url', 'owens_convert',  'sweet_alert', 'form', 'html', 'text', 'url'];
-    public $session = [];
+
+    protected $_encryption_key                      = 'ZIeAzykfMrqDKwtKTjk573t0ovtQS1Xn'; // 256bit
+    protected $helpers                              = ['owens', 'owens_form', 'owens_url', 'owens_convert',  'sweet_alert', 'form', 'html', 'text', 'url'];
+    public $session                                 = [];
     protected $member;
     public $uri;
     protected $owensView;
     protected $owensCache;
     public function __construct()
     {
-        $this->response                        = Services::response();
-        $this->request                         = Services::request();
-        $this->session                         = Services::session();
-        $this->uri                             = Services::uri();
-        $this->member                          = new MemberLib();
+        $this->response                             = Services::response();
+        $this->request                              = Services::request();
+        $this->session                              = Services::session();
+        $this->uri                                  = Services::uri();
+        $this->member                               = new MemberLib();
 
         helper($this->helpers);
 
@@ -51,15 +52,15 @@ class CoreController extends BaseController
 
     protected function _initResponse()
     {
-        $response                                  = [];
-        $response['status']                        = false;
-        $response['messages']                      = [];
-        $response['alert']                         = '';
-        $response['redirect_url']                  = '';
-        $response['replace_url']                   = '';
-        $response['goback']                        = false;
-        $response['reload']                        = false;
-        $response['time']                          = time();
+        $response                                   = [];
+        $response['status']                         = false;
+        $response['messages']                       = [];
+        $response['alert']                          = '';
+        $response['redirect_url']                   = '';
+        $response['replace_url']                    = '';
+        $response['goback']                         = false;
+        $response['reload']                         = false;
+        $response['time']                           = time();
 
         return $response;
     }
@@ -67,8 +68,8 @@ class CoreController extends BaseController
     private function loadLibrary()
     {
         $config = new View();
-        $this->owensCache                       = new OwensCache();
-        $this->owensView                        = new OwensView($config);
+        $this->owensCache                           = new OwensCache();
+        $this->owensView                            = new OwensView($config);
         $this->owensView->setSiteLayout('\Module\core\Views\layouts\default');
 
         //$this->member = new Member();
@@ -80,18 +81,17 @@ class CoreController extends BaseController
         $this->owensView->setHeaderScriptVar('site_datetime', date("Y-m-d H:i:s"));
         $this->owensView->setHeaderScriptVar('site_is_admin_login', $this->member->isAdminLogin());
 
-        $csrfToken = service('security')->getCSRFHash();
+        $csrfToken                                  = service('security')->getCSRFHash();
         $this->owensView->setHeaderScriptVar('site_csrf_hash', $csrfToken);
 
-        $admin_login_time = $this->session->get('TEMP_ADMIN_LOGIN_TIME');
-        $site_config = new SiteConfig();
+        $admin_login_time                           = $this->session->get('TEMP_ADMIN_LOGIN_TIME');
+        $site_config                                = new SiteConfig();
 
         if (empty($admin_login_time) == false)
         {
+            $admin_expire_time                      = (int)$site_config->adminExpireTime ?? 7200;
 
-            $admin_expire_time = (int)$site_config->adminExpireTime ?? 7200;
-
-            $admin_auth_time = (int)$this->session->get('TEMP_ADMIN_LOGIN_TIME') + $admin_expire_time - time();
+            $admin_auth_time                        = (int)$this->session->get('TEMP_ADMIN_LOGIN_TIME') + $admin_expire_time - time();
 
             $this->owensView->setHeaderScriptVar('admin_auth_time', $admin_auth_time);
             $this->owensView->setViewData('admin_auth_time', $admin_auth_time + 1);
@@ -117,7 +117,7 @@ class CoreController extends BaseController
             return $string;
         }
 
-        $key                                    = $this->_encryption_key;
+        $key                                        = $this->_encryption_key;
 
         if (empty($key) === true)
         {
@@ -135,7 +135,7 @@ class CoreController extends BaseController
             return $string;
         }
 
-        $key                                    = $this->_encryption_key;
+        $key                                        = $this->_encryption_key;
 
         if (empty($key) === true)
         {
@@ -155,63 +155,67 @@ class CoreController extends BaseController
      */
     protected function _pagination($param = [])
     {
-        $pager = \Config\Services::pager();
 
-        $currentPage = $param['cur_page'] ?? 1;
-        $perPage = $param['per_page'] ?? 10;
-        $totalRows = $param['total_rows'] ?? 0;
-        $baseUrl = $param['base_url'] ?? '';
+        $pager                                      = \Config\Services::pager();
 
-        $totalPages = ceil($totalRows / $perPage);
+        $currentPage                                = $param['cur_page'] ?? 1;
+        $perPage                                    = $param['per_page'] ?? 10;
+        $totalRows                                  = $param['total_rows'] ?? 0;
+        $baseUrl                                    = $param['base_url'] ?? '';
 
-        $html = '<ul class="pagination align-items-center body2-c">';
+        $totalPages                                 = ceil($totalRows / $perPage);
+
+        $html                                       = '<ul class="pagination align-items-center body2-c">';
 
         // 이전 페이지 버튼
         if ($currentPage > 1) {
-            $html .= '<li class="page-item">
-                        <a href="' . $baseUrl . '?page=' . ($currentPage - 1) . '" class="page-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M10 4L6 8L10 12" stroke="#ADB5BD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>';
+            $prev                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage - 1) : 'javascript:void(0);';
+            $html                                  .= '<li class="page-item">
+                                                        <a href="' . $prev . '" data-page="'.($currentPage - 1).'" class="page-link">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                <path d="M10 4L6 8L10 12" stroke="#ADB5BD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    </li>';
         }
 
         // 페이지 번호
         for ($i = 1; $i <= $totalPages; $i++) {
             if ($i == $currentPage) {
-                $html .= '<li class="page-item active"><a href="javascript:void(0);" class="page-link">' . $i . '</a></li>';
+                $html                              .= '<li class="page-item active"><a href="javascript:void(0);" class="">' . $i . '</a></li>';
             } else {
-                $html .= '<li class="page-item"><a href="' . $baseUrl . '?page=' . $i . '" class="page-link">' . $i . '</a></li>';
+                $nums                               = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($i) : 'javascript:void(0);';
+                $html                              .= '<li class="page-item"><a href="' . $nums.'" data-page="'.$i.'"class="page-link">' . $i . '</a></li>';
             }
         }
 
         // 다음 페이지 버튼
         if ($currentPage < $totalPages) {
-            $html .= '<li class="page-item">
-                        <a href="' . $baseUrl . '?page=' . ($currentPage + 1) . '" class="page-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M6 4L10 8L6 12" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>';
+            $next                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage + 1) : 'javascript:void(0);';
+            $html                                  .= '<li class="page-item">
+                                                        <a href="' . $next .'" data-page="'.( $currentPage + 1 ).'" class="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                <path d="M6 4L10 8L6 12" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    </li>';
         }
 
-        $html .= '</ul>';
+        $html                                      .= '</ul>';
 
         // 총 페이지 및 이동 드롭다운
-        $html .= '<div class="pagination-goto" style="gap: 8px">';
-        $html .= '<p>페이지</p>';
-        $html .= '<select class="form-select" onchange="window.location.href=\'' . $baseUrl . '?page=\'+this.value">';
+        $html                                      .= '<div class="pagination-goto" style="gap: 8px">';
+        $html                                      .= '<p>페이지</p>';
+        $html                                      .= '<select class="form-select">';
 
         for ($i = 1; $i <= $totalPages; $i++) {
-            $selected = ($i == $currentPage) ? ' selected' : '';
-            $html .= '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
+            $selected                               = ($i == $currentPage) ? ' selected' : '';
+            $html                                  .= '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
         }
 
-        $html .= '</select>';
-        $html .= '<p>총 ' . $totalRows . '</p>';
-        $html .= '</div>';
+        $html                                      .= '</select>';
+        $html                                      .= '<p>총 ' . $totalPages . '</p>';
+        $html                                      .= '</div>';
 
         return $html;
     }

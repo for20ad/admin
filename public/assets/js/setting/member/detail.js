@@ -19,11 +19,11 @@ function dupCheckId( $obj ){
         return true;
     }
     if( $obj.val().length < 4 ){
-        box_alert( '4자 이상의 아이디를 입력해주세요.' );
+        box_alert( '4자 이상의 아이디를 입력해주세요.', 'i' );
         return false;
     }
     if($obj.val().length > 16){
-        box_alert( '16자 이하의 아이디를 입력해주세요.' );
+        box_alert( '16자 이하의 아이디를 입력해주세요.', 'i' );
         return false;
     }
     var frm = $("#frm_modify");
@@ -46,7 +46,7 @@ function dupCheckId( $obj ){
                 var error_message = '';
                 error_message = response.errors.join('<br />');
                 if (error_message != '') {
-                    alert(error_message);
+                    box_alert(error_message,'e');
                 }
                 return false;
             }
@@ -169,7 +169,7 @@ $(function(){
         {
             var error_message = '';
             error_message = error_lists.join('<br />');
-            box_alert(error_message, 'info');
+            box_alert(error_message, 'e');
 
             inputs.prop('disabled', false);
             return false;
@@ -199,7 +199,7 @@ $(function(){
                     var error_message = '';
                     error_message = error_lists.join('<br />');
                     if (error_message != '') {
-                        box_alert(error_message, 'info');
+                        box_alert(error_message, 'e');
                     }
 
                     return false;

@@ -17,36 +17,32 @@ class KakaoModel extends Model
     public function __construct()
     {
 
-        $this->kakaoDB = \Config\Database::connect('kakaoDB', false);
+        $this->kakaoDB                              = \Config\Database::connect('kakaoDB', false);
     }
 
     public function getTemplate( $code )
     {
-        $aReturn = [];
+        $aReturn                                    = [];
 
-        $builder = $this->kakaoDB->table('TBL_TEMPLATE');
+        $builder                                    = $this->kakaoDB->table('TBL_TEMPLATE');
 
         $builder->where('TEMPLATE_CODE' , $code);
         $builder->where('INSPECTION_STATUS','APR');
 
-        $query = $builder->get();
-
-        //echo $this->kakaoDB->getLastQuery();
+        $query                                      = $builder->get();
 
         if ($this->kakaoDB->affectedRows())
         {
-            $result = $query->getRowArray();
-
-            $aReturn = $result;
+            $result                                 = $query->getRowArray();
+            $aReturn                                = $result;
         }
-
 
         return $aReturn;
     }
 
     public function INSERT_ATALK( $param = [] )
     {
-        $builder = $this->kakaoDB->table('SUREData');
+        $builder                                    = $this->kakaoDB->table('SUREData');
 
         $builder->insert( $param);
 

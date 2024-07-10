@@ -8,50 +8,50 @@ class CartModel extends Model
 {
     public function __construct()
     {
-        $this->db = \Config\Database::connect();
+        $this->db                                   = \Config\Database::connect();
     }
 
     public function getCartSetting()
     {
-        $aReturn = [];
+        $aReturn                                    = [];
 
-        $builder = $this->db->table( 'DEFAULT_CART_SETTING' );
+        $builder                                    = $this->db->table( 'DEFAULT_CART_SETTING' );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getRowArray();
+            $aReturn                                = $query->getRowArray();
         }
         return $aReturn;
     }
 
     public function updateCartSetting( $param =[] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'DEFAULT_CART_SETTING' );
+        $builder                                    = $this->db->table( 'DEFAULT_CART_SETTING' );
         foreach( $param as $key => $val ){
             $builder->set( $key, $val );
         }
         $builder->where( 'P_IDX', 1 );
 
-        $aReturn = $builder->update();
+        $aReturn                                    = $builder->update();
         return $aReturn;
     }
     public function insertCartSetting( $param =[] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'DEFAULT_CART_SETTING' );
+        $builder                                    = $this->db->table( 'DEFAULT_CART_SETTING' );
         foreach( $param as $key => $val ){
             $builder->set( $key, $val );
         }
 
-        $aReturn = $builder->insert();
+        $aReturn                                    = $builder->insert();
         return $aReturn;
     }
 

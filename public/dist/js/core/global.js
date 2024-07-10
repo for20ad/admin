@@ -44,11 +44,11 @@ function submitSuccess(response) {
         {
             box_alert_replace(response.alert, response.replace_url, boxType);
         }
-        else if (response.goback == 'true')
+        else if (response.goback == true)
         {
             box_alert_back(response.alert, boxType);
         }
-        else if (response.reload == 'true')
+        else if (response.reload == true)
         {
             box_alert_reload(response.alert, boxType);
         }
@@ -67,11 +67,11 @@ function submitSuccess(response) {
         {
             document.location.replace(response.replace_url);
         }
-        else if (response.goback == 'true')
+        else if (response.goback == true)
         {
             history.go(-1);
         }
-        else if (response.reload == 'true')
+        else if (response.reload == true)
         {
             document.location.reload();
         }

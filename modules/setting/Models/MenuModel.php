@@ -15,12 +15,12 @@ class MenuModel extends Model
 {
     public function __construct()
     {
-        $this->db = \Config\Database::connect();
+        $this->db                                   = \Config\Database::connect();
     }
 
     public function updateMenu( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
@@ -28,7 +28,8 @@ class MenuModel extends Model
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
+
         $builder->set( 'MENU_GROUP_ID', _elm( $param, 'MENU_GROUP_ID' ) );
         $builder->set( 'MENU_NAME', _elm( $param, 'MENU_NAME' ) );
         $builder->set( 'MENU_CUSTOM_TAG', _elm( $param, 'MENU_CUSTOM_TAG' ) );
@@ -38,14 +39,15 @@ class MenuModel extends Model
         $builder->set( 'MENU_SORT', _elm( $param, 'MENU_SORT' ) );
         $builder->set( 'MENU_STATUS', _elm( $param, 'MENU_STATUS' ) );
         $builder->where( 'MENU_IDX', _elm( $param, 'MENU_IDX' ) );
-        $aReturn = $builder->update();
+
+        $aReturn                                    = $builder->update();
 
         return $aReturn;
     }
 
     public function deleteMenu($param = [])
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if (empty($param) === true){
             return $aReturn;
         }
@@ -53,20 +55,21 @@ class MenuModel extends Model
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
+
         $builder->where( 'MENU_IDX', _elm( $param, 'MENU_IDX' ) );
         $builder->orWhere( 'MENU_PARENT_IDX', _elm( $param, 'MENU_IDX' ) );
 
-        $aReturn = $builder->delete();
+        $aReturn                                    = $builder->delete();
 
         return $aReturn;
     }
 
     public function getMenuLists( $status = 0 )
     {
-        $aReturn = [];
+        $aReturn                                    = [];
 
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
 
         $builder->select( 'MENU_IDX, MENU_PARENT_IDX, MENU_GROUP_ID, MENU_NAME, MENU_CUSTOM_TAG, MENU_LINK, MENU_LINK_TARGET' );
         $builder->select( 'MENU_DISPLAY_MEMBER_GROUP, MENU_SORT, MENU_STATUS' );
@@ -81,22 +84,23 @@ class MenuModel extends Model
         $builder->orderBy( 'MENU_SORT', 'ASC' );
         $builder->orderBy( 'MENU_IDX', 'ASC' );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getResultArray();
+            $aReturn                                = $query->getResultArray();
         }
         return $aReturn;
     }
 
     public function writeMenu( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
+
         $builder->set( 'MENU_PARENT_IDX', _elm( $param, 'MENU_PARENT_IDX' ) );
         $builder->set( 'MENU_GROUP_ID', _elm( $param, 'MENU_GROUP_ID' ) );
         $builder->set( 'MENU_NAME', _elm( $param, 'MENU_NAME' ) );
@@ -106,13 +110,12 @@ class MenuModel extends Model
         $builder->set( 'MENU_DISPLAY_MEMBER_GROUP', _elm( $param, 'MENU_DISPLAY_MEMBER_GROUP' ) );
         $builder->set( 'MENU_SORT', _elm( $param, 'MENU_SORT' ) );
 
-        $aResult = $builder->insert();
+        $aResult                                    = $builder->insert();
 
         if( $aResult ){
-            $aReturn = $this->db->insertID();
+            $aReturn                                = $this->db->insertID();
         }
         return $aReturn;
-
     }
 
 
@@ -120,8 +123,8 @@ class MenuModel extends Model
     public function getAdminMenuLists($status = 0)
     {
 
-        $aReturn = [];
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
         $builder->select( 'MENU_IDX, MENU_PARENT_IDX, MENU_GROUP_ID, MENU_NAME, MENU_CUSTOM_TAG, MENU_LINK, MENU_LINK_TARGET' );
         $builder->select( 'MENU_DISPLAY_MEMBER_GROUP, MENU_SORT, MENU_STATUS' );
 
@@ -134,11 +137,11 @@ class MenuModel extends Model
         $builder->orderBy( 'MENU_SORT', 'ASC' );
         $builder->orderBy( 'MENU_IDX', 'ASC' );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getResultArray();
+            $aReturn                                = $query->getResultArray();
         }
         return $aReturn;
 
@@ -146,11 +149,12 @@ class MenuModel extends Model
 
     public function getAdminMenuListsByGroupId($group_id = '')
     {
-        $aReturn = [];
+        $aReturn                                    = [];
         if( empty( $group_id ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
+
         $builder->select( 'MENU_IDX, MENU_PARENT_IDX, MENU_GROUP_ID, MENU_NAME, MENU_CUSTOM_TAG, MENU_LINK, MENU_LINK_TARGET' );
         $builder->select( 'MENU_DISPLAY_MEMBER_GROUP, MENU_SORT, MENU_STATUS' );
         $builder->where( 'MENU_STATUS', 1 );
@@ -160,11 +164,11 @@ class MenuModel extends Model
         $builder->orderBy( 'MENU_SORT', 'ASC' );
         $builder->orderBy( 'MENU_IDX', 'ASC' );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
         //echo $this->db->getLastQuery();
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getResultArray();
+            $aReturn                                = $query->getResultArray();
         }
         return $aReturn;
     }
@@ -172,21 +176,22 @@ class MenuModel extends Model
     public function getAdminMenuListsByIdx($idx = 0)
     {
 
-        $aReturn = [];
+        $aReturn                                    = [];
         if( empty( $idx ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
+
         $builder->select( 'MENU_IDX, MENU_PARENT_IDX, MENU_GROUP_ID, MENU_NAME, MENU_CUSTOM_TAG, MENU_LINK, MENU_LINK_TARGET' );
         $builder->select( 'MENU_DISPLAY_MEMBER_GROUP, MENU_SORT, MENU_STATUS' );
         $builder->where( 'MENU_STATUS', 1 );
         $builder->where( 'MENU_IDX', $idx );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getRowArray();
+            $aReturn                                = $query->getRowArray();
         }
         return $aReturn;
 
@@ -195,12 +200,12 @@ class MenuModel extends Model
     public function getAdminMenuListsByParentIdx($parent_idx = 0)
     {
 
-        $aReturn = [];
+        $aReturn                                    = [];
         if( empty( $parent_idx ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MENU' );
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
         $builder->select( 'MENU_IDX, MENU_PARENT_IDX, MENU_GROUP_ID, MENU_NAME, MENU_CUSTOM_TAG, MENU_LINK, MENU_LINK_TARGET' );
         $builder->select( 'MENU_DISPLAY_MEMBER_GROUP, MENU_SORT, MENU_STATUS' );
         $builder->where( 'MENU_STATUS', 1 );
@@ -210,10 +215,10 @@ class MenuModel extends Model
         $builder->orderBy( 'MENU_SORT', 'ASC' );
         $builder->orderBy( 'MENU_IDX', 'ASC' );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getResultArray();
+            $aReturn                                = $query->getResultArray();
         }
         return $aReturn;
     }

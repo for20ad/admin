@@ -30,7 +30,7 @@ function dupCheckId( $obj ){
                 var error_message = '';
                 error_message = response.errors.join('<br />');
                 if (error_message != '') {
-                    alert(error_message);
+                    box_alert(error_message, 'e');
                 }
                 return false;
             }
@@ -53,7 +53,7 @@ function sameValueCheck( name, $obj ){
     const currentValue = $obj.val();
 
     if (targetValue !== currentValue) {
-        box_alert('비밀번호가 동일하지 않습니다.', 'e');
+        box_alert('비밀번호가 동일하지 않습니다.', 'i');
     }else{
         passwdChk = true;
     }
@@ -112,7 +112,7 @@ $(function(){
         {
             var error_message = '';
             error_message = error_lists.join('<br />');
-            box_alert(error_message, 'info');
+            box_alert(error_message, 'i');
 
             inputs.prop('disabled', false);
             return false;
@@ -142,7 +142,7 @@ $(function(){
                     var error_message = '';
                     error_message = error_lists.join('<br />');
                     if (error_message != '') {
-                        box_alert(error_message, 'info');
+                        box_alert(error_message, 'e');
                     }
 
                     return false;

@@ -1,4 +1,5 @@
 function getSearchList( $page ) {
+
     const frm = $("#frm_search");
     frm.find( '[name=page]' ).val( $page );
     var inputs = frm.find('input, button, select');
@@ -18,7 +19,7 @@ function getSearchList( $page ) {
             if (response.status == 'false') {
                 var error_message = response.error_lists.join('<br />');
                 if (error_message != '') {
-                    box_alert(error_message, 'info');
+                    box_alert(error_message, 'e');
                 }
                 return false;
             }

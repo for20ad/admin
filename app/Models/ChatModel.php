@@ -5,57 +5,58 @@ use CodeIgniter\Model;
 
 class ChatModel extends Model
 {
+
     public function addMessage( $param = [] )
     {
-        $aReturn                 = false;
+        $aReturn                                    = false;
 
-        $builder = $this->db->table( 'WJ_CHAT_MESSAGES' );
+        $builder                                    = $this->db->table( 'WJ_CHAT_MESSAGES' );
         foreach( $param as $key=> $val )
         {
             $builder->set( $key, $val);
         }
 
-        $aReturn = $builder->insert();
+        $aReturn                                    = $builder->insert();
         return $aReturn;
     }
 
     public function getMessages( $param = [] )
     {
-        $aReturn                  = [];
-        $builder = $this->db->table( 'WJ_CHAT_MESSAGES' );
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'WJ_CHAT_MESSAGES' );
         $builder->where( 'ROOM_ID', _elm( $param, 'ROOM_ID' ) );
         $builder->where( 'TIMESTAMP >=',  _elm( $param, 'SINCE' ) );
         $builder->orderBy( 'TIMESTAMP',  'DESC' );
 
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getResultArray();
+            $aReturn                                = $query->getResultArray();
         }
         return $aReturn;
     }
 
     public function addRoom( $param = [] )
     {
-        $aReturn                  = [];
-        $builder = $this->db->table( 'WJ_CHAT_ROOMINFO' );
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'WJ_CHAT_ROOMINFO' );
 
         foreach( $param as $key=> $val )
         {
             $builder->set( $key, $val);
         }
 
-        $aReturn = $builder->insert();
+        $aReturn                                    = $builder->insert();
         return $aReturn;
 
     }
 
     public function getMyRoomLists( $param = [] )
     {
-        $aReturn                   = [];
+        $aReturn                                    = [];
 
-        $builder = $this->db->table( 'WJ_CHAT_ROOMINFO R' );
+        $builder                                    = $this->db->table( 'WJ_CHAT_ROOMINFO R' );
         $builder->select( 'R.*' );
         $builder->select( 'M.MESSAGE LAST_MESSAGE, M.TIMESTAMP LAST_TIMESTAMP' );
         $builder->join("(
@@ -72,12 +73,12 @@ class ChatModel extends Model
         $builder->orWhere( 'JSON_UNQUOTE(JSON_EXTRACT( R.ROOM_INFO, \'$.join_member\'))', _elm( $param, 'USER_ID') );
         $builder->orderBy( 'M.TIMESTAMP',  'DESC' );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
 
 
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getResultArray();
+            $aReturn                                = $query->getResultArray();
         }
         return $aReturn;
     }
@@ -85,17 +86,17 @@ class ChatModel extends Model
     public function getRoomInfo( $param = [] )
     {
 
-        $aReturn                    = [];
-        $builder = $this->db->table( 'WJ_CHAT_ROOMINFO' );
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'WJ_CHAT_ROOMINFO' );
+
         $builder->where( 'IS_ACTIVE', 'true' );
         $builder->where( 'ROOM_ID', _elm( $param, 'ROOM_ID' ) );
 
-
-        $query = $builder->get();
+        $query                                      = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getRowArray();
+            $aReturn                                = $query->getRowArray();
         }
         return $aReturn;
     }

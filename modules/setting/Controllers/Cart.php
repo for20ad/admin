@@ -45,9 +45,10 @@ class Cart extends Setting
 
     public function index()
     {
-        $pageParam               = [];
-        $pageParam['file']       = '\Module\core\Views\errors\error_404';
-        $pageParam['pageLayout'] = 'blank';
+
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\core\Views\errors\error_404';
+        $pageParam['pageLayout']                    = 'blank';
 
         $this->owensView->loadLayoutView($pageParam);
     }
@@ -57,32 +58,32 @@ class Cart extends Setting
         #------------------------------------------------------------------
         # TODO: 기본 페이지 변수 세팅
         #------------------------------------------------------------------
-        $pageDatas                                 = [];
-        $requests                                  = $this->request->getGet();
+        $pageDatas                                  = [];
+        $requests                                   = $this->request->getGet();
         #------------------------------------------------------------------
         # TODO: 모델 로드
         #------------------------------------------------------------------
-        $cartModel                                 = new CartModel();
+        $cartModel                                  = new CartModel();
 
         #------------------------------------------------------------------
         # TODO: Config 세팅
         #------------------------------------------------------------------
-        $aConfig                                   = new settingConfig();
-        $pageDatas['aConfig']                      = $aConfig->policy['cart'];
+        $aConfig                                    = new settingConfig();
+        $pageDatas['aConfig']                       = $aConfig->policy['cart'];
 
         #------------------------------------------------------------------
         # TODO: 정책관리 데이터 로드
         #------------------------------------------------------------------
-        $pageDatas['cartSettingData']              = $cartModel->getCartSetting();
+        $pageDatas['cartSettingData']               = $cartModel->getCartSetting();
 
          #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
 
-        $pageParam                                 = [];
-        $pageParam['file']                         = '\Module\setting\Views\cart\cartSetting';
-        $pageParam['pageLayout']                   = '';
-        $pageParam['pageDatas']                    = $pageDatas;
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\setting\Views\cart\cartSetting';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
 
 
         $this->owensView->loadLayoutView($pageParam);

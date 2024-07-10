@@ -9,42 +9,42 @@ class MemberModel extends Model
     public function __construct()
     {
 
-        $this->db = \Config\Database::connect();
+        $this->db                                   = \Config\Database::connect();
     }
 
     public function getAdminMemberData( $param = [] )
     {
-        $aReturn = [];
+        $aReturn                                    = [];
         if( empty($param) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'ADMIN_MEMBER MB' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER MB' );
         $builder->select( 'MB.*' );
         $builder->select( 'G.MB_GROUP_NAME' );
         $builder->join( 'ADMIN_MEMBER_GROUP G', 'MB.MB_LEVEL=G.MB_GROUP_IDX', 'left' );
         $builder->where( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getRowArray();
+            $aReturn                                = $query->getRowArray();
         }
         return $aReturn;
     }
 
     public function getAdminMemberLists(array $param = [])
     {
-        $aReturn = [
-            'lists' => [],
-            'total_count' => 0,
+        $aReturn                                    = [
+            'lists'                                 => [],
+            'total_count'                           => 0,
         ];
 
         if ( empty( $param ) === true ) {
             return $aReturn;
         }
 
-        $builder = $this->db->table('ADMIN_MEMBER MB');
+        $builder                                    = $this->db->table('ADMIN_MEMBER MB');
         $builder->select( 'MB.*' );
         $builder->select( 'G.MB_GROUP_NAME' );
         $builder->join( 'ADMIN_MEMBER_GROUP G', 'MB.MB_LEVEL=G.MB_GROUP_IDX', 'left' );
@@ -66,7 +66,7 @@ class MemberModel extends Model
         }
 
         // 총 결과 수
-        $aReturn['total_count'] = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
 
         // 정렬
         if (!empty( _elm( $param, 'order') ) ) {
@@ -78,11 +78,11 @@ class MemberModel extends Model
             $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
         }
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aReturn['lists'] = $query->getResultArray();
+            $aReturn['lists']                       = $query->getResultArray();
         }
 
         return $aReturn;
@@ -91,35 +91,36 @@ class MemberModel extends Model
 
     public function insertGroupMember( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'ADMIN_MEMBER_GROUP_MEMBER' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER_GROUP_MEMBER' );
         $builder->set( 'MB_GROUP_IDX', _elm( $param, 'MB_GROUP_IDX' ) );
         $builder->set( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
         $builder->set( 'MB_GM_AT', _elm( $param, 'MB_GM_AT' ) );
 
-        $aResult = $builder->insert();
+        $aResult                                    = $builder->insert();
 
         if( $aResult ){
-            $aReturn = $this->db->insertID();
+            $aReturn                                = $this->db->insertID();
         }
+
         return $aReturn;
 
     }
 
     public function updateGroupMember( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'ADMIN_MEMBER_GROUP_MEMBER' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER_GROUP_MEMBER' );
         $builder->set( 'MB_GROUP_IDX', _elm( $param, 'MB_GROUP_IDX' ) );
         $builder->where( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
 
-        $aReturn = $builder->update();
+        $aReturn                                    = $builder->update();
 
         return $aReturn;
 
@@ -127,26 +128,28 @@ class MemberModel extends Model
 
     public function updateAdminMemberStatus( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
-        $builder = $this->db->table( 'ADMIN_MEMBER' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER' );
+
         $builder->set( 'MB_STATUS', _elm( $param, 'MB_STATUS' ) );
         $builder->where( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
 
-        $aReturn = $builder->update();
+        $aReturn                                    = $builder->update();
         return $aReturn;
     }
 
     public function insertAdminMember( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MEMBER' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER' );
+
         $builder->set( 'MB_USERID', _elm( $param, 'MB_USERID' ) );
         $builder->set( 'MB_PASSWORD', _elm( $param, 'MB_PASSWORD' ) );
         $builder->set( 'MB_USERNAME', _elm( $param, 'MB_USERNAME' ) );
@@ -160,21 +163,21 @@ class MemberModel extends Model
         $builder->set( 'MB_CREATE_AT', _elm( $param, 'MB_CREATE_AT' ) );
         $builder->set( 'MB_CREATE_IP', _elm( $param, 'MB_CREATE_IP' ) );
 
-        $aResult = $builder->insert();
+        $aResult                                    = $builder->insert();
         if( $aResult ){
-            $aReturn = $this->db->insertID();
+            $aReturn                                = $this->db->insertID();
         }
         return $aReturn;
     }
 
     public function updateAdminMember( $param = [] )
     {
-        $aReturn = false;
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
-        $builder = $this->db->table( 'ADMIN_MEMBER' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER' );
         $builder->set( 'MB_USERID', _elm( $param, 'MB_USERID' ) );
 
         if( empty( _elm( $param, 'MB_PASSWORD' ) ) === false ){
@@ -194,7 +197,7 @@ class MemberModel extends Model
 
         $builder->where( 'MB_IDX', _elm( $param, 'MB_IDX' ) );
 
-        $aReturn = $builder->update();
+        $aReturn                                    = $builder->update();
 
         return $aReturn;
     }
@@ -202,33 +205,33 @@ class MemberModel extends Model
 
     public function findAdmUserId( $param = [] )
     {
-        $aReturn = [];
-        $builder = $this->db->table( 'ADMIN_MEMBER' );
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER' );
         $builder->select( 'MB_USERID' );
         $builder->where( 'MB_USERID', _elm( $param, 'MB_USERID' ) );
 
-        $query = $builder->get();
+        $query                                      = $builder->get();
         if ($this->db->affectedRows())
         {
-            $aReturn = $query->getRowArray();
+            $aReturn                                = $query->getRowArray();
         }
         return $aReturn;
 
     }
     public function getMemberGroup()
     {
-        $aReturn = [];
+        $aReturn                                    = [];
 
-        $builder = $this->db->table( 'ADMIN_MEMBER_GROUP' );
+        $builder                                    = $this->db->table( 'ADMIN_MEMBER_GROUP' );
         $builder->select( 'MB_GROUP_IDX, MB_GROUP_NAME' );
         $builder->orderBy( 'MB_GROUP_ORDER', 'ASC' );
         $builder->orderBy( 'MB_GROUP_IDX', 'ASC' );
 
-        $query = $builder->get();
+        $query                                     = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aResult = $query->getResultArray();
+            $aResult                               = $query->getResultArray();
             foreach( $aResult as $vData )
             {
                 $aReturn[_elm($vData, 'MB_GROUP_IDX')] = _elm($vData, 'MB_GROUP_NAME');
@@ -239,20 +242,20 @@ class MemberModel extends Model
 
     public function getAdminMemberGroup( $level = 0 )
     {
-        $aReturn = [];
+        $aReturn                                   = [];
 
-        $builder = $this->db->table( 'ADMIN_MEMBER_GROUP' );
+        $builder                                   = $this->db->table( 'ADMIN_MEMBER_GROUP' );
         $builder->select( 'MB_GROUP_IDX, MB_GROUP_NAME' );
         $builder->where( 'MB_GROUP_IDX', $level );
         $builder->orderBy( 'MB_GROUP_ORDER', 'ASC' );
         $builder->orderBy( 'MB_GROUP_IDX', 'ASC' );
 
-        $query = $builder->get();
+        $query                                     = $builder->get();
 
         if ($this->db->affectedRows())
         {
-            $aResult = $query->getRowArray();
-            $aReturn = _elm( $aResult, 'MB_GROUP_NAME' );
+            $aResult                               = $query->getRowArray();
+            $aReturn                               = _elm( $aResult, 'MB_GROUP_NAME' );
         }
         return $aReturn;
     }
