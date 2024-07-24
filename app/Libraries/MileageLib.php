@@ -77,7 +77,7 @@ class MileageLib
         $modelParam                     = [];
         $modelParam['MEMBER_IDX']       = _elm( $param, 'MEMBER_IDX' );
         $modelParam['BALANCE']          = 2000;
-        $modelParam['COMMENT']          = '회원가입 마일리지 지급';
+        $modelParam['COMMENT']          = '회원가입 포인트 지급';
         $modelParam['CREATED_AT']       = date('Y-m-d H:i:s');
         $this->db->transBegin();
 
@@ -119,7 +119,7 @@ class MileageLib
     public function useMileage( array $param )
     {
         $response = [];
-        //현재 마일리지에서 차감하되 마일리지가 사용금액보다 적을 경우 포인트에서 차감한다.
+        //현재 포인트에서 차감하되 포인트가 사용금액보다 적을 경우 포인트에서 차감한다.
         if(empty(_elm($param, 'MEMBER_IDX')) === true) {
             $response['status']         = 400;
             $response['error']          = 400;
@@ -137,7 +137,7 @@ class MileageLib
         $this->db->transBegin();
 
         //--------------------------------------------------------------
-        // 마일리지 처리
+        // 포인트 처리
         // -------------------------------------------------------------
         if ($mileage >= $used_mileage) {
             // $new_balance                = $mileage - $used_mileage;
@@ -147,7 +147,7 @@ class MileageLib
             $historyParam['TYPE']       = 1;
             $historyParam['SEND_IDX']   = _elm($param, 'SEND_IDX');
             // $historyParam['COMMENT']    = _elm($param, 'COMMENT');
-            $historyParam['COMMENT']    = '마일리지 차감 주석처리';
+            $historyParam['COMMENT']    = '포인트차감 주석처리';
             $historyParam['AMOUNT']     = $used_mileage;
             $historyParam['BALANCE']    = $new_balance;
             $historyParam['CREATED_AT'] = date('Y-m-d H:i:s');
@@ -159,7 +159,7 @@ class MileageLib
             if ($this->db->transStatus() === false ||$bIDX === false) {
                 $this->db->transRollback();
                 $response['status']         = 400;
-                $response['messages'][]     = '마일리지 히스토리 처리중 오류발생.. 다시 시도해주세요.';
+                $response['messages'][]     = '포인트 히스토리 처리중 오류발생.. 다시 시도해주세요.';
                 return  $response;
             }
 
@@ -175,7 +175,7 @@ class MileageLib
             if ($this->db->transStatus() === false ||$aStatus === false) {
                 $this->db->transRollback();
                 $response['status']         = 400;
-                $response['messages'][]     = '마일리지 싱크 처리중 오류발생.. 다시 시도해주세요.';
+                $response['messages'][]     = '포인트 싱크 처리중 오류발생.. 다시 시도해주세요.';
                 return  $response;
             }
 
@@ -183,7 +183,7 @@ class MileageLib
             $response['messages'][]         = 'success';
         }
         //--------------------------------------------------------------
-        // 마일리지 부족시 처리
+        // 포인트 부족시 처리
         // -------------------------------------------------------------
         else {
             $PointLib                       = new PointLib();
@@ -205,7 +205,7 @@ class MileageLib
                     $historyParam['MEMBER_IDX'] = _elm($param, 'MEMBER_IDX');
                     $historyParam['TYPE']       = 1;
                     $historyParam['SEND_IDX']   = _elm($param, 'SEND_IDX');
-                    $historyParam['COMMENT']    = _elm($param, 'COMMENT').'(잔액부족으로 마일리지와 포인트 차감)';
+                    $historyParam['COMMENT']    = _elm($param, 'COMMENT').'(잔액부족으로 포인트 차감)';
                     $historyParam['AMOUNT']     = $mileage;
                     $historyParam['CREATED_AT'] = date('Y-m-d H:i:s');
                     // ------------------------------------------------------
@@ -216,7 +216,7 @@ class MileageLib
                     if ($this->db->transStatus() === false ||$bIDX === false) {
                         $this->db->transRollback();
                         $response['status']         = 400;
-                        $response['messages'][]     = '마일리지 히스토리 처리중 오류발생.. 다시 시도해주세요.';
+                        $response['messages'][]     = '포인트 히스토리 처리중 오류발생.. 다시 시도해주세요.';
                         return  $response;
                     }
 
@@ -232,7 +232,7 @@ class MileageLib
                     if ($this->db->transStatus() === false ||$aStatus === false) {
                         $this->db->transRollback();
                         $response['status']         = 400;
-                        $response['messages'][]     = '마일리지 싱크 처리중 오류발생.. 다시 시도해주세요.';
+                        $response['messages'][]     = '포인트 싱크 처리중 오류발생.. 다시 시도해주세요.';
                         return  $response;
                     }
 

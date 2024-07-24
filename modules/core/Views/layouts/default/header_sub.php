@@ -192,38 +192,41 @@
                                     <?php endif; ?>
                                 </svg>
                             </div>
-                            <span class="name"> <?php echo _elm($menu, 'MENU_NAME')?> </span>
+                            <span class="name toggle" > <?php echo _elm($menu, 'MENU_NAME')?> </span>
                         </div>
                     </a>
                     <?php if (!empty(_elm($menu, 'CHILD'))): ?>
-                    <?php foreach(_elm($menu, 'CHILD') as $subKey => $subMenu): ?>
-                    <div class="child" id="subMenu<?php echo _elm( $subMenu, 'MENU_IDX' )?>">
-                        <a
-                            href="<?php echo empty(_elm($subMenu, 'CHILD')) ? _link_url(_elm($subMenu, 'MENU_LINK')) : 'javascript:void(0)'; ?>">
-                            <div class="name">
-                                <span> <?php echo _elm($subMenu, 'MENU_NAME')?></span>
-                                <?php if( empty( _elm($subMenu, 'CHILD' ) ) === false ):?>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
-                                    fill="none">
-                                    <path d="M6.75 4.5L11.25 9L6.75 13.5" stroke="white" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" class="arrow-icon" />
-                                </svg>
-                                <?php endif;?>
+                    <span class="child_group">
+                        <?php foreach(_elm($menu, 'CHILD') as $subKey => $subMenu): ?>
+                        <div class="child" id="subMenu<?php echo _elm( $subMenu, 'MENU_IDX' )?>">
+                            <a
+                                href="<?php echo empty(_elm($subMenu, 'CHILD')) ? _link_url(_elm($subMenu, 'MENU_LINK')) : 'javascript:void(0)'; ?>">
+                                <div class="name
+                                <?php if ( empty(_elm($subMenu, 'CHILD') ) && strpos($uriString, '/'.$topGroup.'/'._elm($subMenu, 'MENU_GROUP_ID') ) !== false ){?> grand-child background active <?php }?>" >
+                                    <span> <?php echo _elm($subMenu, 'MENU_NAME')?></span>
+                                    <?php if( empty( _elm($subMenu, 'CHILD' ) ) === false ):?>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
+                                        fill="none">
+                                        <path d="M6.75 4.5L11.25 9L6.75 13.5" stroke="white" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="arrow-icon" />
+                                    </svg>
+                                    <?php endif;?>
+                                </div>
+                            </a>
+                            <?php if (!empty(_elm($subMenu, 'CHILD'))): ?>
+                            <?php foreach(_elm($subMenu, 'CHILD') as $s_subKey => $s_subMenu):?>
+                            <a href="<?php echo _link_url(_elm($s_subMenu, 'MENU_LINK'))?>">
+                            <div class="grand-child background <?php echo strpos($uriString, '/'.$topGroup.'/'._elm($s_subMenu, 'MENU_GROUP_ID') ) !== false ? 'active' : '';?>"
+                                style="display:none">
+                                    <span><?php echo _elm($s_subMenu, 'MENU_NAME')?></span>
                             </div>
-                        </a>
-                        <?php if (!empty(_elm($subMenu, 'CHILD'))): ?>
-                        <?php foreach(_elm($subMenu, 'CHILD') as $s_subKey => $s_subMenu):?>
-                        <a href="<?php echo _link_url(_elm($s_subMenu, 'MENU_LINK'))?>">
-                        <div class="grand-child background <?php echo strpos($uriString, '/'.$topGroup.'/'._elm($s_subMenu, 'MENU_GROUP_ID')) !== false ? 'active' : '';?>"
-                            style="display:none">
-                                <span><?php echo _elm($s_subMenu, 'MENU_NAME')?></span>
+                            </a>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
-                        </a>
                         <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
-                    <?php endforeach; ?>
                     <?php endif; ?>
+                    </span>
                 </div>
                 <?php endforeach; ?>
 

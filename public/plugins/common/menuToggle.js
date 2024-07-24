@@ -6,53 +6,68 @@ $(document).ready(function() {
         if (window.matchMedia("(min-width: 640px)").matches === true) {
             $('.mini-side-bar').toggle();
         }
+
         $('.side-bar').show();
 
         if($('.side-bar').is(':visible')){
-            $('.dashboard').css( 'margin-left','290px' );
-        }else{
-            $('.dashboard').css( 'margin-left','53px' );
+            //$('.dashboard').css( 'margin-left','290px' );
+            $('.dashboard').animate({ 'margin-left': '290px' }, 0);
         }
     }else{
-        $('.dashboard').css( 'margin-left','53px' );
+        $('.dashboard').animate({ 'margin-left': '53px' }, 0);
     }
 
     $('.icon-container #sideToggle').on('click', function() {
-
         if (window.matchMedia("(min-width: 640px)").matches == true) {
             $('.mini-side-bar').toggle();
         }
-        $('.side-bar').toggle(400);
-        if($('.side-bar').is(':visible')){
-            $('.dashboard').css( 'margin-left','290px' );
-        }else{
-            $('.dashboard').css( 'margin-left','53px' );
+
+        if ($('.side-bar').is(':visible')) {
+            $('.side-bar').hide();
+            $('.dashboard').animate({ 'margin-left': '53px' }, 200);
+        } else {
+            $('.side-bar').show("slide", { direction: "left" }, 400);
+            $('.dashboard').animate({ 'margin-left': '290px' }, 400);
         }
+
         localStorage.setItem('sideBarOpen', 'true'); // 열림 상태 저장
     });
+
     $('#closeToggle').on('click', function() {
         if (window.matchMedia("(min-width: 640px)").matches == true) {
             $('.mini-side-bar').toggle(0);
         }
-        $('.side-bar').toggle(0);
-        if($('.side-bar').is(':visible')){
-            $('.dashboard').css( 'margin-left','290px' );
-        }else{
-            $('.dashboard').css( 'margin-left','53px' );
+
+        if ($('.side-bar').is(':visible')) {
+            $('.side-bar').hide();
+            $('.dashboard').animate({ 'margin-left': '53px' }, 200);
+        } else {
+            $('.side-bar').show("slide", { direction: "left" }, 400);
+            $('.dashboard').animate({ 'margin-left': '290px' }, 400);
         }
+
         localStorage.setItem('sideBarOpen', 'false'); // 닫힘 상태 저장
     });
 
     $('#header-sider-bar-toggle-btn').on('click', function() {
-        //$('.side-bar-area').toggle(0);
-        $('.side-bar').toggle(400);
-
-
+        if ($('.side-bar').is(':visible')) {
+            $('.side-bar').hide();
+            $('.dashboard').animate({ 'margin-left': '0px' }, 200);
+        } else {
+            $('.side-bar').show("slide", { direction: "left" }, 400);
+            $('.dashboard').animate({ 'margin-left': '290px' }, 400);
+        }
     });
+
     $('.overlay').on('click', function(event) {
         if (!$(event.target).closest('.side-bar').length) {
-            //$('.side-bar-area').toggle(0);
-            $('.side-bar').toggle(400);
+            if ($('.side-bar').is(':visible')) {
+                $('.side-bar').hide();
+                $('.dashboard').animate({ 'margin-left': '53px' }, 400);
+            } else {
+                $('.side-bar').show("slide", { direction: "left" }, 400);
+                $('.dashboard').animate({ 'margin-left': '290px' }, 400);
+            }
         }
     });
 
@@ -115,6 +130,23 @@ $(document).ready(function() {
         localStorage.setItem('expandedSubMenus', JSON.stringify(expandedSubMenus));
     });
 
+
+     // 상위 메뉴 클릭 이벤트
+    $('.name.toggle').on('click', function(event) {
+        event.preventDefault();
+        const $clickedToggle = $(this).closest('.category').find('.child_group');
+        // 클릭된 상위 메뉴 열기/닫기
+        $clickedToggle.slideToggle(200);
+    });
+
+    // 페이지 로드 시 현재 활성화된 메뉴의 최상위 항목을 열고 다른 항목은 닫기
+    $('.category').each(function() {
+        if ($(this).hasClass('active')) {
+            $(this).find('.child_group').show();
+        } else {
+            $(this).find('.child_group').hide();
+        }
+    });
 
 
 });

@@ -70,6 +70,7 @@
     var site = '';
     <?php echo $this->getHeaderScriptVar(); ?>
     </script>
+
 </head>
 
 <body>

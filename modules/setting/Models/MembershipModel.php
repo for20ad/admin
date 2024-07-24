@@ -11,6 +11,44 @@ class MembershipModel extends Model
         $this->db                                   = \Config\Database::connect();
     }
 
+    public function saveGradeValuation( $param = [] )
+    {
+        $aReturn                                    = false;
+
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBER_GRADE_VALUATION_CONF' );
+
+        $sql                                        = $builder->set( $param )->getCompiledInsert();
+
+        $sql                                       .= ' ON DUPLICATE KEY UPDATE ';
+        $updateFields                               = [];
+        foreach ($param as $key => $value) {
+            if( $key != 'V_UNIQUE' ){
+                $updateFields[]                     = "$key = VALUES($key)";
+            }
+        }
+        $sql                                       .= implode(', ', $updateFields);
+
+        $aReturn                                    = $this->db->query($sql);
+        return $aReturn;
+
+    }
+
+    public function getMembershipGradeValuation()
+    {
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'MEMBER_GRADE_VALUATION_CONF' );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
     public function deleteMembershipGradeIcon( $param = [] )
     {
         $aReturn                                    = false;

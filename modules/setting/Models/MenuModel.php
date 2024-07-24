@@ -17,6 +17,22 @@ class MenuModel extends Model
     {
         $this->db                                   = \Config\Database::connect();
     }
+    public function getMenuDataByPrefix( $group,$prefix = 'Lists' )
+    {
+        $aReturn                                    = [];
+        if( empty( $group ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'ADMIN_MENU' );
+        $builder->where( 'MENU_GROUP_ID', $group.$prefix );
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
 
     public function updateMenu( $param = [] )
     {

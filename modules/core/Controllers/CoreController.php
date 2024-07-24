@@ -76,28 +76,27 @@ class CoreController extends BaseController
     }
 
     private function setHeaderScriptVar()
+{
+    $this->owensView->setHeaderScriptVar('site_time', time());
+    $this->owensView->setHeaderScriptVar('site_datetime', date("Y-m-d H:i:s"));
+    $this->owensView->setHeaderScriptVar('site_is_admin_login', $this->member->isAdminLogin());
+
+    $csrfToken = service('security')->getCSRFHash();
+    $this->owensView->setHeaderScriptVar('site_csrf_hash', $csrfToken);
+
+    $admin_login_time = $this->session->get('TEMP_ADMIN_LOGIN_TIME');
+    $site_config = new SiteConfig();
+
+    if (!empty($admin_login_time))
     {
-        $this->owensView->setHeaderScriptVar('site_time', time());
-        $this->owensView->setHeaderScriptVar('site_datetime', date("Y-m-d H:i:s"));
-        $this->owensView->setHeaderScriptVar('site_is_admin_login', $this->member->isAdminLogin());
+        $admin_expire_time = (int)$site_config->adminExpireTime ?? 7200;
+        $admin_auth_time = $admin_expire_time - (time() - $admin_login_time);
 
-        $csrfToken                                  = service('security')->getCSRFHash();
-        $this->owensView->setHeaderScriptVar('site_csrf_hash', $csrfToken);
-
-        $admin_login_time                           = $this->session->get('TEMP_ADMIN_LOGIN_TIME');
-        $site_config                                = new SiteConfig();
-
-        if (empty($admin_login_time) == false)
-        {
-            $admin_expire_time                      = (int)$site_config->adminExpireTime ?? 7200;
-
-            $admin_auth_time                        = (int)$this->session->get('TEMP_ADMIN_LOGIN_TIME') + $admin_expire_time - time();
-
-            $this->owensView->setHeaderScriptVar('admin_auth_time', $admin_auth_time);
-            $this->owensView->setViewData('admin_auth_time', $admin_auth_time + 1);
-        }
-
+        $this->owensView->setHeaderScriptVar('admin_auth_time', $admin_auth_time);
+        $this->owensView->setViewData('admin_auth_time', $admin_auth_time + 1);
     }
+}
+
 
     protected function _getSegment($offset = 0)
     {

@@ -47,20 +47,19 @@
                     </div>
                 </div>
                 <div class="card-body" style="margin-top:-2vh">
-
                     <div class="table-responsive">
                         <table class="table table-vcenter">
                             <tbody>
-                            <colgroup>
-                                <col style="width:10%;">
-                                <col style="width:60;">
-                                <col style="width:15%;">
-                                <col style="width:15%;">
-                            </colgroup>
+                                <colgroup>
+                                    <col style="width:10%;">
+                                    <col style="width:60%;">
+                                    <col style="width:15%;">
+                                    <col style="width:15%;">
+                                </colgroup>
                                 <tr>
                                     <th style="padding-left:2em">회원등급</th>
                                     <th style="padding-left:2em">등급아이콘</th>
-                                    <th style="padding-left:2em">마일리지 적립율</th>
+                                    <th style="padding-left:2em">포인트 적립율</th>
                                     <th style="padding-left:2em">배송비 무료</th>
                                 </tr>
                                 <tr>
@@ -199,9 +198,9 @@
                                 </th>
                                 <th style="padding-left:2em">회원등급</th>
                                 <th style="padding-left:2em">등급아이콘</th>
-                                <th style="padding-left:2em">마일리지 적립율</th>
+                                <th style="padding-left:2em">포인트 적립율</th>
                                 <th style="padding-left:2em">배송비 무료</th>
-                                <th style="padding-left:2em">수정/삭제</th>
+                                <th style="padding-left:2em">삭제</th>
                             </tr>
                             </thead>
                             <tbody id="sortable">
@@ -280,16 +279,20 @@
                                     </div>
                                 </td>
                                 <td>
-                                <a href="javascript:;" onclick="deleteGradeConfirm('<?php echo _elm( $lists, 'G_IDX' ) ?>');">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </a>
-
+                                <?php
+                                    echo getIconAnchor([
+                                        'txt' => '',
+                                        'icon' => 'delete',
+                                        'buttonClass' => '',
+                                        'buttonStyle' => '',
+                                        'width' => '24',
+                                        'height' => '24',
+                                        'stroke' => '#616876',
+                                        'extra' => [
+                                            'onclick' => 'deleteGradeConfirm("'. _elm( $lists, 'G_IDX' ).'");',
+                                        ]
+                                    ]);
+                                ?>
                                 </td>
                             </tr>
                             <?php
@@ -316,31 +319,7 @@
     </div>
 </div>
 <script>
-function deleteIconConfirm( g_idx )
-{
-    box_confirm('아이콘을 삭제하시겠습니까?', 'q', '', deleteIcon, {'g_idx': g_idx});
-}
-function deleteIcon( param ){
-    $.ajax({
-        url: '/apis/setting/deleteMembershipGradeIcon',
-        type: 'post',
-        data: 'g_idx='+param.g_idx,
-        dataType: 'json',
-        processData: false,
-        cache: false,
-        beforeSend: function() { },
-        success: function(response) {
-            submitSuccess(response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            submitError(jqXHR.status, errorThrown);
-            console.log(textStatus);
 
-            return false;
-        },
-        complete: function() { }
-    });
-}
 </script>
 
 <?php

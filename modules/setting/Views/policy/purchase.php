@@ -141,7 +141,7 @@
                             $options  = [''=>'선택'];
                             $options += _elm($aConfig, 'purchase_conf_days', []);
                             $extras   = ['id' => 'i_purchase_conf_days', 'class' => 'form-select', 'style' => 'max-width: 90px'];
-                            $selected = _elm( $aData, 'P_DELIVERY_END_DAYS' );
+                            $selected = _elm( $aData, 'P_PURCHASE_CONF_DAYS' );
                             echo getSelectBox('i_purchase_conf_days', $options, $selected, $extras);
                         ?>&nbsp;&nbsp;&nbsp;
                         일 뒤 '구매확정' 상태로 자동변경

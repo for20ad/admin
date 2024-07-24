@@ -350,66 +350,8 @@
     </div>
     <?php echo form_close() ?>
 </div>
-
-<script>
-
-$(function(){
-
-$('#frm_register').on('submit', function(event) {
-    event.preventDefault();
-
-    error_lists = [];
-    $('.error_txt').html('');
-
-    var inputs = $(this).find('input, button, textarea');
-    var isSubmit = true;
-
-    $.ajax({
-        url: '/apis/setting/setCartSetting',
-        method: 'POST',
-        data: new FormData(this),
-        dataType: 'json',
-        processData: false,
-        contentType: false,
-        cache: false,
-        beforeSend: function()
-        {
-            inputs.prop('disabled', true);
-            setTimeout(function() { inputs.prop('disabled', false); }, 3000);
-        },
-        success: function(response)
-        {
-            submitSuccess(response);
-
-            inputs.prop('disabled', false);
-
-            if (response.status == 'false')
-            {
-                var error_message = '';
-                error_message = error_lists.join('<br />');
-                if (error_message != '') {
-                    box_alert(error_message, 'info');
-                }
-
-                return false;
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            submitError(jqXHR.status, errorThrown);
-            console.log(textStatus);
-
-            inputs.prop('disabled', false);
-            return false;
-        },
-        complete: function() { }
-    });
-});
-});
-</script>
-
 <?php
-$owensView->setFooterJs('/assets/js/setting/policy/cartSetting.js');
+$owensView->setFooterJs('/assets/js/setting/cart/cartSetting.js');
 $script = "
 ";
 

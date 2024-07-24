@@ -35,9 +35,10 @@ class CartModel extends Model
         foreach( $param as $key => $val ){
             $builder->set( $key, $val );
         }
-        $builder->where( 'P_IDX', 1 );
+        $builder->where( 'C_IDX', 1 );
 
         $aReturn                                    = $builder->update();
+
         return $aReturn;
     }
     public function insertCartSetting( $param =[] )

@@ -18,3 +18,213 @@
     height: 3px;
     background-color: #2FB344; /* 기본 색상 */
 }
+
+
+
+
+/* 여기부터 */
+
+.custom-cancel-button {
+    border: 1px solid #E6E7E9 !important;
+    background-color: #fff !important;
+    color: #1D273B !important;
+    position: relative;
+}
+
+.custom-popup {
+    position: relative;
+}
+
+.custom-popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: #2FB344; /* 기본 색상 */
+}
+
+.custom-div {
+    padding: 20px;
+}
+
+.custom-content {
+    margin-bottom: 20px;
+}
+
+.custom-text-and-supporting-text {
+    text-align: center; /* 중앙 정렬 */
+}
+
+.custom-text-and-supporting-text .custom-frame-419 {
+    display: flex;
+    align-items: center;
+}
+
+.custom-text-and-supporting-text .custom-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #333;
+}
+
+.custom-supporting-text {
+    margin-top: 10px;
+    color: #555;
+}
+
+.custom-group-21 {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px; /* 글자 크기 설정 */
+}
+
+.custom-frame-249 {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd; /* 밑에 보더 추가 */
+    padding: 17px 24px
+}
+
+.custom-ellipse-2 {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.custom-frame-420 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0; /* 상하 패딩 추가 */
+}
+
+.custom-input-field {
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+  padding: 5px 20px;
+}
+
+.custom-div2 {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 14px; /* 글자 크기 14px로 설정 */
+}
+
+.custom-div3 {
+    color: #333;
+    font-weight: bold;
+    background-color: #f1f5f9; /* 이전 색상으로 배경 설정 */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px; /* 글자 크기 14px로 설정 */
+}
+
+.custom-frame-410 {
+    margin-top: 20px;
+}
+
+.custom-frame-38 {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left; /* 실패사유 글씨 중앙 정렬 */
+}
+
+.custom-frame-411 {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.custom-frame-421, .custom-frame-4102 {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+}
+
+.custom-frame-421:last-child, .custom-frame-4102:last-child {
+    border-bottom: none;
+}
+
+.custom-frame-194, .custom-frame-203 {
+    width: 120px;
+    text-align: center; /* 테이블 제목 중앙 정렬 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 중앙 정렬 */
+}
+
+.custom-frame-191 {
+    flex: 1;
+    text-align: center; /* 테이블 제목 중앙 정렬 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 중앙 정렬 */
+}
+
+.custom-div5 {
+    color: #555;
+    font-weight: bold;
+    text-align: center; /* 테이블 제목 중앙 정렬 */
+    margin: auto; /* 추가 */
+}
+
+.custom-frame-321 {
+    flex: 1;
+    text-align: left; /* 테이블 내용 왼쪽 정렬 */
+}
+
+.custom-div6 {
+    color: #555;
+    text-align: left; /* 테이블 내용 왼쪽 정렬 */
+    padding:3px;
+}
+
+.custom-frame-23 {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.custom-btn-btn-dark {
+    background-color: #444;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.custom-btn-btn-dark:hover {
+    background-color: #666;
+}
+
+.custom-btn-btn-white {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.custom-div7 {
+    color: #1D273B;
+    font-size: 16px;
+}

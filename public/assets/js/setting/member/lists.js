@@ -50,4 +50,6 @@ $(function(){
     /* paging 한 묶음 E */
 });
 
-getSearchList(1);
+setTimeout(function(){
+    getSearchList(1);
+}, 300);

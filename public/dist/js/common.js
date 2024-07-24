@@ -1,20 +1,133 @@
-//datepicker 호출 yyyy mm dd
-document.addEventListener("DOMContentLoaded", function () {
-  var datepickerIcons = document.getElementsByClassName("datepicker-icon");
-  for (var i = 0; i < datepickerIcons.length; i++) {
-    new Litepicker({
-      lang: "ko-KR",
-      format: "YYYY-MM-DD",
-      element: datepickerIcons[i],
-      buttonText: {
-        previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
-        nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
-      },
+// Function to restore readonly attribute
+function restoreReadonlyAttributes(mutationsList) {
+    for (let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'readonly') {
+            const target = mutation.target;
+            if (!target.hasAttribute('readonly')) {
+                target.setAttribute('readonly', '');
+            }
+        }
+    }
+}
+
+// Observe changes in all input elements
+function observeInputs() {
+    const inputs = document.querySelectorAll('input[readonly]');
+    inputs.forEach(input => {
+        const observer = new MutationObserver(restoreReadonlyAttributes);
+        observer.observe(input, {
+            attributes: true // Listen for attribute changes
+        });
     });
-  }
+}
+
+// Initial observer setup
+observeInputs();
+
+// Re-apply observer when new input elements are added dynamically
+const bodyObserver = new MutationObserver(() => {
+    observeInputs();
 });
+bodyObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+});
+// // //datepicker 호출 yyyy mm dd
+document.addEventListener("DOMContentLoaded", function () {
+    var datepickerIcons = document.getElementsByClassName("datepicker-icon");
+    for (var i = 0; i < datepickerIcons.length; i++) {
+        new Litepicker({
+            lang: "ko-KR",
+            format: "YYYY-MM-DD",
+            element: datepickerIcons[i],
+                buttonText: {
+                    previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+                    nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+                },
+        });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    initializeDatepickers();
+});
+
+function initializeDatepickers() {
+    var datepickerIcons = document.getElementsByClassName("datepicker-icon");
+    for (var i = 0; i < datepickerIcons.length; i++) {
+        new Litepicker({
+            lang: "ko-KR",
+            format: "YYYY-MM-DD",
+            element: datepickerIcons[i],
+                buttonText: {
+                    previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+                    nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+                },
+        });
+    }
+}
+
+
+// 사업자 등록번호 포맷팅 함수
+function formatBusinessNumber(value) {
+    // 숫자만 남기기
+    const numbersOnly = value.replace(/\D/g, '').slice(0, 10);
+
+    let formattedNumber = numbersOnly;
+
+    if (numbersOnly.length > 3 && numbersOnly.length <= 5) {
+        formattedNumber = numbersOnly.slice(0, 3) + '-' + numbersOnly.slice(3);
+    } else if (numbersOnly.length > 5) {
+        formattedNumber = numbersOnly.slice(0, 3) + '-' + numbersOnly.slice(3, 5) + '-' + numbersOnly.slice(5);
+    }
+
+    return formattedNumber;
+}
+
+// 사업자 등록번호 입력 이벤트 리스너
+
+$('input[data-business-number]').each(function() {
+    const $inputField = $(this);
+    $inputField.on('input', function() {
+        const inputVal = $inputField.val();
+
+        // 포맷팅된 번호로 설정
+        const formattedNumber = formatBusinessNumber(inputVal);
+        $inputField.val(formattedNumber);
+    });
+
+});
+$(document).on('input', 'input[data-business-number]', function() {
+    const $inputField = $(this);
+    const inputVal = $inputField.val();
+
+    // 포맷팅된 번호로 설정
+    const formattedNumber = formatBusinessNumber(inputVal);
+
+    $inputField.val(formattedNumber);
+});
+
+
+function showPasswordGroup(){
+    event.preventDefault();
+    $toggleDiv = $("#passGroup");
+
+    if ($toggleDiv.is(':visible')) {
+        $toggleDiv.slideUp();
+        $("#passChangeBtn").text( '변경하기' );
+        passwdChk = true;
+
+    } else {
+        $toggleDiv.slideDown();
+        $("#passChangeBtn").text( '취소' );
+        passwdChk = false;
+    }
+}
+
 function formatMobileNumber(numbersOnly) {
     let formattedNumber = numbersOnly;
 
@@ -26,6 +139,7 @@ function formatMobileNumber(numbersOnly) {
 
     return formattedNumber;
 }
+
 $('input[data-max-length]').each(function() {
     const $inputField = $(this);
     const $wordCount = $inputField.siblings('.wordCount');
@@ -40,8 +154,15 @@ $('input[data-max-length]').each(function() {
     const initialLength = $inputField.val().length;
     $wordCount.text(`${initialLength}/${maxLength}`);
 });
+$(document).on('input', 'input[data-max-length]', function() {
+    const $inputField = $(this);
+    const $wordCount = $inputField.siblings('.wordCount');
+    const maxLength = $inputField.data('max-length');
 
-$('input[data-mobile]').on('input', function() {
+    const currentLength = $inputField.val().length;
+    $wordCount.text(`${currentLength}/${maxLength}`);
+});
+$(document).on('input', 'input[data-mobile]', function() {
     const $inputField = $(this);
     const inputVal = $inputField.val();
 
@@ -53,6 +174,17 @@ $('input[data-mobile]').on('input', function() {
 
     $inputField.val(formattedNumber);
 });
+// 기존 값이 있는 경우 초기 형식 설정
+$('input[data-mobile]').each(function() {
+    const $inputField = $(this);
+    const inputVal = $inputField.val();
+
+    const numbersOnly = inputVal.replace(/\D/g, '').slice(0, 11);
+    const formattedNumber = formatMobileNumber(numbersOnly);
+
+    $inputField.val(formattedNumber);
+});
+
 
 $('input[data-password]').on('input', function() {
     const $input = $(this);
@@ -103,16 +235,6 @@ $('input[data-email]').each(function() {
 
 
 
-// 기존 값이 있는 경우 초기 형식 설정
-$('input[data-mobile]').each(function() {
-    const $inputField = $(this);
-    const inputVal = $inputField.val();
-
-    const numbersOnly = inputVal.replace(/\D/g, '').slice(0, 11);
-    const formattedNumber = formatMobileNumber(numbersOnly);
-
-    $inputField.val(formattedNumber);
-});
 
 
 //리스트 검색 레이어 (모바일)
@@ -445,9 +567,7 @@ function displayPageHistory() {
 
 function toggleForm( obj ){
     event.preventDefault();
-
     var $cardBody = obj.closest('.col-12').find('.card-body');
-
     if ($cardBody.is(':visible')) {
         $cardBody.slideUp();
         obj.find('svg > path').attr('d', 'M1 1L7 7L13 1'); // 반대 방향 아이콘
@@ -458,14 +578,38 @@ function toggleForm( obj ){
 }
 var Pagination = (function() {
     function pagingNumFunc(callbackMethod) {
-        $(document).on('click', '.page-item a', function(e) {
+        $(document).on('click', '.page-item a:not(#subList .page-item a)', function(e) {
             e.preventDefault();
             callbackMethod($(this).data('page'));
         });
     }
 
     function pagingSelectFunc(callbackMethod) {
-        $(document).on('change', '.pagination-goto select', function(e) {
+        $(document).on('change', '.pagination-goto select:not(#subList .pagination-goto select)', function(e) {
+            e.preventDefault();
+            callbackMethod($(this).val());
+        });
+    }
+
+    return {
+        initPagingNumFunc: function(callbackMethod) {
+            pagingNumFunc(callbackMethod);
+        },
+        initPagingSelectFunc: function(callbackMethod) {
+            pagingSelectFunc(callbackMethod);
+        }
+    };
+})();
+var subPagination = (function() {
+    function pagingNumFunc(callbackMethod) {
+        $(document).on('click', '#subList .page-item a', function(e) {
+            e.preventDefault();
+            callbackMethod($(this).data('page'));
+        });
+    }
+
+    function pagingSelectFunc(callbackMethod) {
+        $(document).on('change', '#subList .pagination-goto select', function(e) {
             e.preventDefault();
             callbackMethod($(this).val());
         });

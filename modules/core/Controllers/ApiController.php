@@ -14,6 +14,7 @@ use Config\Services;
 use App\Libraries\OwensCache;
 use Module\setting\Libraries\Member;
 use Module\core\Models\LogModel;
+use Module\setting\Models\ExcelFormModel;
 
 class ApiController extends ResourceController
 {
@@ -114,6 +115,14 @@ class ApiController extends ResourceController
         $response['goback']                        = false;
         $response['reload']                        = false;
         $response['time']                           = time();
+
+        return $response;
+    }
+
+    protected function _unset( $response = [] )
+    {
+        unset( $response['redirect_url'] );
+        unset( $response['replace_url'] );
 
         return $response;
     }
@@ -368,5 +377,72 @@ class ApiController extends ResourceController
         $html                                      .= '</div>';
 
         return $html;
+    }
+    protected function exportExcel($data, $form_idx) {
+        $spreadsheet                                = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet                                      = $spreadsheet->getActiveSheet();
+        $excelFormModel                             = new ExcelFormModel();
+        $formParam                                  = ['F_IDX' => $form_idx];
+        #------------------------------------------------------------------
+        # TODO: 폼데이터 받아오기
+        #------------------------------------------------------------------
+        $formData                                   = $excelFormModel->getFormsDataByIdx($formParam);
+        #------------------------------------------------------------------
+        # TODO: 테이블의 필드 데이터 모두 뽑아옴
+        #------------------------------------------------------------------
+        $_fields                                    = $excelFormModel->getFieldAndTitles(strtoupper(_elm($formData, 'F_MENU')));
+        #------------------------------------------------------------------
+        # TODO: 필드 구분자로 분리
+        #------------------------------------------------------------------
+        $fields                                     = explode('|', _elm($formData, 'F_FIELDS'));
+
+        $columns = [];
+
+        #------------------------------------------------------------------
+        # TODO: 모든 필드에서 구분자로 분리된 필드들만 뽑아서 재정렬
+        #------------------------------------------------------------------
+        foreach ($fields as $field) {
+            foreach ($_fields as $_field) {
+                if ($_field['COLUMN_NAME'] == $field) {
+                    $columns[]                      = $_field['COLUMN_COMMENT'];
+                    break;
+                }
+            }
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 다시 엑셀의 해더 정렬
+        #------------------------------------------------------------------
+        $colIndex                                   = 'A';
+        foreach ($columns as $column) {
+            $sheet->setCellValue($colIndex . '1', $column);
+            $colIndex++;
+        }
+        #------------------------------------------------------------------
+        # TODO: 구분자로 분리된걸 재정렬 했으니 해당 필드만 데이터로 만들어준다.
+        #------------------------------------------------------------------
+        $row = 2;
+        foreach ($data as $item) {
+            $colIndex                               = 'A';
+            foreach ($fields as $field) {
+                $sheet->setCellValue($colIndex . $row, _elm($item, $field));
+                $colIndex++;
+            }
+            $row++;
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 엑셀 다운로드 해더
+        #------------------------------------------------------------------        //  // HTTP 응답으로 엑셀 파일 다운로드
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="membership_list.xlsx"');
+        header('Cache-Control: max-age=0');
+        header('Expires: 0');
+        header('Pragma: public');
+
+        $writer                                     = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+        ob_end_clean(); // Output 버퍼 비우기
+        $writer->save('php://output');
+        exit;
     }
 }

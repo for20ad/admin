@@ -43,7 +43,7 @@ class MembershipApi extends ApiController
                 'rules'  => 'trim|required|is_unique[MEMBER_GRADE.G_NAME]',
                 'errors' => [
                     'required'      => '등급명을 입력하세요.',
-                    'unique_user_id' => '등급명이 이미 존재합니다.',
+                    'is_unique'     => '등급명이 이미 존재합니다.',
                 ],
             ],
         ]);
@@ -179,7 +179,7 @@ class MembershipApi extends ApiController
 
 
         #------------------------------------------------------------------
-        # TODO: 메뉴 수정
+        # TODO: 등급 수정
         #------------------------------------------------------------------
         $this->db->transBegin();
 
@@ -195,7 +195,8 @@ class MembershipApi extends ApiController
             # TODO: 파일처리
             #------------------------------------------------------------------
 
-            if( empty( _elm( _elm( $files, 'i_icon' ), $vGradeIdx ) ) === false ){
+            if( _elm( _elm( $files, 'i_icon' ), $vGradeIdx )->getSize()  > 0 ){
+
                 $config                             = [
                     'path' => 'grade_icon',
                     'mimes' => 'pdf|jpg|gif|png|jpeg|svg',
@@ -480,6 +481,72 @@ class MembershipApi extends ApiController
 
         return $this->respond($response);
 
+
+    }
+
+    public function setMembershipGradeValuation()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+
+        $membershipModel                            = new MembershipModel();
+
+        $aData                                      = $membershipModel->getMembershipGradeValuation();
+        $bData                                      = $membershipModel->getMembershipGrade();
+        $this->db->transBegin();
+        #------------------------------------------------------------------
+        # TODO: valuation 데이터 모델 세팅
+        #------------------------------------------------------------------
+        $aModelParam                                = [];
+        $aModelParam['V_PERIOD']                    = _elm( $requests, 'i_period_check' ) == 'Y' ?  _elm( $requests, 'i_period' ) : 0 ;
+        $aModelParam['V_SCHEDULE_DAYS']             = _elm( $requests, 'i_schedule_days' );
+        $aModelParam['V_AMOUNT']                    = _elm( $requests, 'i_amount' );
+        $aModelParam['V_TO_SCORE']                  = _elm( $requests, 'i_to_score' );
+        $aModelParam['V_UNIQUE']                    = 'SE';
+
+        #------------------------------------------------------------------
+        # TODO: valuation run
+        #------------------------------------------------------------------
+        $aStatus                                    = $membershipModel->saveGradeValuation( $aModelParam );
+
+        if ( $this->db->transStatus() === false || $aStatus === false) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = 'valuation 저장 중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+
+        #------------------------------------------------------------------
+        # TODO: membership grade 모델 세팅
+        #------------------------------------------------------------------
+
+        foreach( _elm($requests, 'i_period_score_start') as $key => $value){
+            $bModelParam                            = [];
+            $bModelParam['G_PERIOD_SCORE_START']    = _elm(_elm($requests, 'i_period_score_start'), $key);
+            $bModelParam['G_PERIOD_SCORE_END']      = _elm(_elm($requests, 'i_period_score_end'), $key);
+            $bModelParam['G_IDX']                   = $key;
+
+            $bStatus                                = $membershipModel->updateMembershipGrade( $bModelParam );
+
+            if ( $this->db->transStatus() === false || $bStatus === false) {
+                $this->db->transRollback();
+                $response['status']                 = 400;
+                $response['alert']                  = 'valuation 저장 중 오류발생.. 다시 시도해주세요.';
+                return $this->respond( $response );
+            }
+        }
+
+
+        $this->db->transCommit();
+        unset( $response['redirect_url'] );
+        unset( $response['replace_url'] );
+        $response['status']                         = 200;
+        $response['alert']                          = '저장되었습니다.';
+        $response['reload']                         = true;
+
+        return $this->respond( $response );
 
     }
 

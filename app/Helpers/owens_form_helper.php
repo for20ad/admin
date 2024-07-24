@@ -9,6 +9,128 @@
 use CodeIgniter\HTTP\IncomingRequest;
 
 use Config\Site as SiteConfig;
+if (!function_exists('getPostSearch')) {
+    function getPostSearch( $param = [] ){
+        // 기본값 설정
+        $postHtml = '
+            <div id="postLayer" style="z-index:9999; position:fixed; overflow:hidden; display:none;">
+                <span class="close" onclick="closeDaumPostcode()" style="cursor:pointer; position:absolute; right:10px; top:10px; z-index:1001; background:#fff; border:1px solid #ddd; border-radius:50%; padding:5px; width:25px; height:25px; text-align:center; line-height:15px;">X</span>
+                <div id="layer-content" style="width:100%; height:4vh;"></div>
+            </div>
+
+            <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+            <script>
+            function execDaumPostcode( zipid, addr) {
+                var element_layer = document.getElementById("postLayer");
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        var fullAddr = data.roadAddress; // 도로명 주소 변수
+                        var extraAddr = ""; // 참고 항목 변수
+
+                        // 도로명 조합형 주소가 있을 경우
+                        if(data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                            extraAddr += data.bname;
+                        }
+                        // 건물명 조합형 주소가 있을 경우
+                        if(data.buildingName !== "" && data.apartment === "Y") {
+                            extraAddr += (extraAddr !== "" ? ", " + data.buildingName : data.buildingName);
+                        }
+                        // 표시할 참고 항목이 있을 경우
+                        if(extraAddr !== "") {
+                            extraAddr = " (" + extraAddr + ")";
+                        }
+                        // 조합된 참고 항목을 포함한 주소 변수
+                        fullAddr += extraAddr;
+                        $("#"+zipid).val(data.zonecode);
+                        $("#"+addr).val(fullAddr); // 주소 정보를 해당 필드에 입력
+
+                        // iframe을 넣은 element를 안보이게 한다.
+                        element_layer.style.display = "none";
+                    },
+                    onclose:function(state){
+                        if(state === "COMPLETE_CLOSE"){ // 주소 선택으로 인한 close일 경우
+                            element_layer.innerHTML = ""; // 레이어 적용 해제
+                        }
+                    },
+                    width : "100%",
+                    height : "100%",
+                    maxSuggestItems : 5
+                }).embed(element_layer);
+
+                // iframe을 넣은 element를 보이게 한다.
+                element_layer.style.display = "block";
+
+                // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+                initLayerPosition();
+            }
+
+            function initLayerPosition() {
+                var width = 500; //우편번호서비스가 들어갈 element의 width
+                var height = 400; //우편번호서비스가 들어갈 element의 height
+                var borderWidth = 1; //샘플에서 사용하는 border의 두께
+
+                // 위에서 선언한 값들을 실제 element에 넣는다.
+                $("#postLayer").css({
+                    "width": width + "px",
+                    "height": height + "px",
+                    "border": borderWidth + "px solid #ddd",
+                    "left": ((window.innerWidth - width) / 2 - borderWidth) + "px",
+                    "top": ((window.innerHeight - height) / 2 - borderWidth) + "px"
+                });
+            }
+
+            function closeDaumPostcode() {
+                var element_layer = document.getElementById("postLayer");
+                element_layer.style.display = "none";
+            }
+            </script>
+        ';
+        return $postHtml;
+    }
+}
+
+if (!function_exists('getIconAnchor')) {
+    function getIconAnchor($param = []) {
+        // 기본값 설정
+        $defaultValue = [
+            'txt' => '',
+            'width' => '20',
+            'height' => '20',
+            'icon' => 'edit',
+            'anchorClass' => '',
+            'anchorStyle' => '',
+            'svgClass' => '',
+            'stroke' => '#1D273B',
+            'extra' => []
+        ];
+
+        // 제공된 매개변수와 기본값 병합
+        $param = array_merge($defaultValue, $param);
+
+        // extra 배열을 HTML 속성 문자열로 변환
+        $extraAttributes = '';
+        if (!empty(_elm($param, 'extra')) && is_array(_elm($param, 'extra'))) {
+            foreach (_elm($param, 'extra') as $key => $value) {
+                $extraAttributes .= $key . '="' . htmlspecialchars($value, ENT_QUOTES) . '" ';
+            }
+        }
+
+        // 사이트 설정 및 아이콘 데이터 가져오기
+        $site_config = new SiteConfig;
+        $iconData = $site_config->buttonIcon[$param['icon']];
+
+        // 앵커 HTML 생성
+        $anchor = '<a href="javascript:;" class="' . _elm($param, 'anchorClass') . '" style="' . _elm($param, 'anchorStyle') . '" ' . $extraAttributes . '>';
+        $anchor .= '<svg xmlns="http://www.w3.org/2000/svg" class="' . _elm($param, 'svgClass') . '" width="' . _elm($param, 'width') . 'px" height="' . _elm($param, 'height') . 'px" viewBox="0 0 ' . _elm($param, 'width') . ' ' . _elm($param, 'height') . '" fill="none">';
+        foreach ($iconData as $info) {
+            $anchor .= '<path d="' . $info . '" stroke="' . _elm($param, 'stroke') . '" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />';
+        }
+        $anchor .= '</svg>';
+        $anchor .= _elm($param, 'txt') . '</a>';
+
+        return $anchor;
+    }
+}
 if (!function_exists('getIconButton')) {
     function getIconButton($param = []) {
         // 기본값 설정

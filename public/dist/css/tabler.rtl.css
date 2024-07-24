@@ -13913,12 +13913,12 @@ body {
   scrollbar-color: rgba(var(--tblr-scrollbar-color, var(--tblr-body-color-rgb)), 0.16) transparent;
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   width: 1rem;
   height: 1rem;
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
-}
+} */
 @media (prefers-reduced-motion: reduce) {
   *::-webkit-scrollbar {
     -webkit-transition: none;

@@ -58,7 +58,7 @@ function modifyMenu()
                 var error_message = '';
                 error_message = error_lists.join('<br />');
                 if (error_message != '') {
-                    box_alert(error_message, 'info');
+                    box_alert(error_message, 'i');
                 }
 
                 return false;

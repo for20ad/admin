@@ -324,7 +324,7 @@ class LoginApi extends ApiController
         $siteConfig                                 = new Site();
         $admin_expire_time                          = (int)_elm($siteConfig, 'adminExpireTime', 7200);
 
-        $this->session->setTempdata('TEMP_ADMIN_LOGIN_TIME', time(), $admin_expire_time);
+        $this->session->set('TEMP_ADMIN_LOGIN_TIME', time(), $admin_expire_time);
 
 
         session_write_close();
@@ -370,32 +370,31 @@ class LoginApi extends ApiController
     }
 
     // 로그인 연장
+
     public function delayLogin($param = [])
     {
-        $response                                   = $this->_initResponse();
-        $memberLib                                  = new MemberLib();
-
-        $site_config                                = new SiteConfig();
-
-        $isLogin = $memberLib->isAdminLogin();
+        $response = $this->_initResponse();
+        $memberLib = new MemberLib();
+        $site_config = new SiteConfig();
 
         if ($memberLib->isAdminLogin() === true)
         {
-            $admin_expire_time                      = (int)_elm($site_config, 'adminExpireTime', 7200);
+            $current_time = time();
+            $admin_expire_time = (int)$site_config->adminExpireTime ?? 7200; // 2시간 = 7200초
 
-            $this->session->set('TEMP_ADMIN_LOGIN_TIME', time(), $admin_expire_time);
+            $this->session->set('TEMP_ADMIN_LOGIN_TIME', $current_time);
 
-            $response['status']                     = 'true';
-            $response['admin_auth_time']            = $admin_expire_time;
+            $response['status'] = 'true';
+            $response['admin_auth_time'] = $admin_expire_time;
         }
         else
         {
-            $response['status']                     = 'false';
-            $response['replace_url']                = _link_url('/login');
+            $response['status'] = 'false';
+            $response['replace_url'] = _link_url('/login');
         }
-        return $this->respond( $response );
-
+        return $this->respond($response);
     }
+
 
 
 }

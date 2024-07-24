@@ -1,18 +1,4 @@
-function showPasswordGroup(){
 
-    $toggleDiv = $("#passGroup");
-
-    if ($toggleDiv.is(':visible')) {
-        $toggleDiv.slideUp();
-        $("#passChangeBtn").text( '변경하기' );
-        passwdChk = true;
-
-    } else {
-        $toggleDiv.slideDown();
-        $("#passChangeBtn").text( '취소' );
-        passwdChk = false;
-    }
-}
 function dupCheckId( $obj ){
     if( $obj.val() == orgUseID ){
         idChk = true
@@ -114,106 +100,105 @@ function sameValueCheck( name, $obj ){
         passwdChk = true;
     }
 }
-$(function(){
-    $('#frm_modify').on('submit', function(event) {
-        event.preventDefault();
+function modfiyConfirm(){
+    box_confirm('회원정보를 수정하시겠습니까?', 'q', '', function(){
+        modfiyAdminMember(event); // event 객체 전달
+    });
+}
 
-        error_lists = [];
-        $('.error_txt').html('');
+function modfiyAdminMember(event){
+    event.preventDefault(); // 이벤트 객체를 사용하여 기본 동작 방지
+    error_lists = [];
+    $('.error_txt').html('');
 
-        var inputs = $(this).find('input, button');
-        var isSubmit = true;
+    var inputs = $('#frm_modify').find('input, button');
+    var isSubmit = true;
 
-        if ($.trim($('#i_user_id').val()) == '')
+    var frm = $('#frm_modify');
+
+    if ($.trim($('#i_user_id').val()) == '')
+    {
+        _form_error('i_user_id', '아이디를 입력하세요.');
+        isSubmit = false;
+    }
+    if(passwdChk == false){
+        if ($.trim($('#i_password').val()) == '')
         {
-            _form_error('i_user_id', '아이디를 입력하세요.');
+            _form_error('i_password', '비밀번호를 입력하세요.');
             isSubmit = false;
         }
-        if(passwdChk == false){
-            if ($.trim($('#i_password').val()) == '')
+
+        if ($.trim($('#i_password_check').val()) == '')
+        {
+            _form_error('i_password_check', '비밀번호 확인을 입력하세요.');
+            isSubmit = false;
+        }
+    }
+
+    if ($.trim($('#i_user_name').val()) == '')
+    {
+        _form_error('i_user_name', '관리자명을 입력하세요.');
+        isSubmit = false;
+    }
+
+    if ($.trim($('#i_mobile_num').val()) == '')
+    {
+        _form_error('i_link', '휴대폰번호를 입력하세요.');
+        isSubmit = false;
+    }
+    if( idChk === false ){
+        _form_error('i_user_id', '아이디체크를 진행하세요.');
+        isSubmit = false;
+    }
+
+    if( passwdChk === false ){
+        _form_error('i_password_check', '패스워드가 서로 다릅니다. 다시 입력하세요.');
+        isSubmit = false;
+    }
+
+    if (isSubmit == false)
+    {
+        var error_message = '';
+        error_message = error_lists.join('<br />');
+        box_alert(error_message, 'e');
+
+        inputs.prop('disabled', false);
+        return false;
+    }
+
+    $.ajax({
+        url: "/apis/setting/memberModify",
+        method: "POST",
+        data: frm.serialize(),
+        dataType: "json",
+        cache: false,
+        beforeSend: function() {
+            inputs.prop('disabled', true);
+            setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+        },
+        complete: function() { },
+        success: function(response)
+        {
+            submitSuccess(response);
+
+            if (response.status != 200)
             {
-                _form_error('i_password', '비밀번호를 입력하세요.');
-                isSubmit = false;
+                var error_message = '';
+                error_message = response.errors.join('<br />');
+                if (error_message != '') {
+                    alert(error_message);
+                }
+                return false;
             }
 
-            if ($.trim($('#i_password_check').val()) == '')
-            {
-                _form_error('i_password_check', '비밀번호 확인을 입력하세요.');
-                isSubmit = false;
-            }
-        }
-
-
-        if ($.trim($('#i_user_name').val()) == '')
+        },
+        error: function(jqXHR, textStatus, errorThrown)
         {
-            _form_error('i_user_name', '관리자명을 입력하세요.');
-            isSubmit = false;
-        }
-
-        if ($.trim($('#i_mobile_num').val()) == '')
-        {
-            _form_error('i_link', '휴대폰번호를 입력하세요.');
-            isSubmit = false;
-        }
-        if( idChk === false ){
-            _form_error('i_user_id', '아이디체크를 진행하세요.');
-            isSubmit = false;
-        }
-
-        if( passwdChk === false ){
-            _form_error('i_password_check', '패스워드가 서로 다릅니다. 다시 입력하세요.');
-            isSubmit = false;
-        }
-
-        if (isSubmit == false)
-        {
-            var error_message = '';
-            error_message = error_lists.join('<br />');
-            box_alert(error_message, 'e');
+            submitError(jqXHR.status, errorThrown);
+            console.log(textStatus);
 
             inputs.prop('disabled', false);
             return false;
         }
-
-        $.ajax({
-            url: '/apis/setting/memberModify',
-            method: 'POST',
-            data: new FormData(this),
-            dataType: 'json',
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function()
-            {
-                inputs.prop('disabled', true);
-                setTimeout(function() { inputs.prop('disabled', false); }, 3000);
-            },
-            success: function(response)
-            {
-                submitSuccess(response);
-
-                inputs.prop('disabled', false);
-
-                if (response.status == 'false')
-                {
-                    var error_message = '';
-                    error_message = error_lists.join('<br />');
-                    if (error_message != '') {
-                        box_alert(error_message, 'e');
-                    }
-
-                    return false;
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                submitError(jqXHR.status, errorThrown);
-                console.log(textStatus);
-
-                inputs.prop('disabled', false);
-                return false;
-            },
-            complete: function() { }
-        });
     });
-});
+}

@@ -1,6 +1,7 @@
 * {
   font-family: Pretendard;
   font-style: normal;
+  scrollbar-color: inherit;
 }
 
 a {
@@ -214,22 +215,24 @@ letter-spacing: -0.072px;
   display: flex;
   position: fixed;
   top: 53px;
+  z-index: 1;
 }
 
 .side-bar {
   position: relative;
   width: 290px;
-  height: -webkit-fill-available;
+  height: 100vh;
   background: #206bc4;
   color: #fff;
-  min-height: auto;
+  min-height: 100vh;
   overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 3.625rem
 }
 
 .side-bar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
+  display: none;
 }
 
 .side-bar .logo {
@@ -316,6 +319,7 @@ letter-spacing: -0.072px;
   }
   .side-bar {
     height: 100vh;
+    padding-bottom: 0;
   }
 
   .side-bar .category.bottom {
@@ -337,7 +341,7 @@ letter-spacing: -0.072px;
   height: inherit;
   background: #206bc4;
   color: #fff;
-  min-height: 1050px;
+  min-height: 100vh;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -497,12 +501,39 @@ letter-spacing: -0.072px;
   color: #206BC4;
 }
 
+.table-responsive tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
 .table-responsive tbody > tr > td.nowrap{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 150px;
 }
+
+.table-responsive-other thead > tr > th{
+    padding: 7px 24px;
+    background-color: transparent;
+    color:  #616876;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+  }
+
+  .table-responsive-other tbody > tr > td{
+    padding: 13px 24px;
+    /*background-color: #fff;*/
+    color: #206BC4;
+  }
+
+  .table-responsive-other tbody > tr > td.nowrap{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
 /* --------------- pagination ------------------ */
 .pagination-wrapper {
   display: flex;
@@ -843,6 +874,21 @@ border: 1px solid  #9BA9BE;
     display: flex; align-items: center;
 }
 
+.form-inline > input{
+   margin-left: 10px !important;
+   margin-right: 10px !important;
+}
+.input-group .form-control {
+    width: 20vh;
+    margin-left: 0 !important;
+}
+.input-group-text {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-left: 0;
+}
+
+
 .image-container {
     position: relative;
     display: inline-block;
@@ -867,6 +913,90 @@ border: 1px solid  #9BA9BE;
     display: block;
 }
 
+.no-border-bottom{
+    border-bottom: 0;
+    padding-top:0 !important;
+}
 
 
+.input-icon {
+    position: relative;
+}
+.input-icon .form-control {
+    padding-right: 2.5rem;
+}
+.input-icon .input-icon-addon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
 
+.multi-select-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.multi-select-box{
+    width: 45%;
+    height: 200px;
+}
+.multi-select-box button {
+    align-self: center;
+}
+.formHide{
+    display:none;
+}
+#postLayer {
+    width:150%;
+    display: none;
+    position: fixed;
+    overflow: hidden;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+    background: white;
+    border: 1px solid #ddd;
+}
+.post-modal-content {
+    width: 100%;
+    height: 100%;
+    border: 0 none;
+    border-radius: 0;
+}
+#postLayer .close {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+}
+
+.deleted td {
+    position: relative;
+    background-color: #E6E7E9; /* 비활성화 상태의 배경색 */
+}
+
+.deleted td::before {
+    content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #E6E7E9;
+  opacity: 0.5;
+  pointer-events: none; /* 오버레이가 클릭 이벤트를 차단하지 않도록 설정 */
+  z-index: 1; /* 오버레이가 td 내용 위에 표시되도록 설정 */
+}
+.fixth{
+    position: sticky;
+    top: 0;
+    background-color: #fff !important;
+    z-index: 1;
+}
+.fixTable{
+    position: relative;
+    max-height: 500px;
+    overflow: auto;
+}

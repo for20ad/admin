@@ -37,8 +37,8 @@
             ?>
     </div>
     </td>
-    <td class="body2-c nowrap"><a href="<?php echo _link_url( '/setting/memberDetail/'._elm( $vData , 'MB_IDX' ) )?>"><?php echo _elm( $vData , 'MB_USERID' )?></a></td>
-    <td class="body2-c nowrap"><a href="<?php echo _link_url( '/setting/memberDetail/'._elm( $vData , 'MB_IDX' ) )?>"><?php echo _elm( $vData , 'MB_USERNAME' )?></a></td>
+    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'memberModal')" ><?php echo _elm( $vData , 'MB_USERID' )?></a></td>
+    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'memberModal')"><?php echo _elm( $vData , 'MB_USERNAME' )?></a></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'MB_GROUP_NAME' )?> </td>
     <td class="body2-c nowrap"><?php echo _add_dash_tel_num( _elm( $vData , 'MB_MOBILE_NUM_DEC' ) )?></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData , 'MB_STATUS' ) == '0' ? '대기' : ( _elm( $vData , 'MB_STATUS' ) == '1' ? '승인' : '정지' ) ?></td>

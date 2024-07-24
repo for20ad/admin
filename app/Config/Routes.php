@@ -17,7 +17,7 @@ $routes->set404Override();
 
 
 $routes->setAutoRoute(true);
-//$routes->get('/', 'Home::index');
+$routes->get('/', 'Main::index');
 
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {

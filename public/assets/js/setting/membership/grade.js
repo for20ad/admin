@@ -2,11 +2,11 @@ function modifyGradeConfirm()
 {
     if ($('input:checkbox[name="i_grade_idx[]"]:checked').length > 0)
     {
-        box_confirm('선택된 등급을 수정하시겠습니까?', 'c', '', modifyGrade);
+        box_confirm('선택된 등급을 수정하시겠습니까?', 'q', '', modifyGrade);
     }
     else
     {
-        box_alert('선택된 등급이 없습니다.', 'info');
+        box_alert('선택된 등급이 없습니다.', 'i');
     }
 }
 
@@ -30,7 +30,7 @@ function modifyGrade()
                 var error_message = '';
                 error_message = error_lists.join('<br />');
                 if (error_message != '') {
-                    box_alert(error_message, 'info');
+                    box_alert(error_message, 'i');
                 }
 
                 return false;
@@ -72,68 +72,68 @@ function deleteGrade( param ){
 
 function addMembershipGrade(){
     event.preventDefault();
-        const frm = $('#frm_register')
-        error_lists = [];
-        $('.error_txt').html('');
+    const frm = $('#frm_register')
+    error_lists = [];
+    $('.error_txt').html('');
 
-        var inputs = frm.find('input, button');
-        var isSubmit = true;
+    var inputs = frm.find('input, button');
+    var isSubmit = true;
 
-        if ($.trim(frm.find('#i_name').val()) == '')
+    if ($.trim(frm.find('#i_name').val()) == '')
+    {
+        _form_error('i_user_id', '등급명을 입력하세요.');
+        isSubmit = false;
+    }
+
+    if (isSubmit == false)
+    {
+        var error_message = '';
+        error_message = error_lists.join('<br />');
+        box_alert(error_message, 'e');
+
+        inputs.prop('disabled', false);
+        return false;
+    }
+    $.ajax({
+        url: '/apis/setting/addMembershipGrade',
+        method: 'POST',
+        data: new FormData(frm[0]),
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function()
         {
-            _form_error('i_user_id', '등급명을 입력하세요.');
-            isSubmit = false;
-        }
-
-        if (isSubmit == false)
+            inputs.prop('disabled', true);
+            setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+        },
+        success: function(response)
         {
-            var error_message = '';
-            error_message = error_lists.join('<br />');
-            box_alert(error_message, 'e');
+            submitSuccess(response);
+
+            inputs.prop('disabled', false);
+
+            if (response.status == 'false')
+            {
+                var error_message = '';
+                error_message = error_lists.join('<br />');
+                if (error_message != '') {
+                    box_alert(error_message, 'i');
+                }
+
+                return false;
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            submitError(jqXHR.status, errorThrown);
+            console.log(textStatus);
 
             inputs.prop('disabled', false);
             return false;
-        }
-        $.ajax({
-            url: '/apis/setting/addMembershipGrade',
-            method: 'POST',
-            data: new FormData(frm[0]),
-            dataType: 'json',
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function()
-            {
-                inputs.prop('disabled', true);
-                setTimeout(function() { inputs.prop('disabled', false); }, 3000);
-            },
-            success: function(response)
-            {
-                submitSuccess(response);
-
-                inputs.prop('disabled', false);
-
-                if (response.status == 'false')
-                {
-                    var error_message = '';
-                    error_message = error_lists.join('<br />');
-                    if (error_message != '') {
-                        box_alert(error_message, 'info');
-                    }
-
-                    return false;
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                submitError(jqXHR.status, errorThrown);
-                console.log(textStatus);
-
-                inputs.prop('disabled', false);
-                return false;
-            },
-            complete: function() { }
-        });
+        },
+        complete: function() { }
+    });
 
 }
 

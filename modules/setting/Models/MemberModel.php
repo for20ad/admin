@@ -40,10 +40,6 @@ class MemberModel extends Model
             'total_count'                           => 0,
         ];
 
-        if ( empty( $param ) === true ) {
-            return $aReturn;
-        }
-
         $builder                                    = $this->db->table('ADMIN_MEMBER MB');
         $builder->select( 'MB.*' );
         $builder->select( 'G.MB_GROUP_NAME' );

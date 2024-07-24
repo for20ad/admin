@@ -52,7 +52,7 @@ class MemberLib
 
         if (!empty($this->session->get('_memberInfo')))
         {
-            $admin_login_time = $this->session->getTempdata('TEMP_ADMIN_LOGIN_TIME');
+            $admin_login_time = $this->session->get('TEMP_ADMIN_LOGIN_TIME');
 
             if (!empty($admin_login_time))
             {

@@ -194,7 +194,7 @@ class MenuApi extends ApiController
             if ( $this->db->transStatus() === false || $aResult === false ) {
                 $this->db->transRollback();
                 $response['status']                 = 400;
-                $response['messages']               = '처리중 오류발생.. 다시 시도해주세요.';
+                $response['alert']                  = '처리중 오류발생.. 다시 시도해주세요.';
                 return $this->respond( $response, 400 );
             }
 
@@ -221,6 +221,9 @@ class MenuApi extends ApiController
         if( _elm( $requests, 'rawData' ) === true ){
             return $response;
         }
+
+        unset( $response['redirect_url'] );
+        unset( $response['replace_url'] );
 
         return $this->respond($response);
 

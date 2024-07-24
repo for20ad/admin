@@ -30,9 +30,10 @@ class Member extends Setting
 
     public function index()
     {
-        $pageParam               = [];
-        $pageParam['file']       = '\Module\core\Views\errors\error_404';
-        $pageParam['pageLayout'] = 'blank';
+
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\core\Views\errors\error_404';
+        $pageParam['pageLayout']                    = 'blank';
 
         $this->owensView->loadLayoutView($pageParam);
     }
@@ -64,6 +65,7 @@ class Member extends Setting
         #------------------------------------------------------------------
         # TODO: 기본 페이지 변수 세팅
         #------------------------------------------------------------------
+
         $pageDatas                                  = [];
         $requests                                   = $this->request->getGet();
         #------------------------------------------------------------------
@@ -159,70 +161,6 @@ class Member extends Setting
 
 
         $this->owensView->loadLayoutView($pageParam);
-    }
-
-    public function detail( $memIdx = 0 )
-    {
-        if( empty( $memIdx ) === true ){
-            $pageParam                              = [];
-            $pageParam['file']                      = '\Module\core\Views\errors\error_404';
-            $pageParam['pageLayout']                = 'blank';
-
-            $this->owensView->loadLayoutView($pageParam);
-            exit;
-        }
-        #------------------------------------------------------------------
-        # TODO: 기본 페이지 변수 세팅
-        #------------------------------------------------------------------
-        $pageDatas                                  = [];
-        #------------------------------------------------------------------
-        # TODO: 모델 로드
-        #------------------------------------------------------------------
-        $memberModel                                = new MemberModel();
-
-        #------------------------------------------------------------------
-        # TODO: Config 세팅
-        #------------------------------------------------------------------
-        $aConfig                                    = new settingConfig();
-
-        #------------------------------------------------------------------
-        # TODO: 그룹 로드
-        #------------------------------------------------------------------
-
-        $pageDatas['member_group']                  = $memberModel->getMemberGroup();
-        $pageDatas['aConfig']                       = $aConfig->member;
-
-        #------------------------------------------------------------------
-        # TODO: 데이터 세팅
-        #------------------------------------------------------------------
-        $modelParam                                 = [];
-
-        $modelParam['MB_IDX']                       = $memIdx;
-        $pageDatas['aData']                         = $memberModel->getAdminMemberData( $modelParam );
-
-        if( empty( _elm( $pageDatas, 'aData') ) === true ){
-            $pageParam                              = [];
-            $pageParam['file']                      = '\Module\core\Views\errors\error_404';
-            $pageParam['pageLayout']                = 'blank';
-
-            $this->owensView->loadLayoutView($pageParam);
-            exit;
-        }
-        $pageDatas['aData']['MB_MOBILE_NUM_DEC']    = _add_dash_tel_num( $this->_aesDecrypt( _elm(  _elm($pageDatas, 'aData' ), 'MB_MOBILE_NUM' ) ) );
-        $pageDatas['aData']['MB_EMAIL_DEC']         = $this->_aesDecrypt( _elm(  _elm($pageDatas, 'aData' ), 'MB_EMAIL' ) );
-
-        #------------------------------------------------------------------
-        # TODO: 메인 뷰 처리
-        #------------------------------------------------------------------
-
-        $pageParam                                  = [];
-        $pageParam['file']                          = '\Module\setting\Views\member\detail';
-        $pageParam['pageLayout']                    = '';
-        $pageParam['pageDatas']                     = $pageDatas;
-
-
-        $this->owensView->loadLayoutView($pageParam);
-
     }
 
 }

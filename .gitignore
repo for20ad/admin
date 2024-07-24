@@ -3,4 +3,5 @@
 /writable/*
 /.git/*
 /.github/*
+/vendor
 

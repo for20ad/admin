@@ -11,6 +11,9 @@ namespace Module\setting\Controllers\apis;
 use Module\core\Controllers\ApiController;
 
 use Module\setting\Models\MemberModel as adminModel;
+
+use Module\setting\Config\Config as settingConfig;
+
 use App\Libraries\MemberLib;
 use App\Libraries\OwensView;
 
@@ -129,7 +132,7 @@ class MemberApi extends ApiController
                 'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
-                    'unique_user_id' => '아이디가 이미 존재합니다.',
+                    'is_unique'     => '아이디가 이미 존재합니다.',
                 ],
             ],
             'i_password' => [
@@ -425,6 +428,70 @@ class MemberApi extends ApiController
 
     }
 
+    public function adminDetail()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $owensView                                  = new OwensView();
+
+        if( empty( _elm($requests, 'memIdx' ) ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 모델 로드
+        #------------------------------------------------------------------
+        $adminModel                                 = new adminModel();
+
+        #------------------------------------------------------------------
+        # TODO: Config 세팅
+        #------------------------------------------------------------------
+        $aConfig                                    = new settingConfig();
+
+        #------------------------------------------------------------------
+        # TODO: 그룹 로드
+        #------------------------------------------------------------------
+        $view_datas                                 = [];
+        $view_datas['member_group']                 = $adminModel->getMemberGroup();
+        $view_datas['aConfig']                      = $aConfig->member;
+
+        #------------------------------------------------------------------
+        # TODO: 데이터 세팅
+        #------------------------------------------------------------------
+        $modelParam                                 = [];
+
+        $modelParam['MB_IDX']                       = _elm($requests, 'memIdx' );
+        $aData                                      = $adminModel->getAdminMemberData( $modelParam );
+
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        $aData['MB_MOBILE_NUM_DEC']                 = _add_dash_tel_num( $this->_aesDecrypt( _elm(  $aData, 'MB_MOBILE_NUM' ) ) );
+        $aData['MB_EMAIL_DEC']                      = $this->_aesDecrypt( _elm(  $aData, 'MB_EMAIL' ) );
+
+        #------------------------------------------------------------------
+        # TODO: AJAX 뷰 처리
+        #------------------------------------------------------------------
+
+        $result                                     = $aData;
+
+        $view_datas['aData']                        = $result;
+
+        $owensView->setViewDatas( $view_datas );
+
+        $page_datas['detail']                       = view( '\Module\setting\Views\member\_detail' , ['owensView' => $owensView] );
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        return $this->respond($response);
+    }
+
 
     public function memberModify()
     {
@@ -612,7 +679,6 @@ class MemberApi extends ApiController
 
         $response['status']                         = 200;
         $response['alert']                          = '수정이 완료되었습니다.';
-        $response['redirect_url']                   = _link_url( '/setting/memberDetail/'._elm( $modelParam, 'MB_IDX' ) );
 
         return $this->respond( $response );
     }

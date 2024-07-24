@@ -58,13 +58,12 @@
                     <div class="table-responsive">
                         <table class="table table-vcenter">
                             <tbody>
-                            <colgroup>
-                                <col style="width:10%;">
-                                <col style="width:40%;">
-                                <col style="width:10%;">
-                                <col style="width:50%;">
-                            </colgroup>
-
+                                <colgroup>
+                                    <col style="width:10%;">
+                                    <col style="width:40%;">
+                                    <col style="width:10%;">
+                                    <col style="width:50%;">
+                                </colgroup>
                                 <tr>
                                     <th class="no-border-bottom">상태</th>
                                     <td class="no-border-bottom">
@@ -88,7 +87,6 @@
                                     ?>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th class="no-border-bottom">검색</th>
                                     <td colspan="3" class="no-border-bottom">
@@ -103,38 +101,39 @@
                                             <input type="text" id="ssubject" name="s_keyword" class="form-control" style="width:20%" value="<?php echo _elm( $aGetData, 's_keyword' )?>" >
                                         </div>
                                     </td>
-                                </tbody>
-                            </table>
-                        </div>
-                        <?php echo form_close();?>
-                        <div style="text-align: center; margin-top: 52px">
-                        <?php
-                        echo getIconButton([
-                            'txt' => '검색',
-                            'icon' => 'search',
-                            'buttonClass' => 'btn btn-success',
-                            'buttonStyle' => 'width: 180px; height: 46px',
-                            'width' => '21',
-                            'height' => '20',
-                            'stroke' => 'white',
-                            'extra' => [
-                                'onclick' => 'getSearchList();',
-                            ]
-                        ]);
-                        ?>
-                        <?php
-                        echo getIconButton([
-                            'txt' => '초기화',
-                            'icon' => 'reset',
-                            'buttonClass' => 'btn',
-                            'buttonStyle' => 'width: 180px; height: 46px',
-                            'width' => '21',
-                            'height' => '20',
-                            'extra' => [
-                                'onclick' => 'location.href="'._link_url('/setting/memberLists').'"',
-                            ]
-                        ]);
-                        ?>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php echo form_close();?>
+                    <div style="text-align: center; margin-top: 52px">
+                    <?php
+                    echo getIconButton([
+                        'txt' => '검색',
+                        'icon' => 'search',
+                        'buttonClass' => 'btn btn-success',
+                        'buttonStyle' => 'width: 180px; height: 46px',
+                        'width' => '21',
+                        'height' => '20',
+                        'stroke' => 'white',
+                        'extra' => [
+                            'onclick' => 'getSearchList();',
+                        ]
+                    ]);
+                    ?>
+                    <?php
+                    echo getIconButton([
+                        'txt' => '초기화',
+                        'icon' => 'reset',
+                        'buttonClass' => 'btn',
+                        'buttonStyle' => 'width: 180px; height: 46px',
+                        'width' => '21',
+                        'height' => '20',
+                        'extra' => [
+                            'onclick' => 'location.href="'._link_url('/setting/memberLists').'"',
+                        ]
+                    ]);
+                    ?>
                     </div>
                 </div>
             </div>
@@ -154,7 +153,7 @@
                         <circle cx="2" cy="2" r="2" fill="#206BC4" />
                     </svg>
                     <p class="body1-c ms-2 mt-1">
-                        공지사항
+                        관리자목록
                     </p>
                 </div>
                 <!-- 아코디언 토글 버튼 -->
@@ -220,6 +219,76 @@
         </div>
     </div>
 </div>
+<!-- Modal S-->
+<div class="modal fade" id="memberModal" tabindex="-1" style="margin-top:3em;" aria-labelledby="memberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="max-height:90vh;display:flex;flex-direction: column;width:80vh">
+            <div class="modal-header">
+                <h5 class="modal-title" id="memberModalLabel">정보 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
+                <div class="viewData">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal E-->
+<script>
+function openLayer( mb_idx, id ){
+
+    $.ajax({
+        url: '/apis/setting/adminDetail',
+        type: 'post',
+        data: 'memIdx='+mb_idx,
+        processData: false,
+        cache: false,
+        beforeSend: function() { },
+        success: function(response) {
+            submitSuccess(response);
+
+            if (response.status == 'false')
+            {
+                var error_message = '';
+                error_message = error_lists.join('<br />');
+                if (error_message != '') {
+                    box_alert(error_message, 'e');
+                }
+
+                return false;
+            }
+            $('#'+id+' .viewData').empty().html( response.page_datas.detail );
+            //var modal = new bootstrap.Modal(document.getElementById(id));
+            var modalElement = document.getElementById(id);
+            var modal = new bootstrap.Modal(modalElement, {
+                backdrop: 'static', // 마스크 클릭해도 닫히지 않게 설정
+                keyboard: false     // esc 키로 닫히지 않게 설정
+            });
+
+            modal.show();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            submitError(jqXHR.status, errorThrown);
+            console.log(textStatus);
+
+            return false;
+        },
+        complete: function() { }
+    });
+        // 모달 열기
+
+}
+
+</script>
 
 <?php
 $owensView->setFooterJs('/assets/js/setting/member/lists.js');
+$owensView->setFooterJs('/assets/js/setting/member/detail.js');
+
+$script = "
+";
+
+$owensView->setFooterScript($script);
+

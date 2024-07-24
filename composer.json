@@ -17,6 +17,7 @@
         "codeigniter4/framework": "^4.0",
         "firebase/php-jwt": "^6.4",
         "laminas/laminas-escaper": "^2.9",
+        "phpoffice/phpspreadsheet": "^2.1",
         "psr/log": "^1.1",
         "swoole/ide-helper": "^5.1",
         "tarantool/client": "^0.10.0"

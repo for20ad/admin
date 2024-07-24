@@ -98,7 +98,29 @@ class Membership extends Setting
         $membershipModel                            = new MembershipModel();
 
 
+        #------------------------------------------------------------------
+        # TODO: Config 세팅
+        #------------------------------------------------------------------
+        $aConfig                                    = new settingConfig();
+        $pageDatas['aConfig']                       = $aConfig->policy['membership'];
 
+        #------------------------------------------------------------------
+        # TODO: 정책관리 데이터 로드
+        #------------------------------------------------------------------
+        $pageDatas['gradeDatas']                    = $membershipModel->getMembershipGrade();
+        $pageDatas['valuation']                     = $membershipModel->getMembershipGradeValuation();
+
+         #------------------------------------------------------------------
+        # TODO: 메인 뷰 처리
+        #------------------------------------------------------------------
+
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\setting\Views\membership\valuation';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
+
+
+        $this->owensView->loadLayoutView($pageParam);
 
     }
 

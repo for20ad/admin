@@ -10,6 +10,7 @@
     $aMenuTreeLists   = _elm($pageDatas, 'menu_tree_lists', []);
     $aMemberGroup    = _elm($pageDatas, 'member_group', []);
 ?>
+
 <!-- 콘텐츠 시작 -->
 <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_menu_write', 'onSubmit' => 'return false;', 'autocomplete' => 'off']); ?>
 <div class="container-fluid" style="margin-bottom: 32px">
@@ -151,17 +152,17 @@
     </div>
 
 
-    <div class="table-responsive">
+    <div class="table-responsive-other">
         <table class="table table-vcenter table-bordered table-striped mb-0 text-center nowrap ">
             <colgroup>
                 <col style="width:3%;">
                 <col style="width:3%;">
-                <col style="width:8%;">
+                <col style="width:13%;">
                 <col style="width:10%;">
                 <col style="">
-                <col style="width:6%;">
+                <col style="width:8%;">
                 <col style="width:25%;">
-                <col style="width:6%;">
+                <col style="width:8%;">
                 <col style="width:6%;">
                 <col style="width:4%;">
             </colgroup>
@@ -262,15 +263,21 @@
                     ?>
                 </td>
                 <td>
-                    <a href="javascript:;"onclick="deleteMenuConfirm('<?php echo $menu_idx; ?>');">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 7H20" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14 11V17" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#616876" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+                <?php
+                    echo getIconAnchor([
+                        'txt' => '',
+                        'icon' => 'delete',
+                        'buttonClass' => '',
+                        'buttonStyle' => '',
+                        'width' => '24',
+                        'height' => '24',
+                        'stroke' => '#616876',
+                        'extra' => [
+                            'onclick' => 'deleteMenuConfirm("'. $menu_idx.'");',
+                        ]
+                    ]);
+                ?>
+
                 </td>
             </tr>
                 <?php
@@ -280,7 +287,7 @@
                         {
                             $menu_idx = _elm($vMENU_CHILD, 'MENU_IDX', 0);
                 ?>
-                <tr>
+                <tr class="table-success">
                     <td>
                         <div class="checkbox checkbox-single">
                             <?php
