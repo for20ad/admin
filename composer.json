@@ -17,6 +17,7 @@
         "codeigniter4/framework": "^4.0",
         "firebase/php-jwt": "^6.4",
         "laminas/laminas-escaper": "^2.9",
+        "league/commonmark": "^2.5",
         "phpoffice/phpspreadsheet": "^2.1",
         "psr/log": "^1.1",
         "swoole/ide-helper": "^5.1",
@@ -54,7 +55,8 @@
     },
     "autoload": {
         "psr-4": {
-            "CodeIgniter\\": "system/"
+            "CodeIgniter\\": "system/",
+            "Shared\\": "~/workspace/web/Shared/"
         },
         "exclude-from-classmap": [
             "**/Database/Migrations/**"
@@ -62,7 +64,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Support\\": "tests/_support"
+            "Tests\\Support\\": "tests/_support",
+            "Shared\\": "~/wrokspace/web/Shared/"
         }
     },
     "config": {

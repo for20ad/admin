@@ -38,8 +38,8 @@
             ?>
     </div>
     </td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'F_IDX' ) ?>', 'formsModal')" ><?php echo _elm( _elm( $aConfig, 'forms'), _elm( $vData , 'F_MENU' ) )?></a></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'F_IDX' ) ?>', 'formsModal')"><?php echo _elm( $vData , 'F_TITLE' )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:void(0);' onclick="javascript:openLayer('<?php echo _elm( $vData , 'F_IDX' ) ?>', 'formsModal')" ><?php echo _elm( _elm( $aConfig, 'forms'), _elm( $vData , 'F_MENU' ) )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:void(0);' onclick="javascript:openLayer('<?php echo _elm( $vData , 'F_IDX' ) ?>', 'formsModal')"><?php echo _elm( $vData , 'F_TITLE' )?></a></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'MB_USERID' )?> (<?php echo _elm( $vData, 'MB_USERNAME' )?> )</td>
     <td class="body2-c nowrap"><?php echo date( 'Y-m-d H:i' , strtotime( _elm( $vData , 'F_CREATE_AT' ) ) )?></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'F_STATUS' ) == 'Y' ? '노출': '비노출'?></td>

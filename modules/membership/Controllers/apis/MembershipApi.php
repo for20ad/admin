@@ -1109,6 +1109,48 @@ class MembershipApi extends ApiController
         return $this->respond($response);
     }
 
+    public function getMileageListsExcel(){
+
+        $requests                                   = $this->request->getPost();
+
+        $modelParam                                 = [];
+
+        $modelParam['MB_STATUS']                    = _elm($requests, 's_status');
+        $modelParam['END_DATE']                     = _elm($requests, 's_end_date');
+
+
+        if (!empty(_elm($requests, 's_keyword'))) {
+            switch (_elm($requests, 's_condition')) {
+                case 'mb_id':
+                    $modelParam['MB_USERID']        = _elm($requests, 's_keyword');
+                    break;
+                case 'mb_name':
+                    $modelParam['MB_NM']            = _elm($requests, 's_keyword');
+                    break;
+                case 'mb_mobile':
+                    $modelParam['MB_MOBILE_NUM']    = $this->_aesEncrypt(preg_replace('/[^0-9]/', '', _elm($requests, 's_keyword')));
+                    break;
+            }
+        }
+
+        switch (_elm($requests, 'ordering')) {
+            case 'regdate_desc':
+                $modelParam['order']                = ' LAST_UPDATE_AT DESC';
+                break;
+            case 'regdate_asc':
+                $modelParam['order']                = ' LAST_UPDATE_AT ASC';
+                break;
+            default:
+                $modelParam['order']                = ' LAST_UPDATE_AT DESC';
+                break;
+        }
+
+        $aLISTS_RESULT = $this->membershipModel->getMemberShipMileageLists($modelParam);
+
+        $this->exportExcel(_elm($aLISTS_RESULT, 'lists'), _elm($requests, 's_form_idx'), date('Ymd').'_회원포인트리스트');
+
+    }
+
 
 
     public function getListsExcel(){
@@ -1161,7 +1203,7 @@ class MembershipApi extends ApiController
             }
         }
 
-        $this->exportExcel(_elm($aLISTS_RESULT, 'lists'), _elm($requests, 's_form_idx'));
+        $this->exportExcel(_elm($aLISTS_RESULT, 'lists'), _elm($requests, 's_form_idx'), date('Ymd').'_회원리스트');
 
     }
 
@@ -1251,17 +1293,34 @@ class MembershipApi extends ApiController
 
         $wait_members                               = $this->membershipModel->getWaitMembershipMembers();
         $button                                     = '';
-        if( $wait_members > 0  ){
-            $button                                .= '대기회원 '.number_format($wait_members). '명';
 
-            $button                                .= getButton([
-                'text' => '보기',
-                'class' => 'btn btn-primary',
-                'style' => 'width: 60px; height:34px',
-                'extra' => [
-                    'onclick' => '$("#frm_search [name=s_status]").val("1");getSearchList()',
-                ]
-            ]);
+        if( $wait_members > 0  ){
+            if( _elm($requests, 'xStatus' )  == 1 ){
+                $button                                .= '대기회원 '.number_format($wait_members). '명';
+
+                $button                                .= getButton([
+                    'text' => '전체',
+                    'class' => 'btn',
+                    'style' => 'width: 60px; height:34px',
+                    'extra' => [
+                        'onclick' => '$("#frm_search [name=s_status]").val("");getSearchList()',
+                        'name' => 'xBtn',
+                    ]
+                ]);
+            }else{
+                $button                                .= '대기회원 '.number_format($wait_members). '명';
+
+                $button                                .= getButton([
+                    'text' => '보기',
+                    'class' => 'btn btn-info',
+                    'style' => 'width: 60px; height:34px',
+                    'extra' => [
+                        'onclick' => '$("#frm_search [name=s_status]").val("1");getSearchList()',
+                        'name' => 'xBtn',
+                    ]
+                ]);
+            }
+
 
             $button                                .=' | ';
         }
@@ -1499,7 +1558,6 @@ class MembershipApi extends ApiController
                 'rules'  => 'trim|required',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
-                    'unique_user_id' => '아이디가 이미 존재합니다.',
                 ],
             ],
             'i_user_name' => [

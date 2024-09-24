@@ -23,6 +23,10 @@ class MenuModel extends Model
         if( empty( $group ) === true ){
             return $aReturn;
         }
+        if( $group == 'membership' ){
+            $prefix = '';
+        }
+
         $builder                                    = $this->db->table( 'ADMIN_MENU' );
         $builder->where( 'MENU_GROUP_ID', $group.$prefix );
 

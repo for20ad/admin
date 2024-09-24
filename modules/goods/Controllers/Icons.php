@@ -7,14 +7,11 @@
 # @Desc :
 #------------------------------------------------------------------
 namespace Module\goods\Controllers;
-use Module\core\Controllers\CoreController;
 
 use Config\Services;
 use DOMDocument;
 use Exception;
 
-use App\Libraries\MenuLib;
-use App\Libraries\MemberLib;
 use Module\goods\Controllers\Goods;
 
 

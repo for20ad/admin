@@ -49,9 +49,9 @@
                                 <label for="available-items" style="padding-top:1.2rem">사용 가능한 항목</label>
                                 <select id="available-items" class="form-control multi-select-box" multiple>
                                     <?php if( !empty( $aField ) ){
-                                        foreach( $aField as $vField ){
+                                        foreach( $aField as $vKey => $vField ){
                                     ?>
-                                    <option value="<?php echo _elm( $vField, 'COLUMN_NAME' )?>"><?php echo _elm( $vField, 'COLUMN_COMMENT' )?></option>
+                                    <option value="<?php echo $vKey?>"><?php echo $vField?></option>
                                     <?php
                                         }
                                     }?>
@@ -137,10 +137,15 @@ function fetchData() {
             type: 'POST',
             data: { form: formValue },
             dataType: 'json',
+            beforeSend:function(){
+                $('#preloader').show();
+            },
             success: function(response) {
                 updateSelectBoxes(response.fields);
+                $('#preloader').hide();
             },
             error: function(xhr, status, error) {
+                $('#preloader').hide();
                 console.error('AJAX Error: ', status, error);
             }
         });
@@ -156,7 +161,7 @@ function updateSelectBoxes(fields) {
     selectedItems.empty();
 
     $.each(fields, function(index, field) {
-        availableItems.append($('<option>', { value: field.COLUMN_NAME, text: field.COLUMN_COMMENT }));
+        availableItems.append($('<option>', { value: index, text: field }));
     });
 
     originalOrder = $('#available-items option').map(function() {
@@ -215,12 +220,13 @@ function frmRegiser(event) {
         dataType: 'json',
         beforeSend: function () {
             inputs.prop('disabled', true);
+            $('#preloader').show();
         },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 var error_message = '';
@@ -236,6 +242,7 @@ function frmRegiser(event) {
         error: function(jqXHR, textStatus, errorThrown)
         {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }

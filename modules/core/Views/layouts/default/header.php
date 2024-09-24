@@ -50,7 +50,11 @@
     <link rel="shortcut icon" href="/dist/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/dist/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/plugins/common/common.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="/dist/js/jquery.preloader.min.js"></script>
+
     <style>
     .active>.grand-child {
         display: block;
@@ -69,9 +73,15 @@
     <script type="text/javascript" <?php echo csp_script_nonce()?>>
     var site = '';
     <?php echo $this->getHeaderScriptVar(); ?>
+
     </script>
+
 
 </head>
 
 <body>
+<div id="preloader" style="display:none;">
+    <div id="preloader-inner"></div>
+</div>
+
     <!-- <body class="hold-transition layout-navbar-fixed layout-fixed"> -->

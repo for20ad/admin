@@ -77,9 +77,10 @@ class Test extends CoreController
         // ---------------------------------------------------------------------
         // 메인뷰 처리
         // ---------------------------------------------------------------------
+
         $pageParam               = [];
         $pageParam['file']       = '\Module\test\Views\four';
-        $pageParam['pageLayout'] = 'none';
+        $pageParam['pageLayout'] = '';
         $pageParam['pageDatas']  = $pageDatas;
 
         $this->owensView->loadLayoutView($pageParam);

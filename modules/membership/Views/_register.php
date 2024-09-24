@@ -47,7 +47,7 @@
                         이름
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" placeholder="홍길동" name="i_user_name" id="i_user_name"  data-max-length="20" /
+                    <input type="text" class="form-control" placeholder="이름을 입력해주세요." name="i_user_name" id="i_user_name"  data-max-length="20" /
                         style="border-top-right-radius:0px; border-bottom-right-radius: 0px" value=""/>
                     <span class="wordCount input-group-text"
                         style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
@@ -59,7 +59,7 @@
                         휴대폰번호
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mobile_num" id="i_mobile_num" data-mobile='true' value="" />
+                    <input type="text" class="form-control" name="i_mobile_num" id="i_mobile_num" placeholder="하이픈(-) 자동입력" data-mobile='true' value="" />
                 </div>
                 <div class="input-group required">
                     <label class="label body2-c">
@@ -107,8 +107,6 @@
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">
@@ -126,14 +124,14 @@
                         회사명
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_com_name" id="I_MB_COM_NAME" value=""  placeholder="주소검색시 자동입력"/>
+                    <input type="text" class="form-control" name="i_mb_com_name" id="I_MB_COM_NAME" value="" placeholder="회사명을 입력해주세요."/>
                 </div>
                 <div class="input-group">
                     <label class="label body2-c">
                         대표자
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_com_ceo" id="i_mb_com_ceo" value=""/>
+                    <input type="text" class="form-control" name="i_mb_com_ceo" id="i_mb_com_ceo" value="" placeholder="대표자명을 입력해주세요."/>
                 </div>
 
                 <div class="input-group">
@@ -141,7 +139,7 @@
                         사업자등록번호
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_business_number" id="i_mb_business_number" data-business-number='true' value=""/>
+                    <input type="text" class="form-control" name="i_mb_business_number" id="i_mb_business_number" data-business-number='true' value="" placeholder="사업자등록번호를 입력해주세요."/>
 
                 </div>
 
@@ -150,7 +148,7 @@
                         업태
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_com_sevice" id="i_mb_com_sevice" value=""/>
+                    <input type="text" class="form-control" name="i_mb_com_sevice" id="i_mb_com_sevice" value="" placeholder="업태를 입력해주세요." />
                 </div>
 
                 <div class="input-group">
@@ -158,7 +156,7 @@
                         종목
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_comp_item" id="i_mb_comp_item" value="" />
+                    <input type="text" class="form-control" name="i_mb_comp_item" id="i_mb_comp_item" value="" placeholder="종목을 입력해주세요."/>
                 </div>
 
                 <div class="input-group">
@@ -166,8 +164,8 @@
                         주소
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" style="width:1.8rem" name="i_mb_com_zipcd" id="i_mb_com_zipcd" value="" onclick="execDaumPostcode('i_mb_com_zipcd', 'i_mb_com_addr')" readonly />&nbsp;&nbsp;
-                    <input type="text" class="form-control" name="i_mb_com_addr" id="i_mb_com_addr" value=""  placeholder="주소검색시 자동입력" onclick="execDaumPostcode('i_mb_com_zipcd', 'i_mb_com_addr')" readonly/>
+                    <input type="text" class="form-control" style="width:1.8rem" name="i_mb_com_zipcd" id="i_mb_com_zipcd" value="" onclick="execDaumPostcode('i_mb_com_zipcd', 'i_mb_com_addr')" placeholder="주소검색시 자동입력" readonly />&nbsp;&nbsp;
+                    <input type="text" class="form-control" name="i_mb_com_addr" id="i_mb_com_addr" value=""   onclick="execDaumPostcode('i_mb_com_zipcd', 'i_mb_com_addr')" placeholder="주소검색시 자동입력" readonly/>
                 </div>
                 <div class="input-group">
                     <label class="label body2-c">
@@ -196,8 +194,6 @@
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">
@@ -230,7 +226,7 @@
                         <span>*</span>
                     </label>
                     <div class="col-2">
-                        <input type="text" class="form-control" style="width:120px;" name="i_mb_birth" id="i_mb_birth" value=""/>
+                        <input type="text" class="form-control" style="width:120px;" name="i_mb_birth" id="i_mb_birth" value=""  />
                     </div>
                 </div>
 

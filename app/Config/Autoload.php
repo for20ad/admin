@@ -48,6 +48,7 @@ class Autoload extends AutoloadConfig
         'Config'      => APPPATH   . 'Config',
         'Module'      => ROOTPATH  . 'modules',
         'ThirdPart'   => APPPATH   . 'ThirdParty',
+        'Shared'      => '/home',
     ];
 
     /**

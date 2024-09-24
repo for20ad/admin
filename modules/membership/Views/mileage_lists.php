@@ -45,8 +45,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -107,8 +105,8 @@
                     echo getIconButton([
                         'txt' => '검색',
                         'icon' => 'search',
-                        'buttonClass' => 'btn btn-success',
-                        'buttonStyle' => 'width: 180px; height: 46px',
+                        'buttonClass' => 'btn text-white',
+                        'buttonStyle' => 'width: 180px; height: 46px;background-color:#206BC4',
                         'width' => '21',
                         'height' => '20',
                         'stroke' => 'white',
@@ -126,7 +124,7 @@
                         'width' => '21',
                         'height' => '20',
                         'extra' => [
-                            'onclick' => 'location.href="'._link_url('/membership/mileage').'"',
+                            'onclick' => 'document.location.reload()',
                         ]
                     ]);
                     ?>
@@ -149,7 +147,7 @@
                         <circle cx="2" cy="2" r="2" fill="#206BC4" />
                     </svg>
                     <p class="body1-c ms-2 mt-1">
-                        회원목록
+                        회원포인트목록
                     </p>
                 </div>
                 <div style="display: flex">
@@ -163,8 +161,6 @@
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">

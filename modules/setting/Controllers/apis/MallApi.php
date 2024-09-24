@@ -45,7 +45,7 @@ class MallApi extends ApiController
         if( empty( $aData ) === true ){
             $aStatus                                = $policyModel->insertTerms( $modelParam );
         }else{
-            $aStatus                                = $policyModel->insertTerms( $modelParam );
+            $aStatus                                = $policyModel->updateTerms( $modelParam );
         }
 
         if ( $this->db->transStatus() === false || $aStatus === false ) {

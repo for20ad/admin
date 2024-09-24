@@ -108,8 +108,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -124,10 +122,9 @@
                 <div class="card-body">
                     <div class="input-group">
                         <label class="label body2-c">
-                            전화번호
                             <span>*</span>
                         </label>
-                        <input type="text" class="form-control" name="i_tel_num" id="i_tel_num" value="<?php echo _elm( $aData, 'MB_TEL_NUM' )?>"/>
+                        <input type="text" class="form-control" name="i_tel_num" id="i_tel_num" value="<?php echo _elm( $aData, 'MB_TEL_NUM_DEC' )?>"/>
                     </div>
 
                     <div class="input-group">

@@ -26,12 +26,14 @@ function dupCheckId( $obj ){
         data: frm.serialize(),
         dataType: "json",
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 frm.find('name=i_user_id]').addClass('error');
@@ -52,6 +54,7 @@ function dupCheckId( $obj ){
         error: function(jqXHR, textStatus, errorThrown)
         {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }
@@ -72,12 +75,14 @@ function deleteMemberProc(){
         data: frm.serialize(),
         dataType: "json",
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 var error_message = '';
@@ -93,6 +98,7 @@ function deleteMemberProc(){
         error: function(jqXHR, textStatus, errorThrown)
         {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }
@@ -186,12 +192,13 @@ function modfiyMember(event){
         beforeSend: function() {
             inputs.prop('disabled', true);
             setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 var error_message = '';
@@ -207,7 +214,7 @@ function modfiyMember(event){
         {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             return false;
         }

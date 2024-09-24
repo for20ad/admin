@@ -14,10 +14,13 @@ use App\Libraries\MemberLib;
 use Module\goods\Models\GoodsModel;
 use Module\goods\Models\CategoryModel;
 use Module\goods\Models\IconsModel;
+use Module\goods\Models\BrandModel;
+use Module\goods\Models\BundleModel;
+
 
 class Goods extends CoreController
 {
-    protected $goodsModel, $categoryModel, $iconsModel;
+    protected $goodsModel, $categoryModel, $iconsModel, $brandModel, $bundleModel ;
     protected $goodsConfig;
     protected $memberlib;
     protected $menulib;
@@ -28,9 +31,12 @@ class Goods extends CoreController
         $this->goodsModel                           = new GoodsModel();
         $this->categoryModel                        = new CategoryModel();
         $this->iconsModel                           = new IconsModel();
+        $this->brandModel                           = new BrandModel();
+        $this->bundleModel                          = new BundleModel();
 
-        $this->memberlib                           = new MemberLib();
-        $this->menulib                             = new MenuLib();
+
+        $this->memberlib                            = new MemberLib();
+        $this->menulib                              = new MenuLib();
 
         $this->goodsConfig                          = new goodsConfig();
 

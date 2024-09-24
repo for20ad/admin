@@ -152,7 +152,8 @@
                 </a>
             </div>
             <?php endforeach; ?>
-            <div class="icon-container bottom">
+
+            <div class="icon-container">
                 <a href="<?php echo _link_url('/logOut')?>">
                     <div class="background">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -176,7 +177,7 @@
                     $topGroup = _elm($menu, 'MENU_GROUP_ID');
                     ?>
                 <div
-                    class="category <?php echo strpos($uriString, _elm($menu, 'MENU_GROUP_ID')) !== false ? 'active' : '';?>">
+                    class="category <?php echo strpos($uriString, _elm($menu, 'MENU_GROUP_ID')) != false ? 'active' : '';?>">
                     <a
                         href="<?php echo empty(_elm($menu, 'CHILD')) ? _link_url(_elm($menu, 'MENU_LINK')) : 'javascript:void(0)'; ?>">
                         <div class="background ">
@@ -201,8 +202,7 @@
                         <div class="child" id="subMenu<?php echo _elm( $subMenu, 'MENU_IDX' )?>">
                             <a
                                 href="<?php echo empty(_elm($subMenu, 'CHILD')) ? _link_url(_elm($subMenu, 'MENU_LINK')) : 'javascript:void(0)'; ?>">
-                                <div class="name
-                                <?php if ( empty(_elm($subMenu, 'CHILD') ) && strpos($uriString, '/'.$topGroup.'/'._elm($subMenu, 'MENU_GROUP_ID') ) !== false ){?> grand-child background active <?php }?>" >
+                                <div class="name <?php if ( empty(_elm($subMenu, 'CHILD') ) && strpos($uriString, '/'.$topGroup.'/'._elm($subMenu, 'MENU_GROUP_ID') ) !== false ){?>  background active <?php }?>" >
                                     <span> <?php echo _elm($subMenu, 'MENU_NAME')?></span>
                                     <?php if( empty( _elm($subMenu, 'CHILD' ) ) === false ):?>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
@@ -216,7 +216,7 @@
                             <?php if (!empty(_elm($subMenu, 'CHILD'))): ?>
                             <?php foreach(_elm($subMenu, 'CHILD') as $s_subKey => $s_subMenu):?>
                             <a href="<?php echo _link_url(_elm($s_subMenu, 'MENU_LINK'))?>">
-                            <div class="grand-child background <?php echo strpos($uriString, '/'.$topGroup.'/'._elm($s_subMenu, 'MENU_GROUP_ID') ) !== false ? 'active' : '';?>"
+                            <div class="grand-child background <?php echo strpos($uriString, '/'.$topGroup.'/'._elm($s_subMenu, 'MENU_GROUP_ID') ) !== false ? 'active' : '';?>" id="subMenu<?php echo _elm( $s_subMenu, 'MENU_IDX' )?>"
                                 style="display:none">
                                     <span><?php echo _elm($s_subMenu, 'MENU_NAME')?></span>
                             </div>
@@ -230,7 +230,7 @@
                 </div>
                 <?php endforeach; ?>
 
-                <div class="category bottom">
+                <div class="category ">
                     <a href="<?php echo _link_url('/logOut')?>">
                         <div class="background">
                             <div class="icon-container">

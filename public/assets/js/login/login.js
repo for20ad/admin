@@ -25,12 +25,14 @@ function loginAuth(){
         data: frm.serialize(),
         dataType: "json",
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 var error_message = '';
@@ -47,6 +49,7 @@ function loginAuth(){
         error: function(jqXHR, textStatus, errorThrown)
         {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }

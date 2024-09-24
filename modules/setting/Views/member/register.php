@@ -50,7 +50,7 @@
                             이름
                             <span>*</span>
                         </label>
-                        <input type="text" class="form-control" placeholder="홍길동" name="i_user_name" id="i_user_name"  data-max-length="20" /
+                        <input type="text" class="form-control" placeholder="이름을 입력해주세요." name="i_user_name" id="i_user_name"  data-max-length="20" /
                             style="border-top-right-radius:0px; border-bottom-right-radius: 0px" />
                         <span class="wordCount input-group-text"
                             style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
@@ -87,8 +87,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">

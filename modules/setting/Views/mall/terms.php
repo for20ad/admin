@@ -50,7 +50,7 @@
                     </div>
                     <div class="input-group required">
                         <label class="label body2-c">
-                            정기과금 이용약
+                            정기과금 이용약관
                         </label>
                         <textarea class="form-control" style="height:160px" name="i_agreement_recurring"><?php echo _elm( $aData, 'T_AGREEMENT_RECURRING' )?></textarea>
                     </div>

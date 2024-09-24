@@ -120,8 +120,6 @@
 
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -159,7 +157,7 @@
 
                                 <td>
                                     <div class="form-inline">
-                                        <input type="text" class="form-control" style="width:18vh;text-align:right" name="i_period_score_start[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_PERIOD_SCORE_START', 0, true )?>" >
+                                        <input type="text" class="form-control" style="width:18vh;text-align:right;max-width:100%;margin:0px !important;"   name="i_period_score_start[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_PERIOD_SCORE_START', 0, true )?>" >
                                         <span class="wordCount input-group-text"
                                             style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
                                             만원
@@ -167,7 +165,7 @@
                                         &nbsp;
                                         이상 ~
                                         &nbsp;&nbsp;
-                                        <input type="text" class="form-control" style="width:18vh;text-align:right"  name="i_period_score_end[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_PERIOD_SCORE_END', 0, true )?>" >
+                                        <input type="text" class="form-control" style="width:18vh;text-align:right;max-width:100%;margin:0px !important;"  name="i_period_score_end[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_PERIOD_SCORE_END', 0, true )?>" >
                                         <span class="wordCount input-group-text"
                                             style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
                                             만원

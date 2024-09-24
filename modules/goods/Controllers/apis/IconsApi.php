@@ -368,7 +368,7 @@ class IconsApi extends ApiController
         #------------------------------------------------------------------
         $this->db->transBegin();
 
-        $aStatus                                    = $iconsModel->integratInsert( $_modelParam );
+        $aStatus                                    = $this->LogModel->integratInsert( $_modelParam );
 
         if ( $this->db->transStatus() === false || $aStatus === false ) {
             $this->db->transRollback();
@@ -486,15 +486,15 @@ class IconsApi extends ApiController
 
             foreach( $files as $file ){
                 if( $file->getSize() > 0 ){
-                    $file_return                        = $this->_upload( $file, $config );
+                    $file_return                    = $this->_upload( $file, $config );
 
                     #------------------------------------------------------------------
                     # TODO: 파일처리 실패 시
                     #------------------------------------------------------------------
                     if( _elm($file_return , 'status') === false ){
                         $this->db->transRollback();
-                        $response['status']             = 400;
-                        $response['alert']              = _elm( $file_return, 'error' );
+                        $response['status']         = 400;
+                        $response['alert']          = _elm( $file_return, 'error' );
                         return $this->respond( $response, 400 );
                     }
                     #------------------------------------------------------------------
@@ -507,8 +507,8 @@ class IconsApi extends ApiController
                     # TODO: 데이터모델 세팅
                     #------------------------------------------------------------------
 
-                    $modelParam['I_IMG_PATH']          = _elm( $file_return, 'uploaded_path');
-                    $modelParam['I_IMG_NAME']          = _elm( $file_return, 'org_name');
+                    $modelParam['I_IMG_PATH']       = _elm( $file_return, 'uploaded_path');
+                    $modelParam['I_IMG_NAME']       = _elm( $file_return, 'org_name');
                 }
 
             }
@@ -518,37 +518,37 @@ class IconsApi extends ApiController
         #------------------------------------------------------------------
         # TODO: 통합 데이터 세팅
         #------------------------------------------------------------------
-        $_modelParam                           = [];
-        $_modelParam['table']                  = 'GOODS_ICONS';
-        $_modelParam['data']                   = $modelParam;
-        $_modelParam['where']                  = 'I_IDX';
+        $_modelParam                                = [];
+        $_modelParam['table']                       = 'GOODS_ICONS';
+        $_modelParam['data']                        = $modelParam;
+        $_modelParam['where']                       = 'I_IDX';
 
         #------------------------------------------------------------------
         # TODO: run
         #------------------------------------------------------------------
         $this->db->transBegin();
 
-        $aStatus                               = $iconsModel->integratUpdate( $_modelParam );
+        $aStatus                                    = $this->LogModel->integratUpdate( $_modelParam );
 
         if ( $this->db->transStatus() === false || $aStatus === false ) {
             $this->db->transRollback();
-            $response['status']                = 400;
-            $response['alert']                 = '처리중 오류발생.. 다시 시도해주세요.';
+            $response['status']                     = 400;
+            $response['alert']                      = '처리중 오류발생.. 다시 시도해주세요.';
             return $this->respond( $response );
         }
 
         #------------------------------------------------------------------
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
-        $logParam                              = [];
-        $logParam['MB_HISTORY_CONTENT']        = '상품 아이콘 수정 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ) . ' // newData:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE )  ;
-        $logParam['MB_IDX']                    = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '상품 아이콘 수정 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ) . ' // newData:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE )  ;
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
         if ( $this->db->transStatus() === false ) {
             $this->db->transRollback();
-            $response['status']                = 400;
-            $response['alert']                 = '로그 처리중 오류발생.. 다시 시도해주세요.';
+            $response['status']                     = 400;
+            $response['alert']                      = '로그 처리중 오류발생.. 다시 시도해주세요.';
             return $this->respond( $response );
         }
 
@@ -558,9 +558,9 @@ class IconsApi extends ApiController
 
         $this->db->transCommit();
 
-        $response                              = $this->_unset($response);
-        $response['status']                    = 200;
-        $response['alert']                     = '수정되었습니다.';
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '수정되었습니다.';
 
         return $this->respond( $response );
     }
@@ -637,6 +637,37 @@ class IconsApi extends ApiController
         $response['status']                         = 200;
         $response['alert']                          = '삭제가 완료되었습니다.';
 
+
+        return $this->respond( $response );
+
+    }
+
+    public function getGoodsIconGroup()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $iconsModel                                 = new IconsModel();
+
+        $_data                                      = $iconsModel->getIconsLists();
+
+        $data                                       = [];
+
+
+        if( !empty( _elm( $_data, 'lists') ) ){
+            foreach( _elm( $_data, 'lists') as $key => $icon ){
+                if( _elm( $icon, 'I_GBN' ) == 'L'  ){
+                    $data['L'][]                    = $icon;
+                }else{
+                    $data['P'][]                    = $icon;
+                }
+            }
+        }
+
+        $response                                   = $this->_unset( $response );
+
+        $response['status']                         = 200;
+        $response['page_datas']                     = [];
+        $response['page_datas']['lists']            = $data;
 
         return $this->respond( $response );
 

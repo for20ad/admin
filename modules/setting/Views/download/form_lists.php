@@ -36,8 +36,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -109,8 +107,8 @@
                     echo getIconButton([
                         'txt' => '검색',
                         'icon' => 'search',
-                        'buttonClass' => 'btn btn-success',
-                        'buttonStyle' => 'width: 180px; height: 46px',
+                        'buttonClass' => 'btn text-white',
+                        'buttonStyle' => 'width: 180px; height: 46px;background-color:#206BC4',
                         'width' => '21',
                         'height' => '20',
                         'stroke' => 'white',
@@ -128,7 +126,7 @@
                         'width' => '21',
                         'height' => '20',
                         'extra' => [
-                            'onclick' => 'location.href="'._link_url('/setting/memberLists').'"',
+                            'onclick' => 'document.location.reload()',
                         ]
                     ]);
                     ?>
@@ -156,8 +154,6 @@
                 </div>
                 <!-- 아코디언 토글 버튼 -->
                 <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
-                    <input type="radio" name="icons" value="home"
-                        class="form-selectgroup-input" checked />
                     <span class="form-selectgroup-label">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                             viewBox="0 0 14 8" fill="none">
@@ -277,10 +273,12 @@ function openLayer( formIdx, id ){
         data: data,
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -304,7 +302,7 @@ function openLayer( formIdx, id ){
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }

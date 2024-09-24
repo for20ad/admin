@@ -21,10 +21,12 @@ function modifyGrade()
         processData: false,
         contentType: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -39,7 +41,7 @@ function modifyGrade()
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }
@@ -56,14 +58,17 @@ function deleteGrade( param ){
         dataType: 'json',
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
+            $('#preloader').hide();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }
@@ -106,11 +111,12 @@ function addMembershipGrade(){
         {
             inputs.prop('disabled', true);
             setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
 
             if (response.status == 'false')
@@ -128,7 +134,7 @@ function addMembershipGrade(){
         {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             return false;
         },
@@ -137,6 +143,33 @@ function addMembershipGrade(){
 
 }
 
+function deleteIconConfirm( g_idx ){
+    box_confirm('등급 아이콘을 삭제하시겠습니까?', 'q', '', deleteIcon, {'g_idx': g_idx});
+}
+function deleteIcon( param ){
+    $.ajax({
+        url: '/apis/setting/deleteMembershipGradeIcon',
+        type: 'post',
+        data: 'g_idx='+param.g_idx,
+        dataType: 'json',
+        processData: false,
+        cache: false,
+        beforeSend: function() {
+            $('#preloader').show();
+        },
+        success: function(response) {
+            submitSuccess(response);
+            $('#preloader').hide();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            submitError(jqXHR.status, errorThrown);
+            console.log(textStatus);
+            $('#preloader').hide();
+            return false;
+        },
+        complete: function() { }
+    });
+}
 
 function updateGradrSort()
 {
@@ -154,11 +187,16 @@ function updateGradrSort()
         processData:false,
         contentType: false,
         cache:false,
+        beforeSend:function(){
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
+            $('#preloader').hide();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
+            $('#preloader').hide();
             return submitError(jqXHR.status, errorThrown);
         }
     });

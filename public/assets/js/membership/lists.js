@@ -12,9 +12,11 @@ function getSearchList( $page ) {
         beforeSend: function () {
             inputs.prop('disabled', true);
             setTimeout(function () { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         success: function (response) {
             submitSuccess(response);
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             if (response.status == 'false') {
                 var error_message = response.error_lists.join('<br />');
@@ -32,7 +34,7 @@ function getSearchList( $page ) {
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             return false;
         },
@@ -143,10 +145,12 @@ function setWaitMembers(){
         processData: false,
         contentType: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -163,7 +167,7 @@ function setWaitMembers(){
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() {
@@ -194,10 +198,12 @@ function setApprovalMembers(){
         processData: false,
         contentType: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -215,7 +221,7 @@ function setApprovalMembers(){
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() {
@@ -227,15 +233,15 @@ function getButtonSet(){
     $.ajax({
         url: '/apis/membership/getListInButtonSet',
         type: 'post',
-        data: '',
-        dataType: 'json',
+        data: 'xStatus='+$("#frm_search [name=s_status]").val(),
         processData: false,
-        contentType: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -251,7 +257,7 @@ function getButtonSet(){
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() {
@@ -276,10 +282,12 @@ function openLayer( mb_idx, id ){
         data: data,
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -301,6 +309,7 @@ function openLayer( mb_idx, id ){
         },
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
 
             return false;

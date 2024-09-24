@@ -49,10 +49,12 @@ function modifyCode()
         dataType: 'json',
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -67,7 +69,7 @@ function modifyCode()
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }
@@ -90,10 +92,12 @@ function deleteCode(param)
         data: 'code_idx='+param.code_idx,
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -108,7 +112,7 @@ function deleteCode(param)
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }
@@ -153,11 +157,12 @@ $(document).ready(function () {
             {
                 inputs.prop('disabled', true);
                 setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+                $('#preloader').show();
             },
             success: function(response)
             {
                 submitSuccess(response);
-
+                $('#preloader').hide();
                 inputs.prop('disabled', false);
 
                 if (response.status == 'false')
@@ -175,7 +180,7 @@ $(document).ready(function () {
             {
                 submitError(jqXHR.status, errorThrown);
                 console.log(textStatus);
-
+                $('#preloader').hide();
                 inputs.prop('disabled', false);
                 return false;
             },

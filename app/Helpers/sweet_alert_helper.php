@@ -133,6 +133,38 @@ if (! function_exists('box_alert_close'))
     }
 }
 
+// -----------------------------------------------------------------------------
+// Alert 띄우기 후 창 Close
+// -----------------------------------------------------------------------------
+if (! function_exists('box_alert_target_close'))
+{
+    function box_alert_target_close($msg = '', $type = '', $title = '', $standAlone = false)
+    {
+        if ($standAlone === false)
+        {
+            box_alert_header();
+        }
+
+        box_alert_init();
+
+        echo '
+            <script type="text/javascript">
+                box_alert("' . $msg . '", "' . $type . '", "' . $title . '").then((result) => {
+                    if (result.isConfirmed) {
+                        self.close();
+                    }
+                });
+            </script>
+        ';
+
+        if ($standAlone === false)
+        {
+            box_alert_footer();
+        }
+        exit;
+    }
+}
+
 
 // -----------------------------------------------------------------------------
 // Alert 띄우기 후 redirect

@@ -49,12 +49,12 @@ if (!function_exists('getPostSearch')) {
                     },
                     onclose:function(state){
                         if(state === "COMPLETE_CLOSE"){ // 주소 선택으로 인한 close일 경우
-                            element_layer.innerHTML = ""; // 레이어 적용 해제
+                            element_layer.innerHTML = "<span class=\"close\" onclick=\"closeDaumPostcode()\" style=\"cursor:pointer; position:absolute; right:10px; top:10px; z-index:1001; background:#fff; border:1px solid #ddd; border-radius:50%; padding:5px; width:25px; height:25px; text-align:center; line-height:15px;\">X</span><div id=\"layer-content\" style=\"width:100%; height:4vh;\"></div>"; // 레이어 적용 해제
                         }
                     },
                     width : "100%",
                     height : "100%",
-                    maxSuggestItems : 5
+                    SuggestItems : 5
                 }).embed(element_layer);
 
                 // iframe을 넣은 element를 보이게 한다.
@@ -162,7 +162,7 @@ if (!function_exists('getIconButton')) {
         $iconData = $site_config->buttonIcon[ $param['icon'] ];
 
         // 버튼 HTML 생성
-        $button = '<button class="' . _elm( $param, 'buttonClass' ) . '" style="' . _elm( $param, 'buttonStyle' ) . '" ' . $extraAttributes . '>';
+        $button = '<button class="' . _elm( $param, 'buttonClass' ) . '" style="' . _elm( $param, 'buttonStyle' ) . '" ' . $extraAttributes . ' type="button">';
         $button .= '<svg xmlns="http://www.w3.org/2000/svg" class="'._elm( $param, 'svgClass' ).'"  width="' . _elm( $param, 'width' ) . 'px" height="' . _elm( $param, 'height' ) . 'px" viewBox="0 0 ' . _elm( $param, 'width') . ' ' . _elm( $param, 'height' ) . '" fill="none" style="margin-right: 4px">';
         foreach ($iconData as $info) {
             $button .= '<path d="' . $info . '" stroke="' . _elm( $param, 'stroke' ) . '" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />';
@@ -204,7 +204,7 @@ if (!function_exists('getButton')) {
         }
 
         // 버튼 HTML 생성
-        $button = '<button class="' . _elm( $param, 'class' ) . '" style="' . _elm( $param, 'style' ) . '" ' . $extraAttributes . '>';
+        $button = '<button class="' . _elm( $param, 'class' ) . '" style="' . _elm( $param, 'style' ) . '" ' . $extraAttributes . ' type="button">';
         $button .= $param['text'];
         $button .= '</button>';
 

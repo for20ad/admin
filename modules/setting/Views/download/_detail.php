@@ -96,9 +96,9 @@
                                 <label for="available-items" style="padding-top:1.2rem">사용 가능한 항목</label>
                                 <select id="available-items" class="form-control multi-select-box" multiple>
                                     <?php if( !empty( $aField ) ){
-                                        foreach( $aField as $vField ){
+                                        foreach( $aField as $vKey => $vField ){
                                     ?>
-                                    <option value="<?php echo _elm( $vField, 'COLUMN_NAME' )?>"><?php echo _elm( $vField, 'COLUMN_COMMENT' )?></option>
+                                    <option value="<?php echo $vKey ?>"><?php echo $vField ?></option>
                                     <?php
                                         }
                                     }?>
@@ -150,7 +150,8 @@
 </div>
 <?php echo form_close() ?>
 <script>
-var originalOrder = <?php echo json_encode(array_map(function($vField) { return _elm($vField, 'COLUMN_NAME'); }, $aField)); ?>;
+var originalOrder = <?php echo json_encode(array_map(function( $vField) { return _elm($vField, 'COLUMN_NAME'); }, $aField)); ?>;
+var aOriginSelectVal = "<?php echo _elm( $aData, 'F_MENU' )?>";
 var selectedFields = <?php echo json_encode($fFields); ?>;
 
 function addItem(){
@@ -177,14 +178,26 @@ function sortAvailableItems() {
     $('#available-items').empty().append(options);
 }
 
+// function autoSelectItems() {
+//     $('#available-items option').each(function() {
+//         alert( itemValue +'::'+ aOriginSelectVal );
+//         var itemValue = $(this).val();
+//         if (aOriginSelectVal == itemValue && fields[itemValue]) {
+//             $('#selected-items').append($(this).clone());
+//             $(this).remove();
+//         }
+//     });
+// }
+
 function autoSelectItems() {
     $('#available-items option').each(function() {
-        if (selectedFields.includes($(this).val())) {
+        if (selectedFields.includes($(this).val()) && $('#i_forms').val() == aOriginSelectVal ) {
             $('#selected-items').append($(this).clone());
             $(this).remove();
         }
     });
 }
+
 
 function fetchData() {
     var formValue = $('#i_forms').val();
@@ -194,11 +207,16 @@ function fetchData() {
             type: 'POST',
             data: { form: formValue },
             dataType: 'json',
+            beforeSend:function(){
+                $('#preloader').show();
+            },
             success: function(response) {
                 updateSelectBoxes(response.fields);
+                $('#preloader').hide();
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error: ', status, error);
+                $('#preloader').hide();
             }
         });
     }
@@ -212,7 +230,7 @@ function updateSelectBoxes(fields) {
     selectedItems.empty();
 
     $.each(fields, function(index, field) {
-        availableItems.append($('<option>', { value: field.COLUMN_NAME, text: field.COLUMN_COMMENT }));
+        availableItems.append($('<option>', { value: index, text: field }));
     });
 
     originalOrder = $('#available-items option').map(function() {
@@ -224,6 +242,7 @@ function updateSelectBoxes(fields) {
     // 자동 선택 기능 호출
     autoSelectItems();
 }
+
 
 function frmModify(event) {
     event.preventDefault();
@@ -275,12 +294,13 @@ function frmModify(event) {
         dataType: 'json',
         beforeSend: function () {
             inputs.prop('disabled', true);
+            $('#preloader').show();
         },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 var error_message = '';
@@ -296,6 +316,7 @@ function frmModify(event) {
         error: function(jqXHR, textStatus, errorThrown)
         {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }

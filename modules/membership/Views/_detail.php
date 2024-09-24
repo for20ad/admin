@@ -67,7 +67,7 @@
                         이름
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" placeholder="홍길동" name="i_user_name" id="i_user_name"  data-max-length="20" /
+                    <input type="text" class="form-control" placeholder="이름을 입력해주세요."  name="i_user_name" id="i_user_name"  data-max-length="20" /
                         style="border-top-right-radius:0px; border-bottom-right-radius: 0px" value="<?php echo _elm( $aData, 'MB_NM' )?>"/>
                     <span class="wordCount input-group-text"
                         style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
@@ -79,7 +79,7 @@
                         휴대폰번호
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mobile_num" id="i_mobile_num" data-mobile='true' value="<?php echo _elm( $aData, 'MB_MOBILE_NUM_DEC' )?>" />
+                    <input type="text" class="form-control" name="i_mobile_num" id="i_mobile_num" placeholder="하이픈(-) 자동입력" data-mobile='true' value="<?php echo _elm( $aData, 'MB_MOBILE_NUM_DEC' )?>" />
                 </div>
                 <div class="input-group required">
                     <label class="label body2-c">
@@ -127,8 +127,6 @@
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">
@@ -146,14 +144,14 @@
                         회사명
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_com_name" id="I_MB_COM_NAME" value="<?php echo _elm( $aData, 'MB_COM_NAME' )?>"  placeholder="주소검색시 자동입력"/>
+                    <input type="text" class="form-control" name="i_mb_com_name" id="I_MB_COM_NAME" value="<?php echo _elm( $aData, 'MB_COM_NAME' )?>"  placeholder="회사명을 입력해주세요."/>
                 </div>
                 <div class="input-group">
                     <label class="label body2-c">
                         대표자
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_com_ceo" id="i_mb_com_ceo" value="<?php echo _elm( $aData, 'MB_COM_CEO' )?>"/>
+                    <input type="text" class="form-control" name="i_mb_com_ceo" id="i_mb_com_ceo" value="<?php echo _elm( $aData, 'MB_COM_CEO' )?>" placeholder="대표자명을 입력해주세요."/>
                 </div>
 
                 <div class="input-group">
@@ -161,7 +159,7 @@
                         사업자등록번호
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_business_number" id="i_mb_business_number" data-business-number='true' value="<?php echo _add_dash_biz_num( _elm( $aData, 'MB_BUSINESS_NUMBER' ) )?>"/>
+                    <input type="text" class="form-control" name="i_mb_business_number" id="i_mb_business_number" data-business-number='true' value="<?php echo _add_dash_biz_num( _elm( $aData, 'MB_BUSINESS_NUMBER' ) )?>" placeholder="사업자등록번호를 입력해주세요."/>
 
                 </div>
 
@@ -170,7 +168,7 @@
                         업태
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_com_sevice" id="i_mb_com_sevice" value="<?php echo _elm( $aData, 'MB_COM_SEVICE' )?>"/>
+                    <input type="text" class="form-control" name="i_mb_com_sevice" id="i_mb_com_sevice" value="<?php echo _elm( $aData, 'MB_COM_SEVICE' )?>" placeholder="업태를 입력해주세요."/>
                 </div>
 
                 <div class="input-group">
@@ -178,7 +176,7 @@
                         종목
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_mb_comp_item" id="i_mb_comp_item" value="<?php echo _elm( $aData, 'MB_COMP_ITEM' )?>" />
+                    <input type="text" class="form-control" name="i_mb_comp_item" id="i_mb_comp_item" value="<?php echo _elm( $aData, 'MB_COMP_ITEM' )?>" placeholder="종목을 입력해주세요."/>
                 </div>
 
                 <div class="input-group">
@@ -220,8 +218,6 @@
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">
@@ -254,7 +250,7 @@
                         <span>*</span>
                     </label>
                     <div class="col-2">
-                        <input type="text" class="form-control" style="width:120px;" name="i_mb_birth" id="i_mb_birth" value="<?php echo _elm( $aData, 'MB_BIRTH' )?>"/>
+                        <input type="text" class="form-control" style="width:120px;" name="i_mb_birth" id="i_mb_birth" value="<?php echo _elm( $aData, 'MB_BIRTH' )?>" placeholder="yyyy-mm-dd"/>
                     </div>
                 </div>
 

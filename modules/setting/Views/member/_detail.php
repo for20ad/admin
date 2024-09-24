@@ -7,13 +7,14 @@
     $aConfig          = _elm($view_datas, 'aConfig', []);
     $aMemeberGroup    = _elm($view_datas, 'member_group', []);
     $aData            = _elm($view_datas, 'aData', [] );
+
 ?>
 <style>
     .formHide{
         display:none;
     }
 </style>
-<?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_modify', 'autocomplete' => 'off']); ?>
+<?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_modify', 'onSubmit' => 'return false;' ,'autocomplete' => 'off']); ?>
 <input type="hidden" name="i_mb_idx" value="<?php echo _elm( $aData, 'MB_IDX' )?>">
 <div class="row row-deck row-cards">
     <!-- 카드1 -->
@@ -42,6 +43,7 @@
                         'extra' => [
                             'onclick' => 'showPasswordGroup()',
                             'id' => 'passChangeBtn',
+                            'type' => 'button',
                         ]
                     ]);
                     ?>
@@ -69,11 +71,11 @@
                         이름
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" placeholder="홍길동" name="i_user_name" id="i_user_name"  data-max-length="20" /
+                    <input type="text" class="form-control" placeholder="이름을 입력해주세요" name="i_user_name" id="i_user_name"  data-max-length="20" /
                         style="border-top-right-radius:0px; border-bottom-right-radius: 0px" value="<?php echo _elm( $aData, 'MB_USERNAME' )?>"/>
                     <span class="wordCount input-group-text"
                         style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
-                        0/20
+                        <?php echo mb_strlen( _elm( $aData, 'MB_USERNAME' ) )?>/20
                     </span>
                 </div>
 
@@ -106,8 +108,6 @@
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">
@@ -125,7 +125,7 @@
                         전화번호
                         <span>*</span>
                     </label>
-                    <input type="text" class="form-control" name="i_tel_num" id="i_tel_num" value="<?php echo _elm( $aData, 'MB_TEL_NUM' )?>"/>
+                    <input type="text" class="form-control" name="i_tel_num" id="i_tel_num" value="<?php echo _elm( $aData, 'MB_TEL_NUM_DEC' )?>"/>
                 </div>
 
                 <div class="input-group">
@@ -239,6 +239,7 @@
             'style' => 'width: 180px; height: 46px',
             'extra' => [
                 'onclick' => 'event.preventDefault();$(".btn-close").trigger("click")',
+                'type' => 'button',
             ]
         ]);
         ?>
@@ -249,6 +250,7 @@
             'style' => 'width: 180px; height: 46px',
             'extra' => [
                 'onclick' => 'deleteMember()',
+                'type' => 'button',
             ]
         ]);
         ?>

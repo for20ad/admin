@@ -109,7 +109,28 @@ $(document).ready(function() {
             id = $(this).attr('name');
         }
 
+        // name 속성 확인
+        var name = $(this).attr('name');
+
+        // 제외할 필드 확인
+        var excludedFields = [
+            'i_option_keys[]',
+            'i_option_value[]',
+            'i_option_stock[]',
+            'i_req_info_keys[]',
+            'i_req_info_values[]',
+            'i_discount_mb_group_amt[]',
+            'i_discount_start_date[]',
+            'i_discount_end_date[]',
+            'i_option_add_amt[]',
+        ];
+
+        if ($.inArray(name, excludedFields) !== -1) {
+            return; // 제외할 필드면 함수 종료
+        }
+
         $('#error_' + id).html('');
         $('#' + id).removeClass('is-invalid');
     });
 });
+

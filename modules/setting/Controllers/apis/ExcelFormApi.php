@@ -213,7 +213,7 @@ class ExcelFormApi extends ApiController
 
         $keys                                       = _elm( $aData, 'F_MENU' );
 
-        $view_datas['fields']                       = $excelFormModel->getFieldAndTitles( strtoupper( $keys ) );
+        $view_datas['fields']                       = _elm($this->sharedConfig::$excelField,$keys );
         $view_datas['aData']                        = $aData;
         //print_r( $view_datas );
 
@@ -261,7 +261,8 @@ class ExcelFormApi extends ApiController
         #------------------------------------------------------------------
         $keys                                       = array_keys( _elm( _elm($view_datas, 'aConfig'), 'forms' ) );
 
-        $view_datas['fields']                       = $excelFormModel->getFieldAndTitles( strtoupper( _elm( $keys, 0) ) );
+        $view_datas['fields']                       = _elm($this->sharedConfig::$excelField, _elm( $keys, 0));
+
 
         #------------------------------------------------------------------
         # TODO: AJAX 뷰 처리
@@ -295,7 +296,8 @@ class ExcelFormApi extends ApiController
 
         $keys                                       = array_keys( _elm( $aConfig, 'forms' ) );
 
-        $fields                                     = $excelFormModel->getFieldAndTitles( strtoupper( _elm( $requests, 'form' )  ) );
+
+        $fields                                     = _elm($this->sharedConfig::$excelField, _elm( $requests, 'form' ) );
 
         $response['status']                         = 200;
         $response['fields']                         = $fields;

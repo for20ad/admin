@@ -31,11 +31,12 @@ $(function(){
             {
                 inputs.prop('disabled', true);
                 setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+                $('#preloader').show();
             },
             success: function(response)
             {
                 submitSuccess(response);
-
+                $('#preloader').hide();
                 inputs.prop('disabled', false);
 
                 if (response.status == 'false')
@@ -53,7 +54,7 @@ $(function(){
             {
                 submitError(jqXHR.status, errorThrown);
                 console.log(textStatus);
-
+                $('#preloader').hide();
                 inputs.prop('disabled', false);
                 return false;
             },

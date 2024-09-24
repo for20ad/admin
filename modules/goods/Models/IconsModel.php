@@ -11,6 +11,25 @@ class IconsModel extends Model
 
         $this->db = \Config\Database::connect();
     }
+    public function getGoodsInIcons( $goods_idx )
+    {
+        $aReturn                                      = [];
+        if( empty( $goods_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_IN_ICONS' );
+        $builder->where( 'I_GOODS_IDX',             $goods_idx );
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+
+
+    }
+
     public function getIconsLists( $param = [] )
     {
         $aReturn                                    = [
@@ -91,60 +110,7 @@ class IconsModel extends Model
         return $aReturn;
     }
 
-    public function integratUpdate( $_param = [] )
-    {
-        $aReturn                                    = false;
-        if( empty( _elm($_param, 'table') ) === true ){
-            return $aReturn;
-        }
-        if( empty( _elm($_param, 'data') ) === true ){
-            return $aReturn;
-        }
-        if( empty( _elm( $_param, 'where' ) ) ){
-            return $aReturn;
-        }
-        $param                                      = _elm( $_param, 'data' );
-        $table                                      = _elm( $_param, 'table' );
-        $whereField                                 = _elm( $_param, 'where' );
 
-        $builder                                    = $this->db->table( $table );
-        foreach( $param as $key => $val ){
-            if( $key == $whereField ){
-                $builder->where( $key, $val );
-            }else{
-                $builder->set( $key, $val );
-            }
-        }
-
-        $aReturn                                    = $builder->update();
-        return $aReturn;
-    }
-
-    public function integratInsert( $_param = [] )
-    {
-        $aReturn                                    = false;
-        if( empty( _elm($_param, 'table') ) === true ){
-            return $aReturn;
-        }
-        if( empty( _elm($_param, 'data') ) === true ){
-            return $aReturn;
-        }
-
-        $param                                      = _elm( $_param, 'data' );
-        $table                                      = _elm( $_param, 'table' );
-
-        $builder                                    = $this->db->table( $table );
-        foreach( $param as $key => $val ){
-            $builder->set( $key, $val );
-        }
-
-        $aResult                                    = $builder->insert();
-        if( $aResult ){
-            $aReturn                                = $this->db->insertID();
-        }
-        return $aReturn;
-
-    }
 
 
 }

@@ -12,9 +12,11 @@ function getSearchList( $page ) {
         beforeSend: function () {
             inputs.prop('disabled', true);
             setTimeout(function () { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         success: function (response) {
             submitSuccess(response);
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             if (response.status == 'false') {
                 var error_message = response.error_lists.join('<br />');
@@ -32,6 +34,7 @@ function getSearchList( $page ) {
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
+            $('#preloader').hide();
 
             inputs.prop('disabled', false);
             return false;
@@ -54,9 +57,11 @@ function getSubSearchList($page) {
         beforeSend: function () {
             inputs.prop('disabled', true);
             setTimeout(function () { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         success: function (response) {
             submitSuccess(response);
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             if (response.status == 'false') {
                 var error_message = response.error_lists.join('<br />');
@@ -74,7 +79,7 @@ function getSubSearchList($page) {
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             return false;
         },
@@ -146,7 +151,7 @@ function selectFormAndDownload() {
     $('#excelForm input[name="s_form_idx"]').val(s_form_idx);
 
     // excelForm 전송
-    $('#excelForm').attr('action', '/apis/membership/getListsExcel');
+    $('#excelForm').attr('action', '/apis/membership/getMileageListsExcel');
     $('#excelForm').attr('method', 'POST');
     $('#excelForm').attr('target', '_blank'); // 새 창으로 전송
     $('#excelForm').submit();
@@ -189,13 +194,15 @@ function openLayer(mb_idx, id, page = 1) {
         processData: false,
         cache: false,
         async: true,
-        beforeSend: function () { },
+        beforeSend: function () {
+            $('#preloader').show();
+        },
         success: function (response) {
             console.log("AJAX 성공");
             console.log(response);
 
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false') {
                 var error_message = '';
                 error_message = error_lists.join('<br />');
@@ -225,6 +232,7 @@ function openLayer(mb_idx, id, page = 1) {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         },
@@ -261,10 +269,12 @@ function openMileageLayer( mb_idx, id){
         data: data,
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -286,6 +296,7 @@ function openMileageLayer( mb_idx, id){
         },
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
 
             return false;

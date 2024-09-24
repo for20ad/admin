@@ -38,8 +38,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -218,8 +216,8 @@
                     echo getIconButton([
                         'txt' => '검색',
                         'icon' => 'search',
-                        'buttonClass' => 'btn btn-success',
-                        'buttonStyle' => 'width: 180px; height: 46px',
+                        'buttonClass' => 'btn text-white',
+                        'buttonStyle' => 'width: 180px; height: 46px;background-color:#206BC4',
                         'width' => '21',
                         'height' => '20',
                         'stroke' => 'white',
@@ -237,7 +235,7 @@
                         'width' => '21',
                         'height' => '20',
                         'extra' => [
-                            'onclick' => 'location.href="'._link_url('/setting/memberLists').'"',
+                            'onclick' => 'document.location.reload()',
                         ]
                     ]);
                     ?>
@@ -265,8 +263,6 @@
                 </div>
                 <!-- 아코디언 토글 버튼 -->
                 <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
-                    <input type="radio" name="icons" value="home"
-                        class="form-selectgroup-input" checked />
                     <span class="form-selectgroup-label">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                             viewBox="0 0 14 8" fill="none">
@@ -296,7 +292,7 @@
                         'height' => '20',
                         'stroke' => '#1D273B',
                         'extra' => [
-                            'onclick' => "openLayer('', 'formsModal')",
+                            'onclick' => "openLayer('', 'iconsModal')",
                         ]
                     ]);
                     ?>
@@ -360,7 +356,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="max-height:90vh;display:flex;flex-direction: column;width:80vh">
             <div class="modal-header">
-                <h5 class="modal-title" id="iconsModalLabel">아이콘 등록/수장</h5>
+                <h5 class="modal-title" id="iconsModalLabel">아이콘 등록/수정</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
@@ -388,10 +384,12 @@ function openLayer( iconIdx, id ){
         data: data,
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -415,7 +413,7 @@ function openLayer( iconIdx, id ){
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }

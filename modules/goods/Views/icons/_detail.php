@@ -5,7 +5,7 @@
     $sQueryString     = ( empty($_SERVER['QUERY_STRING']) === true ) ? '' : '?' . $_SERVER['QUERY_STRING'];
     $aConfig          = _elm($view_datas, 'aConfig', []);
     $aData            = _elm($view_datas, 'aData', []);
-print_r( $aData );
+
 ?>
 
 <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_modify', 'autocomplete' => 'off']); ?>
@@ -129,8 +129,6 @@ print_r( $aData );
                     </div>
                     <!-- 아코디언 토글 버튼 -->
                     <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                        <input type="radio" name="icons" value="home"
-                            class="form-selectgroup-input" checked />
                         <span class="form-selectgroup-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                 viewBox="0 0 14 8" fill="none">

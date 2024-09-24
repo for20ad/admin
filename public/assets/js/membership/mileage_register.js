@@ -69,12 +69,13 @@ function registerMileageHistory(event){
         beforeSend: function() {
             inputs.prop('disabled', true);
             setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 var error_message = '';
@@ -91,7 +92,7 @@ function registerMileageHistory(event){
         {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             return false;
         }

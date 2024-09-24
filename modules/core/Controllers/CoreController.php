@@ -12,7 +12,7 @@ use App\Libraries\MemberLib;
 
 use App\Libraries\OwensCache;
 
-
+use Shared\Config as SharedConfig;
 class CoreController extends BaseController
 {
 
@@ -23,6 +23,7 @@ class CoreController extends BaseController
     public $uri;
     protected $owensView;
     protected $owensCache;
+    protected $sharedConfig;
     public function __construct()
     {
         $this->response                             = Services::response();
@@ -30,6 +31,7 @@ class CoreController extends BaseController
         $this->session                              = Services::session();
         $this->uri                                  = Services::uri();
         $this->member                               = new MemberLib();
+        $this->sharedConfig                         = new SharedConfig;
 
         helper($this->helpers);
 

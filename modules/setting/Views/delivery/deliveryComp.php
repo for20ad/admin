@@ -34,7 +34,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item" onclick="toggleForm($(this))">
-                            <input type="radio" name="icons" value="home" class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
                                     <path d="M1 7L7 1L13 7" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
@@ -135,7 +134,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item" onclick="toggleForm($(this))">
-                            <input type="radio" name="icons" value="home" class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
                                     <path d="M1 7L7 1L13 7" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
@@ -330,11 +328,12 @@ function addDeliveryCompany(){
         {
             inputs.prop('disabled', true);
             setTimeout(function() { inputs.prop('disabled', false); }, 3000);
+            $('#preloader').show();
         },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
 
             if (response.status == 'false')
@@ -352,7 +351,7 @@ function addDeliveryCompany(){
         {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             inputs.prop('disabled', false);
             return false;
         },
@@ -384,10 +383,12 @@ function modifyDeliveryComp()
         processData: false,
         contentType: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false')
             {
                 var error_message = '';
@@ -402,7 +403,7 @@ function modifyDeliveryComp()
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
-
+            $('#preloader').hide();
             return false;
         },
         complete: function() { }
@@ -419,11 +420,15 @@ function deletedeliveryComp( param ){
         dataType: 'json',
         processData: false,
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
+            $('#preloader').hide();
         },
         error: function(jqXHR, textStatus, errorThrown) {
+            $('#preloader').hide();
             submitError(jqXHR.status, errorThrown);
             console.log(textStatus);
 
@@ -449,11 +454,16 @@ function updateDeliveryCompanySort()
         processData:false,
         contentType: false,
         cache:false,
+        beforeSend:function(){
+            $('#preloader').show();
+        },
         success: function(response) {
             submitSuccess(response);
+            $('#preloader').hide();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
+            $('#preloader').hide();
             return submitError(jqXHR.status, errorThrown);
         }
     });

@@ -12,6 +12,7 @@
     $aCATE         = _elm($view_datas, 'cates', []);
     $total_rows    = _elm($view_datas, 'total_rows', []);
 
+
     if (empty($aLists) === false)
     {
         foreach ($aLists as $vData)

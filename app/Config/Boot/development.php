@@ -1,5 +1,4 @@
 <?php
-
 /*
  |--------------------------------------------------------------------------
  | ERROR DISPLAY
@@ -12,6 +11,7 @@
  */
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+// Check if the shared .env file exists and is readable
 
 /*
  |--------------------------------------------------------------------------

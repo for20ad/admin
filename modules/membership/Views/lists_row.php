@@ -36,8 +36,8 @@
                 ]
             ];
             echo getCheckBox( $setParam );
-            ?>
-    </div>
+        ?>
+        </div>
     </td>
     <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'memberModal')" ><?php echo _elm( $vData , 'MB_USERID' )?></a></td>
     <td class="body2-c nowrap" ><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'memberModal')"><?php echo _elm( $vData , 'MB_NM' )?></a></td>

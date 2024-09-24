@@ -144,7 +144,7 @@ class MembershipApi extends ApiController
 
         $response['status']                         = 200;
         $response['alert']                          = '등록이 완료되었습니다.';
-        $response['redirect_url']                   = _link_url( '/setting/membershipGrade' );
+        $response['redirect_url']                   = _link_url( '/setting/memberGrade' );
 
         return $this->respond( $response );
 
@@ -366,9 +366,11 @@ class MembershipApi extends ApiController
 
         $this->db->transCommit();
 
+        $response                                   = $this->_unset( $response );
+
         $response['status']                         = 200;
         $response['alert']                          = '삭제되었습니다.';
-        $response['redirect_url']                   = _link_url( '/setting/membershipGrade' );
+        $response['reload']                         = true;
 
         if( _elm( $requests, 'rawData' ) === true ){
             return $response;
@@ -461,7 +463,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 등급 아이콘 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 등급 아이콘 삭제 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -473,7 +475,7 @@ class MembershipApi extends ApiController
 
         $response['status']                         = 200;
         $response['alert']                          = '삭제되었습니다.';
-        $response['reload']                         = true;
+        $response['redirect_url']                   = _link_url( '/setting/memberGrade' );
 
         if( _elm( $requests, 'rawData' ) === true ){
             return $response;

@@ -47,8 +47,8 @@
                                             echo getIconButton([
                                                 'txt' => '검색',
                                                 'icon' => 'search',
-                                                'buttonClass' => 'btn',
-                                                'buttonStyle' => 'width: 100px; height: 36px; float:right',
+                                                'buttonClass' => 'btn text-white',
+                                                'buttonStyle' => 'width: 100px; height: 36px; float:right;background-color:#206BC4',
                                                 'width' => '21',
                                                 'height' => '20',
                                                 'extra' => [

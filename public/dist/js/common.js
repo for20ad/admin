@@ -34,7 +34,7 @@ bodyObserver.observe(document.body, {
 });
 // // //datepicker 호출 yyyy mm dd
 document.addEventListener("DOMContentLoaded", function () {
-    var datepickerIcons = document.getElementsByClassName("datepicker-icon");
+    var datepickerIcons = document.getElementsByClassName("datepicker");
     for (var i = 0; i < datepickerIcons.length; i++) {
         new Litepicker({
             lang: "ko-KR",
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initializeDatepickers() {
-    var datepickerIcons = document.getElementsByClassName("datepicker-icon");
+    var datepickerIcons = document.getElementsByClassName("datepicker");
     for (var i = 0; i < datepickerIcons.length; i++) {
         new Litepicker({
             lang: "ko-KR",
@@ -113,7 +113,6 @@ $(document).on('input', 'input[data-business-number]', function() {
 
 
 function showPasswordGroup(){
-    event.preventDefault();
     $toggleDiv = $("#passGroup");
 
     if ($toggleDiv.is(':visible')) {
@@ -127,6 +126,28 @@ function showPasswordGroup(){
         passwdChk = false;
     }
 }
+$(document).on('keydown', 'input[type="text"]', function(event) {
+
+    if (event.keyCode === 13) {
+        Enter_Remove();
+    }
+});
+function Enter_Remove(){ // input 에서 enter 입력시 다음에 있는 button이 호출되는 현상때문에      // 엔터키의 코드는 13입니다.
+	if(event.keyCode == 13){
+		return false;
+	}
+}
+flatpickr('.datetimepicker', {
+    enableTime: true,
+    dateFormat: 'Y-m-d H:i',
+    time_24hr: true
+});
+flatpickr('.datepicker-icon', {
+    enableTime: true,
+    dateFormat: 'Y-m-d',
+    time_24hr: true
+});
+
 
 function formatMobileNumber(numbersOnly) {
     let formattedNumber = numbersOnly;
@@ -342,7 +363,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-
 
 });
 
@@ -566,7 +586,7 @@ function displayPageHistory() {
 }
 
 function toggleForm( obj ){
-    event.preventDefault();
+
     var $cardBody = obj.closest('.col-12').find('.card-body');
     if ($cardBody.is(':visible')) {
         $cardBody.slideUp();
@@ -633,3 +653,54 @@ var subPagination = (function() {
 //   }
 //   displayPageHistory();
 // });
+function showTooltip(element, tooltipId) {
+    const tooltipData = tooltipContent[tooltipId];
+    if (!tooltipData) return;
+
+    let existingTooltip = document.getElementById(tooltipId);
+    if (existingTooltip) {
+        existingTooltip.remove();
+    }
+
+    let tooltip = document.createElement('div');
+    tooltip.className = 'tooltip_over';
+    tooltip.id = tooltipId;
+
+    let tooltipTitle = document.createElement('div');
+    tooltipTitle.className = 'tooltip_title';
+    tooltipTitle.innerText = tooltipData.title;
+
+    let tooltipBody = document.createElement('div');
+    tooltipBody.className = 'tooltip_body';
+    tooltipBody.innerHTML = tooltipData.content; // HTML 태그를 포함한 내용 삽입
+
+    tooltip.appendChild(tooltipTitle);
+    tooltip.appendChild(tooltipBody);
+
+    document.body.appendChild(tooltip);
+
+    const tooltipWidth = tooltip.offsetWidth;
+    const elementWidth = element.offsetWidth;
+    const elementLeft = element.getBoundingClientRect().left + window.pageXOffset;
+    const tooltipLeft = elementLeft - (tooltipWidth / 2) + (elementWidth / 2);
+
+    tooltip.style.left = `${tooltipLeft - tooltipData.left}px`;
+    tooltip.style.top = `${element.getBoundingClientRect().top + window.pageYOffset - tooltip.offsetHeight - tooltipData.height}px`;
+
+    tooltip.style.display = 'block';
+
+    setTimeout(function() {
+        document.addEventListener('click', function(event) {
+            if (!tooltip.contains(event.target) && event.target !== element) {
+                hideTooltip(tooltipId);
+            }
+        }, { once: true });
+    }, 0);
+}
+
+function hideTooltip(tooltipId) {
+    let tooltip = document.getElementById(tooltipId);
+    if (tooltip) {
+        tooltip.remove();
+    }
+}

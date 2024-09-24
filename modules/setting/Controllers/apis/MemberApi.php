@@ -129,10 +129,11 @@ class MemberApi extends ApiController
         $validation->setRules([
             'i_user_id' => [
                 'label'  => '아이디',
-                'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]',
+                'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]|regex_match[/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
                     'is_unique'     => '아이디가 이미 존재합니다.',
+                    'regex_match'   => '아이디는 영문과 숫자를 포함한 조합이어야 하며, 최소 6자 이상이어야 합니다.',
                 ],
             ],
             'i_password' => [
@@ -472,6 +473,7 @@ class MemberApi extends ApiController
             return $this->respond( $response );
         }
         $aData['MB_MOBILE_NUM_DEC']                 = _add_dash_tel_num( $this->_aesDecrypt( _elm(  $aData, 'MB_MOBILE_NUM' ) ) );
+        $aData['MB_TEL_NUM_DEC']                    = empty(_elm(  $aData, 'MB_TEL_NUM' )) === true ? '' : _add_dash_tel_num( $this->_aesDecrypt( _elm(  $aData, 'MB_TEL_NUM' ) ) );
         $aData['MB_EMAIL_DEC']                      = $this->_aesDecrypt( _elm(  $aData, 'MB_EMAIL' ) );
 
         #------------------------------------------------------------------
@@ -513,17 +515,18 @@ class MemberApi extends ApiController
         $setRules                                   = [
             'i_user_id' => [
                 'label'  => '아이디',
-                'rules'  => 'trim|required',
+                'rules'  => 'trim|required|regex_match[/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
-                    'unique_user_id' => '아이디가 이미 존재합니다.',
+                    'regex_match'   => '아이디는 영문과 숫자를 포함한 조합이어야 하며, 최소 6자 이상이어야 합니다.',
                 ],
             ],
             'i_user_name' => [
                 'label'  => '이름',
-                'rules'  => 'trim|required',
+                'rules'  => 'trim|required|max_length[20]',
                 'errors' => [
                     'required' => '이름을 입력하세요.',
+                    'max_length' => '이름은 최대 20자까지 입력 가능합니다.',
                 ],
             ],
 
@@ -617,6 +620,7 @@ class MemberApi extends ApiController
         #------------------------------------------------------------------
         # FIXME: 추가정보
         #------------------------------------------------------------------
+
         $modelParam['MB_TEL_NUM']                   = $this->_aesEncrypt( preg_replace('/[^0-9]/', '', _elm( $requests, 'i_tel_num' ) ) ) ;
         $modelParam['MB_EMAIL']                     = $this->_aesEncrypt( _elm( $requests, 'i_email' ) );
         $modelParam['MB_DEPARTMENT']                = _elm( $requests, 'i_department' );

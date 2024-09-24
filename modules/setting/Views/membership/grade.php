@@ -34,8 +34,6 @@
                         </div>
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -75,9 +73,9 @@
                                     </td>
                                     <td>
                                         <div class="form-inline">
-                                            <input type="text" class="form-control" styel="width:90px" name="i_save_rate" >
+                                            <input type="text" class="form-control" styel="width:90px" name="i_save_rate" style="max-width:100%;margin:0px !important;">
                                             <span class="wordCount input-group-text"
-                                                style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
+                                                style="border-top-left-radius:0px; border-bottom-left-radius: 0px;margin-left:0px !important">
                                                 %
                                             </span>
                                         </div>
@@ -144,8 +142,6 @@
 
                         <!-- 아코디언 토글 버튼 -->
                         <label class="form-selectgroup-item"  onclick="toggleForm( $(this) )">
-                            <input type="radio" name="icons" value="home"
-                                class="form-selectgroup-input" checked />
                             <span class="form-selectgroup-label">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
                                     viewBox="0 0 14 8" fill="none">
@@ -251,9 +247,9 @@
                                 </td>
                                 <td>
                                     <div class="form-inline">
-                                        <input type="text" class="form-control" name="i_save_rate[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_SAVE_RATE' )?>" >
+                                        <input type="text" class="form-control" style="max-width:100%;margin:0px !important;" name="i_save_rate[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_SAVE_RATE' )?>" >
                                         <span class="wordCount input-group-text"
-                                            style="border-top-left-radius:0px; border-bottom-left-radius: 0px">
+                                            style="border-top-left-radius:0px; border-bottom-left-radius: 0px;margin:0;">
                                             %
                                         </span>
                                     </div>

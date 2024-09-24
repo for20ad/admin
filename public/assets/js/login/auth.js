@@ -35,10 +35,13 @@ function resendAuthNum() {
         dataType: "json",
         cache: false,
         async: true,
-        beforeSend: function() {},
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         complete: function() {},
         success: function(response) {
             submitSuccess(response);
+            $('#preloader').hide();
             $('#frm_loginProc [name=auth_num]').val(response.auth_num);
             $('#frm_loginProc [name=i_auth_number]').val(response.auth_num);
             seconds = 180;
@@ -54,6 +57,7 @@ function resendAuthNum() {
         },
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }
@@ -78,11 +82,13 @@ function loginProc() {
         data: frm.serialize(),
         dataType: "json",
         cache: false,
-        beforeSend: function() {},
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         complete: function() {},
         success: function(response) {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status == 'false') {
                 var error_message = '';
                 error_message = response.errors.join('<br />');
@@ -94,6 +100,7 @@ function loginProc() {
         },
         error: function(jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }

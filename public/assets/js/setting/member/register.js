@@ -18,12 +18,14 @@ function dupCheckId( $obj ){
         data: frm.serialize(),
         dataType: "json",
         cache: false,
-        beforeSend: function() { },
+        beforeSend: function() {
+            $('#preloader').show();
+        },
         complete: function() { },
         success: function(response)
         {
             submitSuccess(response);
-
+            $('#preloader').hide();
             if (response.status != 200)
             {
                 $('#frm_register [name=i_user_id]').addClass('error');
@@ -41,6 +43,7 @@ function dupCheckId( $obj ){
         error: function(jqXHR, textStatus, errorThrown)
         {
             submitError(jqXHR.status, errorThrown);
+            $('#preloader').hide();
             console.log(textStatus);
             return false;
         }

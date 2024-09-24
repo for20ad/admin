@@ -80,8 +80,9 @@ class Mileage extends Membership
         # TODO: 폼 데이터 로드
         #------------------------------------------------------------------
         $formParam                                  = [];
-        $formParam['F_MENU']                        = 'membership';
+        $formParam['F_MENU']                        = 'member_mileage';
         $pageDatas['form_lists']                    = $this->excelFormModel->getFormsDataByMenu( $formParam );
+
         #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------

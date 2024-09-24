@@ -16,6 +16,9 @@ use Module\setting\Libraries\Member;
 use Module\core\Models\LogModel;
 use Module\setting\Models\ExcelFormModel;
 
+use Shared\Config as SharedConfig;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+
 class ApiController extends ResourceController
 {
     protected $_encryption_key = 'ZIeAzykfMrqDKwtKTjk573t0ovtQS1Xn'; // 256bit
@@ -28,6 +31,7 @@ class ApiController extends ResourceController
     public $session;
     public $uri;
     public $baseURL;
+    protected $sharedConfig;
 
     public function __construct()
     {
@@ -38,6 +42,7 @@ class ApiController extends ResourceController
         $this->uri                                  = Services::uri();
         $this->LogModel                             = new LogModel();
         $this->baseURL                              = base_url();
+        $this->sharedConfig                         = new SharedConfig();
 
         helper($this->helpers);
 
@@ -224,6 +229,141 @@ class ApiController extends ResourceController
         return $return;
     }
 
+    protected function _uploadAndResize( $file , $_config  )
+    {
+        $uploader                                   = Services::upload();
+
+        // 기본 설정 및 사용자 정의 설정 병합
+        $config                                     = [
+            'upload_path'                           => WRITEPATH . 'uploads/' . _elm($_config, 'path'),
+            'allowed_types'                         => _elm($_config, 'mimes') ?? 'jpg|jpeg|png|gif',
+            'max_size'                              => _elm($_config, 'max_size') ?? '10240', // KB 단위
+        ];
+
+        // 파일 크기 검사를 수행
+        if ($file->getSize() > ($config['max_size'] * 1024)) { // KB 단위로 비교
+            return [
+                'status'                            => false,
+                'error'                             => '최대 사이즈 오류발생 ' . $config['max_size'] . ' KB'
+            ];
+        }
+
+        // 업로드 경로가 존재하지 않으면 생성
+        if (!is_dir($config['upload_path'])) {
+            mkdir($config['upload_path'], 0777, true);
+        }
+
+        $originalName                               = $file->getName();
+        $realFilename                               = $file->getRandomName();
+
+        // 파일 업로드
+        if (!$file->move($config['upload_path'], $realFilename)) {
+            return [
+                'status' => false,
+                'error'  => '파일 업로드 실패'
+            ];
+        }
+
+        $uploadedPath                               = $config['upload_path'] . '/' . $realFilename;
+        $relativePath                               = 'uploads/' . _elm($_config, 'path') . '/' . $realFilename;
+
+        // 리사이즈할 사이즈 목록
+        $sizes = [
+            [100, 100],
+            [250, 250],
+            [500, 500],
+            [800, 800],
+            [1024, 1024],
+        ];
+
+        $resizedImages                              = $this->_resizeImage($uploadedPath, $relativePath , $sizes, $config['upload_path'], $realFilename, $_config );
+
+        // 업로드된 파일 및 리사이즈된 파일 정보 반환
+        return [
+            'status'                                => true,
+            'org_name'                              => $originalName,
+            'url'                                   => base_url($relativePath),
+            'uploaded_path'                         => $relativePath,
+            'type'                                  => mime_content_type($uploadedPath),
+            'size'                                  => filesize($uploadedPath), // bytes 단위
+            'ext'                                   => pathinfo($uploadedPath, PATHINFO_EXTENSION),
+            'resized'                               => $resizedImages, // 리사이즈된 이미지 정보
+        ];
+    }
+
+    // 이미지 리사이즈 함수
+    protected function _resizeImage($sourcePath, $relativePath, $sizes, $destinationPath, $originalFilename, $_config )
+    {
+
+        $resizedImages                              = [];
+
+        foreach ($sizes as $size) {
+            list($targetWidth, $targetHeight) = $size;
+            $resizedFilename = "{$targetWidth}x{$targetHeight}_{$originalFilename}";
+            $resizedPath = $destinationPath . '/' . $resizedFilename;
+
+            // 리사이즈 작업 수행
+            $resized = $this->_createResizedImage($sourcePath, $targetWidth, $targetHeight, $resizedPath);
+
+            if ($resized) {
+                $relativePath = 'uploads/' . _elm($_config, 'path').'/'. $resizedFilename;
+
+                $resizedImages[] = [
+                    'name'  => $resizedFilename,
+                    'path'  => $relativePath,  // '/uploads/'로 시작하는 경로 반환
+                    'size'  => "{$targetWidth}",
+                ];
+            }
+        }
+
+        return $resizedImages;
+    }
+
+    // 실제 리사이즈 작업을 수행하는 함수 (GD 라이브러리 사용)
+    protected function _createResizedImage($sourcePath, $targetWidth, $targetHeight, $destinationPath)
+    {
+        list($originalWidth, $originalHeight, $imageType) = getimagesize($sourcePath);
+
+        // 원본 이미지에 대한 리소스 생성
+        switch ($imageType) {
+            case IMAGETYPE_JPEG:
+                $sourceImage                        = imagecreatefromjpeg($sourcePath);
+                break;
+            case IMAGETYPE_PNG:
+                $sourceImage                        = imagecreatefrompng($sourcePath);
+                break;
+            case IMAGETYPE_GIF:
+                $sourceImage                        = imagecreatefromgif($sourcePath);
+                break;
+            default:
+                return false; // 지원되지 않는 파일 형식
+        }
+
+        // 새로운 크기의 이미지 리소스 생성
+        $resizedImage                               = imagecreatetruecolor($targetWidth, $targetHeight);
+
+        // 원본 이미지의 내용을 리사이즈된 이미지에 복사
+        imagecopyresampled($resizedImage, $sourceImage, 0, 0, 0, 0, $targetWidth, $targetHeight, $originalWidth, $originalHeight);
+
+        // 리사이즈된 이미지를 저장
+        switch ($imageType) {
+            case IMAGETYPE_JPEG:
+                imagejpeg($resizedImage, $destinationPath);
+                break;
+            case IMAGETYPE_PNG:
+                imagepng($resizedImage, $destinationPath);
+                break;
+            case IMAGETYPE_GIF:
+                imagegif($resizedImage, $destinationPath);
+                break;
+        }
+
+        // 메모리에서 이미지 리소스 제거
+        imagedestroy($sourceImage);
+        imagedestroy($resizedImage);
+
+        return true;
+    }
 
     protected function _upload_base64( $file_data , $org_name , $_config  )
     {
@@ -268,6 +408,51 @@ class ApiController extends ResourceController
 
         return $return;
     }
+
+    protected function _upload_tmp_base64( $file_data , $org_name , $_config  )
+    {
+        $uploader                                   = Services::upload();
+
+        $config                                     = [
+            'upload_path'                           => WRITEPATH.'uploads/temp/'._elm( $_config, 'path' ), // 파일이 업로드될 경로
+            'allowed_types'                         => _elm( $_config, 'mimes' )??'jpg|jpeg|png|gif|csv|xls|xlsx|zip|hwp|pdf|svg', // 허용된 파일 확장자
+            'max_size'                              => _elm( $_config, 'max_size' )??'10240', // 업로드할 파일의 최대 크기 (KB)
+        ];
+
+        if (is_dir($config['upload_path']) === false)
+        {
+            mkdir($config['upload_path'], 0777, true);
+        }
+
+        // 파일이 업로드될 경로가 존재하지 않는 경우 폴더를 생성합니다.
+        if (!is_dir($config['upload_path'])) {
+            mkdir($config['upload_path'], 0777, true);
+        }
+
+        $return['org_name']                         = $org_name;
+
+
+        $fileName                                   = uniqid() . '.jpg'; // 파일 이름 생성
+        $filepath                                   = $config['upload_path'].'/'.$fileName;
+
+        $bStatus                                    = file_put_contents($filepath, $file_data);
+        if( $bStatus ){
+            $return['url']                          = base_url().'uploads/temp/'._elm( $_config, 'path' ).'/'.$fileName;
+            $return['uploaded_path']                = 'uploads/'._elm( $_config, 'path' ).'/'.$fileName;
+            $return['status']                       = true;
+
+            $return['type']                         = mime_content_type($filepath);
+            $return['size']                         = filesize($filepath); // in bytes
+            $return['ext']                          = pathinfo($filepath, PATHINFO_EXTENSION);
+
+        }else{
+            $return['status']                       = false;
+        }
+
+
+        return $return;
+    }
+
 
     protected function _aesEncrypt($string = '')
     {
@@ -378,8 +563,9 @@ class ApiController extends ResourceController
 
         return $html;
     }
-    protected function exportExcel($data, $form_idx) {
+    protected function exportExcel($data, $form_idx, $down_file_name) {
         $spreadsheet                                = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+
         $sheet                                      = $spreadsheet->getActiveSheet();
         $excelFormModel                             = new ExcelFormModel();
         $formParam                                  = ['F_IDX' => $form_idx];
@@ -390,7 +576,9 @@ class ApiController extends ResourceController
         #------------------------------------------------------------------
         # TODO: 테이블의 필드 데이터 모두 뽑아옴
         #------------------------------------------------------------------
-        $_fields                                    = $excelFormModel->getFieldAndTitles(strtoupper(_elm($formData, 'F_MENU')));
+        $keys                                       = _elm( $formData, 'F_MENU' );
+        $_fields                                    = _elm($this->sharedConfig::$excelField,$keys );
+
         #------------------------------------------------------------------
         # TODO: 필드 구분자로 분리
         #------------------------------------------------------------------
@@ -402,9 +590,9 @@ class ApiController extends ResourceController
         # TODO: 모든 필드에서 구분자로 분리된 필드들만 뽑아서 재정렬
         #------------------------------------------------------------------
         foreach ($fields as $field) {
-            foreach ($_fields as $_field) {
-                if ($_field['COLUMN_NAME'] == $field) {
-                    $columns[]                      = $_field['COLUMN_COMMENT'];
+            foreach ($_fields as $_key => $_field) {
+                if ($_key == $field) {
+                    $columns[]                      = $_field;
                     break;
                 }
             }
@@ -425,17 +613,31 @@ class ApiController extends ResourceController
         foreach ($data as $item) {
             $colIndex                               = 'A';
             foreach ($fields as $field) {
-                $sheet->setCellValue($colIndex . $row, _elm($item, $field));
+                if( is_numeric( _elm($item, $field) ) ){
+                    $sheet->setCellValue($colIndex . $row, number_format( _elm( $item, $field, '0', true) ) );
+                    // 셀 스타일 설정
+                    $sheet->getStyle($colIndex . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+                }else{
+                    $sheet->setCellValue($colIndex . $row, _elm($item, $field, '-', true));
+                    // 셀 스타일 설정
+                    $sheet->getStyle($colIndex . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                }
+
                 $colIndex++;
             }
             $row++;
         }
+        // 컬럼 너비 자동 조정 적용
+        foreach (range(1, count($data[0])) as $colIndex) {
+            $sheet->getColumnDimension(\PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($colIndex))->setAutoSize(true);
+        }
+
 
         #------------------------------------------------------------------
         # TODO: 엑셀 다운로드 해더
         #------------------------------------------------------------------        //  // HTTP 응답으로 엑셀 파일 다운로드
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="membership_list.xlsx"');
+        header('Content-Disposition: attachment; filename="'.$down_file_name.'.xlsx"');
         header('Cache-Control: max-age=0');
         header('Expires: 0');
         header('Pragma: public');

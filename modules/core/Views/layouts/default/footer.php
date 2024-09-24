@@ -27,7 +27,9 @@ echo $this->getFooterJs();
 <script <?php echo csp_script_nonce()?>>
 <?php echo $this->getFooterScript(); ?>
 </script>
-
+<script>
+    check_popup();
+</script>
 <script src="/plugins/lazyload/lazyload.min.js"></script>
 <script <?php echo csp_script_nonce()?>>
 var lazyLoadInstance = new LazyLoad({
@@ -41,11 +43,11 @@ var lazyLoadInstance = new LazyLoad({
                         <ul class="list-inline list-inline-dots mb-0">
                             <li class="list-inline-item">
                                 Copyright &copy; 2024
-                                <a href="." class="link-secondary">산수유람</a>.
+                                <a href="#" class="link-secondary">산수유람</a>.
                                 All rights reserved.
                             </li>
                             <li class="list-inline-item">
-                                <a href="./changelog.html" class="link-secondary" rel="noopener">
+                                <a href="#" class="link-secondary" rel="noopener">
                                     v1.0.0
                                 </a>
                             </li>
@@ -53,8 +55,8 @@ var lazyLoadInstance = new LazyLoad({
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
-</div> -->
+        </footer>--> -->
+    <!--</div>
+</div>-->
 </body>
 </html>
