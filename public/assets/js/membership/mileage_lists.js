@@ -1,7 +1,11 @@
-function getSearchList( $page ) {
+function getSearchList( page ) {
 
     const frm = $("#frm_search");
-    frm.find( '[name=page]' ).val( $page );
+    const urlParams = new URLSearchParams(window.location.search);
+    if (page === undefined) {
+        page = urlParams.get('page') || 1; // 기본값 1
+    }
+    frm.find( '[name=page]' ).val( page );
     var inputs = frm.find('input, button, select');
     $.ajax({
         url: '/apis/membership/getMileageLists',
@@ -27,7 +31,7 @@ function getSearchList( $page ) {
             }
 
             $('#listsTable tbody').empty().html( response.page_datas.lists_row );
-            $("#paginatoon").empty().html( response.page_datas.pagination );
+            $("#pagination").empty().html( response.page_datas.pagination );
 
 
         },
@@ -43,15 +47,15 @@ function getSearchList( $page ) {
     });
 }
 
-function getSubSearchList($page) {
+function getMileageHistoryList(page) {
 
-    const frm = $("#frm_sub_search");
-    frm.find( '[name=page]' ).val( $page );
+    const frm = $("#frm_sub_lists");
+    frm.find( '[name=page]' ).val( page );
     var inputs = frm.find('input, button, select');
     $.ajax({
-        url: '/apis/membership/getSubMileageLists',
+        url: '/apis/membership/getMileageHistoryList',
         method: 'POST',
-        data: frm.serialize(),
+        data: frm.serialize()+'&memIdx='+_mb_idx,
         dataType: 'json',
         cache: false,
         beforeSend: function () {
@@ -71,10 +75,8 @@ function getSubSearchList($page) {
                 return false;
             }
 
-            $('#subListsTable tbody').empty().html( response.page_datas.lists_row );
-            $("#frm_sub_lists #paginatoon").empty().html( response.page_datas.pagination );
-
-
+            $('#frm_sub_lists tbody').empty().html( response.page_datas.detail );
+            $("#frm_sub_lists #pagination").empty().html( response.page_datas.pagination );
         },
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
@@ -117,8 +119,8 @@ $(function(){
     /* paging 한 묶음 E */
 
 
-    subPagination.initPagingNumFunc(getSubSearchList);
-    subPagination.initPagingSelectFunc(getSubSearchList);
+    subPagination.initPagingNumFunc(getMileageHistoryList);
+    subPagination.initPagingSelectFunc(getMileageHistoryList);
 });
 setTimeout(function(){
     getSearchList(1);
@@ -214,7 +216,7 @@ function openLayer(mb_idx, id, page = 1) {
 
             if (page == 1) {
                 $('#' + id + ' tbody').empty().html(response.page_datas.detail);
-
+                $("#frm_sub_lists #pagination").empty().html( response.page_datas.pagination );
                 console.log("총 페이지 수:", _total_page);
                 currentPage = 1; // 첫 페이지 로드시 currentPage를 1로 초기화
                 var modalElement = document.getElementById(id);
@@ -223,6 +225,9 @@ function openLayer(mb_idx, id, page = 1) {
                     keyboard: true     // esc 키로 닫히지 않게 설정
                 });
                 modal.show();
+
+
+
             } else {
                 $('#' + id + ' tbody').append(response.page_datas.detail);
             }

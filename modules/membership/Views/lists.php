@@ -16,9 +16,11 @@
     $aFormLists      = _elm( $pageDatas, 'form_lists', [] );
 
 ?>
+
 <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <link rel="stylesheet" href="/plugins/common/mCustomScrollbar-min.css"
     integrity="sha512-6qkvBbDyl5TDJtNJiC8foyEVuB6gxMBkrKy67XpqnIDxyvLLPJzmTjAj1dRJfNdmXWqD10VbJoeN4pOQqDwvRA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -164,32 +166,32 @@
                     </div>
 
                     <div style="text-align: center; margin-top: 15px">
-                        <?php
-                    echo getIconButton([
-                        'txt' => '검색',
-                        'icon' => 'search',
-                        'buttonClass' => 'btn text-white',
-                        'buttonStyle' => 'width: 180px; height: 46px;background-color:#206BC4',
-                        'width' => '21',
-                        'height' => '20',
-                        'stroke' => 'white',
-                        'extra' => [
-                            'onclick' => 'getSearchList();',
-                        ]
-                    ]);
+                     <?php
+                        echo getIconButton([
+                            'txt' => '검색',
+                            'icon' => 'search',
+                            'buttonClass' => 'btn text-white',
+                            'buttonStyle' => 'width: 180px; height: 46px;background-color:#206BC4',
+                            'width' => '21',
+                            'height' => '20',
+                            'stroke' => 'white',
+                            'extra' => [
+                                'onclick' => 'getSearchList();',
+                            ]
+                        ]);
                     ?>
-                        <?php
-                    echo getIconButton([
-                        'txt' => '초기화',
-                        'icon' => 'reset',
-                        'buttonClass' => 'btn',
-                        'buttonStyle' => 'width: 180px; height: 46px',
-                        'width' => '21',
-                        'height' => '20',
-                        'extra' => [
-                            'onclick' => 'document.location.reload()',
-                        ]
-                    ]);
+                    <?php
+                        echo getIconButton([
+                            'txt' => '초기화',
+                            'icon' => 'reset',
+                            'buttonClass' => 'btn',
+                            'buttonStyle' => 'width: 180px; height: 46px',
+                            'width' => '21',
+                            'height' => '20',
+                            'extra' => [
+                                'onclick' => 'document.location.reload()',
+                            ]
+                        ]);
                     ?>
                     </div>
                 </div>
@@ -343,6 +345,7 @@
                                 <th>주문건수</th>
                                 <th>주문금액</th>
                                 <th>상태</th>
+                                <th>상담내역</th>
                                 <th>등록일</th>
                                 <th>최종접속일</th>
                             </tr>
@@ -354,7 +357,7 @@
                     </table>
                 </div>
                 <!--페이징-->
-                <div class="pagination-wrapper" id="paginatoon">
+                <div class="pagination-wrapper" id="pagination">
 
 
                 </div>
@@ -382,7 +385,115 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="counselModal" tabindex="-1" style="margin-top:3em;z-index:9999" aria-labelledby="counselLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="max-height:100vh;display:flex;flex-direction: column;width:90vh">
+            <div class="modal-header">
+                <h5 class="modal-title" id="counselLabel">상담 내역</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
+                <div class="viewData">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="dataModal" tabindex="-1" style="margin-top:3em;" aria-labelledby="dataModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="max-height:90vh;display:flex;flex-direction: column;width:90vh">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataModalLabel">회원 정보</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
+                <div id="headerInfo" class="display: grid; grid-template-columns: 60% 40%; align-items: center;margin-top:-0.5rem">
+                </div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="tab1-tab" onclick="openLayer( show_mb_idx, 'dataModal', 'summery' );" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">
+                            요약보기
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab2-tab" onclick="openLayer( show_mb_idx, 'dataModal', 'info' );" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                            회원정보
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab3-tab" onclick="openLayer( show_mb_idx, 'dataModal', 'orderList' );" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">
+                            주문내역
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab4-tab" onclick="openLayer( show_mb_idx, 'dataModal', 'point' );" data-bs-toggle="tab" data-bs-target="#tab4" type="button" role="tab" aria-controls="tab4" aria-selected="false">
+                            포인트내역
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab5-tab" onclick="openLayer( show_mb_idx, 'dataModal', 'coupon' );" data-bs-toggle="tab" data-bs-target="#tab5" type="button" role="tab" aria-controls="tab5" aria-selected="false">
+                            쿠폰내역
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                        <div class="viewData">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                        <div class="viewData">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                        <div class="viewData">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show active" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                        <div class="viewData">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show active" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+                        <div class="viewData">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal E-->
+
+<!-- 레이어 팝업 -->
+<div id="layerPopup" style="display:none; top:50%; left:50%; transform:translate(-50%, -50%); width:400px; background-color:white; border:1px solid #ccc; z-index:999999999; padding:20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; flex-direction:column; justify-content:space-between;">
+
+    <div>
+        <h4 style="text-align:center; padding-bottom: 10px; border-bottom: 2px solid #eee; margin-bottom: 20px;">
+            쿠폰 사용범위
+        </h4>
+        <p id="popupContent" style="padding-top:10px; flex-grow:1; margin-bottom: 40px;">여기에 쿠폰 내용을 표시합니다.</p>
+    </div>
+
+    <div style="position:relative;margin-top:1.2rem; height: 35px;">
+        <?php
+            echo getButton([
+                'text' => '닫기',
+                'class' => 'btn btn-secondary',
+                'style' => 'width: 80px; height: 35px; font-size:12px; position:absolute; bottom:0; left:50%; transform:translateX(-50%);',
+                'extra' => [
+                    'onclick' => 'event.preventDefault();closeLayerPopup()',
+                ]
+            ]);
+        ?>
+    </div>
+</div>
+<!-- 레이어 팝업 배경 -->
+<div id="layerPopupBg" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:99999999;"></div>
+
 
 <!-- Form List Modal S-->
 <div class="modal fade" id="formListModal" tabindex="-1" aria-labelledby="formListModalLabel" aria-hidden="true">
@@ -435,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 });
-
+let show_mb_idx = '';
 </script>
 
 <?php

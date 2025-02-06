@@ -40,7 +40,7 @@
     </div>
     </td>
     <td class="body2-c nowrap"><?php echo $no?></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'R_IDX' ) ?>', 'dataModal')" ><?php echo  _elm( $vData , 'R_TITLE' )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'R_IDX' ) ?>', 'dataModal')" ><?php echo  _elm( $vData , 'R_TITLE' )?></a></td>
     <td class="body2-c nowrap"><?php echo empty( _elm( $vData , 'R_CREATE_AT' ) ) == false ? date( 'Y-m-d' , strtotime( _elm( $vData , 'R_CREATE_AT' ) ) ) : '-' ?></td>
     <td class="body2-c nowrap"><?php echo empty( _elm( $vData , 'R_UPDATE_AT' ) ) == false ? date( 'Y-m-d' , strtotime( _elm( $vData , 'R_UPDATE_AT' ) ) ) : '-' ?></td>
     <td class="body2-c nowrap">

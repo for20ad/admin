@@ -45,7 +45,7 @@ class OwensCache
         $aCachedDatas['expireTime'] = (empty($ttl) === true) ? 0 : time() + $ttl;
         $aCachedDatas['data']       = $value;
 
-        $sCachedData = json_encode($aCachedDatas, JSON_UNESCAPED_UNICODE);
+        $sCachedData = json_encode($aCachedDatas, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 
         if (file_put_contents($cacheFile, $sCachedData) !== false)
         {

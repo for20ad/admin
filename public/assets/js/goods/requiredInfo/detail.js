@@ -42,6 +42,7 @@ function frmModify(){
         {
             submitSuccess(response);
             $('#preloader').hide();
+            inputs.prop('disabled', false);
             if (response.status != 200)
             {
                 var error_message = '';
@@ -59,6 +60,7 @@ function frmModify(){
         {
             submitError(jqXHR.status, errorThrown);
             $('#preloader').hide();
+            inputs.prop('disabled', false);
             console.log(textStatus);
             return false;
         }

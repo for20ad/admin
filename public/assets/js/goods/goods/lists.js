@@ -1,7 +1,15 @@
-function getSearchList( $page ) {
+function getSearchList( page ) {
 
     const frm = $("#frm_search");
-    frm.find( '[name=page]' ).val( $page );
+    const urlParams = new URLSearchParams(window.location.search);
+    if (page === undefined) {
+        page = urlParams.get('page') || 1; // 기본값 1
+    }else{
+        let newUrl = window.location.origin + window.location.pathname + '?page=' + page;
+        history.pushState({ page: page }, null, newUrl);
+    }
+
+    frm.find('[name=page]').val(page); // 폼에 페이지 값 설정
     var inputs = frm.find('input, button, select');
     $.ajax({
         url: '/apis/goods/getGoodsLists',
@@ -27,7 +35,7 @@ function getSearchList( $page ) {
             }
 
             $('#listsTable tbody').empty().html( response.page_datas.lists_row );
-            $("#paginatoon").empty().html( response.page_datas.pagination );
+            $("#pagination").empty().html( response.page_datas.pagination );
         },
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);
@@ -53,7 +61,7 @@ $(function(){
 });
 
 setTimeout(function(){
-    getSearchList(1);
+    getSearchList();
 }, 300);
 
 

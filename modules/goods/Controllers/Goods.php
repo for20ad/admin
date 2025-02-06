@@ -16,11 +16,12 @@ use Module\goods\Models\CategoryModel;
 use Module\goods\Models\IconsModel;
 use Module\goods\Models\BrandModel;
 use Module\goods\Models\BundleModel;
+use Module\goods\Models\GoodsAddInfoModel;
 
 
 class Goods extends CoreController
 {
-    protected $goodsModel, $categoryModel, $iconsModel, $brandModel, $bundleModel ;
+    protected $goodsModel, $categoryModel, $iconsModel, $brandModel, $bundleModel, $aInfoModel ;
     protected $goodsConfig;
     protected $memberlib;
     protected $menulib;
@@ -33,12 +34,13 @@ class Goods extends CoreController
         $this->iconsModel                           = new IconsModel();
         $this->brandModel                           = new BrandModel();
         $this->bundleModel                          = new BundleModel();
-
+        $this->aInfoModel                           = new GoodsAddInfoModel();
 
         $this->memberlib                            = new MemberLib();
         $this->menulib                              = new MenuLib();
 
         $this->goodsConfig                          = new goodsConfig();
+
 
     }
 

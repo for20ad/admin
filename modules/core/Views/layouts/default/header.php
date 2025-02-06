@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="/dist/js/jquery-3.6.0.min.js"></script>
-    <script src="/dist/js/jquery.preloader.min.js"></script>
+    <!-- <script src="/dist/js/jquery.preloader.min.js"></script> -->
 
     <style>
     .active>.grand-child {
@@ -81,7 +81,7 @@
 
 <body>
 <div id="preloader" style="display:none;">
-    <div id="preloader-inner"></div>
+    <div id="preloader-inner"><img src="/dist/img/spinner.gif"></div>
 </div>
 
     <!-- <body class="hold-transition layout-navbar-fixed layout-fixed"> -->

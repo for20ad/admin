@@ -39,8 +39,8 @@
         </div>
     </td>
     <td class="body2-c nowrap"><?php echo $no?></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'B_IDX' ) ?>', 'dataModal')"><?php echo  _elm( _elm( $aConfig,'viewGbn' ), _elm( $vData , 'B_VIEW_GBN' ) ) ?></a></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'B_IDX' ) ?>', 'dataModal')"><?php echo _elm( $vData , 'B_TITLE' )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'B_IDX' ) ?>', 'dataModal')"><?php echo  _elm( _elm( $aConfig,'viewGbn' ), _elm( $vData , 'B_VIEW_GBN' ) ) ?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'B_IDX' ) ?>', 'dataModal')"><?php echo _elm( $vData , 'B_TITLE' )?></a></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'B_PERIOD_START_AT' ) . ' ~ ' . _elm( $vData, 'B_PERIOD_END_AT' ) ?></td>
     <td class="body2-c nowrap"><?php echo _elm( _elm( $aConfig, 'status' ), _elm( $vData, 'B_STATUS' ) )?></td>
     <td class="body2-c nowrap"><?php echo _elm( _elm( _elm( $aConfig, 'viewLoc' ), _elm( $vData,'B_VIEW_GBN' ) ), _elm( $vData, 'B_LOCATE' ) )?></td>

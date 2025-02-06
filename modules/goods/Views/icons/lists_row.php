@@ -40,8 +40,8 @@
     </div>
     </td>
     <td class="body2-c nowrap"><?php echo $no?></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'I_IDX' ) ?>', 'iconsModal')" ><?php echo  _elm( $vData , 'I_NAME' )?></a></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'I_IDX' ) ?>', 'iconsModal')"><img src="/<?php echo _elm( $vData , 'I_IMG_PATH' )?>"></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'I_IDX' ) ?>', 'iconsModal')" ><?php echo  _elm( $vData , 'I_NAME' )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'I_IDX' ) ?>', 'iconsModal')"><img src="/<?php echo _elm( $vData , 'I_IMG_PATH' )?>"></a></td>
     <td class="body2-c nowrap"><?php echo _elm( _elm( $aConfig, 'icon_gbn' ), _elm( $vData, 'I_GBN' ) )?></td>
     <td class="body2-c nowrap"><?php echo _elm( _elm( $aConfig, 'status' ), _elm( $vData, 'I_STATUS' ) )?></td>
     <td class="body2-c nowrap"><?php echo empty( _elm( $vData , 'I_CREATE_AT' ) ) == false ? date( 'Y-m-d' , strtotime( _elm( $vData , 'I_CREATE_AT' ) ) ) : '-' ?></td>

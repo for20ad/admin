@@ -254,7 +254,7 @@
                     </table>
                 </div>
                 <!--페이징-->
-                <div class="pagination-wrapper" id="paginatoon">
+                <div class="pagination-wrapper" id="pagination">
 
 
                 </div>
@@ -283,51 +283,57 @@
 <!-- Modal E-->
 <!-- MemberModal S-->
 <div class="modal fade" id="memberModal" tabindex="-1" style="margin-top:3em;" aria-labelledby="memberModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="max-height:90vh;display:flex;flex-direction:column;width:80vh">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="memberModalLabel">포인트 내역</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
-                    <div class="row row-deck row-cards">
-                        <!-- 카드1 -->
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive fixTable">
-                                        <table class="table table-vcenter">
-                                            <colgroup>
-                                                <col style="width:10%;">
-                                                <col style="width:15%;">
-                                                <col style="width:15%;">
-                                                <col style="width:15%;">
-                                                <col style="width:15%;">
-                                                <col style="width:30%;">
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th class="fixth" >No.</th>
-                                                    <th class="fixth" >지급액</th>
-                                                    <th class="fixth" >차감액</th>
-                                                    <th class="fixth" >잔액</th>
-                                                    <th class="fixth" >처리자</th>
-                                                    <th class="fixth" >사유</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="viewData">
-                                                <!-- 데이터 행이 여기에 추가됩니다 -->
-                                            </tbody>
-                                        </table>
-                                    </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="max-height:90vh;display:flex;flex-direction:column;width:80vh">
+            <div class="modal-header">
+                <h5 class="modal-title" id="memberModalLabel">포인트 내역</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
+                <div class="row row-deck row-cards">
+                    <!-- 카드1 -->
+                    <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_sub_lists',  'onSubmit' => 'return false;', 'autocomplete' => 'off']); ?>
+                    <input type="hidden" name="page">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive fixTable">
+                                    <table class="table table-vcenter">
+                                        <colgroup>
+                                            <col style="width:10%;">
+                                            <col style="width:15%;">
+                                            <col style="width:15%;">
+                                            <col style="width:15%;">
+                                            <col style="width:15%;">
+                                            <col style="width:30%;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th class="fixth" >No.</th>
+                                                <th class="fixth" >차감액</th>
+                                                <th class="fixth" >지급액</th>
+                                                <th class="fixth" >잔액</th>
+                                                <th class="fixth" >처리자</th>
+                                                <th class="fixth" >사유</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewData">
+                                            <!-- 데이터 행이 여기에 추가됩니다 -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pagination-wrapper" id="pagination">
+
                                 </div>
                             </div>
                         </div>
+                        <?php echo form_close()?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <!-- Modal E-->
 <!-- Form List Modal S-->

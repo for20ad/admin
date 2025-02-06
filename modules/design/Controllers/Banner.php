@@ -75,5 +75,6 @@ class Banner extends Design
 
         $this->owensView->loadLayoutView($pageParam);
 
+
     }
 }

@@ -64,6 +64,7 @@ class GoodsBundle extends Goods
         }
 
         $pageDatas['productIdxs']                   = $productIdxs;
+        $pageDatas['totalCount']                    = count( $productLists );
         #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
@@ -258,6 +259,10 @@ class GoodsBundle extends Goods
             }
         }
 
+        if( empty($timeIdx) ){
+            box_alert_back( '잘못된 접근입니다.' );
+        }
+
         $pageDatas                                  = [];
         $requests                                   = $this->request->getGet();
         $pageDatas['aColorConfig']                  = $this->sharedConfig::$goodsColor;
@@ -363,6 +368,10 @@ class GoodsBundle extends Goods
             }
         }
 
+        if( empty($weeklyIdx) ){
+            box_alert_back( '잘못된 접근입니다.' );
+        }
+
         $pageDatas                                  = [];
         $requests                                   = $this->request->getGet();
         $pageDatas['aColorConfig']                  = $this->sharedConfig::$goodsColor;
@@ -392,6 +401,179 @@ class GoodsBundle extends Goods
 
         $pageParam                                  = [];
         $pageParam['file']                          = '\Module\goods\Views\bundle\weekly\detail_list';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
+
+
+        $this->owensView->loadLayoutView($pageParam);
+
+    }
+
+
+
+
+
+
+
+
+
+    public function hotKeyword()
+    {
+        #------------------------------------------------------------------
+        # TODO: 일반 관리자 권한 체크
+        #------------------------------------------------------------------
+        if ($this->memberlib->isLogin() === true)
+        {
+            if ($this->menulib->isGrant(83) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 최고관리자 권한체크
+        #------------------------------------------------------------------
+        // 권한 체크
+        if ($this->memberlib->isSuperAdmin() === false)
+        {
+            if ($this->menulib->isGrant(83) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
+
+        $pageDatas                                  = [];
+        $requests                                   = $this->request->getGet();
+        $pageDatas['aColorConfig']                  = $this->sharedConfig::$goodsColor;
+
+
+        #------------------------------------------------------------------
+        # TODO: 메인 뷰 처리
+        #------------------------------------------------------------------
+
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\goods\Views\bundle\hotKeyword\lists';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
+
+
+        $this->owensView->loadLayoutView($pageParam);
+
+    }
+
+    public function hotKeywordDetail( $hotKeywordIdx )
+    {
+        #------------------------------------------------------------------
+        # TODO: 일반 관리자 권한 체크
+        #------------------------------------------------------------------
+        if ($this->memberlib->isLogin() === true)
+        {
+            if ($this->menulib->isGrant(83) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 최고관리자 권한체크
+        #------------------------------------------------------------------
+        // 권한 체크
+        if ($this->memberlib->isSuperAdmin() === false)
+        {
+            if ($this->menulib->isGrant(83) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
+
+        if( empty($hotKeywordIdx) ){
+            box_alert_back( '잘못된 접근입니다.' );
+        }
+
+        $pageDatas                                  = [];
+        $requests                                   = $this->request->getGet();
+        $pageDatas['aColorConfig']                  = $this->sharedConfig::$goodsColor;
+        $aData                                      = $this->bundleModel->hotKeywordDataByIdx( $hotKeywordIdx );
+
+        $productLists                               = $this->bundleModel->getHotKeywordDetailLists( $hotKeywordIdx );
+
+
+
+        $pageDatas['limitCnt']                      = _elm( $aData, 'A_LIMIT' );
+        $aData['productLists']                      = [];
+
+        $productIdxs                                = [];
+        if( empty( $productLists ) === false ){
+            foreach( $productLists as $key => $list ){
+                $goodsInfo                          = $this->goodsModel->getGoodsDataByIdx( _elm( $list, 'AD_GOODS_IDX' ) );
+                $productIdxs[]                      = _elm( $list, 'AD_GOODS_IDX' );
+                $aData['productLists'][]            = $goodsInfo;
+            }
+        }
+
+        $pageDatas['productIdxs']                   = $productIdxs;
+        $pageDatas['aData']                         = $aData;
+        #------------------------------------------------------------------
+        # TODO: 메인 뷰 처리
+        #------------------------------------------------------------------
+
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\goods\Views\bundle\hotKeyword\detail_list';
+        $pageParam['pageLayout']                    = '';
+        $pageParam['pageDatas']                     = $pageDatas;
+
+
+        $this->owensView->loadLayoutView($pageParam);
+
+    }
+
+    public function hotBrand()
+    {
+        #------------------------------------------------------------------
+        # TODO: 일반 관리자 권한 체크
+        #------------------------------------------------------------------
+        if ($this->memberlib->isLogin() === true)
+        {
+            if ($this->menulib->isGrant(84) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 최고관리자 권한체크
+        #------------------------------------------------------------------
+        // 권한 체크
+        if ($this->memberlib->isSuperAdmin() === false)
+        {
+            if ($this->menulib->isGrant(84) === false)
+            {
+                $this->response->redirect(_link_url('/main'));
+            }
+        }
+
+        $pageDatas                                  = [];
+        $requests                                   = $this->request->getGet();
+
+        $pageDatas['aColorConfig']                  = $this->sharedConfig::$goodsColor;
+        $brandLists                                 = $this->bundleModel->getHotBrandLists();
+        $pageDatas['limitCnt']                      = _elm( _elm( $brandLists, 0), 'A_LIMIT' );
+        $pageDatas['brandLists']                    = [];
+        $brandIdxs                                  = [];
+        if( empty( $brandLists ) === false ){
+            foreach( $brandLists as $key => $list ){
+                $brandInfo                          = $this->brandModel->getBrandDataByIdx( _elm( $list, 'A_BRAND_IDX' ) );
+                $brandIdxs[]                        = _elm( $list, 'A_BRAND_IDX' );
+                $pageDatas['brandLists'][]          = $brandInfo;
+            }
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 메인 뷰 처리
+        #------------------------------------------------------------------
+
+        $pageParam                                  = [];
+        $pageParam['file']                          = '\Module\goods\Views\bundle\hotBrand\lists';
         $pageParam['pageLayout']                    = '';
         $pageParam['pageDatas']                     = $pageDatas;
 

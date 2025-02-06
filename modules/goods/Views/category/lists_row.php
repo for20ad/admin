@@ -55,7 +55,7 @@
                 $cate_idx = _elm($vCATE_CHILD, 'C_IDX', 0);
                 $parent_idx = _elm($vCATE_CHILD, 'C_PARENT_IDX', 0);
         ?>
-        <div class="child-container" data-idx="<?php echo $cate_idx ?>" data-parent-idx="<?php echo $parent_idx ?>">
+        <div class="child-container" data-idx="<?php echo $cate_idx ?>" data-parent-idx="<?php echo $parent_idx ?>" style="display: none;">
             <!-- 2차 카테고리 -->
             <div class="child-category-wrapper detail" data-idx="<?php echo $cate_idx ?>" data-parent-idx="<?php echo $parent_idx ?>">
                 <div class="child-category d-flex align-items-center justify-content-between">
@@ -93,7 +93,7 @@
                         $cate_idx = _elm($vCATE_GRAND_CHILD, 'C_IDX', 0);
                         $parent_idx = _elm($vCATE_GRAND_CHILD, 'C_PARENT_IDX', 0);
                 ?>
-                <div class="child-container2" data-idx="<?php echo $cate_idx ?>" data-parent-idx="<?php echo $parent_idx ?>">
+                <div class="child-container2" data-idx="<?php echo $cate_idx ?>" data-parent-idx="<?php echo $parent_idx ?>" style="display: none;">
                     <!-- 3차 카테고리 -->
                     <div class="child-category d-flex align-items-center justify-content-between detail" data-idx="<?php echo $cate_idx ?>" data-parent-idx="<?php echo $parent_idx ?>">
                         <div class="d-flex align-items-center gap-2">

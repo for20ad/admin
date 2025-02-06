@@ -40,7 +40,7 @@
             <?php echo _elm( $vData, 'G_IDX' );?>
         </td>
         <td>
-            <img src="/<?php echo _elm( $vData, 'I_IMG_PATH' );?>">
+            <img src="/<?php echo _elm( $vData, 'I_IMG_PATH' );?>" style="width:50px">
         </td>
         <td>
             <?php echo _elm( $vData, 'G_NAME' )?>

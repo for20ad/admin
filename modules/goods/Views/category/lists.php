@@ -7,6 +7,7 @@ $sQueryString = (empty($_SERVER['QUERY_STRING']) === true) ? '' : '?' . $_SERVER
 $aConfig = _elm($pageDatas, 'aConfig', []);
 
 $aLists = _elm($pageDatas, 'aDatas', []);
+$aKeyword= _elm($pageDatas, 'aKeyword', []);
 $aCateTreeLists = _elm($pageDatas, 'cate_tree_lists', []);
 
 $aGetData = _elm($pageDatas, 'getData', []);
@@ -15,7 +16,13 @@ $aGetData = _elm($pageDatas, 'getData', []);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<style>
+#keyword-layer-${groupCount} {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
 
+</style>
 <!-- 본문 -->
 <div class="container-fluid" style="">
     <!-- 카드 타이틀 -->
@@ -132,7 +139,7 @@ $aGetData = _elm($pageDatas, 'getData', []);
                                                 $parent_idx = _elm($vCATE_CHILD, 'C_PARENT_IDX', 0);
                                         ?>
                                 <div class="child-container" data-idx="<?php echo $cate_idx ?>"
-                                    data-parent-idx="<?php echo $parent_idx ?>">
+                                    data-parent-idx="<?php echo $parent_idx ?>" style="display: none;">
                                     <!-- 2차 카테고리 -->
                                     <div class="child-category-wrapper detail" data-idx="<?php echo $cate_idx ?>"
                                         data-parent-idx="<?php echo $parent_idx ?>">
@@ -191,7 +198,7 @@ $aGetData = _elm($pageDatas, 'getData', []);
                                                         $parent_idx = _elm($vCATE_GRAND_CHILD, 'C_PARENT_IDX', 0);
                                                 ?>
                                         <div class="child-container2" data-idx="<?php echo $cate_idx ?>"
-                                            data-parent-idx="<?php echo $parent_idx ?>">
+                                            data-parent-idx="<?php echo $parent_idx ?>" style="display: none;">
                                             <!-- 3차 카테고리 -->
                                             <div class="child-category d-flex align-items-center justify-content-between detail"
                                                 data-idx="<?php echo $cate_idx ?>"
@@ -267,59 +274,107 @@ $aGetData = _elm($pageDatas, 'getData', []);
 let groupCount = 0; // 그룹 카운트
 let columnCounts = {}; // 그룹별 행 개수를 관리하는 객체
 let groups = []; // 지문 관리 배열
-function addGroup() {
+var keywords = <?php echo json_encode($aKeyword); ?>;
+    function addGroup() {
         groupCount++;
         columnCounts[groupCount] = 1;  // 새 그룹 생성 시 첫 번째 행으로 초기화
         groups.push(groupCount);  // 지문 그룹 추가
 
         const newGroup = `
-            <!-- 첫 번째 라인: 지문 -->
             <div class="form-wrap sortable-item" id="group-wrap-${groupCount}">
-                <div class="form-group" id="group-${groupCount}">
-                    <div style="flex: 1;">
-                        <label class="group-label move">
-                            <div class="move-icons ui-sortable-handle">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" fill="none">
-                                    <g clip-path="url(#clip0_492_18580)">
-                                        <path d="M11.5 9C12.3284 9 13 8.32843 13 7.5C13 6.67157 12.3284 6 11.5 6C10.6716 6 10 6.67157 10 7.5C10 8.32843 10.6716 9 11.5 9Z" fill="#616876"></path>
-                                        <path d="M20.5 9C21.3284 9 22 8.32843 22 7.5C22 6.67157 21.3284 6 20.5 6C19.6716 6 19 6.67157 19 7.5C19 8.32843 19.6716 9 20.5 9Z" fill="#616876"></path>
-                                        <path d="M11.5 17.5C12.3284 17.5 13 16.8284 13 16C13 15.1716 12.3284 14.5 11.5 14.5C10.6716 14.5 10 15.1716 10 16C10 16.8284 10.6716 17.5 11.5 17.5Z" fill="#616876"></path>
-                                        <path d="M20.5 17.5C21.3284 17.5 22 16.8284 22 16C22 15.1716 21.3284 14.5 20.5 14.5C19.6716 14.5 19 15.1716 19 16C19 16.8284 19.6716 17.5 20.5 17.5Z" fill="#616876"></path>
-                                        <path d="M11.5 26C12.3284 26 13 25.3284 13 24.5C13 23.6716 12.3284 23 11.5 23C10.6716 23 10 23.6716 10 24.5C10 25.3284 10.6716 26 11.5 26Z" fill="#616876"></path>
-                                        <path d="M20.5 26C21.3284 26 22 25.3284 22 24.5C22 23.6716 21.3284 23 20.5 23C19.6716 23 19 23.6716 19 24.5C19 25.3284 19.6716 26 20.5 26Z" fill="#616876"></path>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_492_18580">
-                                            <rect width="32" height="32" fill="white"></rect>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                지문 ${groups.length}
-                            </div>
-                        </label>
+                <div style="flex: 1;">
+                    <label class="group-label move">
+                        <div class="move-icons ui-sortable-handle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" fill="none">
+                                <g clip-path="url(#clip0_492_18580)">
+                                    <path d="M11.5 9C12.3284 9 13 8.32843 13 7.5C13 6.67157 12.3284 6 11.5 6C10.6716 6 10 6.67157 10 7.5C10 8.32843 10.6716 9 11.5 9Z" fill="#616876"></path>
+                                    <path d="M20.5 9C21.3284 9 22 8.32843 22 7.5C22 6.67157 21.3284 6 20.5 6C19.6716 6 19 6.67157 19 7.5C19 8.32843 19.6716 9 20.5 9Z" fill="#616876"></path>
+                                    <path d="M11.5 17.5C12.3284 17.5 13 16.8284 13 16C13 15.1716 12.3284 14.5 11.5 14.5C10.6716 14.5 10 15.1716 10 16C10 16.8284 10.6716 17.5 11.5 17.5Z" fill="#616876"></path>
+                                    <path d="M20.5 17.5C21.3284 17.5 22 16.8284 22 16C22 15.1716 21.3284 14.5 20.5 14.5C19.6716 14.5 19 15.1716 19 16C19 16.8284 19.6716 17.5 20.5 17.5Z" fill="#616876"></path>
+                                    <path d="M11.5 26C12.3284 26 13 25.3284 13 24.5C13 23.6716 12.3284 23 11.5 23C10.6716 23 10 23.6716 10 24.5C10 25.3284 10.6716 26 11.5 26Z" fill="#616876"></path>
+                                    <path d="M20.5 26C21.3284 26 22 25.3284 22 24.5C22 23.6716 21.3284 23 20.5 23C19.6716 23 19 23.6716 19 24.5C19 25.3284 19.6716 26 20.5 26Z" fill="#616876"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_492_18580">
+                                        <rect width="32" height="32" fill="white"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            지문 ${groupCount}
 
-                        <input type="text" class="form-control question-input" name="questions[${groupCount}][question]" placeholder="지문을 입력하세요">
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group" id="group-${groupCount}">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <!-- 리뷰 키워드 -->
+
+                        <div style="flex: 1;">
+
+                            <label for="keyword-select-${groupCount}" style="display: inline-block; margin-right: 10px;">리뷰 키워드</label>
+
+                            <select class="form-control" id="keyword-select-${groupCount}" name="questions[${groupCount}][keyword]" style="width: 150px; display: inline-block;">
+                                <option value="">선택</option>
+                            </select>
+
+                        </div>
+                        <!-- 리뷰 타이틀 -->
+                        <div style="flex: 1.4; min-width: 200px;">
+                            <label for="title-input-${groupCount}" style="display: inline-block; margin-right: 10px;">리뷰 타이틀</label>
+                            <input
+                                id="title-input-${groupCount}"
+                                type="text"
+                                class="form-control question-input"
+                                name="questions[${groupCount}][question]"
+                                placeholder="지문을 입력하세요"
+                                style="width: 300px; display: inline-block;"
+                            >
+                        </div>
                     </div>
                     <div style="flex: 0 0 auto;">
-                        <button type="button" class="btn-sm btn-red" style="margin-top:1.2rem;padding: 5px 10px;font-size: 12px;border:0;" onclick="deleteGroup(${groupCount})">지문 삭제</button>
+                        <button type="button" class="btn-sm" style="background-color:#616876; margin-top:1.2rem; padding: 5px 10px; font-size: 12px; border:0;" onclick="deleteGroup(${groupCount})">삭제</button>
                     </div>
                 </div>
-
                 <!-- 값 설명 및 값 입력이 행으로 추가되는 부분 -->
                 <div class="form-group value-group" id="value-container-${groupCount}" style="display: flex; align-items: flex-start;">
                     <div class="value-row" id="value-row-${groupCount}" style="flex:1">
-                        <!-- 첫 번째 기본 행 추가 -->
                         ${createRowMarkup(groupCount, 1)}
                     </div>
                     <div class="button-wrapper" style="flex: 0 0 auto; margin-left: 10px; display: flex; flex-direction: column; align-items: flex-start;">
-                        <button type="button" class="btn-sm btn-white" style="margin-top:1.2rem;font-size: 12px;" onclick="addRow(${groupCount})">보기 추가</button>
-                        <button type="button" class="btn-sm btn-red" style="font-size: 12px;" onclick="deleteLastRow(${groupCount})">보기 삭제</button>
+                        <button type="button" class="btn-sm btn-white" style="margin-top:1.2rem; font-size: 12px;" onclick="addRow(${groupCount})"> + 추가</button>
+                        <button type="button" class="btn-sm btn-white" style="font-size: 12px;" onclick="deleteLastRow(${groupCount})"> - 삭제</button>
                     </div>
                 </div>
             </div>
         `;
         $('#inputContainer').append(newGroup);
+
+        // 키워드 목록 추가
+        keywords.forEach(keyword => {
+            const option = `<option value="${keyword.K_IDX}">${keyword.K_NAME}</option>`;
+            $(`#keyword-select-${groupCount}`).append(option);
+
+            const keywordDiv = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;" id="keyword-row-${keyword.K_IDX}">
+                    <span>${keyword.K_NAME}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" onclick="deleteKeyword(event, '${keyword.K_IDX}')">
+                    <path d="M2.5 10C2.5 10.9849 2.69399 11.9602 3.0709 12.8701C3.44781 13.7801 4.00026 14.6069 4.6967 15.3033C5.39314 15.9997 6.21993 16.5522 7.12987 16.9291C8.03982 17.306 9.01509 17.5 10 17.5C10.9849 17.5 11.9602 17.306 12.8701 16.9291C13.7801 16.5522 14.6069 15.9997 15.3033 15.3033C15.9997 14.6069 16.5522 13.7801 16.9291 12.8701C17.306 11.9602 17.5 10.9849 17.5 10C17.5 9.01509 17.306 8.03982 16.9291 7.12987C16.5522 6.21993 15.9997 5.39314 15.3033 4.6967C14.6069 4.00026 13.7801 3.44781 12.8701 3.0709C11.9602 2.69399 10.9849 2.5 10 2.5C9.01509 2.5 8.03982 2.69399 7.12987 3.0709C6.21993 3.44781 5.39314 4.00026 4.6967 4.6967C4.00026 5.39314 3.44781 6.21993 3.0709 7.12987C2.69399 8.03982 2.5 9.01509 2.5 10Z" fill="white"/>
+                    <path d="M8.33333 8.33333L11.6667 11.6667L8.33333 8.33333ZM11.6667 8.33333L8.33333 11.6667L11.6667 8.33333Z" fill="white"/>
+                    <path d="M8.33333 8.33333L11.6667 11.6667M11.6667 8.33333L8.33333 11.6667M2.5 10C2.5 10.9849 2.69399 11.9602 3.0709 12.8701C3.44781 13.7801 4.00026 14.6069 4.6967 15.3033C5.39314 15.9997 6.21993 16.5522 7.12987 16.9291C8.03982 17.306 9.01509 17.5 10 17.5C10.9849 17.5 11.9602 17.306 12.8701 16.9291C13.7801 16.5522 14.6069 15.9997 15.3033 15.3033C15.9997 14.6069 16.5522 13.7801 16.9291 12.8701C17.306 11.9602 17.5 10.9849 17.5 10C17.5 9.01509 17.306 8.03982 16.9291 7.12987C16.5522 6.21993 15.9997 5.39314 15.3033 4.6967C14.6069 4.00026 13.7801 3.44781 12.8701 3.0709C11.9602 2.69399 10.9849 2.5 10 2.5C9.01509 2.5 8.03982 2.69399 7.12987 3.0709C6.21993 3.44781 5.39314 4.00026 4.6967 4.6967C4.00026 5.39314 3.44781 6.21993 3.0709 7.12987C2.69399 8.03982 2.5 9.01509 2.5 10Z" stroke="#616876" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </div>
+            `;
+            $(`#keyword-list-${groupCount}`).append(keywordDiv);
+        });
+
     }
+    // 키워드 레이어 토글
+    function toggleLayer(groupCount) {
+        const layer = document.getElementById(`keyword-layer`);
+        layer.style.display = layer.style.display === 'none' ? 'block' : 'none';
+    }
+
+
 
     // 행 추가 함수 (5개로 제한)
     function addRow(groupId) {

@@ -264,6 +264,7 @@ if (!function_exists('getCheckBox')) {
             'value' => '',
             'label' => '',
             'checked' => false,
+            'style' => '',
             'extraAttributes' => []
         ];
 
@@ -283,11 +284,13 @@ if (!function_exists('getCheckBox')) {
 
             }
         }
+        // style 속성 설정
+        $styleAttr = !empty($extras['style']) ? ' style="' . htmlspecialchars($extras['style'], ENT_QUOTES) . '"' : '';
 
         // checked 상태 설정
         $checkedAttr = $extras['checked'] ? 'checked' : '';
 
-        $html .= '<label class="form-check form-check-inline">';
+        $html .= '<label class="form-check form-check-inline"' . $styleAttr . '>';
         $html .= '<input class="form-check-input'.$classAdd.'" type="checkbox" id="'._elm( $extras,'id' ).'"  name="' . htmlspecialchars(  _elm( $extras, 'name' ), ENT_QUOTES) . '" value="' . htmlspecialchars( _elm( $extras, 'value' ), ENT_QUOTES) . '" ' . $checkedAttr . ' ' . $extraAttributes . '>';
         $html .= '<span class="form-check-label">' . htmlspecialchars( _elm( $extras, 'label' ), ENT_QUOTES) . '</span>';
         $html .= '</label>';

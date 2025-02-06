@@ -100,6 +100,7 @@
                         <colgroup>
                             <col style="width:6%;">
                             <col style="width:5%;">
+                            <col style="width:5%;">
                             <col style="width:8%;">
                             <col style="*">
                             <col style="width:13%;">
@@ -111,6 +112,7 @@
                         </colgroup>
                         <thead>
                             <tr>
+                                <th></th>
                                 <th></th>
                                 <th>
                                     <div class="checkbox checkbox-single">
@@ -144,7 +146,7 @@
                                 <th>등록일/수정일</th>
                             </tr>
                         </thead>
-                        <tbody id="bestSort">
+                        <tbody id="newGoodsSort">
                             <?php
                             if( empty( $aProductLists ) === false ){
                                 foreach( $aProductLists as $key => $vData ){
@@ -170,6 +172,7 @@
                                             </svg>
                                         </div>
                                     </td>
+                                    <td><span class="numbering"><?php echo $key + 1?></span></td>
                                     <td class="body2-c nowrap">
                                         <div class="checkbox checkbox-single">
 
@@ -343,12 +346,15 @@ $(document).on('dblclick', '.price', function(){
     });
 });
 
-$('#bestSort').sortable({
+$('#newGoodsSort').sortable({
     handle: '.group-move-icons',
     update: function(event, ui) {
-        var idsInOrder = $('#bestSort').sortable('toArray',{ attribute : 'data-idx'});
+        var idsInOrder = $('#newGoodsSort').sortable('toArray',{ attribute : 'data-idx'});
 
         console.log(idsInOrder);
+        $('#newGoodsSort tr').each(function(index) {
+            $(this).find('.numbering').text(index + 1);
+        });
     }
 });
 function removeLine( id )

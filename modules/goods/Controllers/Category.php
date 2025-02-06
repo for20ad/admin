@@ -73,6 +73,9 @@ class Category extends Goods
 
         $cate                                       = [];
 
+        $keyword_group                              = $this->categoryModel->getQuestionKeywords();
+
+
         #------------------------------------------------------------------
         # TODO: 메뉴 트리 적용
         #------------------------------------------------------------------
@@ -98,6 +101,7 @@ class Category extends Goods
         }
 
         $pageDatas['aDatas']                        = $cate;
+        $pageDatas['aKeyword']                      = $keyword_group;
 
         #------------------------------------------------------------------
         # TODO: 메인 뷰 처리

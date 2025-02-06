@@ -62,7 +62,7 @@ class Download extends ApiController
         #------------------------------------------------------------------
         $dLogParam                                 = [];
         $dLogParam['D_FILE_PATH']                  = _elm( $requests, 'file' );
-        $dLogParam['D_TOKEN_INFO']                 = json_encode( $uReturn, JSON_UNESCAPED_UNICODE );
+        $dLogParam['D_TOKEN_INFO']                 = json_encode( $uReturn, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $dLogParam['D_DOWNLOAD_AT']                = date( 'Y-m-d H:i:s' );
         $dLogParam['D_DOWNLOAD_IP']                = _elm( $_SERVER, 'REMOTE_ADDR' );
 

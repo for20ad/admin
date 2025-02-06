@@ -360,6 +360,25 @@ if (! function_exists('_elm'))
     }
 }
 
+if (! function_exists('getSelectStatusGroupOptions'))
+{
+    function getSelectStatusGroupOptions($orderTitle, $orderStatus, $orderBtns) {
+        $output = "";
+        foreach ($orderTitle as $key => $title) {
+            $output .= "<optgroup label=\"{$title}\">\n";
+            if (isset($orderStatus[$key])) {
+                foreach ($orderStatus[$key] as $statusKey) {
+                    if (isset($orderBtns[$statusKey])) {
+                        $output .= "<option value=\"{$statusKey}\">{$orderBtns[$statusKey]}</option>\n";
+                    }
+                }
+            }
+            $output .= "</optgroup>\n";
+        }
+        return $output;
+    }
+}
+
 #------------------------------------------------------------------
 # TODO: json 출력
 #------------------------------------------------------------------
@@ -503,6 +522,43 @@ if (! function_exists('_uniqid'))
             $sReturn = (int) (microtime(true) * 10000) + random_int(1000, 9999);
         }
 
+
+        return $sReturn;
+    }
+}
+if (! function_exists('_uniqid2'))
+{
+    function _uniqid2($length = 16, $readable = false, $type = 'string')
+    {
+        $sReturn = '';
+
+        if ($type == 'string') {
+            if ($readable === false) {
+                // 더 안전한 난수 생성
+                if (function_exists("random_bytes")) {
+                    $bytes = random_bytes(ceil($length / 2));
+                } else if (function_exists("openssl_random_pseudo_bytes")) {
+                    $bytes = openssl_random_pseudo_bytes(ceil($length / 2));
+                } else {
+                    $bytes = uniqid(mt_rand(), true);
+                }
+                $sReturn = substr(bin2hex($bytes), 0, $length);
+            } else {
+                // 사람이 읽기 쉬운 문자열
+                $characters = '23456789abcdehkmnpswxABCDEFGHKLMNPQRSTWXZ';
+                $max = strlen($characters) - 1;
+
+                $sReturn = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $sReturn .= $characters[random_int(0, $max)];
+                }
+            }
+        } else {
+            // 숫자 기반 고유 ID 생성
+            $timePart = (int)(microtime(true) * 10000); // 초 단위로 정밀도 강화
+            $randomPart = random_int(10000, 99999); // 더 큰 범위의 난수 추가
+            $sReturn = $timePart + $randomPart;
+        }
 
         return $sReturn;
     }

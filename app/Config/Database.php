@@ -95,6 +95,26 @@ class Database extends Config
         'busyTimeout' => 1000,
     ];
 
+    public array $fcmDB = [
+        'DSN'      => '',
+        'hostname' => '49.247.40.200',
+        'username' => 'timber_fcm',
+        'password' => 'timber_fcm1234!!',
+        'database' => 'fcm',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => true,
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port'     => 3306,
+    ];
+
     public function __construct()
     {
         parent::__construct();

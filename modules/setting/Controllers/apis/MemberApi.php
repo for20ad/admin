@@ -129,11 +129,11 @@ class MemberApi extends ApiController
         $validation->setRules([
             'i_user_id' => [
                 'label'  => '아이디',
-                'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]|regex_match[/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
+                'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]|regex_match[/^[a-zA-Z]{6,}$/]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
                     'is_unique'     => '아이디가 이미 존재합니다.',
-                    'regex_match'   => '아이디는 영문과 숫자를 포함한 조합이어야 하며, 최소 6자 이상이어야 합니다.',
+                    'regex_match'   => '아이디는 영문자로만 구성되며, 최소 6자 이상이어야 합니다.',
                 ],
             ],
             'i_password' => [
@@ -251,7 +251,7 @@ class MemberApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '관리자 회원 추가 - Data:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '관리자 회원 추가 - Data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -515,10 +515,10 @@ class MemberApi extends ApiController
         $setRules                                   = [
             'i_user_id' => [
                 'label'  => '아이디',
-                'rules'  => 'trim|required|regex_match[/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/]',
+                'rules'  => 'trim|required|regex_match[/^[a-zA-Z]{6,}$/]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
-                    'regex_match'   => '아이디는 영문과 숫자를 포함한 조합이어야 하며, 최소 6자 이상이어야 합니다.',
+                    'regex_match'   => '아이디는 영문자로만 구성되며, 최소 6자 이상이어야 합니다.',
                 ],
             ],
             'i_user_name' => [
@@ -665,7 +665,7 @@ class MemberApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '관리자 회원 수정 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ).' / newData:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '관리자 회원 수정 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ).' / newData:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -724,7 +724,7 @@ class MemberApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '관리자 회원 삭제 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '관리자 회원 삭제 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );

@@ -11,6 +11,37 @@ class MembershipModel extends Model
         $this->db = \Config\Database::connect();
     }
 
+    public function findMemeberData( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBERSHIP' );
+        $builder->where( 'MB_NM', _elm( $param, 'MB_NM' ) );
+        $builder->orWhere( 'MB_MOBILE_NUM', _elm( $param, 'MB_MOBILE_NUM' ) );
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
+    public function getMemberInfoByCi( $ci )
+    {
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'MEMBERSHIP' );
+        $builder->where( 'MB_CI',                   $ci );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
     public function insertMemberData( $param = [] )
     {
         $aReturn                                    = false;
@@ -179,6 +210,27 @@ class MembershipModel extends Model
         return $aReturn;
 
     }
+    public function getSimpleSearch( $param = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $param ) ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBERSHIP' );
+        $builder->select( 'MB_IDX, MB_USERID,MB_NM,MB_MOBILE_NUM' );
+        $builder->like( 'MB_USERID',                _elm( $param, 'MB_USERID' ), 'both' );
+        $builder->orLike( 'MB_NM',                  _elm( $param, 'MB_NM' ), 'both' );
+        if( empty( _elm( $param, 'MB_MOBILE_NUM' ) ) === false ){
+            $builder->orLike( 'MB_MOBILE_NUM',          _elm( $param, 'MB_MOBILE_NUM' ), 'both' );
+        }
+        $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
 
     public function getMembershipGrade()
     {
@@ -317,6 +369,129 @@ class MembershipModel extends Model
 
     }
 
+    public function insertCounsel( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBERSHIP_COUNSEL' );
+        foreach( $param as $key => $val ){
+            $builder->set( $key,                    $val );
+        }
+        $aResult                                    = $builder->insert();
+        if( $aResult ){
+            $aReturn                                = $this->db->insertID();
+        }
+        return $aReturn;
+
+    }
+    public function deleteCounsel( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBERSHIP_COUNSEL' );
+        $builder->where( 'C_IDX',                   _elm( $param, 'C_IDX' ) );
+
+        $aReturn                                    = $builder->delete();
+        return $aReturn;
+
+    }
+    public function getLatestCounselListByUserIdx( $mb_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $mb_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBERSHIP_COUNSEL MC' );
+        $builder->select( 'MC.*' );
+        $builder->select('ADM.MB_USERNAME as C_WRITER_NAME');
+        $builder->join('ADMIN_MEMBER ADM', 'MC.C_CREATE_MB_IDX = ADM.MB_IDX', 'left');
+        $builder->where( 'C_MB_IDX',                $mb_idx);
+        $builder->orderBy( 'C_CREATE_AT', 'DESC' );
+
+        $builder->limit(5);
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+
+
+    }
+    public function getUserCounselCount( $mb_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $mb_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBERSHIP_COUNSEL' );
+
+        $builder->select( 'count( C_IDX ) as total_counsel_count' );
+        $builder->where( 'C_MB_IDX',                $mb_idx);
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getCounselDataByIdx( $c_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $c_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBERSHIP_COUNSEL' );
+        $builder->where( 'C_IDX',                   $c_idx );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getCounselLists($mb_idx)
+    {
+        $aReturn = [];
+        if (empty($mb_idx) === true) {
+            return $aReturn;
+        }
+
+        $builder = $this->db->table('MEMBERSHIP_COUNSEL MC');
+        $builder->select('DATE(MC.C_CREATE_AT) as counsel_date');
+        $builder->select('MC.*');
+        $builder->select('ADM.MB_USERNAME as C_WRITER_NAME');
+        $builder->join('ADMIN_MEMBER ADM', 'MC.C_CREATE_MB_IDX = ADM.MB_IDX', 'left');
+        $builder->where('MC.C_MB_IDX', $mb_idx);
+        $builder->orderBy('MC.C_CREATE_AT', 'ASC'); // 최신순 정렬
+
+        $query = $builder->get();
+        if ($this->db->affectedRows()) {
+            $rawResults = $query->getResultArray();
+
+            // 날짜별 그룹핑 처리
+            foreach ($rawResults as $row) {
+                $date = $row['counsel_date']; // 그룹핑 기준 날짜
+                if (!isset($aReturn[$date])) {
+                    $aReturn[$date] = [];
+                }
+                $aReturn[$date][] = $row; // 해당 날짜에 속하는 데이터 추가
+            }
+        }
+
+        return $aReturn;
+    }
+
+
     public function getMembershipDataByIdx( $mb_idx )
     {
         $aReturn                                    = [];
@@ -330,6 +505,7 @@ class MembershipModel extends Model
 
         $builder->where( 'MB.MB_IDX', $mb_idx );
         $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
         if ($this->db->affectedRows())
         {
             $aReturn                                = $query->getRowArray();

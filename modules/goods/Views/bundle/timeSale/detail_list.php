@@ -101,7 +101,6 @@
                 <div class="table-responsive">
                     <table class="table table-vcenter" id="gListsTable">
                         <colgroup>
-                            <col style="width:6%;">
                             <col style="width:5%;">
                             <col style="width:8%;">
                             <col style="*">
@@ -175,6 +174,7 @@
                                                 </defs>
                                             </svg>
                                         </div>
+                                        <div></div>
                                     </td>
                                     <td class="body2-c nowrap">
                                         <div class="checkbox checkbox-single">
@@ -372,6 +372,9 @@ $('#tableSort').sortable({
         var idsInOrder = $('#tableSort').sortable('toArray',{ attribute : 'data-idx'});
 
         console.log(idsInOrder);
+        $('#tableSort tr').each(function(index) {
+            $(this).find('.numbering').text(index + 1);
+        });
     }
 });
 function removeLine( id )

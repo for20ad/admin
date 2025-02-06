@@ -237,7 +237,7 @@
                                         <span class="image-container">
                                             <img src="<?php echo base_url()._elm( $lists, 'G_ICON_PATH' )?>"  class="icon-image">
                                             <svg class="delete-button" xmlns="http://www.w3.org/2000/svg" onclick="deleteIconConfirm( '<?php echo _elm( $lists, 'G_IDX' )?>' )" viewBox="0 0 24 24" width="24" height="24" fill="red">
-                                                <path d="M18 6L6 18M6 6l12 12" stroke="black" />
+                                                <path d="M18 6L6 18M6 6l12 12" stroke="white" />
                                             </svg>
                                         </span>
                                         <?php

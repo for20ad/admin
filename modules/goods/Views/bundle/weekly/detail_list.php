@@ -103,6 +103,7 @@
                         <colgroup>
                             <col style="width:6%;">
                             <col style="width:5%;">
+                            <col style="width:5%;">
                             <col style="width:8%;">
                             <col style="*">
                             <col style="width:13%;">
@@ -114,6 +115,7 @@
                         </colgroup>
                         <thead>
                             <tr>
+                                <th></th>
                                 <th></th>
                                 <th>
                                     <div class="checkbox checkbox-single">
@@ -173,6 +175,7 @@
                                             </svg>
                                         </div>
                                     </td>
+                                    <td><span class="numbering"><?php echo $key + 1?></span></td>
                                     <td class="body2-c nowrap">
                                         <div class="checkbox checkbox-single">
 
@@ -368,6 +371,9 @@ $('#tableSort').sortable({
         var idsInOrder = $('#tableSort').sortable('toArray',{ attribute : 'data-idx'});
 
         console.log(idsInOrder);
+        $('#tableSort tr').each(function(index) {
+            $(this).find('.numbering').text(index + 1);
+        });
     }
 });
 function removeLine( id )

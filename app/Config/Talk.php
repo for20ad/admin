@@ -12,15 +12,15 @@ class Talk
             '#{URL1}'     => 'link_url'
         ],
         'KakaoInfo' => [
-            'YELLOWID_KEY' => '477c26d7bf50b8b6c6e814b2ad769bf662e442c0',
-            'UUID' => '@성우edu',
-            'PROFILE' => '도서출판 성우 EDU'
+            'YELLOWID_KEY' => '1ad105e0e3ddb720742cc1a16f791c8bbbeb33df',
+            'UUID' => '@산수유람온라인',
+            'PROFILE' => '산수유람'
         ],
         'kakaoTemplate' => [
-            'sungwoo_edu_007'   => '비밀번호재설정안내',
-            'sungwoo_edu_001' => '인증번호3',
-            'sungwoo_edu_003'   => '아이디찾기',
-            'sungwoo_edu_004'   => '비밀번호변경',
+            'timber_007'   => '비밀번호재설정안내',
+            'timber_001' => '인증번호3',
+            'timber_003'   => '아이디찾기',
+            'timber_004'   => '비밀번호변경',
         ]
     ];
 }

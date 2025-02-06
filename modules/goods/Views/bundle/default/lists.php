@@ -10,6 +10,7 @@
     $productIdxs      = _elm( $pageDatas, 'productIdxs', [] );
     $aLimitCnt        = _elm( $pageDatas, 'limitCnt', '' );
     $aColorConfig     = _elm( $pageDatas, 'aColorConfig', [] );
+    $aTotalCount      = _elm( $pageDatas, 'totalCount', 0 );
 
 ?>
 <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet">
@@ -100,6 +101,7 @@
                         <colgroup>
                             <col style="width:6%;">
                             <col style="width:5%;">
+                            <col style="width:5%;">
                             <col style="width:8%;">
                             <col style="*">
                             <col style="width:13%;">
@@ -111,6 +113,7 @@
                         </colgroup>
                         <thead>
                             <tr>
+                                <th></th>
                                 <th></th>
                                 <th>
                                     <div class="checkbox checkbox-single">
@@ -168,9 +171,12 @@
                                                     </clipPath>
                                                 </defs>
                                             </svg>
+
                                         </div>
                                     </td>
+                                    <td><span class="numbering"><?php echo $key + 1?></span></td>
                                     <td class="body2-c nowrap">
+
                                         <div class="checkbox checkbox-single">
 
                                         <?php
@@ -346,6 +352,10 @@ $('#defaultSort').sortable({
         var idsInOrder = $('#defaultSort').sortable('toArray',{ attribute : 'data-idx'});
 
         console.log(idsInOrder);
+        // 재정렬된 순서대로 .numbering 요소를 업데이트
+        $('#defaultSort tr').each(function(index) {
+            $(this).find('.numbering').text(index + 1);
+        });
     }
 });
 function removeLine( id )

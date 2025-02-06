@@ -263,34 +263,34 @@ const asideSearch = document.getElementById("asideSearch");
 const asideOpen = document.getElementById("asideOpen");
 
 if (asideSearch && asideOpen) {
-  document.addEventListener("click", function (event) {
-    if (event.target.closest(".card, #asideOpen")) {
-      return;
-    }
-    asideSearch.classList.remove("open");
-  });
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".card, #asideOpen")) {
+            return;
+        }
+        asideSearch.classList.remove("open");
+    });
 
-  asideOpen.addEventListener("click", function () {
-    asideSearch.classList.add("open");
-  });
+    asideOpen.addEventListener("click", function () {
+        asideSearch.classList.add("open");
+    });
 }
 
 //input 최대값 계산
 document.addEventListener("input", function (event) {
-  if (event.target.matches(".max-text")) {
-    let tsVal = event.target.value;
-    let numChar = tsVal.length;
-    const maxNum = event.target.getAttribute("maxlength");
-    let lenDisplay = event.target
-      .closest(".input-group")
-      .querySelector(".max-len b");
-    if (numChar > maxNum) {
-      event.target.value = tsVal.substr(0, maxNum);
-      lenDisplay.textContent = numChar;
-    } else {
-      lenDisplay.textContent = numChar;
+    if (event.target.matches(".max-text")) {
+        let tsVal = event.target.value;
+        let numChar = tsVal.length;
+        const maxNum = event.target.getAttribute("maxlength");
+        let lenDisplay = event.target
+        .closest(".input-group")
+        .querySelector(".max-len b");
+        if (numChar > maxNum) {
+            event.target.value = tsVal.substr(0, maxNum);
+            lenDisplay.textContent = numChar;
+        } else {
+            lenDisplay.textContent = numChar;
+        }
     }
-  }
 });
 
 
@@ -298,76 +298,123 @@ document.addEventListener("input", function (event) {
 //input 최대값 계산 - 페이지 로드 시 최대값 계산해서 출력
 const maxLenSpans = document.querySelectorAll(".max-len");
 maxLenSpans.forEach(function (maxLenSpan) {
-  let numChar = maxLenSpan.closest(".input-group").querySelector(".max-text")
+    let numChar = maxLenSpan.closest(".input-group").querySelector(".max-text")
     .value.length;
-  maxLenSpan.querySelector("b").textContent = numChar;
+    maxLenSpan.querySelector("b").textContent = numChar;
 });
 
 //input tel 숫자만 입력
 function allowOnlyNumbersForTelInputs() {
-  const telInputs = document.querySelectorAll('input[type="tel"]');
-  telInputs.forEach(function (telInput) {
-    telInput.addEventListener("input", function () {
-      this.value = this.value.replace(/[^0-9]/g, "");
+    const telInputs = document.querySelectorAll('input[type="tel"]');
+    telInputs.forEach(function (telInput) {
+        telInput.addEventListener("input", function () {
+            this.value = this.value.replace(/[^0-9]/g, "");
+        });
     });
-  });
 }
 allowOnlyNumbersForTelInputs();
 
 //체크박스 전체 체크
 document.querySelectorAll(".label-control").forEach(function (labelControl) {
-  labelControl.addEventListener("change", function (event) {
-    const target = event.target;
-    if (
-      target.matches('input[type="checkbox"]') &&
-      target.classList.contains("check-all")
-    ) {
-      const isChecked = target.checked;
-      const checkboxes = labelControl.querySelectorAll(
-        'input[type="checkbox"]'
-      );
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = isChecked;
-      });
-      if (!isChecked) {
-        target.checked = false; // check-all 비활성화
-      }
-    } else if (
-      target.matches('input[type="checkbox"]:not(.check-all)') &&
-      !target.checked
-    ) {
-      const checkAllCheckbox = labelControl.querySelector(".check-all");
-      if (checkAllCheckbox) {
-        checkAllCheckbox.checked = false; // check-all 비활성화
-      }
-    }
-  });
+    labelControl.addEventListener("change", function (event) {
+        const target = event.target;
+        if (
+            target.matches('input[type="checkbox"]') &&
+            target.classList.contains("check-all")
+        ) {
+            const isChecked = target.checked;
+            const checkboxes = labelControl.querySelectorAll(
+                'input[type="checkbox"]'
+            );
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = isChecked;
+            });
+            if (!isChecked) {
+                target.checked = false; // check-all 비활성화
+            }
+        } else if (
+            target.matches('input[type="checkbox"]:not(.check-all)') &&
+            !target.checked
+        ) {
+            const checkAllCheckbox = labelControl.querySelector(".check-all");
+            if (checkAllCheckbox) {
+                checkAllCheckbox.checked = false; // check-all 비활성화
+            }
+        }
+    });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 체크박스 전체 체크
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 체크박스 전체 체크
 
-    if( document.querySelector('#checkAll') != null ){
-        document.querySelector('#checkAll').addEventListener('change', function () {
+//     if( document.querySelector('#checkAll') != null ){
+//         document.querySelector('#checkAll').addEventListener('change', function () {
+//             const isChecked = this.checked;
+//             document.querySelectorAll('.check-item').forEach(function (checkbox) {
+//                 checkbox.checked = isChecked;
+//             });
+//         });
+
+//         // 개별 체크박스 체크/체크 해제 시 전체 체크박스 상태 업데이트
+//         document.querySelectorAll('.check-item').forEach(function (checkbox) {
+//             checkbox.addEventListener('change', function () {
+//                 const allChecked = document.querySelectorAll('.check-item:checked').length === document.querySelectorAll('.check-item').length;
+//                 document.querySelector('#checkAll').checked = allChecked;
+//             });
+//         });
+//     }
+
+// });
+document.addEventListener('DOMContentLoaded', function () {
+    // 체크박스 전체 체크/해제
+    const checkAllElement = document.querySelector('#checkAll');
+    const checkItemElements = document.querySelectorAll('.check-item');
+
+    if (checkAllElement !== null) {
+
+        checkAllElement.addEventListener('change', function () {
+            console.log( checkAllElement );
             const isChecked = this.checked;
             document.querySelectorAll('.check-item').forEach(function (checkbox) {
                 checkbox.checked = isChecked;
             });
         });
 
-        // 개별 체크박스 체크/체크 해제 시 전체 체크박스 상태 업데이트
+        // 개별 체크박스 선택 시 전체 선택 체크박스 상태 업데이트
         document.querySelectorAll('.check-item').forEach(function (checkbox) {
             checkbox.addEventListener('change', function () {
                 const allChecked = document.querySelectorAll('.check-item:checked').length === document.querySelectorAll('.check-item').length;
-                document.querySelector('#checkAll').checked = allChecked;
+                checkAllElement.checked = allChecked;
             });
         });
     }
-
 });
+function initCheckAll(id = '') {
+    // 체크박스 전체 체크/해제
 
+    const checkAllSelector = id ? `${id} #checkAll` : '#checkAll';
+    const checkItemSelector = id ? `${id} .check-item` : '.check-item';
 
+    const checkAllElement = document.querySelector(checkAllSelector);
+    const checkItemElements = document.querySelectorAll(checkItemSelector);
 
+    if (checkAllElement !== null) {
+        checkAllElement.addEventListener('change', function () {
+            const isChecked = this.checked;
+            checkItemElements.forEach(function (checkbox) {
+                checkbox.checked = isChecked;
+            });
+        });
+
+        // 개별 체크박스 선택 시 전체 선택 체크박스 상태 업데이트
+        checkItemElements.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                const allChecked = document.querySelectorAll(`${checkItemSelector}:checked`).length === checkItemElements.length;
+                checkAllElement.checked = allChecked;
+            });
+        });
+    }
+}
 /* 년도 셀렉트박스
 data-start-year가 빈값이면 현재 년도부터 data-end-year까지 출력
 data-end-year가 빈값이면 현재 data-start-year부터 현재까지 출력
@@ -586,8 +633,9 @@ function displayPageHistory() {
 }
 
 function toggleForm( obj ){
-
-    var $cardBody = obj.closest('.col-12').find('.card-body');
+    var $parentCol = obj.closest('.col-12').length ? obj.closest('.col-12') : obj.closest('.col-md');
+    // 해당하는 col 내에서 card-body 찾기
+    var $cardBody = $parentCol.find('.card-body');
     if ($cardBody.is(':visible')) {
         $cardBody.slideUp();
         obj.find('svg > path').attr('d', 'M1 1L7 7L13 1'); // 반대 방향 아이콘
@@ -598,15 +646,38 @@ function toggleForm( obj ){
 }
 var Pagination = (function() {
     function pagingNumFunc(callbackMethod) {
-        $(document).on('click', '.page-item a:not(#subList .page-item a)', function(e) {
+        $(document).on('click', '.page-item a:not(#frm_sub_lists .page-item a)', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            let page = $(this).data('page'); // 클릭한 페이지 번호 가져오기
+            if (!page) {
+                console.error('페이지 번호를 가져올 수 없습니다.');
+                return;
+            }
+
+            // URL 업데이트
+            let newUrl = window.location.origin + window.location.pathname + '?page=' + page;
+            history.pushState({ page: page }, null, newUrl);
+
             callbackMethod($(this).data('page'));
+
         });
     }
 
     function pagingSelectFunc(callbackMethod) {
-        $(document).on('change', '.pagination-goto select:not(#subList .pagination-goto select)', function(e) {
+        $(document).on('change', '.pagination-goto select:not(#frm_sub_lists .pagination-goto select)', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+
+            let page = $(this).val(); // 선택한 페이지 번호 가져오기
+            if (!page) {
+                console.error('페이지 번호를 가져올 수 없습니다.');
+                return;
+            }
+
+            // URL 업데이트
+            let newUrl = window.location.origin + window.location.pathname + '?page=' + page;
+            history.pushState({ page: page }, null, newUrl);
             callbackMethod($(this).val());
         });
     }
@@ -614,6 +685,13 @@ var Pagination = (function() {
     return {
         initPagingNumFunc: function(callbackMethod) {
             pagingNumFunc(callbackMethod);
+            window.addEventListener('popstate', function(event) {
+                if (event.state && event.state.page) {
+                    let page = event.state.page;
+                    console.log(`뒤로 가기: 페이지 ${page}`);
+                    callbackMethod(page); // 콜백 메서드 호출
+                }
+            });
         },
         initPagingSelectFunc: function(callbackMethod) {
             pagingSelectFunc(callbackMethod);
@@ -621,18 +699,33 @@ var Pagination = (function() {
     };
 })();
 var subPagination = (function() {
+
+    // 중복 바인딩 방지 플래그
+    var isPagingNumBound = false;
+    var isPagingSelectBound = false;
+
     function pagingNumFunc(callbackMethod) {
-        $(document).on('click', '#subList .page-item a', function(e) {
-            e.preventDefault();
-            callbackMethod($(this).data('page'));
-        });
+        if (!isPagingNumBound) {  // 이미 바인딩된 경우 중복 바인딩 방지
+            $(document).on('click', '#frm_sub_lists .page-item a', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                callbackMethod($(this).data('page'));
+            });
+            isPagingNumBound = true;  // 플래그 설정
+        }
     }
 
     function pagingSelectFunc(callbackMethod) {
-        $(document).on('change', '#subList .pagination-goto select', function(e) {
-            e.preventDefault();
-            callbackMethod($(this).val());
-        });
+        if (!isPagingSelectBound) {  // 이미 바인딩된 경우 중복 바인딩 방지
+            $(document).on('change', '#frm_sub_lists .pagination-goto select', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                callbackMethod($(this).val());
+            });
+            isPagingSelectBound = true;  // 플래그 설정
+        }
     }
 
     return {
@@ -644,7 +737,48 @@ var subPagination = (function() {
         }
     };
 })();
+var subSelectorPagination = (function() {
 
+    // 각 탭별 플래그 관리
+    var pagingBoundFlags = {};
+    var pagingSelectBound = {};
+
+    function pagingNumFunc(selector, callbackMethod) {
+        if (!pagingBoundFlags[selector]) {  // 해당 탭에 바인딩된 적이 없을 때만
+            $(document).on('click', selector + ' .page-item a', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                callbackMethod($(this).data('page'));
+            });
+            pagingBoundFlags[selector] = true;  // 해당 탭에 대한 플래그 설정
+        }
+    }
+
+    function pagingSelectFunc(selector, callbackMethod) {
+        if (!pagingSelectBound[selector]) {  // 해당 탭에 바인딩된 적이 없을 때만
+            $(document).on('change', selector + ' .pagination-goto select', function(e) {
+                console.log('Select changed:', $(this).val()); // 이벤트 발생 확인용
+                e.preventDefault();
+                e.stopPropagation();
+
+                callbackMethod($(this).val());
+            });
+            pagingSelectBound[selector] = true;  // 해당 탭에 대한 플래그 설정
+        }
+    }
+
+    return {
+        initPagingNumFunc: function(selector, callbackMethod) {
+            selector = selector+ ' #frm_sub_lists' || '#frm_sub_lists'; // 기본 셀렉터 설정
+            pagingNumFunc(selector, callbackMethod);
+        },
+        initPagingSelectFunc: function(selector, callbackMethod) {
+            selector = selector+ ' #frm_sub_lists' || '#frm_sub_lists'; // 기본 셀렉터 설정
+            pagingSelectFunc(selector, callbackMethod);
+        }
+    };
+})();
 // document.addEventListener("DOMContentLoaded", () => {
 //   const pageTitleElement = document.querySelector(".page-title");
 //   if (pageTitleElement) {
@@ -697,6 +831,77 @@ function showTooltip(element, tooltipId) {
         }, { once: true });
     }, 0);
 }
+
+
+function showTooltipPosition(element, tooltipId, position = 'top') {
+    const tooltipData = tooltipContent[tooltipId];
+    if (!tooltipData) return;
+
+    // 기존 툴팁 제거
+    let existingTooltip = document.getElementById(tooltipId);
+    if (existingTooltip) {
+        existingTooltip.remove();
+    }
+
+    // 새로운 툴팁 생성
+    let tooltip = document.createElement('div');
+    tooltip.className = `tooltip_over_p ${position}`;  // 꼬리 위치에 따라 클래스 추가
+    tooltip.id = tooltipId;
+
+    // 툴팁 타이틀과 내용 추가
+    let tooltipTitle = document.createElement('div');
+    tooltipTitle.className = 'tooltip_title';
+    tooltipTitle.innerText = tooltipData.title;
+
+    let tooltipBody = document.createElement('div');
+    tooltipBody.className = 'tooltip_body';
+    tooltipBody.innerHTML = tooltipData.content; // HTML 태그를 포함한 내용 삽입
+
+    tooltip.appendChild(tooltipTitle);
+    tooltip.appendChild(tooltipBody);
+
+    document.body.appendChild(tooltip);
+
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+    const elementWidth = element.offsetWidth;
+    const elementRect = element.getBoundingClientRect();
+
+    // 툴팁 기본 위치 계산 (화면 상단에서 떨어진 위치)
+    let tooltipLeft = elementRect.left + window.pageXOffset + (elementWidth / 2) - (tooltipWidth / 2);
+    let tooltipTop = elementRect.top + window.pageYOffset - tooltipHeight;
+
+    // 툴팁 위치 조정 (top은 화면 상단에서 떨어진 위치, left는 좌우 위치)
+    tooltipLeft += tooltipData.left || 0;
+    tooltipTop += tooltipData.top || 0;
+
+    // 꼬리 위치 조정 (말풍선 꼬리의 위치를 height 값으로 처리)
+    if (tooltipData.height) {
+        tooltip.style.setProperty('--tooltip-arrow-offset', `${tooltipData.height}px`);
+    }
+
+    // 툴팁 위치 설정
+    tooltip.style.left = `${tooltipLeft}px`;
+    tooltip.style.top = `${tooltipTop}px`;
+    tooltip.style.display = 'block';
+
+    // 자동으로 툴팁을 닫기 위한 클릭 이벤트 추가
+    setTimeout(function() {
+        document.addEventListener('click', function(event) {
+            if (!tooltip.contains(event.target) && event.target !== element) {
+                hideTooltip(tooltipId);
+            }
+        }, { once: true });
+    }, 0);
+}
+
+
+
+
+
+
+
+
 
 function hideTooltip(tooltipId) {
     let tooltip = document.getElementById(tooltipId);

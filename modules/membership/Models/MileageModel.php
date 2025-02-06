@@ -30,6 +30,23 @@ class MileageModel extends Model
         $builder->join( 'CODE C', 'M.M_REASON_CD = C.C_IDX', 'left' );
         $builder->join( 'ADMIN_MEMBER ADM', 'M.M_ADM_IDX = ADM.MB_IDX', 'left' );
         $builder->where( 'M.M_MB_IDX', _elm( $param, 'M_MB_IDX' ) );
+        if( empty( _elm( $param, 's_condition' ) ) === false && empty( _elm( $param, 's_keyword' ) ) === false){
+            if( _elm( $param, 's_condition' ) == 'orderNo' ){
+                $builder->like( 'M.M_USE_HISTORY', _elm( $param, 's_keyword' ), 'both' );
+            }
+        }
+        if( empty( _elm( $param, 's_start_date' ) ) === false && empty( _elm( $param, 's_end_date' ) ) === false ){
+            $builder->where( 'M_CREATE_AT >=', _elm( $param, 's_start_date' ) );
+            $builder->where( 'M_CREATE_AT <=', _elm( $param, 's_end_date' ) );
+        }
+
+        if( empty( _elm( $param, 's_reason_gbn' ) ) === false ){
+            $builder->where( 'M.M_REASON_CD', _elm( $param, 's_reason_gbn' ) );
+        }
+        if( empty( _elm( $param, 's_gbn' ) ) === false ){
+            $builder->where( 'M.M_GBN', _elm( $param, 's_gbn' ) );
+        }
+
         // 총 결과 수
         $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
 
@@ -72,6 +89,27 @@ class MileageModel extends Model
         return $aReturn;
     }
 
+    public function updateMileageHistoryData( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBER_MILEAGE' );
+
+        $builder->set( 'M_TYPE',                    _elm( $param, 'M_TYPE' ) );
+        $builder->set( 'M_REASON_CD',               _elm( $param, 'M_REASON_CD' ) );
+        $builder->set( 'M_REASON_MSG',              _elm( $param, 'M_REASON_MSG' ) );
+        $builder->set( 'M_ADM_IDX',                 _elm( $param, 'M_ADM_IDX' ) );
+
+        $builder->where( 'M_IDX',                   _elm( $param, 'M_IDX' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+
+
+    }
+
     public function setMileageHistory( $param = [] )
     {
         $aReturn                                    = false;
@@ -87,6 +125,24 @@ class MileageModel extends Model
             $aReturn                                = $this->db->insertID();
         }
         return $aReturn;
+    }
+
+    public function getUserMileageHistoryDataByIdx( $h_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $h_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'MEMBER_MILEAGE' );
+        $builder->where( 'M_IDX',                   $h_idx );
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+
     }
 
     public function getMileageSummeryDataByMbIdx( $param = [] )

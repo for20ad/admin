@@ -71,6 +71,7 @@ class LogModel extends Model
 
 
         $aReturn                                    = $builder->insert();
+        //echo $this->db->getLastQuery();
         return $aReturn;
 
     }

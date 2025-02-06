@@ -156,7 +156,6 @@ class CoreController extends BaseController
      */
     protected function _pagination($param = [])
     {
-
         $pager                                      = \Config\Services::pager();
 
         $currentPage                                = $param['cur_page'] ?? 1;
@@ -166,13 +165,18 @@ class CoreController extends BaseController
 
         $totalPages                                 = ceil($totalRows / $perPage);
 
+        // 페이지 그룹당 표시할 최대 페이지 수
+        $pageGroupSize                              = 10;
+        $currentGroupStart                          = (ceil($currentPage / $pageGroupSize) - 1) * $pageGroupSize + 1;
+        $currentGroupEnd                            = min($currentGroupStart + $pageGroupSize - 1, $totalPages);
+
         $html                                       = '<ul class="pagination align-items-center body2-c">';
 
-        // 이전 페이지 버튼
-        if ($currentPage > 1) {
-            $prev                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage - 1) : 'javascript:void(0);';
+        // 이전 그룹 버튼
+        if ($currentGroupStart > 1) {
+            $prevGroup                              = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentGroupStart - 1) : 'javascript:void(0);';
             $html                                  .= '<li class="page-item">
-                                                        <a href="' . $prev . '" data-page="'.($currentPage - 1).'" class="page-link">
+                                                        <a href="' . $prevGroup . '" data-page="'.($currentGroupStart - 1).'" class="page-link">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M10 4L6 8L10 12" stroke="#ADB5BD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
@@ -181,7 +185,7 @@ class CoreController extends BaseController
         }
 
         // 페이지 번호
-        for ($i = 1; $i <= $totalPages; $i++) {
+        for ($i = $currentGroupStart; $i <= $currentGroupEnd; $i++) {
             if ($i == $currentPage) {
                 $html                              .= '<li class="page-item active"><a href="javascript:void(0);" class="">' . $i . '</a></li>';
             } else {
@@ -190,11 +194,11 @@ class CoreController extends BaseController
             }
         }
 
-        // 다음 페이지 버튼
-        if ($currentPage < $totalPages) {
-            $next                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage + 1) : 'javascript:void(0);';
+        // 다음 그룹 버튼
+        if ($currentGroupEnd < $totalPages) {
+            $nextGroup                              = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentGroupEnd + 1) : 'javascript:void(0);';
             $html                                  .= '<li class="page-item">
-                                                        <a href="' . $next .'" data-page="'.( $currentPage + 1 ).'" class="">
+                                                        <a href="' . $nextGroup .'" data-page="'.( $currentGroupEnd + 1 ).'" class="page-link">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M6 4L10 8L6 12" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>

@@ -18,7 +18,7 @@
     </div>
     <div class="modal-body" style="flex: 1 1 auto;overflow-y: auto;">
         <div>
-            <div class="row row-deck row-cards">
+            <div class="row row-deck row-cards col-12">
 
                 <div class="card">
                 <div class="card accordion-card"
@@ -90,7 +90,7 @@
     </div>
     <br>
     <div>
-        <div class="row row-deck row-cards">
+        <div class="row row-deck row-cards col-12">
 
             <div class="card">
             <div class="card accordion-card"
@@ -119,7 +119,7 @@
             </div>
 
             <div class="card-body">
-                <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_lists',  'onSubmit' => 'return false;', 'autocomplete' => 'off']); ?>
+                <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_sub_lists',  'onSubmit' => 'return false;', 'autocomplete' => 'off']); ?>
                     <div class="table-responsive">
                         <table class="table table-vcenter" id="listsTable">
                             <colgroup>
@@ -181,7 +181,7 @@
                                         <?php echo _elm( $vData, 'G_IDX' );?>
                                     </td>
                                     <td>
-                                        <img src="/<?php echo _elm( $vData, 'I_IMG_PATH' );?>">
+                                        <img src="/<?php echo _elm( $vData, 'I_IMG_PATH' );?>" style="width:50px">
                                     </td>
                                     <td>
                                         <?php echo _elm( $vData, 'G_NAME' )?>
@@ -195,7 +195,7 @@
                         </table>
                     </div>
                     <!--페이징-->
-                    <div class="pagination-wrapper" id="paginatoon">
+                    <div class="pagination-wrapper" id="pagination">
                     </div>
                 </div>
                 <?php echo form_close()?>
@@ -246,7 +246,8 @@ $(document).ready(function() {
     }
 });
 
-function getSearchList(){
+function getSearchList( page ){
+
     $targetId = '<?php echo $aTargetId?>';
 
     var data = 'picLists='+addProductPickList ;
@@ -256,8 +257,16 @@ function getSearchList(){
         data = 'picLists='+groupProductLists;
     }else if( $targetId == 'best' ){
         data = 'picLists='+bestProductPcikList ;
+    } else if( $targetId == 'excp_product' ){
+        data = 'picLists='+exceptProductPickList ;
     }
-    let frm = $('#frm_search')
+    let frm = $('#frm_search');
+    const urlParams = new URLSearchParams(window.location.search);
+    if (page === undefined) {
+        page = urlParams.get('page') || 1; // 기본값 1
+    }
+    frm.find('[name=page]').val( page );
+
     $.ajax({
         url: '/apis/goods/getPopGoodsLists',
         method: 'POST',
@@ -279,7 +288,7 @@ function getSearchList(){
             }
 
             $('#listsTable tbody').empty().html( response.page_datas.lists_row );
-
+            $('#pagination').empty().html(response.page_datas.pagination);
             //restoreAccordionState();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -290,19 +299,19 @@ function getSearchList(){
         complete: function () { }
     });
 }
+getSearchList(1);
 
-(function(){
-    $(document).on('keyup', '[name=s_keyword]', function(e){
-        e.preventDefault();
-        if( e.keyCode == 13 ){
-            getSearchList();
-        }
-    });
-    /* paging 한 묶음 S */
-    Pagination.initPagingNumFunc(getSearchList);
-    Pagination.initPagingSelectFunc(getSearchList);
-    /* paging 한 묶음 E */
+$(document).on('keyup', '[name=s_keyword]', function(e){
+    e.preventDefault();
+    if( e.keyCode == 13 ){
+        getSearchList();
+    }
 });
+/* paging 한 묶음 S */
+subPagination.initPagingNumFunc(getSearchList);
+subPagination.initPagingSelectFunc(getSearchList);
+/* paging 한 묶음 E */
+
 
 
 

@@ -112,7 +112,7 @@ class GoodsApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 금액 수정 - orgData:'.json_encode($aData, JSON_UNESCAPED_UNICODE).' // -> //'. json_encode($modelParam, JSON_UNESCAPED_UNICODE) ;
+        $logParam['MB_HISTORY_CONTENT']             = '상품 금액 수정 - orgData:'.json_encode($aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE).' // -> //'. json_encode($modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -146,6 +146,8 @@ class GoodsApi extends ApiController
         $response                                   = $this->_initResponse();
         $requests                                   = $this->request->getPost();
         $files                                      = $this->request->getFiles();
+
+
         $goodsModel                                 = new GoodsModel();
         $membershipModel                            = new MembershipModel();
         $categoryModel                              = new CategoryModel();
@@ -276,16 +278,16 @@ class GoodsApi extends ApiController
                         $filteredGroupData = array_filter($removeGroupData, function($item) use ( $currentGoodsIdx ) {
                             return $item['g_idx'] != $currentGoodsIdx; // 단일 값 비교
                         });
-                        $removeParam                     =[];
-                        $removeParam['G_IDX']            = $removeIdx;
-                        $removeParam['G_GROUP']          = json_encode( $filteredGroupData );
-                        $removeParam['G_GROUP_MAIN']     = 'N';
-                        $rmStatus                         = $goodsModel->updateGoodsGroup( $removeParam );
+                        $removeParam                =[];
+                        $removeParam['G_IDX']       = $removeIdx;
+                        $removeParam['G_GROUP']     = json_encode( $filteredGroupData );
+                        $removeParam['G_GROUP_MAIN']= 'N';
+                        $rmStatus                   = $goodsModel->updateGoodsGroup( $removeParam );
 
                         if ( $this->db->transStatus() === false || $rmStatus == false ) {
                             $this->db->transRollback();
-                            $response['status']                     = 400;
-                            $response['alert']                      = '그룹상품 제외 처리중 오류발생.. 다시 시도해주세요.';
+                            $response['status']     = 400;
+                            $response['alert']      = '그룹상품 제외 처리중 오류발생.. 다시 시도해주세요.';
                             return $this->respond( $response );
                         }
                     }
@@ -300,9 +302,9 @@ class GoodsApi extends ApiController
             $originalGroupInfo = [];
             foreach( _elm( $requests, 'i_goods_group_idxs') as $goodsGroupIdx  ){
                 $isMain = ($i == 0) ? 'Y' : 'N';
-                $originalGroupInfo[]                        = [
-                    'g_idx'                                 => $goodsGroupIdx,
-                    'g_is_main'                             => $isMain
+                $originalGroupInfo[]                = [
+                    'g_idx'                         => $goodsGroupIdx,
+                    'g_is_main'                     => $isMain
                 ];
 
                 $i++;
@@ -311,8 +313,8 @@ class GoodsApi extends ApiController
 
             // groupDatas 배열을 순회하며 업데이트 작업 수행
             foreach ($originalGroupInfo as $groupData) {
-                $goodsGroupIdx = _elm($groupData, 'g_idx');
-                $isMain = _elm($groupData, 'g_is_main');
+                $goodsGroupIdx                      = _elm($groupData, 'g_idx');
+                $isMain                             = _elm($groupData, 'g_is_main');
 
                 // 여기에 업데이트 쿼리를 넣습니다
                 $groupUpdateParam = [
@@ -325,8 +327,8 @@ class GoodsApi extends ApiController
                 $grStatus                           = $goodsModel->updateGoodsGroup( $groupUpdateParam );
                 if ( $this->db->transStatus() === false || $grStatus == false ) {
                     $this->db->transRollback();
-                    $response['status']                     = 400;
-                    $response['alert']                      = '그룹상품 등록 처리중 오류발생.. 다시 시도해주세요.';
+                    $response['status']             = 400;
+                    $response['alert']              = '그룹상품 등록 처리중 오류발생.. 다시 시도해주세요.';
                     return $this->respond( $response );
                 }
             }
@@ -343,7 +345,7 @@ class GoodsApi extends ApiController
         # TODO: 검색용 카테고리 JSON 형식으로 저장
         #------------------------------------------------------------------
         $cateInfo                                   = $categoryModel->getCategoryDataByIdxs( _elm( $requests, 'i_cate_idx' ) );
-        $modelParam['G_CATEGORYS']                  = json_encode( $cateInfo, JSON_UNESCAPED_UNICODE );
+        $modelParam['G_CATEGORYS']                  = json_encode( $cateInfo, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
 
         $modelParam['G_NAME']                       = _elm( $requests, 'i_goods_name' );
         $modelParam['G_NAME_ENG']                   = _elm( $requests, 'i_goods_name_eng' );
@@ -364,7 +366,7 @@ class GoodsApi extends ApiController
         $modelParam['G_SELL_PERIOD_END_AT']         = _elm( $requests, 'i_sell_period_end_at' );
         $modelParam['G_COLOR']                      = _elm( $requests, 'i_goods_color' );
         $modelParam['G_SELL_PRICE']                 = preg_replace('/,/','', _elm( $requests, 'i_sell_price' ) );
-        $modelParam['G_SELL_UNIT']                  = preg_replace('/,/','', _elm( $requests, 'i_sell_unit' ) );
+        $modelParam['G_SELL_UNIT']                  = preg_replace('/,/','', _elm( $requests, 'i_sell_unit' ) ) ?? 'EA';
         $modelParam['G_BUY_PRICE']                  = preg_replace('/,/','', _elm( $requests, 'i_buy_price' ) );
         $modelParam['G_PRICE']                      = preg_replace('/,/','', _elm( $requests, 'i_goods_price' ) );
         $modelParam['G_PRICE_RATE']                 = preg_replace('/,/','', _elm( $requests, 'i_goods_price_rate' ) );
@@ -417,8 +419,8 @@ class GoodsApi extends ApiController
             $gDelStatus                             = $goodsModel->deleteData( 'GOODS_DISCOUNT_GROUP', ['field'=>'D_GOODS_IDX', 'idx'=>_elm( $requests, 'i_goods_idx' ) ] );
             if ( $this->db->transStatus() === false || $gDelStatus == false ) {
                 $this->db->transRollback();
-                $response['status']                     = 400;
-                $response['alert']                      = 'DC 그룹 삭제 처리중 오류발생.. 다시 시도해주세요.';
+                $response['status']                 = 400;
+                $response['alert']                  = 'DC 그룹 삭제 처리중 오류발생.. 다시 시도해주세요.';
                 return $this->respond( $response );
             }
 
@@ -428,19 +430,19 @@ class GoodsApi extends ApiController
         #------------------------------------------------------------------
         $modelParam['G_RELATION_GOODS_FLAG']        = _elm( $requests, 'i_relation_use_flag' );
 
-        $existingRelationData = json_decode(_elm($aData, 'G_RELATION_GOODS'), true);  // 기존 G_GROUP 데이터
+        $existingRelationData                       = json_decode(_elm($aData, 'G_RELATION_GOODS'), true);  // 기존 G_GROUP 데이터
         if( empty( $existingRelationData ) === false ){
             #------------------------------------------------------------------
             # TODO: 새로 요청된 연관상품 데이터 로드
             #------------------------------------------------------------------
-            $newRelationData = _elm($requests, 'i_relation_goods_idxs');
+            $newRelationData                        = _elm($requests, 'i_relation_goods_idxs');
 
             #------------------------------------------------------------------
             # TODO:  기존 데이터의 g_idx 배열 추출
             #------------------------------------------------------------------
             if( empty( $newRelationData ) === false ){
 
-                $existingwRelationIds = array_column($newRelationData, 'g_idx');
+                $existingwRelationIds               = array_column($newRelationData, 'g_idx');
 
                 #------------------------------------------------------------------
                 # TODO: 기존 데이터에서 새로 요청된 데이터에 없는 항목(제거된 항목)을 추출
@@ -449,14 +451,14 @@ class GoodsApi extends ApiController
 
                 if (!empty($toRemoveRelation)) {
                     foreach ($toRemoveRelation as $removeIdx) {
-                        $removeDataRel = $goodsModel->getGoodsDataByIdx($removeIdx);
+                        $removeDataRel              = $goodsModel->getGoodsDataByIdx($removeIdx);
                         if (!empty($removeDataRel)) {
                             $removeRelationData = json_decode(_elm($removeDataRel, 'G_GROUP'), true);
                             if (is_array($removeRelationData)) {
                                 #------------------------------------------------------------------
                                 # TODO: $removeIdx 값을 제외한 항목만 남기도록 필터링
                                 #------------------------------------------------------------------
-                                $currentGoodsIdx = _elm($requests, 'i_goods_idx');
+                                $currentGoodsIdx    = _elm($requests, 'i_goods_idx');
                                 $filteredRelationData = array_filter($removeRelationData, function($item) use ( $currentGoodsIdx ) {
                                     return $item['g_idx'] != $currentGoodsIdx; // 단일 값 비교
                                 });
@@ -485,12 +487,12 @@ class GoodsApi extends ApiController
                     $relationDatas[$r_key]['g_idx'] = $relationIdx;
                     $relationDatas[$r_key]['g_add_gbn']= _elm( _elm( $requests, 'i_relation_goods_add_gbn' ), $r_key );
                     if( _elm( _elm( $requests, 'i_relation_goods_add_gbn' ), $r_key ) == 'dup' ){
-                        $targetGoodsInfo                = $goodsModel->getGoodsDataByIdx( $relationIdx );
+                        $targetGoodsInfo            = $goodsModel->getGoodsDataByIdx( $relationIdx );
                         if( empty( $targetGoodsInfo ) == false ){
-                            $tRelInfo                   = json_decode( _elm($targetGoodsInfo, 'G_RELATION_GOODS'), true );
-                            $tRelInfo[]                 = [
-                                'g_idx'                 => _elm( $requests, 'i_goods_idx' ),
-                                'g_add_gbn'             => _elm( _elm( $relationDatas, $r_key ), 'g_add_gbn' ),
+                            $tRelInfo               = json_decode( _elm($targetGoodsInfo, 'G_RELATION_GOODS'), true );
+                            $tRelInfo[]             = [
+                                'g_idx'             => _elm( $requests, 'i_goods_idx' ),
+                                'g_add_gbn'         => _elm( _elm( $relationDatas, $r_key ), 'g_add_gbn' ),
                             ];
                             #------------------------------------------------------------------
                             # TODO:  중복 제거: g_idx가 중복된 항목을 제거.
@@ -527,7 +529,7 @@ class GoodsApi extends ApiController
                 }
 
             }
-            $modelParam['G_RELATION_GOODS']         = json_encode( $relationDatas , JSON_UNESCAPED_UNICODE);
+            $modelParam['G_RELATION_GOODS']         = json_encode( $relationDatas , JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 
         }else{
             $modelParam['G_RELATION_GOODS']         = NULL;
@@ -538,49 +540,109 @@ class GoodsApi extends ApiController
         #------------------------------------------------------------------
         $modelParam['G_ADD_GOODS_FLAG']             = _elm( $requests, 'i_add_goods_flag' );
         if( _elm( $requests, 'i_add_goods_flag' ) == 'Y' ){
-            $modelParam['G_ADD_GOODS']              = json_encode( _elm( $requests, 'i_add_goods_idxs', [] ), JSON_UNESCAPED_UNICODE );
+            $modelParam['G_ADD_GOODS']              = json_encode( _elm( $requests, 'i_add_goods_idxs', [] ), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         }
 
         #------------------------------------------------------------------
         # TODO: 옵션사용 설정 i_option_use_flag == 'Y'
         #------------------------------------------------------------------
         $modelParam['G_OPTION_USE_FLAG']            = _elm( $requests, 'i_option_use_flag' );
+        if( empty( _elm( $requests, 'i_option_use_flag' ) ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '옵션 사용 여부를 선택해주세요.';
+
+            return $this->respond( $response );
+        }
         if( _elm( $requests, 'i_option_use_flag' ) == 'Y' ){
             if( empty(  _elm( $requests, 'i_option_keys' ) ) === true ){
-                $response['status']                               = 400;
-                $response['alert']                                = '옵션명을 입력해주세요.';
+                $response['status']                 = 400;
+                $response['alert']                  = '옵션명을 입력해주세요.';
 
                 return $this->respond( $response );
             }
             #------------------------------------------------------------------
-            # TODO: 기존 데이터 삭제
+            # TODO: 기존 옵션 데이터 조회
             #------------------------------------------------------------------
-            $oDelStatus                             = $goodsModel->deleteData( 'GOODS_OPTIONS', ['field'=>'O_GOODS_IDX', 'idx'=>_elm( $requests, 'i_goods_idx' ) ] );
-            if ( $this->db->transStatus() === false || $oDelStatus == false ) {
-                $this->db->transRollback();
-                $response['status']                 = 400;
-                $response['alert']                  = '옵션 삭제 처리중 오류발생.. 다시 시도해주세요.';
-                return $this->respond( $response );
+            $existingOptions                        = $goodsModel->getGoodsOptions(_elm($requests, 'i_goods_idx'));
+
+            #------------------------------------------------------------------
+            # TODO: 전달된 옵션 인덱스 목록
+            #------------------------------------------------------------------
+            $postOptionIdxs                         = array_filter( _elm( $requests, 'i_option_idx' )?? [] );
+
+            #------------------------------------------------------------------
+            # TODO: 기존 데이터 중 POST로 넘어온 데이터에 없는 항목 삭제
+            #------------------------------------------------------------------
+            if( empty($postOptionIdxs) === false ){
+                foreach ($existingOptions as $existingOption) {
+                    if ( !in_array( _elm( $existingOption, 'O_IDX' ) , $postOptionIdxs ) ) {
+                        $deleteStatus               = $goodsModel->deleteData('GOODS_OPTIONS', [ 'field' => 'O_IDX', 'idx' => _elm( $existingOption, 'O_IDX') ] );
+                        if ($this->db->transStatus() === false || $deleteStatus == false) {
+                            $this->db->transRollback();
+                            $response['status'] = 400;
+                            $response['alert'] = '옵션 삭제 처리 중 오류 발생.. 다시 시도해주세요.';
+                            return $this->respond($response);
+                        }
+                    }
+                }
+            }else{
+                foreach ($existingOptions as $existingOption) {
+                    $deleteStatus                   = $goodsModel->deleteData('GOODS_OPTIONS', [ 'field' => 'O_IDX', 'idx' => _elm( $existingOption, 'O_IDX') ] );
+                    if ($this->db->transStatus() === false || $deleteStatus == false) {
+                        $this->db->transRollback();
+                        $response['status'] = 400;
+                        $response['alert'] = '옵션 삭제 처리 중 오류 발생.. 다시 시도해주세요.';
+                        return $this->respond($response);
+                    }
+                }
             }
+
+            // #------------------------------------------------------------------
+            // # TODO: 기존 데이터 삭제
+            // #------------------------------------------------------------------
+            // $oDelStatus                             = $goodsModel->deleteData( 'GOODS_OPTIONS', ['field'=>'O_GOODS_IDX', 'idx'=>_elm( $requests, 'i_goods_idx' ) ] );
+            // if ( $this->db->transStatus() === false || $oDelStatus == false ) {
+            //     $this->db->transRollback();
+            //     $response['status']                 = 400;
+            //     $response['alert']                  = '옵션 삭제 처리중 오류발생.. 다시 시도해주세요.';
+            //     return $this->respond( $response );
+            // }
 
             foreach( _elm( $requests, 'i_option_keys' ) as $o_key => $option_key ){
-                $optionParam                            = [];
-                $optionParam['O_KEYS']                  = $option_key;
-                $optionParam['O_VALUES']                = _elm( _elm( $requests, 'i_option_value' ), $o_key );
-                $optionParam['O_STOCK']                 = _elm( _elm( $requests, 'i_option_stock' ), $o_key );
-                $optionParam['O_ADD_PRICE']             = preg_replace('/,/','', _elm( _elm( $requests, 'i_option_add_price' ), $o_key ) ) ;
-                $optionParam['O_VIEW_STATUS']           = _elm( _elm( $requests, 'i_option_status' ), $o_key );
-                $optionParam['O_CREATE_AT']             = date( 'Y-m-d H:i:s' );
-                $optionParam['O_CREATE_IP']             = $this->request->getIPAddress();
-                $optionParam['O_CREATE_MB_IDX']         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
-                $optionParam['O_GOODS_IDX']             = _elm( $requests, 'i_goods_idx' );
+                $optionParam                        = [];
+                $optionParam['O_KEYS']              = $option_key;
+                $optionParam['O_VALUES']            = _elm( _elm( $requests, 'i_option_value' ), $o_key );
+                $optionParam['O_STOCK']             = _elm( _elm( $requests, 'i_option_stock' ), $o_key );
+                $optionParam['O_ADD_PRICE']         = preg_replace('/,/','', _elm( _elm( $requests, 'i_option_add_price' ), $o_key ) ) ;
+                $optionParam['O_VIEW_STATUS']       = _elm( _elm( $requests, 'i_option_status' ), $o_key );
 
-                $oIdx                                   = $goodsModel->insertGoodsOptions( $optionParam );
-                if ( $this->db->transStatus() === false || $oIdx == false ) {
-                    $this->db->transRollback();
-                    $response['status']             = 400;
-                    $response['alert']              = '옵션 저장 처리중 오류발생.. 다시 시도해주세요.';
-                    return $this->respond( $response );
+                $optionIdx                          = _elm( _elm($requests, 'i_option_idx'), $o_key, null );
+                if ($optionIdx) {
+                    $optionParam['O_IDX']           = $optionIdx;
+                    $optionParam['O_UPDATE_AT']     = date( 'Y-m-d H:i:s' );
+                    $optionParam['O_UPDATE_IP']     = $this->request->getIPAddress();
+                    $optionParam['O_UPDATE_MB_IDX'] = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+                    $optionParam['O_GOODS_IDX']     = _elm( $requests, 'i_goods_idx' );
+                    $updateStatus                   = $goodsModel->updateGoodsOptions($optionParam);
+                    if ($this->db->transStatus() === false || $updateStatus == false) {
+                        $this->db->transRollback();
+                        $response['status']         = 400;
+                        $response['alert']          = '옵션 수정 처리 중 오류 발생.. 다시 시도해주세요.';
+                        return $this->respond($response);
+                    }
+                } else {
+                    $optionParam['O_CREATE_AT']     = date( 'Y-m-d H:i:s' );
+                    $optionParam['O_CREATE_IP']     = $this->request->getIPAddress();
+                    $optionParam['O_CREATE_MB_IDX'] = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+                    $optionParam['O_GOODS_IDX']     = _elm( $requests, 'i_goods_idx' );
+
+                    $oIdx                           = $goodsModel->insertGoodsOptions($optionParam);
+                    if ($this->db->transStatus() === false || $oIdx == false) {
+                        $this->db->transRollback();
+                        $response['status']         = 400;
+                        $response['alert']          = '옵션 저장 처리 중 오류 발생.. 다시 시도해주세요.';
+                        return $this->respond($response);
+                    }
                 }
             }
         }else{
@@ -623,7 +685,7 @@ class GoodsApi extends ApiController
             }
         }
         $modelParam['G_TEXT_OPTION_USE_FLAG']       = _elm( $requests, 'i_text_option_use_flag' );
-        $modelParam['G_TEXT_OPTION']                =   empty( $textOptions ) === false ? json_encode(  $textOptions , JSON_UNESCAPED_UNICODE ) :  json_encode([]) ;
+        $modelParam['G_TEXT_OPTION']                =   empty( $textOptions ) === false ? json_encode(  $textOptions , JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) :  json_encode([]) ;
 
 
         $modelParam['G_DELIVERY_PAY_CD']            = _elm( $requests, 'i_delivery_pay' );
@@ -756,8 +818,8 @@ class GoodsApi extends ApiController
         $modelParam['G_GOODS_PRODUCT_TYPE']         = empty( _elm( $requests, 'i_is_product_type' ) ) === false ? join( ',', _elm( $requests, 'i_is_product_type' ) ) : '' ;
         $modelParam['G_IS_SALES_TYPE']              = _elm( $requests, 'i_is_goods_seles_type' );
 
-        $modelParam['G_MIN_BUY_COUNT']              = _elm( $requests, 'i_min_buy_count' );
-        $modelParam['G_MEM_MAX_BUY_COUNT']          = _elm( $requests, 'i_mem_max_buy_count' );
+        $modelParam['G_MIN_BUY_COUNT']              = _elm( $requests, 'i_min_buy_count' ) < 1 ? '1' : _elm( $requests, 'i_min_buy_count' ) ;
+        $modelParam['G_MEM_MAX_BUY_COUNT']          = _elm( $requests, 'i_mem_max_buy_count' ) == 0 || empty(_elm( $requests, 'i_mem_max_buy_count' )) === true? '9999' : _elm( $requests, 'i_mem_max_buy_count' ) ;
         $modelParam['G_IS_ADULT_PRODUCT']           = _elm( $requests, 'i_is_adult_product' );
 
         $modelParam['G_UPDATE_AT']                  = date( 'Y-m-d H:i:s' );
@@ -847,7 +909,7 @@ class GoodsApi extends ApiController
             if ( $this->db->transStatus() === false || $rDelStatus == false ) {
                 $this->db->transRollback();
                 $response['status']                 = 400;
-                $response['alert']                  = '정보제공고시 삭제 처리중 오류발생.. 다시 시도해주세요.';
+                $response['alert']                  = '이미지 삭제 처리중 오류발생.. 다시 시도해주세요.';
                 return $this->respond( $response );
             }
         }
@@ -860,86 +922,121 @@ class GoodsApi extends ApiController
                 'mimes' => 'pdf|jpg|gif|png|jpeg|svg',
             ];
 
-            foreach( _elm($files, 'i_goods_img') as $f_key => $file ){
-                if( $file->getSize() > 0 ){
-                    $imgParam                           = [];
-                    $fileSize                           = $file->getSize();
-                    $fileExtension                      = $file->getExtension();
-                    $fileMimeType                       = $file->getMimeType();
-                    $file_return                        = $this->_uploadAndResize( $file, $config );
+            if ($this->request->getFiles() && $this->request->getPost('img_info')) {
+                $uploadedFiles = $this->request->getFiles()['i_goods_img'] ?? [];
 
-                    #------------------------------------------------------------------
-                    # TODO: 파일처리 실패 시
-                    #------------------------------------------------------------------
-                    if( _elm($file_return , 'status') === false ){
-                        $this->db->transRollback();
-                        $response['status']             = 400;
-                        $response['alert']              = _elm( $file_return, 'error' );
-                        return $this->respond( $response, 400 );
+
+                $imgInfo = $this->request->getPost('img_info');
+
+                // img_info에서 순서와 파일 이름을 기반으로 매핑
+                $orderedFiles = [];
+                foreach ($imgInfo as $info) {
+                    foreach ($uploadedFiles as $file) {
+                        if (strcasecmp(trim($file->getClientName()), trim($info['filename'])) === 0) {
+                            $orderedFiles[(int)$info['order']] = $file;
+                            break;
+                        }
                     }
+                }
 
-                    #------------------------------------------------------------------
-                    # TODO: 데이터모델 세팅
-                    #------------------------------------------------------------------
 
-                    $imgParam['I_SORT']                 = $f_key + 1;
-                    $imgParam['I_GOODS_IDX']            = _elm( $requests, 'i_goods_idx' );
-                    $imgParam['I_IMG_NAME']             = _elm( $file_return, 'org_name');
-                    $imgParam['I_IMG_PATH']             = _elm( $file_return, 'uploaded_path');
-                    $imgParam['I_IMG_VIEW_SIZE']        = '';
-                    $imgParam['I_IS_ORIGIN']            = 'Y';
-                    $imgParam['I_IMG_SIZE']             = $fileSize;
-                    $imgParam['I_IMG_EXT']              = $fileExtension;
-                    $imgParam['I_IMG_MIME_TYPE']        = $fileMimeType;
-                    $imgParam['I_CREATE_AT']            = date( 'Y-m-d H:i:s' );
-                    $imgParam['I_CREATE_IP']            = $this->request->getIPAddress();
-                    $imgParam['I_CREATE_MB_IDX']        = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+                // 순서에 따라 정렬
+                ksort($orderedFiles);
 
-                    $imgIdx                             = $goodsModel->insertGoodsImages( $imgParam );
-                    if ( $this->db->transStatus() === false || $imgIdx == false ) {
-                        $this->db->transRollback();
-                        $response['status']             = 400;
-                        $response['alert']              = '이미지 처리중 오류발생.. 다시 시도해주세요.';
-                        return $this->respond( $response );
-                    }
-                    #------------------------------------------------------------------
-                    # TODO: 리사이즈된 이미지 저장
-                    #------------------------------------------------------------------
-                    $resizedImages = _elm($file_return, 'resized');
-                    if (!empty($resizedImages)) {
-                        foreach ($resizedImages as $resized) {
-                            $resizeParam = [
-                                'I_SORT'                => $f_key + 1,
-                                'I_GOODS_IDX'           => _elm( $requests, 'i_goods_idx' ),
-                                'I_IMG_NAME'            => _elm( $file_return, 'org_name'),
-                                'I_IMG_PATH'            => _elm($resized, 'path'),
-                                'I_IMG_VIEW_SIZE'       => _elm($resized, 'size'),
-                                'I_IMG_SIZE'            => filesize($resized['path']),
-                                'I_IMG_EXT'             => $fileExtension,
-                                'I_IMG_MIME_TYPE'       => $fileMimeType,
-                                'I_IS_ORIGIN'           => 'N', // 리사이즈된 이미지 플래그 설정
-                                'I_CREATE_AT'           => date('Y-m-d H:i:s'),
-                                'I_CREATE_IP'           => $this->request->getIPAddress(),
-                                'I_CREATE_MB_IDX'       => _elm($this->session->get('_memberInfo'), 'member_idx')
-                            ];
+                // 정렬된 파일 처리
+                foreach ($orderedFiles as $order => $file) {
+                    if( $file->getSize() > 0 ){
+                        $imgParam                           = [];
+                        $fileSize                           = $file->getSize();
+                        $fileExtension                      = $file->getExtension();
+                        $fileMimeType                       = $file->getMimeType();
+                        $file_return                        = $this->_uploadAndResize( $file, $config );
 
-                            $resizeImgIdx = $goodsModel->insertGoodsImages($resizeParam);
-                            if ($this->db->transStatus() === false || $resizeImgIdx == false) {
-                                $this->db->transRollback();
-                                $response['status'] = 400;
-                                $response['alert'] = '리사이즈 이미지 처리중 오류발생.. 다시 시도해주세요.';
-                                return $this->respond($response);
+                        #------------------------------------------------------------------
+                        # TODO: 파일처리 실패 시
+                        #------------------------------------------------------------------
+                        if( _elm($file_return , 'status') === false ){
+                            $this->db->transRollback();
+                            $response['status']             = 400;
+                            $response['alert']              = _elm( $file_return, 'error' );
+                            return $this->respond( $response, 400 );
+                        }
+
+                        #------------------------------------------------------------------
+                        # TODO: 데이터모델 세팅
+                        #------------------------------------------------------------------
+
+                        $imgParam['I_SORT']                 = $order + 1;
+                        $imgParam['I_GOODS_IDX']            = _elm( $requests, 'i_goods_idx' );
+                        $imgParam['I_IMG_NAME']             = _elm( $file_return, 'org_name');
+                        $imgParam['I_IMG_PATH']             = _elm( $file_return, 'uploaded_path');
+                        $imgParam['I_IMG_VIEW_SIZE']        = '';
+                        $imgParam['I_IS_ORIGIN']            = 'Y';
+                        $imgParam['I_IMG_SIZE']             = $fileSize;
+                        $imgParam['I_IMG_EXT']              = $fileExtension;
+                        $imgParam['I_IMG_MIME_TYPE']        = $fileMimeType;
+                        $imgParam['I_CREATE_AT']            = date( 'Y-m-d H:i:s' );
+                        $imgParam['I_CREATE_IP']            = $this->request->getIPAddress();
+                        $imgParam['I_CREATE_MB_IDX']        = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+                        $imgIdx                             = $goodsModel->insertGoodsImages( $imgParam );
+                        if ( $this->db->transStatus() === false || $imgIdx == false ) {
+                            $this->db->transRollback();
+                            $response['status']             = 400;
+                            $response['alert']              = '이미지 처리중 오류발생.. 다시 시도해주세요.';
+                            return $this->respond( $response );
+                        }
+                        #------------------------------------------------------------------
+                        # TODO: 리사이즈된 이미지 저장
+                        #------------------------------------------------------------------
+                        $resizedImages = _elm($file_return, 'resized');
+                        if (!empty($resizedImages)) {
+                            foreach ($resizedImages as $resized) {
+                                $resizeParam = [
+                                    'I_SORT'                => $order + 1,
+                                    'I_GOODS_IDX'           => _elm( $requests, 'i_goods_idx' ),
+                                    'I_IMG_NAME'            => _elm( $file_return, 'org_name'),
+                                    'I_IMG_PATH'            => _elm($resized, 'path'),
+                                    'I_IMG_VIEW_SIZE'       => _elm($resized, 'size'),
+                                    'I_IMG_SIZE'            => filesize($resized['path']),
+                                    'I_IMG_EXT'             => $fileExtension,
+                                    'I_IMG_MIME_TYPE'       => $fileMimeType,
+                                    'I_IS_ORIGIN'           => 'N', // 리사이즈된 이미지 플래그 설정
+                                    'I_CREATE_AT'           => date('Y-m-d H:i:s'),
+                                    'I_CREATE_IP'           => $this->request->getIPAddress(),
+                                    'I_CREATE_MB_IDX'       => _elm($this->session->get('_memberInfo'), 'member_idx')
+                                ];
+
+                                $resizeImgIdx = $goodsModel->insertGoodsImages($resizeParam);
+                                if ($this->db->transStatus() === false || $resizeImgIdx == false) {
+                                    $this->db->transRollback();
+                                    $response['status'] = 400;
+                                    $response['alert'] = '리사이즈 이미지 처리중 오류발생.. 다시 시도해주세요.';
+                                    return $this->respond($response);
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
         #------------------------------------------------------------------
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 수정 - orgData:'.json_encode($aData, JSON_UNESCAPED_UNICODE).' // -> //'. json_encode($modelParam, JSON_UNESCAPED_UNICODE) ;
+        $logParam['MB_HISTORY_CONTENT']             = '상품 수정 - orgData:'.json_encode($aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE).' // -> //'. json_encode($modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -1110,7 +1207,7 @@ class GoodsApi extends ApiController
                     // 필터링된 배열을 JSON 문자열로 다시 변환
                     $gModel = [];
                     $gModel['G_IDX'] = _elm($inGoods, 'G_IDX');
-                    $gModel['G_GROUP'] = json_encode(array_values($filteredArray), JSON_UNESCAPED_UNICODE);
+                    $gModel['G_GROUP'] = json_encode(array_values($filteredArray), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 
                     // 수정된 데이터베이스 업데이트 작업
                     $grStatus = $goodsModel->updateGoodsGroup($gModel);
@@ -1129,7 +1226,7 @@ class GoodsApi extends ApiController
             # TODO: 관리자 로그남기기 S
             #------------------------------------------------------------------
             $logParam                               = [];
-            $logParam['MB_HISTORY_CONTENT']         = '상품 데이터 완전 삭제 - orgData'.json_encode( $aData, JSON_UNESCAPED_UNICODE )  ;
+            $logParam['MB_HISTORY_CONTENT']         = '상품 데이터 완전 삭제 - orgData'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE )  ;
             $logParam['MB_IDX']                     = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
             $this->LogModel->insertAdminLog( $logParam );
@@ -1728,7 +1825,7 @@ class GoodsApi extends ApiController
         # TODO: 검색용 카테고리 JSON 형식으로 저장
         #------------------------------------------------------------------
         $cateInfo                                   = $categoryModel->getCategoryDataByIdxs( _elm( $requests, 'i_cate_idx' ) );
-        $modelParam['G_CATEGORYS']                  = json_encode( $cateInfo, JSON_UNESCAPED_UNICODE );
+        $modelParam['G_CATEGORYS']                  = json_encode( $cateInfo, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
 
         $modelParam['G_NAME']                       = _elm( $requests, 'i_goods_name' );
         $modelParam['G_NAME_ENG']                   = _elm( $requests, 'i_goods_name_eng' );
@@ -1749,7 +1846,7 @@ class GoodsApi extends ApiController
         $modelParam['G_SELL_PERIOD_END_AT']         = _elm( $requests, 'i_sell_period_end_at' );
         $modelParam['G_COLOR']                      = _elm( $requests, 'i_goods_color' );
         $modelParam['G_SELL_PRICE']                 = preg_replace('/,/','', _elm( $requests, 'i_sell_price' ) );
-        $modelParam['G_SELL_UNIT']                  = preg_replace('/,/','', _elm( $requests, 'i_sell_unit' ) );
+        $modelParam['G_SELL_UNIT']                  = preg_replace('/,/','', _elm( $requests, 'i_sell_unit' ) ) ?? 'EA';
         $modelParam['G_BUY_PRICE']                  = preg_replace('/,/','', _elm( $requests, 'i_buy_price' ) );
         $modelParam['G_PRICE']                      = preg_replace('/,/','', _elm( $requests, 'i_goods_price' ) );
         $modelParam['G_PRICE_RATE']                 = preg_replace('/,/','', _elm( $requests, 'i_goods_price_rate' ) );
@@ -1797,7 +1894,7 @@ class GoodsApi extends ApiController
 
                 }
             }
-            $modelParam['G_RELATION_GOODS']         = json_encode( $relationDatas , JSON_UNESCAPED_UNICODE);
+            $modelParam['G_RELATION_GOODS']         = json_encode( $relationDatas , JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
         }
 
         #------------------------------------------------------------------
@@ -1805,15 +1902,27 @@ class GoodsApi extends ApiController
         #------------------------------------------------------------------
         $modelParam['G_ADD_GOODS_FLAG']             = _elm( $requests, 'i_add_goods_flag' );
         if( _elm( $requests, 'i_add_goods_flag' ) == 'Y' ){
-            $modelParam['G_ADD_GOODS']              = json_encode( _elm( $requests, 'i_add_goods_idxs', [] ), JSON_UNESCAPED_UNICODE );
+            $modelParam['G_ADD_GOODS']              = json_encode( _elm( $requests, 'i_add_goods_idxs', [] ), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         }
 
         #------------------------------------------------------------------
         # TODO: 옵션사용 설정 i_option_use_flag == 'Y'
         #------------------------------------------------------------------
         $modelParam['G_OPTION_USE_FLAG']            = _elm( $requests, 'i_option_use_flag' );
+        if( empty( _elm( $requests, 'i_option_use_flag' ) ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '옵션 사용 여부를 선택해주세요.';
+
+            return $this->respond( $response );
+        }
         if( _elm( $requests, 'i_option_use_flag' ) == 'Y' ){
             $optionParam                            = [];
+            if( empty( _elm( $requests, 'i_option_keys' ) ) === true ){
+                $response['status']                     = 400;
+                $response['alert']                      = '옵션을 입력해주세요.';
+
+                return $this->respond( $response );
+            }
             foreach( _elm( $requests, 'i_option_keys' ) as $o_key => $option_key ){
                 $optionParam[$o_key]['O_KEYS']      = $option_key;
                 $optionParam[$o_key]['O_VALUES']    = _elm( _elm( $requests, 'i_option_value' ), $o_key );
@@ -1831,7 +1940,7 @@ class GoodsApi extends ApiController
         #------------------------------------------------------------------
         $modelParam['G_STOCK_FLAG']                 = _elm( $requests, 'i_goods_stock_flag' );
         $modelParam['G_STOCK_CNT']                  = _elm( $requests, 'i_goods_stock_flag' ) == 'Y' ? _elm( $requests, 'i_goods_stock' ) : '999999';
-        $modelParam['G_SAFETY_STOCK']               = _elm( $requests, 'i_goods_safe_stock' );
+        $modelParam['G_SAFETY_STOCK']               = _elm( $requests, 'i_goods_safe_stock', 999999 );
         $modelParam['G_DELIVERY_PAY_CD']            = _elm( $requests, 'i_delivery_pay' );
 
         #------------------------------------------------------------------
@@ -1854,7 +1963,7 @@ class GoodsApi extends ApiController
             }
         }
         $modelParam['G_TEXT_OPTION_USE_FLAG']       = _elm( $requests, 'i_text_option_use_flag' );
-        $modelParam['G_TEXT_OPTION']                = empty( $textOptions ) === false ? json_encode(  $textOptions , JSON_UNESCAPED_UNICODE ) :  json_encode([]) ;
+        $modelParam['G_TEXT_OPTION']                = empty( $textOptions ) === false ? json_encode(  $textOptions , JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) :  json_encode([]) ;
 
         $modelParam['G_PC_OPEN_FLAG']               = _elm( $requests, 'i_is_pc_open' );
         $modelParam['G_PC_SELL_FLAG']               = _elm( $requests, 'i_is_pc_sell' );
@@ -1942,8 +2051,9 @@ class GoodsApi extends ApiController
         $modelParam['G_GOODS_PRODUCT_TYPE']         = empty( _elm( $requests, 'i_is_product_type' ) ) === false ? join( ',', _elm( $requests, 'i_is_product_type' ) ) : '' ;
         $modelParam['G_IS_SALES_TYPE']              = _elm( $requests, 'i_is_goods_seles_type' );
 
-        $modelParam['G_MIN_BUY_COUNT']              = _elm( $requests, 'i_min_buy_count' );
-        $modelParam['G_MEM_MAX_BUY_COUNT']          = _elm( $requests, 'i_mem_max_buy_count' );
+        $modelParam['G_MIN_BUY_COUNT']              = _elm( $requests, 'i_min_buy_count' ) < 1 ? '1' : _elm( $requests, 'i_min_buy_count' ) ;
+        $modelParam['G_MEM_MAX_BUY_COUNT']          = _elm( $requests, 'i_mem_max_buy_count' ) == 0 || empty(_elm( $requests, 'i_mem_max_buy_count' )) === true? '9999' : _elm( $requests, 'i_mem_max_buy_count' ) ;
+
         $modelParam['G_IS_ADULT_PRODUCT']           = _elm( $requests, 'i_is_adult_product' );
 
         $modelParam['G_CREATE_AT']                  = date( 'Y-m-d H:i:s' );
@@ -2206,7 +2316,7 @@ class GoodsApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 등록 - data:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_HISTORY_CONTENT']             = '상품 등록 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -2241,7 +2351,9 @@ class GoodsApi extends ApiController
         $param['post']                              = $requests;
         $param['post']['raw_return']                = true;
 
-        $aLISTS_RESULT = $this->getGoodsLists( $param );
+        $param['post']['per_page']                  = 10;
+
+        $aLISTS_RESULT                              = $this->getGoodsLists( $param );
 
         $lists                                      = _elm( $aLISTS_RESULT, 'lists' );
 
@@ -2271,7 +2383,7 @@ class GoodsApi extends ApiController
 
             $owensView->setViewDatas( $view_datas );
             $page_datas['lists_row']                = view( '\Module\goods\Views\goods\pop_lists' , ['owensView' => $owensView] );
-
+            $page_datas['pagination']               = _elm( $aLISTS_RESULT, 'pagination' );
 
         }
 
@@ -2292,7 +2404,9 @@ class GoodsApi extends ApiController
         $param['post']                              = $requests;
         $param['post']['raw_return']                = true;
 
-        $aLISTS_RESULT = $this->getGoodsLists( $param );
+        $param['post']['per_page']                  = 10;
+
+        $aLISTS_RESULT                              = $this->getGoodsLists( $param );
 
         $lists                                      = _elm( $aLISTS_RESULT, 'lists' );
 
@@ -2321,7 +2435,13 @@ class GoodsApi extends ApiController
             $view_datas['lists']                    = $lists;
 
             $owensView->setViewDatas( $view_datas );
-            $page_datas['lists_row']                = view( '\Module\goods\Views\goods\pop_lists_row' , ['owensView' => $owensView] );
+
+            if( !empty( _elm( $requests, 'xPickLists' ) ) ){
+                $page_datas['lists_row']            = view( '\Module\promotion\Views\coupon\pop_lists_row' , ['owensView' => $owensView] );
+            }else{
+                $page_datas['lists_row']            = view( '\Module\goods\Views\goods\pop_lists_row' , ['owensView' => $owensView] );
+            }
+            $page_datas['pagination']               = _elm( $aLISTS_RESULT, 'pagination' );
 
 
         }
@@ -2348,8 +2468,6 @@ class GoodsApi extends ApiController
                 $modelParam['G_NAME_ENG']               = _elm( $requests , 's_keyword' );
             }
         }
-
-
 
         $modelParam['order']                        = ' G_CREATE_AT DESC';
         $page                                       = (int)_elm($requests, 'page', 1);
@@ -2407,8 +2525,25 @@ class GoodsApi extends ApiController
         }
 
         $modelParam['IS_NOT_CATEGORY']              = _elm( $requests, 's_is_not_category' );
+        if( empty( _elm( $requests, 's_is_not_category' ) ) === true ){
+            if( empty( _elm( $requests, 's_category' ) ) === false ){
+                $modelParam['G_CATEGORY_MAIN_IDX'] = _elm( $requests, 's_category' );
+                if( empty( _elm( $requests, 's_child_category' ) ) === false ){
+                    $modelParam['G_CATEGORY_MAIN_IDX'] = _elm( $requests, 's_child_category' );
+                    if( empty( _elm( $requests, 's_grand_child_category' ) ) === false ){
+                        $modelParam['G_CATEGORY_MAIN_IDX'] = _elm( $requests, 's_grand_child_category' );
+                    }
+                }
+            }
+        }
         $modelParam['G_BRAND_IDX']                  = _elm( $requests, 's_is_brand_main' );
 
+        $modelParam['MIN_PRICE']                    = _elm( $requests, 's_min_price' );
+        $modelParam['MAX_PRICE']                    = _elm( $requests, 's_max_price' );
+        $modelParam['GROUP_USE_FLAG']               = _elm( $requests, 's_group_use' );
+        $modelParam['VIEW_GBN_FLAG']                = _elm( $requests, 's_view_gbn' );
+        $modelParam['OPTION_USE_FLAG']              = _elm( $requests, 's_option_use' );
+        $modelParam['STOCK_OVER_FLAG']              = _elm( $requests, 's_stock_over' );
 
         $limit                                      = $per_page;
         $start                                      = ($page - 1) * $limit;
@@ -2416,6 +2551,10 @@ class GoodsApi extends ApiController
         $modelParam['start']                        = $start;
 
         $modelParam['notIdx']                       = explode( ',', _elm( $requests, 'picLists' ) );
+
+        if( !empty( _elm( $requests, 'xPickLists' ) ) ){
+            $modelParam['pickIdx']                  = explode( ',', _elm( $requests, 'xPickLists' ) );
+        }
 
         ###########################################################
         $aLISTS_RESULT                              = $goodsModel->getGoodsLists( $modelParam );
@@ -2451,6 +2590,16 @@ class GoodsApi extends ApiController
             $owensView->setViewDatas( $view_datas );
             $page_datas['lists_row']                = view( '\Module\goods\Views\goods\lists_row' , ['owensView' => $owensView] );
 
+            $paging_param                           = [];
+            $paging_param['num_links']              = 5;
+            $paging_param['per_page']               = $per_page;
+            $paging_param['total_rows']             = $total_count;
+            $paging_param['base_url']               = rtrim( _link_url( '/design/banner' ), '/');
+            $paging_param['ajax']                   = true;
+            $paging_param['cur_page']               = $page;
+
+            $page_datas['pagination']               = $this->_pagination($paging_param);
+
 
         }
 
@@ -2460,6 +2609,7 @@ class GoodsApi extends ApiController
 
         if (_elm($requests, 'raw_return') === true)
         {
+            $aLISTS_RESULT['pagination']            = _elm($page_datas, 'pagination' );
             return $aLISTS_RESULT;
         }
         unset($aLISTS_RESULT);
@@ -2660,7 +2810,7 @@ class GoodsApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 삭제처리 - data:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_HISTORY_CONTENT']             = '상품 삭제처리 - data:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -2686,9 +2836,235 @@ class GoodsApi extends ApiController
     }
 
 
+    public function getGodoGoods()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = _trim($this->request->getPost());
+        $goodsModel                                 = new GoodsModel();
+        $owensView                                  = new OwensView();
+        $modelParam                                 = [];
+
+
+        $modelParam['order']                        = ' goodsNo ASC';
+        $page                                       = (int)_elm($requests, 'page', 1);
+
+        if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
+        {
+            $page                                   = 1;
+        }
+        $per_page                                   = 100;
+
+        if (empty( _elm( $requests, 'per_page' ) ) === false)
+        {
+            $per_page                               = (int)_elm( $requests, 'per_page' );
+        }
+
+        if( empty( _elm( $requests, 'cate' ) ) === false ){
+            $modelParam['cate']                     = _elm( $requests, 'cate' );
+        }
+
+        $limit                                      = $per_page;
+        $start                                      = ($page - 1) * $limit;
+        $modelParam['limit']                        = $limit;
+        $modelParam['start']                        = $start;
 
 
 
+        ###########################################################
+        $aLISTS_RESULT                              = $goodsModel->getGodoGoodsLists( $modelParam );
+
+
+
+        $lists                                      = _elm( $aLISTS_RESULT, 'lists' );
+        if (!empty($lists)) {
+            foreach ($lists as $lKey => $data) {
+                // 'cateCd' 값을 3자리씩 분리
+                $cates = str_split(_elm($data, 'cateCd'), 3);
+                if (!empty($cates)) {
+                    $result = []; // 결과를 담을 배열
+                    $tempString = ''; // 단계적으로 값을 연결할 변수
+
+                    foreach ($cates as $index => $cate) {
+                        $tempString .= $cate; // 현재 카테고리를 연결
+                        $nCateNm                    = $goodsModel->getGodoCateNm( $tempString );
+                        $result[] = '<a href="javascript:$(\'#frm_search [name=cate]\').val(\'' . _elm($nCateNm, 'cateCd') . '\');getSearchList(1)">' . _elm($nCateNm, 'cateNm') . '</a>';
+
+
+                    }
+                    $lists[$lKey]['cates']         = implode(' < ',$result);
+                }
+            }
+        }
+
+
+
+        $total_count                                = _elm( $aLISTS_RESULT, 'total_count', 0 );
+
+        $page_datas                                 = [];
+
+        #############################################################
+        if (_elm($requests, 'page_return') === true || $this->request->isAjax() === true)
+        {
+
+            // ---------------------------------------------------------------------
+            // 서브뷰 처리
+            // ---------------------------------------------------------------------
+            // 리스트
+            $view_datas                             = [];
+            $view_datas['row']                      = $start;
+            $view_datas['aConfig']                  = $this->aConfig;
+            $view_datas['total_rows']               = $total_count;
+
+            $view_datas['openGroup']                = _elm( $requests, 'openGroup' );
+
+
+            $view_datas['lists']                    = $lists;
+
+            $owensView->setViewDatas( $view_datas );
+            $page_datas['lists_row']                = view( '\Module\goods\Views\gdGoods\lists_row' , ['owensView' => $owensView] );
+
+            $paging_param                           = [];
+            $paging_param['num_links']              = 5;
+            $paging_param['per_page']               = $per_page;
+            $paging_param['total_rows']             = $total_count;
+            $paging_param['base_url']               = rtrim( _link_url( '/design/banner' ), '/');
+            $paging_param['ajax']                   = true;
+            $paging_param['cur_page']               = $page;
+
+            $page_datas['pagination']               = $this->_pagination($paging_param);
+
+
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 데이터만 리턴요청이면
+        #------------------------------------------------------------------
+
+        if (_elm($requests, 'raw_return') === true)
+        {
+            $aLISTS_RESULT['pagination']            = _elm($page_datas, 'pagination' );
+            return $aLISTS_RESULT;
+        }
+        unset($aLISTS_RESULT);
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        $response['total_count']                    = $total_count;
+
+        return $this->respond($response);
+    }
+
+
+
+    public function updateGodoGoods()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = _trim($this->request->getPost());
+        $categoryModel                              = new CategoryModel();
+        $goodsModel                                 = new GoodsModel();
+        $modelParam                                 = [];
+        $modelParam['goodsNo']                      = _elm( $requests, 'goodsNo' );
+        //Men > 자켓 > 베스트 , Woman > 자켓 > 베스트
+        // $textValueWithoutSpaces                     = preg_replace('/\s+/', '', _elm( $requests, 'textValue' ));
+        $textValueWithoutSpaces                     = trim( _elm( $requests, 'textValue' ) );
+        $textValueArr                               = explode( ',', $textValueWithoutSpaces );
+
+        $lastCategory = []; // 마지막 카테고리 데이터를 저장할 배열
+        $modelParam['newCateNm']                    = '';
+        $modelParam['newCateCd']                    = '';
+        $cateCodeArray                              = []; // 카테고리 코드 저장 배열
+        if (!empty( $textValueArr )) {
+            $n = 0;
+            foreach ($textValueArr as $textValue) {
+                $parent_idx = null; // 초기 parent_idx는 null
+                $textValues = explode('>', trim($textValue));
+
+                foreach ($textValues as $value) {
+                    $cateData = $categoryModel->getCategoryDataByName(trim($value), $parent_idx);
+
+                    if (!empty($cateData)) {
+                        // 현재 카테고리의 C_IDX, C_CATE_CODE 저장
+                        $lastCategory = [
+                            'C_IDX' => $cateData['C_IDX'],
+                            'C_CATE_CODE' => $cateData['C_CATE_CODE']
+                        ];
+
+                        // 현재 카테고리의 C_CATE_CODE를 cateCodeArray에 추가
+                        $cateCodeArray[$n] = $lastCategory['C_CATE_CODE'];
+
+                        // 현재 카테고리의 C_IDX를 다음 루프의 parent_idx로 설정
+                        $parent_idx = $cateData['C_IDX'];
+                    } else {
+                        $response['status']                     = 400;
+                        $response['alert']                      = '카테고리 명을 정확히 입력해주세요.';
+
+                        return $this->respond( $response );
+                        break;
+                    }
+                }
+                $n++;
+            }
+
+            $modelParam['newCateNm']                    = _elm( $requests, 'textValue' );
+            $modelParam['newCateCd']                    = implode(',', $cateCodeArray); // 카테고리 코드를 콤마로 조인하여 저장
+        }
+
+
+
+        // $textValues                                 = explode( '>', $textValueWithoutSpaces );
+
+        // $parent_idx = null; // 초기 parent_idx는 null
+        // $lastCategory = []; // 마지막 카테고리 데이터를 저장할 배열
+        // $modelParam['newCateNm']                    = '';
+        // $modelParam['newCateCd']                    = '';
+
+        // if (!empty( _elm($textValues, 0 ) )) {
+        //     foreach ($textValues as $value) {
+        //         $cateData = $categoryModel->getCategoryDataByName(trim($value), $parent_idx);
+
+        //         if (!empty($cateData)) {
+        //             // 현재 카테고리의 C_IDX, C_CATE_CODE 저장
+        //             $lastCategory = [
+        //                 'C_IDX' => $cateData['C_IDX'],
+        //                 'C_CATE_CODE' => $cateData['C_CATE_CODE']
+        //             ];
+
+        //             // 현재 카테고리의 C_IDX를 다음 루프의 parent_idx로 설정
+        //             $parent_idx = $cateData['C_IDX'];
+        //         } else {
+        //             $response['status']                     = 400;
+        //             $response['alert']                      = '카테고리 명을 정확히 입력해주세요.';
+
+        //             return $this->respond( $response );
+        //             break;
+        //         }
+        //     }
+        //     $modelParam['newCateNm']                    = _elm( $requests, 'textValue' );
+        //     $modelParam['newCateCd']                    = _elm( $lastCategory, 'C_CATE_CODE' );
+        // }
+
+
+        $this->db->transBegin();
+
+        $aStatus                                    = $goodsModel->updateGodoGoods( $modelParam );
+
+        if ( $this->db->transStatus() === false || $aStatus === false) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        $this->db->transCommit();
+
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '';
+        return $this->respond( $response );
+
+    }
 
 
 

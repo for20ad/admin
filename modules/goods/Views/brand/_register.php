@@ -89,13 +89,13 @@ if(strpos(_elm($_SERVER, 'HTTP_REFERER'), 'goodsRegister') === false){
                 <input type="text" class="form-control" name="i_brand_name_eng" id="i_brand_name_eng" />
             </div>
 
-            <div class="input-group required">
+            <!-- <div class="input-group required">
                 <label class="label body2-c">
                         PC브랜드<br>이미지 등록
                     <span>*</span>
                 </label>
                 <input type="file" class="form-control" name="i_brand_pc_img">
-            </div>
+            </div> -->
             <div class="input-group required">
                 <label class="label body2-c">
                         모바일브랜드<br>이미지 등록
@@ -105,16 +105,31 @@ if(strpos(_elm($_SERVER, 'HTTP_REFERER'), 'goodsRegister') === false){
             </div>
             <div class="input-group required">
                 <label class="label body2-c">
-                        PC배너<br>이미지 등록
+                    배너<br>이미지 등록
                 </label>
-                <input type="file" class="form-control" name="i_brand_pc_banner">
+                <span style="padding:5px 5px">
+                    <?php
+                        echo getIconButton([
+                            'txt' => '파일 추가',
+                            'icon' => 'box_plus',
+                            'buttonClass' => 'btn',
+                            'buttonStyle' => 'width:130px; height: 36px',
+                            'width' => '21',
+                            'height' => '20',
+                            'stroke' => 'black',
+                            'extra' => [
+                                'type' => 'button',
+                                'onclick' => 'addRows();',
+                            ]
+                        ]);
+                    ?>
+                </span>
+
             </div>
-            <div class="input-group required">
-                <label class="label body2-c">
-                        모바일배너<br>이미지 등록
-                </label>
-                <input type="file" class="form-control" name="i_brand_mobile_banner">
+            <div id="fileArea">
+
             </div>
+
 
 
             <div class="input-group" style="margin-bottom:0">

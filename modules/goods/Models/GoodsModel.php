@@ -10,6 +10,90 @@ class GoodsModel extends Model
     {
         $this->db = \Config\Database::connect();
     }
+    public function updateGodoGoods( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( '_es_goods' );
+        $builder->set( 'newCateNm', _elm( $param, 'newCateNm' ) );
+        $builder->set( 'newCateCd', _elm( $param, 'newCateCd' ) );
+        $builder->where( 'goodsNo', _elm( $param, 'goodsNo' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+    public function getGodoCateNm( $cateCd )
+    {
+        $aReturn                                    = [];
+
+        $builder                                    = $this->db->table( '_es_categoryGoods' );
+        $builder->select( 'cateNm,cateCd' );
+        $builder->where( 'cateCd', $cateCd );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getGodoGoodsLists( $param = [] )
+    {
+        $aReturn                                    = [
+            'total_count'                           => 0,
+            'lists'                                 => [],
+        ];
+
+        $builder                                    = $this->db->table( '_es_goods' );
+        $builder->select( 'goodsNo, goodsNm, cateCd, newCateCd, newCateNm' );
+        if( empty( _elm( $param, 'cate' ) ) === false ){
+            $builder->like( 'cateCd', _elm( $param, 'cate' ), 'after' );
+        }
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
+        //$builder->orderBy( 'newCateCd', 'ASC' );
+        // 정렬
+        if (!empty( _elm( $param, 'order') ) ) {
+            $builder->orderBy( _elm( $param, 'order' ) );
+        }
+
+        // 페이징 처리
+        if (!empty( _elm( $param, 'limit' ) ) ) {
+            $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
+        }
+
+        $query                                      = $builder->get();
+
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn['lists']                       = $query->getResultArray();
+        }
+
+        return $aReturn;
+    }
+
+    public function getGoodsColor( $g_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $g_idx ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS' );
+        $builder->select( 'G_COLOR' );
+        $builder->where( 'G_IDX',                   $g_idx );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+
+    }
 
     public function updateGoodsPrice( $param = [] )
     {
@@ -114,9 +198,33 @@ class GoodsModel extends Model
         $builder->orderBy( 'I_SORT',                'ASC' );
 
         $query                                      = $builder->get();
+
         if ($this->db->affectedRows())
         {
             $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
+    public function getGoodsInImagesFixSize( $goods_idx, $size )
+    {
+        $aReturn                                    = [];
+        if( empty( $goods_idx ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_IMAGES' );
+
+        $builder->select( '*' );
+        $builder->where( 'I_GOODS_IDX',             $goods_idx );
+        $builder->where( 'I_IMG_VIEW_SIZE',         $size );
+        $builder->orderBy( 'I_SORT',                'ASC' );
+
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
         }
         return $aReturn;
     }
@@ -240,6 +348,33 @@ class GoodsModel extends Model
         return $aReturn;
     }
 
+    public function getGoodsDataSelectFieldByIdx( $idx, $fields = []  )
+    {
+        $aReturn                                    = [];
+
+        $builder                                    = $this->db->table( 'GOODS G' );
+        if( empty( $fields ) === false ){
+            foreach( $fields as $field ){
+                $builder->select( $field );
+            }
+        }
+        $builder->select('GI.I_IMG_PATH');
+
+        $builder->join( 'GOODS_IMAGES GI', 'G.G_IDX = GI.I_GOODS_IDX AND I_SORT=1 AND I_IS_ORIGIN = \'Y\'', 'left' );
+
+        $builder->where( 'G_DELETE_STATUS',         'N' );
+        $builder->where( 'G.G_IDX', $idx );
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+
+        return $aReturn;
+
+    }
+
 
     public function getGoodsDataByIdx( $idx )
     {
@@ -279,7 +414,7 @@ class GoodsModel extends Model
         $builder->select('BR.C_BRAND_NAME');
         $builder->where( 'G.G_DELETE_STATUS',       'N' );
         // 총 결과 수
-        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
         //$builder->resetQuery(); // 빌더 초기화
         $builder->join( 'GOODS_IMAGES GI', 'G.G_IDX = GI.I_GOODS_IDX AND I_SORT=1 AND I_IS_ORIGIN = \'Y\'', 'left' );
         $builder->join( 'GOODS_BRAND BR', 'BR.C_IDX = G.G_BRAND_IDX', 'left' );
@@ -326,14 +461,79 @@ class GoodsModel extends Model
             $builder->orWhere( 'G.G_CATEGORYS IS NULL' );
             $builder->groupEnd();
         }
+
+        if( !empty( _elm( $param, 'G_CATEGORY_MAIN_IDX' ) ) ){
+            $builder->where( 'G_CATEGORY_MAIN_IDX', _elm( $param, 'G_CATEGORY_MAIN_IDX' ) );
+        }
         if( !empty( _elm( $param, 'G_BRAND_IDX' ) )  ){
-            $builder->where( 'G_BRAND_IDX', _elm( $param, 'G_BRAND_IDX' ) );
+            $builder->where( 'G.G_BRAND_IDX', _elm( $param, 'G_BRAND_IDX' ) );
         }
 
         if( !empty( _elm( $param, 'notIdx' ) ) ){
             $builder->whereNotIn( 'G.G_IDX', _elm( $param, 'notIdx' ) );
         }
+        if( !empty( _elm( $param, 'pickIdx' ) ) ){
+            $builder->whereIn( 'G.G_IDX', _elm( $param, 'pickIdx' ) );
+        }
 
+        if( empty( _elm( $param, 'MIN_PRICE' ) ) === false && empty( _elm( $param, 'MAX_PRICE' ) ) === false ){
+            $builder->where( 'G.G_PRICE >=', _elm( $param, 'MIN_PRICE' ) );
+            $builder->where( 'G.G_PRICE <=', _elm( $param, 'MAX_PRICE' ) );
+        }
+
+        if( empty( _elm( $param, 'GROUP_USE_FLAG' ) ) === false ){
+            if( _elm( $param, 'GROUP_USE_FLAG' ) == 'Y'  ){
+                $builder->where( 'G.G_GROUP IS NOT NULL', null , false );
+            }else{
+                $builder->where( 'G.G_GROUP IS NULL', null , false );
+            }
+        }
+
+        if( empty( _elm( $param, 'VIEW_GBN_FLAG' ) ) === false ){
+            if( _elm( $param, 'VIEW_GBN_FLAG' ) == 'Y' ){
+                $builder->groupStart();
+                    $builder->groupStart();
+                        $builder->where( 'G_PC_OPEN_FLAG', 'Y' );
+                        $builder->orWhere( 'G_PC_SELL_FLAG', 'Y' );
+                    $builder->groupEnd();
+                    $builder->orGroupStart();
+                        $builder->where( 'G_MOBILE_OPEN_FLAG', 'Y'  );
+                        $builder->orWhere( 'G_MOBILE_SELL_FLAG', 'Y'  );
+                    $builder->groupEnd();
+                $builder->groupEnd();
+            }else{
+                $builder->groupStart();
+                    $builder->groupStart();
+                        $builder->where( 'G_PC_OPEN_FLAG', 'N'  );
+                        $builder->orWhere( 'G_PC_SELL_FLAG', 'N'  );
+                    $builder->groupEnd();
+                    $builder->orGroupStart();
+                        $builder->where( 'G_MOBILE_OPEN_FLAG', 'N' );
+                        $builder->orWhere( 'G_MOBILE_SELL_FLAG', 'N'  );
+                    $builder->groupEnd();
+                $builder->groupEnd();
+            }
+        }
+
+        if( empty( _elm( $param, 'OPTION_USE_FLAG' ) ) === false ){
+            $builder->where( 'G_OPTION_USE_FLAG', _elm( $param, 'OPTION_USE_FLAG' ) );
+        }
+
+        if( empty( _elm( $param, 'STOCK_OVER_FLAG' ) ) === false ){
+            if( _elm( $param, 'STOCK_OVER_FLAG' ) == 'over' ){
+                $builder->groupStart();
+                $builder->where( 'G_STOCK_FLAG', 'Y' );
+                $builder->where( 'G.G_SAFETY_STOCK > G.G_STOCK_CNT', null, false );
+                $builder->groupEnd();
+            }else{
+                $builder->groupStart();
+                $builder->where( 'G_STOCK_FLAG', 'N' );
+                $builder->orWhere( 'G.G_SAFETY_STOCK < G.G_STOCK_CNT', null, false );
+                $builder->groupEnd();
+            }
+        }
+
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
         $aReturn['search_count']                    = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
 
         // 정렬
@@ -347,7 +547,7 @@ class GoodsModel extends Model
         }
 
         $query                                      = $builder->get();
-
+        //echo $this->db->getLastQuery();
 
         if ($this->db->affectedRows())
         {
@@ -567,6 +767,14 @@ class GoodsModel extends Model
         return $aReturn;
     }
 
+    public function updateGoodsImageSort($goodsIdx, $filename, $newSort)
+    {
+        return $this->db->table('GOODS_IMAGES')
+            ->where('I_GOODS_IDX', $goodsIdx)
+            ->where('I_IMG_NAME', $filename)
+            ->update(['I_SORT' => $newSort]);
+    }
+
     public function insertDCGroup( $param = [] )
     {
         $aReturn                                    = false;
@@ -616,6 +824,29 @@ class GoodsModel extends Model
         }
         return $aReturn;
     }
+    public function updateGoodsOptions( $param = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        $builder->set( 'O_GOODS_IDX',               _elm( $param, 'O_GOODS_IDX' ) );
+        $builder->set( 'O_KEYS',                    _elm( $param, 'O_KEYS' ) );
+        $builder->set( 'O_VALUES',                  _elm( $param, 'O_VALUES' ) );
+        $builder->set( 'O_STOCK',                   _elm( $param, 'O_STOCK' ) );
+        $builder->set( 'O_ADD_PRICE',               _elm( $param, 'O_ADD_PRICE' ) );
+        $builder->set( 'O_VIEW_STATUS',             _elm( $param, 'O_VIEW_STATUS' ) );
+        $builder->set( 'O_UPDATE_AT',               _elm( $param, 'O_UPDATE_AT' ) );
+        $builder->set( 'O_UPDATE_IP',               _elm( $param, 'O_UPDATE_IP' ) );
+        $builder->set( 'O_UPDATE_MB_IDX',           _elm( $param, 'O_UPDATE_MB_IDX' ) );
+
+        $builder->where( 'O_IDX',                   _elm( $param, 'O_IDX' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
     public function insertGoodsInIcons( $param = [] )
     {
         $aReturn                                    = false;

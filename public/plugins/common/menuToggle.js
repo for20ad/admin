@@ -4,6 +4,7 @@ $(document).ready(function() {
     function adjustDashboardMargin() {
         var sideBarAreaWidth = $('.side-bar-area').width();
         $('.dashboard').css('margin-left', sideBarAreaWidth + 'px');
+        $('.dashboard').css('overflow', 'hidden');
         var sideBarWidth = $('.side-bar').width();
 
         if (localStorage.getItem('sideBarOpen') === 'true') {
@@ -37,10 +38,13 @@ $(document).ready(function() {
         if ($('.side-bar').is(':visible')) {
             $('.side-bar').hide();
             $('.dashboard').animate({ 'margin-left': '53px' }, 200);
+            $('.table-responsive.order-table').animate({ 'max-width': '1800px' }, 200);
             localStorage.setItem('sideBarOpen', 'false');
         } else {
             $('.side-bar').show("slide", { direction: "left" }, 400);
             $('.dashboard').animate({ 'margin-left': '290px' }, 400);
+            $('.table-responsive.order-table').animate({ 'max-width': '1568px' }, 200);
+
             localStorage.setItem('sideBarOpen', 'true');
         }
     }

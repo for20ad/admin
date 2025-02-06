@@ -48,11 +48,13 @@ function frmModify(){
         success: function(response)
         {
             submitSuccess(response);
+            inputs.prop('disabled', false);
             $('#preloader').hide();
+
             if (response.status != 200)
             {
                 var error_message = '';
-                error_message = response.errors.join('<br />');
+                error_message = response.errors;
                 if (error_message != '') {
                     box_alert(error_message, 'e');
                 }
@@ -65,8 +67,10 @@ function frmModify(){
         {
             submitError(jqXHR.status, errorThrown);
             $('#preloader').hide();
+            inputs.prop('disabled', false);
             console.log(textStatus);
             return false;
         }
     });
 }
+

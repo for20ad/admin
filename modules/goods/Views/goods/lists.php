@@ -75,7 +75,7 @@
                                     <td colspan="3" class="no-border-bottom">
                                         <div class="form-inline">
                                         <?php
-                                            $options  = [''=>'전체', 'goods_name'=>'상품명', 'goods_code'=>'상품코드', 'keyword'=>'검색키워드', 'maker'=>'제조사' ];
+                                            $options  = ['goods_name'=>'상품명', 'goods_code'=>'상품코드', 'keyword'=>'검색키워드', 'maker'=>'제조사' ];
 
                                             $extras   = ['id' => 's_condition', 'class' => 'form-select', 'style' => 'max-width: 150px;', ];
                                             $selected = '';
@@ -86,7 +86,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="no-border-bottom">기간검색</th>
+                                    <th class="no-border-bottom">기간</th>
                                     <td colspan="3" class="no-border-bottom">
                                         <div class="form-inline">
                                             <?php
@@ -255,10 +255,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="no-border-bottom">브랜드</th>
-                                    <td class="no-border-bottom" colspan="3">
+                                    <th class="no-border-bottom">메인분류</th>
+                                    <td class="no-border-bottom">
                                         <div class="input-group">
-                                            <div class="form-inline">
+                                            <div class="form-inline" style="margin:0.35rem 0 0 -0.35rem">
                                                 <?php
                                                     echo getButton([
                                                         'text' => '브랜드 선택',
@@ -269,18 +269,188 @@
                                                         ]
                                                     ]);
                                                 ?>
-
-                                                <div id="select-brand" style="margin-left:4.2rem;">
+                                                <div class="select-item" id="select-brand">
                                                 </div>
-
+                                            </div>
+                                            <div style="position:relative; width:460px;">
+                                                <div id="dropdown-layer-brand" style="display:none;max-width:440px;position:absolute;top:-150px;left:30px;overflow-y:scroll;height:180px;" class="dropdown-layer" style="">
+                                                </div>
                                             </div>
 
-                                            <div id="dropdown-layer-brand" class="dropdown-layer" style="display:none;">
-                                            </div>
+                                        </div>
+                                    </td>
+                                    <th class="no-border-bottom">판매가</th>
+                                    <td class="no-border-bottom">
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" style="max-width:130px" name="s_min_price"> 이상 ~
+                                            <input type="text" class="form-control" style="max-width:130px" name="s_max_price"> 이하
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th class="no-border-bottom">그룹사용</th>
+                                    <td class="no-border-bottom">
+                                        <div class="form-inline" style="width:60% !important">
+                                        <?php
+                                            $setParam = [
+                                                'name' => 's_group_use',
+                                                'id' => 's_group_use_all',
+                                                'value' =>  '',
+                                                'label' => '전체',
+                                                'checked' => true,
+                                                'extraAttributes' => [
+                                                    'aria-label' => 'Single checkbox One',
+                                                    'class'=>'check-item',
+                                                    'style'=>'margin-left:-1.3rem !important',
+                                                ]
+                                            ];
+                                            echo getRadioButton( $setParam );
+                                        ?>
+                                        <?php
+                                            $setParam = [
+                                                'name' => 's_group_use',
+                                                'id' => 's_group_use_Y',
+                                                'value' =>  'Y',
+                                                'label' => '사용함',
+                                                'checked' => false,
+                                                'extraAttributes' => [
+                                                    'aria-label' => 'Single checkbox One',
+                                                    'class'=>'check-item',
+                                                    'style'=>'padding-left:0 !important',
+                                                ]
+                                            ];
+                                            echo getRadioButton( $setParam );
+                                        ?>
+                                        <?php
+                                            $setParam = [
+                                                'name' => 's_group_use',
+                                                'id' => 's_group_use_N',
+                                                'value' =>  'N',
+                                                'label' => '사용인함',
+                                                'checked' => false,
+                                                'extraAttributes' => [
+                                                    'aria-label' => 'Single checkbox One',
+                                                    'class'=>'check-item',
+                                                    'style'=>'padding-left:0 !important',
+                                                ]
+                                            ];
+                                            echo getRadioButton( $setParam );
+                                        ?>
+                                        </div>
+                                    </td>
+                                    <th class="no-border-bottom">노출구분</th>
+                                    <td class="no-border-bottom">
+                                        <div class="form-inline" style="width:60% !important">
+                                            <?php
+                                                $setParam = [
+                                                    'name' => 's_view_gbn',
+                                                    'id' => 's_view_gbn_all',
+                                                    'value' =>  '',
+                                                    'label' => '전체',
+                                                    'checked' => true,
+                                                    'extraAttributes' => [
+                                                        'aria-label' => 'Single checkbox One',
+                                                        'class'=>'check-item',
+                                                        'style'=>'margin-left:-1.3rem !important',
+                                                    ]
+                                                ];
+                                                echo getRadioButton( $setParam );
+                                            ?>
+                                            <?php
+                                                $setParam = [
+                                                    'name' => 's_view_gbn',
+                                                    'id' => 's_view_gbn_Y',
+                                                    'value' =>  'Y',
+                                                    'label' => '노출함',
+                                                    'checked' => false,
+                                                    'extraAttributes' => [
+                                                        'aria-label' => 'Single checkbox One',
+                                                        'class'=>'check-item',
+                                                        'style'=>'padding-left:0 !important',
+                                                    ]
+                                                ];
+                                                echo getRadioButton( $setParam );
+                                            ?>
+                                            <?php
+                                                $setParam = [
+                                                    'name' => 's_view_gbn',
+                                                    'id' => 's_view_gbn_N',
+                                                    'value' =>  'N',
+                                                    'label' => '노출인함',
+                                                    'checked' => false,
+                                                    'extraAttributes' => [
+                                                        'aria-label' => 'Single checkbox One',
+                                                        'class'=>'check-item',
+                                                        'style'=>'padding-left:0 !important',
+                                                    ]
+                                                ];
+                                                echo getRadioButton( $setParam );
+                                            ?>
                                         </div>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <th class="no-border-bottom">품절상태</th>
+                                    <td class="no-border-bottom">
+                                        <?php
+                                            $options  = [''=>'전체','over'=>'품절', 'none'=>'미품절'];
+                                            $extras   = ['id' => 's_stock_over', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;',];
+                                            $selected = '';
+                                            echo getSelectBox('s_stock_over', $options, $selected, $extras);
+                                        ?>
+                                    </td>
+                                    <th class="no-border-bottom">옵션사용</th>
+                                    <td class="no-border-bottom">
+                                        <div class="form-inline" style="width:60% !important">
+                                            <?php
+                                                $setParam = [
+                                                    'name' => 's_option_use',
+                                                    'id' => 's_option_use_all',
+                                                    'value' =>  '',
+                                                    'label' => '전체',
+                                                    'checked' => true,
+                                                    'extraAttributes' => [
+                                                        'aria-label' => 'Single checkbox One',
+                                                        'class'=>'check-item',
+                                                        'style'=>'margin-left:-1.3rem !important',
+                                                    ]
+                                                ];
+                                                echo getRadioButton( $setParam );
+                                            ?>
+                                            <?php
+                                                $setParam = [
+                                                    'name' => 's_option_use',
+                                                    'id' => 's_option_use_Y',
+                                                    'value' =>  'Y',
+                                                    'label' => '사용함',
+                                                    'checked' => false,
+                                                    'extraAttributes' => [
+                                                        'aria-label' => 'Single checkbox One',
+                                                        'class'=>'check-item',
+                                                        'style'=>'padding-left:0 !important',
+                                                    ]
+                                                ];
+                                                echo getRadioButton( $setParam );
+                                            ?>
+                                            <?php
+                                                $setParam = [
+                                                    'name' => 's_option_use',
+                                                    'id' => 's_option_use_N',
+                                                    'value' =>  'N',
+                                                    'label' => '사용인함',
+                                                    'checked' => false,
+                                                    'extraAttributes' => [
+                                                        'aria-label' => 'Single checkbox One',
+                                                        'class'=>'check-item',
+                                                        'style'=>'padding-left:0 !important',
+                                                    ]
+                                                ];
+                                                echo getRadioButton( $setParam );
+                                            ?>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -296,7 +466,7 @@
                         'height' => '20',
                         'stroke' => 'white',
                         'extra' => [
-                            'onclick' => 'getSearchList();',
+                            'onclick' => 'getSearchList(1);',
                         ]
                     ]);
                     ?>
@@ -431,7 +601,7 @@
                     </table>
                 </div>
                 <!--페이징-->
-                <div class="pagination-wrapper" id="paginatoon">
+                <div class="pagination-wrapper" id="pagination">
 
 
                 </div>
@@ -626,7 +796,6 @@ function getBrandDropDown()
         data: '',
         dataType: 'json',
         processData: false,
-        contentType: false,
         cache: false,
         beforeSend: function () {
             $('#preloader').show();

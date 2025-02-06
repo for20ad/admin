@@ -59,11 +59,11 @@ function submitSuccess(response) {
     }
     else
     {
-        if (response.redirect_url != '')
+        if (response.redirect_url != undefined && response.redirect_url != '')
         {
             document.location.href = response.redirect_url;
         }
-        else if (response.replace_url != '')
+        else if (response.replace_url != undefined && response.replace_url != '')
         {
             document.location.replace(response.replace_url);
         }

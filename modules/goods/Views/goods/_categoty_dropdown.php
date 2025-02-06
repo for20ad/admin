@@ -69,22 +69,24 @@
                         $parent_idx = _elm($vCATE_GRAND_CHILD, 'C_PARENT_IDX', 0);
                         $vGrandChildTxt     = $vChildTxt .' > ' . _elm( $vCATE_GRAND_CHILD, 'C_CATE_NAME' );
                 ?>
-                <?php
-                    $setParam = [
-                        'name' => 'i_cate_idx[]',
-                        'id' => 'cate_'.$cate_idx,
-                        'value' =>  $cate_idx,
-                        'label' => '',
-                        'checked' => false,
-                        'extraAttributes' => [
-                            'aria-label' => 'Single checkbox One',
-                            'class'=>'check-item',
-                            'data-txt' => $vGrandChildTxt,
-                        ]
-                    ];
-                    echo getCheckBox( $setParam );
-                ?>
-                <label for="cate_<?php echo $cate_idx?>"><?php echo $vGrandChildTxt?></label>
+                    <li>
+                        <?php
+                            $setParam = [
+                                'name' => 'i_cate_idx[]',
+                                'id' => 'cate_'.$cate_idx,
+                                'value' =>  $cate_idx,
+                                'label' => '',
+                                'checked' => false,
+                                'extraAttributes' => [
+                                    'aria-label' => 'Single checkbox One',
+                                    'class'=>'check-item',
+                                    'data-txt' => $vGrandChildTxt,
+                                ]
+                            ];
+                            echo getCheckBox( $setParam );
+                        ?>
+                        <label for="cate_<?php echo $cate_idx?>"><?php echo $vGrandChildTxt?></label>
+                    </li>
                 <?php
                     }
                 ?>

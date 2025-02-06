@@ -80,18 +80,22 @@
                 <div class="table-responsive">
                     <table class="table table-vcenter" id="aListsTable">
                         <colgroup>
+                            <col style="width:10%;">
+                            <col style="width:5%;">
                             <col style="width:30%;">
                             <col style="*">
                             <col style="width:5%;">
                         </colgroup>
                         <thead>
                             <tr>
+                                <th>이동</th>
+                                <th>순번</th>
                                 <th>항목</th>
                                 <th>내용</th>
                                 <th>삭제</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableSort">
 
 
                         </tbody>
@@ -135,6 +139,18 @@
 </div>
 <?php echo form_close() ?>
 <script>
+$('#tableSort').sortable({
+    handle: '.group-move-icons',
+    update: function(event, ui) {
+        var idsInOrder = $('#tableSort').sortable('toArray',{ attribute : 'data-idx'});
+
+        console.log(idsInOrder);
+        // 재정렬된 순서대로 .numbering 요소를 업데이트
+        $('#tableSort tr').each(function(index) {
+            $(this).find('.numbering').text(index + 1);
+        });
+    }
+});
 
 </script>
 

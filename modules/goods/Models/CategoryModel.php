@@ -11,6 +11,182 @@ class CategoryModel extends Model
 
         $this->db = \Config\Database::connect();
     }
+
+    public function updateQustKeyword( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_KEYWOD_GROUP' );
+
+        $builder->where( 'K_IDX',                   _elm( $param, 'K_IDX' ) );
+        $builder->set( 'K_STATUS',                  _elm( $param, 'K_STATUS' ) );
+        $builder->set( 'K_DELETE_AT',               _elm( $param, 'K_DELETE_AT' ) );
+        $builder->set( 'K_DELETE_IP',               _elm( $param, 'K_DELETE_IP' ) );
+        $builder->set( 'K_DELETE_MB_IDX',           _elm( $param, 'K_DELETE_MB_IDX' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
+    public function insertQustKeyword( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_KEYWOD_GROUP' );
+        $builder->set( 'K_NAME',                    _elm( $param, 'K_NAME' ) );
+        $builder->set( 'K_STATUS',                  _elm( $param, 'K_STATUS' ) );
+        $builder->set( 'K_CREATE_AT',               _elm( $param, 'K_CREATE_AT' ) );
+        $builder->set( 'K_CREATE_IP',               _elm( $param, 'K_CREATE_IP' ) );
+        $builder->set( 'K_CREATE_MB_IDX',           _elm( $param, 'K_CREATE_MB_IDX' ) );
+
+        $aResult                                    = $builder->insert();
+        if( $aResult ){
+            $aReturn                                = $this->db->insertID();
+        }
+        return $aReturn;
+
+    }
+    public function sameChkQustKeyword( $param = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_KEYWOD_GROUP' );
+        $builder->where( 'K_NAME',                  _elm( $param, 'K_NAME' ) );
+
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getQuestionKeywords()
+    {
+        $aReturn                                    = [];
+
+        $builder                                    = $this->db->table( 'GOODS_KEYWOD_GROUP' );
+
+        $builder->where( 'K_STATUS',                1 );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+    public function updateCagegoryFileData( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY_FILES' );
+        foreach( $param as $key => $val ){
+            if( $key == 'F_IDX' ){
+                $builder->where( $key, $val );
+            }else{
+                $builder->set( $key, $val );
+            }
+        }
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
+    public function getCategoryFilesByParentIdx( $f_b_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $f_b_idx ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY_FILES' );
+        $builder->where( 'F_B_IDX',                 $f_b_idx );
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+
+    }
+
+    public function deleteCategoryFileDataByIdx( $f_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $f_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY_FILES' );
+        $builder->where( 'F_IDX',                   $f_idx );
+
+        $aReturn                                    = $builder->delete();
+        return $aReturn;
+    }
+
+    public function getCategoryFileDataByIdx( $f_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $f_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY_FILES' );
+        $builder->where( 'F_IDX',                   $f_idx );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getCategoryFiles( $cate_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $cate_idx ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY_FILES' );
+        $builder->where( 'F_B_IDX',                 $cate_idx );
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
+    public function insertCategoryFiles( $param = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY_FILES' );
+        foreach( $param as $key => $val ){
+            $builder->set( $key, $val );
+        }
+        $aResult                                    = $builder->insert();
+
+        if( $aResult ){
+            $aReturn                                = $this->db->insertID();
+        }
+        return $aReturn;
+    }
+
     public function getCateCode( $parentIdx = 0 )
     {
         $aReturn                                    = [];
@@ -158,6 +334,74 @@ class CategoryModel extends Model
         }
         return $aReturn;
     }
+    public function getCategoryDataByName( $cate_name, $parent_idx=null )
+    {
+        $aReturn                                    = [];
+        if( empty( $cate_name ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY' );
+        $builder->where( 'C_CATE_NAME', $cate_name );
+        // parent_idx가 null이 아니면 조건 추가
+        if (!is_null($parent_idx)) {
+            $builder->where('C_PARENT_IDX', $parent_idx);
+        }
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getCategoryDataByCode( $cate_code, $parent_idx=null )
+    {
+        $aReturn                                    = [];
+        if( empty( $cate_code ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY' );
+        $builder->where( 'C_CATE_CODE', $cate_code );
+        // parent_idx가 null이 아니면 조건 추가
+        if (!is_null($parent_idx)) {
+            $builder->where('C_PARENT_IDX', $parent_idx);
+        }
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+
+    public function getCategoryDataSelectFieldByIdx( $cate_idx, $fields = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $cate_idx ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_CATEGORY' );
+        if( empty( $fields ) === false ){
+            foreach( $fields as $field ){
+                $builder->select( $field );
+            }
+        }
+        $builder->where( 'C_IDX', $cate_idx );
+        $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
 
     public function getTopLists( )
     {
@@ -282,6 +526,7 @@ class CategoryModel extends Model
         }
 
         $builder                                    = $this->db->table( 'GOODS_QUESTION' );
+        $builder->set( 'Q_KEYWORD',                 _elm( $param, 'Q_KEYWORD' ) );
         $builder->set( 'Q_QUESTION',                _elm( $param, 'Q_QUESTION' ) );
         $builder->set( 'Q_CATE_IDX',                _elm( $param, 'Q_CATE_IDX' ) );
         $builder->set( 'Q_SORT',                    _elm( $param, 'Q_SORT' ) );
@@ -303,6 +548,7 @@ class CategoryModel extends Model
         }
 
         $builder                                    = $this->db->table( 'GOODS_QUESTION' );
+        $builder->set( 'Q_KEYWORD',                 _elm( $param, 'Q_KEYWORD' ) );
         $builder->set( 'Q_QUESTION',                _elm( $param, 'Q_QUESTION' ) );
         $builder->set( 'Q_SORT',                    _elm( $param, 'Q_SORT' ) );
         $builder->set( 'Q_CATE_IDX',                _elm( $param, 'Q_CATE_IDX' ) );

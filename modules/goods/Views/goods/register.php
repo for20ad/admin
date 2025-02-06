@@ -27,7 +27,46 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+
+ <!-- Toast UI Editor JS -->
+
+<!-- 토스트 UI 에디터 코어 -->
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<link rel="stylesheet" href="https://nhn.github.io/tui.editor/latest/dist/cdn/theme/toastui-editor-dark.css">
+
+<!-- 토스트 UI 컬러피커 -->
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.css" />
+<script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+
+<!-- 토스트 UI 컬러피커와 에디터 연동 플러그인 -->
+<link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css" />
+<script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+<!-- 토스트 UI 에디터 플러그인, 코드 신텍스 하이라이터 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css">
+<link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css">
+<script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+<!-- 토스트 UI 에디터 플러그인, 테이블 셀 병합 -->
+<script src="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.js"></script>
+
+<!-- 토스트 UI 에디터 플러그인, UML -->
+<script src="https://uicdn.toast.com/editor-plugin-uml/latest/toastui-editor-plugin-uml.min.js"></script>
+
+<!-- 토스트 UI 차트 -->
+<link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.css">
+<script src="https://uicdn.toast.com/chart/latest/toastui-chart.js"></script>
+<!-- 토스트 UI 차트와 토스트 UI 에디터를 연결  -->
+<script src="https://uicdn.toast.com/editor-plugin-chart/latest/toastui-editor-plugin-chart.min.js"></script>
+
+<!-- katex -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.0/katex.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.0/katex.min.css">
+
+<!-- docpurify -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"></script>
+<!-- 토스트 UI 에디터 의존성 끝 -->
 
 <?php echo form_open('', ['method' => 'post', 'class' => '', 'id' => 'frm_register', 'autocomplete' => 'off']); ?>
 
@@ -181,7 +220,7 @@
                                 </div>
 
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -342,10 +381,25 @@
                                 </label>
                                 <?php
                                     echo getIconButton([
-                                        'txt' => '추가',
+                                        'txt' => '항목 불러오기',
                                         'icon' => 'add',
                                         'buttonClass' => 'btn',
-                                        'buttonStyle' => 'width:80px; height: 36px',
+                                        'buttonStyle' => 'width:130px; height: 36px',
+                                        'width' => '21',
+                                        'height' => '20',
+                                        'stroke' => 'black',
+                                        'extra' => [
+                                            'type' => 'button',
+                                            'onclick' => 'loadAddInfo();',
+                                        ]
+                                    ]);
+                                ?>
+                                <?php
+                                    echo getIconButton([
+                                        'txt' => '항목추가',
+                                        'icon' => 'box_plus',
+                                        'buttonClass' => 'btn',
+                                        'buttonStyle' => 'width:130px; height: 36px',
                                         'width' => '21',
                                         'height' => '20',
                                         'stroke' => 'black',
@@ -427,7 +481,7 @@
                                     <span>*</span>
                                 </label>
                                 <input type="text" class="form-control" name="i_sell_unit"
-                                    style="border-top-right-radius:0px; border-bottom-right-radius: 0px; width: 1%" value=""/>
+                                    style="border-top-right-radius:0px; border-bottom-right-radius: 0px; width: 1%" value=""/ placeholder="EA">
                             </div>
                             <div class="input-group required">
                                 <label class="label body2-c"></label>
@@ -488,7 +542,7 @@
                                     </p>
                                 </div>
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -577,7 +631,7 @@
                                     </p>
                                 </div>
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -624,10 +678,10 @@
                             </div>
                             <div class="input-group required">
                                 <label class="label body2-c">
-                                    적립금 지급 기준
+                                    할인 기준
                                 </label>
                                 <?php
-                                    $options  = ['N'=>'기본 설정에 따름', 'Y'=>'개별 적립금 설정'];
+                                    $options  = ['N'=>'기본 설정에 따름', 'Y'=>'개별 할인 설정'];
                                     $extras   = ['id' => 'i_sell_point_flag', 'class' => 'form-select', 'style' => 'max-width: 250px;margin-right:0.235em;','onChange'=>'$(this).val() == \'Y\'? $(\'#point_save_wrap\').show() : $(\'#point_save_wrap\').hide()' ];
                                     $selected = '';
                                     echo getSelectBox('i_sell_point_flag', $options, $selected, $extras);
@@ -786,7 +840,7 @@
                                     </p>
                                 </div>
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -908,7 +962,7 @@
                                                         'stroke' => '#ccc',
                                                         'extra' => [
                                                             'type' => 'button',
-                                                            'onclick' => 'showTooltip(this,\'regist_gbn\');',
+                                                            'onclick' => 'showTooltip(this,\'regist_gbn\', \'bottom\');',
                                                         ]
                                                     ]);
                                                     ?>
@@ -946,7 +1000,7 @@
                                     </p>
                                 </div>
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -1084,7 +1138,7 @@
                                     </p>
                                 </div>
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -1108,9 +1162,10 @@
                                         'id' => 'i_option_use_flag_N',
                                         'value' => 'N',
                                         'label' => '사용안함',
-                                        'checked' => 'checked',
+                                        'checked' => '',
                                         'extraAttributes' => [
-                                            'onclick' => '$(\'#options_wrap\').hide();'
+                                            'onclick' => '$(\'#options_wrap\').hide();',
+                                            'disabled' => 'true',
                                         ]
                                     ];
                                     echo getRadioButton($setParam);
@@ -1121,7 +1176,7 @@
                                         'id' => 'i_option_use_flag_Y',
                                         'value' => 'Y',
                                         'label' => '사용함',
-                                        'checked' => '',
+                                        'checked' => 'checked',
                                         'extraAttributes' => [
                                             'onclick' => '$(\'#options_wrap\').show();'
                                         ]
@@ -1129,7 +1184,7 @@
                                     echo getRadioButton($setParam);
                                 ?>
                             </div>
-                            <div id="options_wrap" style="display:none;width:100%;padding:2.5rem;margin-bottom:1.3rem;border-radius: 4px;border: 1px solid var(----tblr-border-color, #E6E7E9);background: var(-----tblr-light, #F8FAFC);">
+                            <div id="options_wrap" style="width:100%;padding:2.5rem;margin-bottom:1.3rem;border-radius: 4px;border: 1px solid var(----tblr-border-color, #E6E7E9);background: var(-----tblr-light, #F8FAFC);">
                                 <?php
                                     echo getIconButton([
                                         'txt' => '항목추가',
@@ -1264,7 +1319,7 @@
                                     </p>
                                 </div>
                                 <!-- 아코디언 토글 버튼 -->
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -1374,7 +1429,7 @@
                                     </p>
                                 </div>
 
-                                <label class="form-selectgroup-item">
+                                <label class="form-selectgroup-item" onclick="toggleForm( $(this) )">
                                     <span class="form-selectgroup-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"
                                             fill="none">
@@ -2040,13 +2095,21 @@
         ?>
     </div>
 
-
 </div>
 <?php echo form_close() ?>
 <!-- Modal S-->
 <div class="modal fade" id="dataModal" tabindex="-1" style="margin-top:3em;" aria-labelledby="dataodalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="max-height:90vh;display:flex;flex-direction: column;width:80vh">
+
+        </div>
+    </div>
+</div>
+<!-- Modal E-->
+<!-- info Modal(사이즈 때문에 나눔) S-->
+<div class="modal fade" id="infoModal" tabindex="-1" style="margin-top:3em;" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="max-height:90vh;display:flex;flex-direction: column;width:70vh">
 
         </div>
     </div>
@@ -2061,6 +2124,54 @@ const $uploadButton = $('#upload-button');
 let   filesArray = [];
 let   productPcikList = [];
 let   addProductPickList = [];
+
+
+function loadAddInfo(){
+    let data = '';
+    let url  = '/apis/goods/getPopRequiredLists';
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: data,
+        processData: false,
+        cache: false,
+        beforeSend: function() {
+            $('#preloader').show();
+        },
+        success: function(response) {
+            submitSuccess(response);
+            $('#preloader').hide();
+            if (response.status == 'false')
+            {
+                var error_message = '';
+                error_message = error_lists.join('<br />');
+                if (error_message != '') {
+                    box_alert(error_message, 'e');
+                }
+
+                return false;
+            }
+            $('#infoModal .modal-content').empty().html( response.page_datas.lists_row );
+            $('.dropdown-layer').hide();
+            //var modal = new bootstrap.Modal(document.getElementById(id));
+            var modalElement = document.getElementById('infoModal');
+            var modal = new bootstrap.Modal(modalElement, {
+                backdrop: 'static', // 마스크 클릭해도 닫히지 않게 설정
+                keyboard: true     // esc 키로 닫히지 않게 설정
+            });
+
+            modal.show();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            submitError(jqXHR.status, errorThrown);
+            console.log(textStatus);
+            $('#preloader').hide();
+            return false;
+        },
+        complete: function() { }
+    });       // 모달
+}
+
 
 $('#relationSort').sortable({
     handle: '.relation-move-icons',
@@ -2146,19 +2257,19 @@ function frmRegister(e){
         }
     });
 
-    // if (isSubmit == false) {
-    //     var error_message = error_lists.join('<br />');
-    //     box_alert(error_message, 'e');
+    if (isSubmit == false) {
+        var error_message = error_lists.join('<br />');
+        box_alert(error_message, 'e');
 
-    //     inputs.prop('disabled', false); // 폼 요소를 다시 활성화
-    //     return false;
-    // }
+        inputs.prop('disabled', false); // 폼 요소를 다시 활성화
+        return false;
+    }
     var formData = new FormData($('#frm_register')[0]);
     console.log( filesArray );
     filesArray.forEach((file, index) => {
         formData.append('i_goods_img[]', file);
     });
-    inputs.prop('disabled', false); // 폼 요소를 다시 활성화
+
     // 폼 전송 로직 추가
     $.ajax({
         url: '/apis/goods/goodsRegisterProc',
@@ -2177,6 +2288,7 @@ function frmRegister(e){
         {
             submitSuccess(response);
             $('#preloader').hide();
+            inputs.prop('disabled', false);
             if (response.status != 200)
             {
                 var error_message = '';
@@ -2327,6 +2439,9 @@ function openDataLayer( gbn ){
                 return false;
             }
             $('#dataModal .modal-content').empty().html( response.page_datas.lists_row );
+
+
+
             $('.dropdown-layer').hide();
             //var modal = new bootstrap.Modal(document.getElementById(id));
             var modalElement = document.getElementById('dataModal');
@@ -2347,101 +2462,183 @@ function openDataLayer( gbn ){
     });       // 모달 열기
 
 }
-var description_editor = new toastui.Editor({
-    el: document.querySelector('#description_editor'),
-    height: '200px',
-    initialEditType: 'wysiwyg',
-    previewStyle: 'vertical',
-    hooks: {
-        addImageBlobHook: function(blob, callback) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var base64Image = reader.result.split(',')[1];
-                $.ajax({
-                    url: '/apis/design/writeImage',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        image: base64Image,
-                        path: 'goods/editor'
-                    }),
-                    success: function(response) {
-                        var imageUrl = response.url;
-                        callback(imageUrl, 'alt text');
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error('Error uploading file:', textStatus, errorThrown);
-                    }
-                });
-            };
-            reader.readAsDataURL(blob);
-        }
-    }
-});
 
-var contents_editor = new toastui.Editor({
-    el: document.querySelector('#contents_editor'),
-    height: '250px',
-    initialEditType: 'wysiwyg',
-    previewStyle: 'vertical',
-    hooks: {
-        addImageBlobHook: function(blob, callback) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var base64Image = reader.result.split(',')[1];
-                $.ajax({
-                    url: '/apis/design/writeImage',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        image: base64Image,
-                        path: 'goods/editor'
-                    }),
-                    success: function(response) {
-                        var imageUrl = response.url;
-                        callback(imageUrl, 'alt text');
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error('Error uploading file:', textStatus, errorThrown);
-                    }
-                });
-            };
-            reader.readAsDataURL(blob);
-        }
-    }
-});
 
-var m_contents_editor = new toastui.Editor({
-    el: document.querySelector('#m_contents_editor'),
-    height: '250px',
-    initialEditType: 'wysiwyg',
-    previewStyle: 'vertical',
-    hooks: {
-        addImageBlobHook: function(blob, callback) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var base64Image = reader.result.split(',')[1];
-                $.ajax({
-                    url: '/apis/design/writeImage',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        image: base64Image,
-                        path: 'goods/editor'
-                    }),
-                    success: function(response) {
-                        var imageUrl = response.url;
-                        callback(imageUrl, 'alt text');
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error('Error uploading file:', textStatus, errorThrown);
-                    }
-                });
-            };
-            reader.readAsDataURL(blob);
+//document.addEventListener('DOMContentLoaded', function() {
+    // WYSIWYG 모드에서 선택된 블록에 CSS를 적용하여 정렬 처리
+    function applyAlignment(editor, alignType) {
+        if (editor.isWysiwygMode()) {
+            const wysiwygEditor = editor.getCurrentModeEditor().$editorContainerEl;
+            const selection = window.getSelection();
+            const range = selection.getRangeAt(0);  // 현재 선택된 범위 가져오기
+
+            if (range && range.commonAncestorContainer) {
+                const selectedBlock = range.commonAncestorContainer.closest('p, div, h1, h2, h3, h4, h5, h6');
+                if (selectedBlock) {
+                    selectedBlock.style.textAlign = alignType;  // 정렬 스타일 적용
+                    console.log(`${alignType} 정렬 적용됨`);
+                } else {
+                    alert('선택된 블록이 없습니다.');
+                }
+            } else {
+                alert('선택된 범위가 없습니다.');
+            }
+        } else {
+            alert('WYSIWYG 모드에서만 사용할 수 있습니다.');
         }
     }
-});
+
+    // 에디터 초기화 함수
+    function initializeEditor(editorId, alignLeftClass, alignCenterClass, alignRightClass) {
+        var editor = new toastui.Editor({
+            el: document.querySelector(editorId),
+            height: '250px',
+            initialEditType: 'wysiwyg',
+            previewStyle: 'vertical',
+            toolbarItems: [
+                ['heading', 'bold', 'italic', 'strike'],
+                ['hr', 'quote'],
+                ['ul', 'ol', 'task'],
+                ['table', 'link'],
+                ['image'],
+                ['indent', 'outdent'],
+                ['scrollSync'],
+                // [
+                //     {
+                //         name: 'alignleft',
+                //         text: '왼쪽 정렬',
+                //         tooltip: '왼쪽 정렬',
+                //         style: { 'margin-right': '4px' },
+                //         className: alignLeftClass
+                //     },
+                //     {
+                //         name: 'aligncenter',
+                //         text: '가운데 정렬',
+                //         tooltip: '가운데 정렬',
+                //         style: { 'margin-right': '4px' },
+                //         className: alignCenterClass
+                //     },
+                //     {
+                //         name: 'alignright',
+                //         text: '오른쪽 정렬',
+                //         tooltip: '오른쪽 정렬',
+                //         style: { 'margin-right': '4px' },
+                //         className: alignRightClass
+                //     }
+                // ]
+            ],
+            hooks: {
+                addImageBlobHook: function(blob, callback) {
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        var base64Image = reader.result.split(',')[1];
+                            $.ajax({
+                                url: '/apis/design/writeImage',
+                                method: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                image: base64Image,
+                                path: 'goods/editor'
+                            }),
+                            success: function(response) {
+                                var imageUrl = response.url;
+                                callback(imageUrl, 'alt text');
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.error('Error uploading file:', textStatus, errorThrown);
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+        // DOM 이벤트 리스너 추가
+        setTimeout(function() {
+            const leftAlignBtn = document.querySelector(`.${alignLeftClass}`);
+            const centerAlignBtn = document.querySelector(`.${alignCenterClass}`);
+            const rightAlignBtn = document.querySelector(`.${alignRightClass}`);
+
+            // 왼쪽 정렬 버튼
+            if (leftAlignBtn) {
+                leftAlignBtn.addEventListener('click', function() {
+                    applyAlignment(editor, 'left');
+                });
+            }
+
+            // 가운데 정렬 버튼
+            if (centerAlignBtn) {
+                centerAlignBtn.addEventListener('click', function() {
+                    applyAlignment(editor, 'center');
+                });
+            }
+
+            // 오른쪽 정렬 버튼
+            if (rightAlignBtn) {
+                rightAlignBtn.addEventListener('click', function() {
+                    applyAlignment(editor, 'right');
+                });
+            }
+        }, 1000);
+
+        return editor;
+    }
+
+    // description_editor 초기화
+    var description_editor = initializeEditor('#description_editor', 'align-left-btn-desc', 'align-center-btn-desc', 'align-right-btn-desc');
+
+    // m_contents_editor 초기화
+    var m_contents_editor = initializeEditor('#m_contents_editor', 'align-left-btn-m-content', 'align-center-btn-m-content', 'align-right-btn-m-content');
+
+    // contents_editor 초기화
+    var contents_editor = initializeEditor('#contents_editor', 'align-left-btn-content', 'align-center-btn-content', 'align-right-btn-content');
+
+    console.log('All editors initialized');
+//});
+
+// var m_contents_editor = new toastui.Editor({
+//     el: document.querySelector('#m_contents_editor'),
+//     height: '250px',
+//     initialEditType: 'wysiwyg',
+//     previewStyle: 'vertical',
+//     toolbarItems: [
+//         ['heading', 'bold', 'italic', 'strike'], // 제목, 굵게, 기울임, 취소선
+//         ['hr', 'quote'], // 수평선, 인용구
+//         ['ul', 'ol', 'task'], // 글머리 기호 목록, 번호 목록, 작업 목록 (체크박스)
+//         ['table', 'link'], // 표, 링크 삽입
+//         ['image'], // 이미지 삽입
+//         ['indent', 'outdent'], // 들여쓰기, 내어쓰기
+//         ['scrollSync'], // 스크롤 동기화
+
+//     ],
+//     plugins: [toastui.Editor.plugin.colorSyntax,],
+//     hooks: {
+//         addImageBlobHook: function(blob, callback) {
+//             var reader = new FileReader();
+//             reader.onload = function() {
+//                 var base64Image = reader.result.split(',')[1];
+//                 $.ajax({
+//                     url: '/apis/design/writeImage',
+//                     method: 'POST',
+//                     contentType: 'application/json',
+//                     data: JSON.stringify({
+//                         image: base64Image,
+//                         path: 'goods/editor'
+//                     }),
+//                     success: function(response) {
+//                         var imageUrl = response.url;
+//                         callback(imageUrl, 'alt text');
+//                     },
+//                     error: function(jqXHR, textStatus, errorThrown) {
+//                         console.error('Error uploading file:', textStatus, errorThrown);
+//                     }
+//                 });
+//             };
+//             reader.readAsDataURL(blob);
+//         }
+//     }
+// });
 
 
 var tooltipContent = {

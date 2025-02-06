@@ -416,20 +416,22 @@
 
 <script>
 
-$(document).ready(function() {
-    let compMember= "<?php echo _elm( $aData, 'MB_COM_NAME' )?>";
-    console.log( compMember );
+    var compMember = "<?php echo _elm( $aData, 'MB_COM_NAME' )?>";
+
     if (compMember == '') {
-        setTimeout(function(){
-            $("#compMember .form-selectgroup-item").trigger('click');
-        }, 200);
+        setTimeout(function() {
+            if ($("#compMember .form-selectgroup-item").length > 0) {
+                $("#compMember .form-selectgroup-item").trigger('click');
+            }
+        }, 300);
     }
 
-});
 
-let idChk = true;
-let passwdChk = true;
-let orgUseID = '<?php echo _elm( $aData, 'MB_USERID' )?>';
+
+
+var idChk = true;
+var passwdChk = true;
+var orgUseID = '<?php echo _elm( $aData, 'MB_USERID' )?>';
 
 </script>
 <?php echo form_close() ?>

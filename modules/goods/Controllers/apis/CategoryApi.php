@@ -25,6 +25,282 @@ class CategoryApi extends ApiController
         $this->aConfig                              = $this->aConfig->goods;
     }
 
+    public function questionKeywordDelete()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $categoryModel                              = new CategoryModel();
+
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'keywordIdx' => [
+                'label'  => 'keywordIdx',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '키워드IDX 누락',
+                ],
+            ],
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $messages                               = [];
+            foreach( $validation->getErrors() as $field => $message ){
+                $messages[]                         = $message;
+            }
+            $response['alert']                      = join( PHP_EOL, $messages);
+
+            return $this->respond($response);
+        }
+
+        $modelParam                                 = [];
+        $modelParam['K_IDX']                        = _elm( $requests, 'keywordIdx' );
+        $modelParam['K_STATUS']                     = 4;
+        $modelParam['K_DELETE_AT']                  = date('Y-m-d H:i:s');
+        $modelParam['K_DELETE_IP']                  = $this->request->getIPAddress();
+        $modelParam['K_DELETE_MB_IDX']              = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+
+        $this->db->transBegin();
+
+        $aStatus                                    = $categoryModel->updateQustKeyword( $modelParam );
+        if ( $this->db->transStatus() === false || $aStatus === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '질문 키워드 삭제 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        if ( $this->db->transStatus() === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '로그 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+        $this->db->transCommit();
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['reload']                         = true;
+
+        return $this->respond( $response );
+
+    }
+
+    public function questionKeywordRegister()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $categoryModel                              = new CategoryModel();
+
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'keyword' => [
+                'label'  => 'keyword',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '키워드 누락',
+                ],
+            ],
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $messages                               = [];
+            foreach( $validation->getErrors() as $field => $message ){
+                $messages[]                         = $message;
+            }
+            $response['alert']                      = join( PHP_EOL, $messages);
+
+            return $this->respond($response);
+        }
+
+        $modelParam                                 = [];
+        $modelParam['K_NAME']                       = _elm( $requests, 'keyword' );
+        $sameCheck                                  = $categoryModel->sameChkQustKeyword( $modelParam );
+        if( empty( $sameCheck ) === false ){
+            $response['status']                     = 400;
+            $response['alert']                      = '이미 존재하는 키워드입니다.';
+
+            return $this->respond( $response );
+        }
+
+        $modelParam['K_STATUS']                     = 1;
+        $modelParam['K_CREATE_AT']                  = date('Y-m-d H:i:s');
+        $modelParam['K_CREATE_IP']                  = $this->request->getIPAddress();
+        $modelParam['K_CREATE_MB_IDX']              = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->db->transBegin();
+
+        $aIdx                                       = $categoryModel->insertQustKeyword( $modelParam );
+        if ( $this->db->transStatus() === false || $aIdx === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '질문 키워드 추가- data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        if ( $this->db->transStatus() === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '로그 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+        $this->db->transCommit();
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['keywordId']                      = $aIdx;
+        $response['reload']                         = true;
+
+        return $this->respond( $response );
+
+
+
+    }
+
+    public function deleteCategoryImages()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $categoryModel                              = new CategoryModel();
+
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'f_idx' => [
+                'label'  => 'f_idx',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '파일인덱스 누락.',
+                ],
+            ],
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $messages                               = [];
+            foreach( $validation->getErrors() as $field => $message ){
+                $messages[]                         = $message;
+            }
+            $response['alert']                      = join( PHP_EOL, $messages);
+
+            return $this->respond($response);
+        }
+
+        $aData                                      = $categoryModel->getCategoryFileDataByIdx( _elm( $requests, 'f_idx' ) );
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '파일 데이터가 없습니다.';
+
+            return $this->respond( $response );
+        }
+        $this->db->transBegin();
+
+        $aStatus                                    = $categoryModel->deleteCategoryFileDataByIdx( _elm( $requests, 'f_idx' ) );
+        if ( $this->db->transStatus() === false || $aStatus == false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '삭제 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 파일 데이터 삭제
+        #------------------------------------------------------------------
+        $finalFilePath                  = WRITEPATH . _elm( $aData, 'F_PATH' );
+        if (file_exists($finalFilePath)) {
+            @unlink($finalFilePath);
+        }
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                              = [];
+        $logParam['MB_HISTORY_CONTENT']        = '상품 브랜드 추가 파일삭제 - data:'.json_encode( $requests, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_IDX']                    = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        if ( $this->db->transStatus() === false ) {
+            $this->db->transRollback();
+            $response['status']                = 400;
+            $response['alert']                 = '로그 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+        $this->db->transCommit();
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '삭제 되었습니다.';
+
+        return $this->respond( $response );
+
+    }
     public function getCategoryLists( $param = [] )
     {
         $response                                   = $this->_initResponse();
@@ -163,6 +439,7 @@ class CategoryApi extends ApiController
 
         $view_datas['aConfig']                      = $this->aConfig;
 
+        $keyword_group                              = $categoryModel->getQuestionKeywords();
         #------------------------------------------------------------------
         # TODO: 데이터 세팅
         #------------------------------------------------------------------
@@ -181,13 +458,18 @@ class CategoryApi extends ApiController
             return $this->respond( $response );
         }
 
-
+        #------------------------------------------------------------------
+        # TODO: 배너파일 로드
+        #------------------------------------------------------------------
+        $aData['files']                             = $categoryModel->getCategoryFiles( _elm( $requests, 'cate_idx' ) );
+        $view_datas['keywords']                     = $keyword_group;
 
         $questions                                  = $categoryModel->getQuestions( _elm( $aData, 'C_IDX' ) );
         if( empty( $questions ) === false  ){
             foreach( $questions as $qKey => $question ){
                 $orderKey                           = $qKey+1;
                 $aData['questions'][$orderKey]['q_idx']      = _elm( $question, 'Q_IDX' );
+                $aData['questions'][$orderKey]['q_keyword']  = _elm( $question, 'Q_KEYWORD' );
                 $aData['questions'][$orderKey]['question']   = _elm( $question, 'Q_QUESTION' );
                 $exampleDatas                       = $categoryModel->getQuestionsExamples( _elm( $question, 'Q_IDX' ) );
                 if( empty( $exampleDatas ) === false ){
@@ -246,6 +528,7 @@ class CategoryApi extends ApiController
         $_max                                       = substr(_elm($_cateCode, 'max'), -1) ?? 0;
         $max                                        = (int)$_max + 1;
 
+        $keyword_group                              = $categoryModel->getQuestionKeywords();
 
 
 
@@ -272,6 +555,9 @@ class CategoryApi extends ApiController
         $view_datas['cateCode']                     = $newCode;
         $view_datas['parentInfo']                   = $_parentInfo;
 
+        $view_datas['keywords']                     = $keyword_group;
+
+
         #------------------------------------------------------------------
         # TODO: AJAX 뷰 처리
         #------------------------------------------------------------------
@@ -286,6 +572,8 @@ class CategoryApi extends ApiController
         return $this->respond($response);
 
     }
+
+
     public function updateCategoryOrder(){
         $response                                   = $this->_initResponse();
         $requests                                   = $this->request->getPost();
@@ -356,6 +644,7 @@ class CategoryApi extends ApiController
         $response                                   = $this->_initResponse();
         $requests                                   = $this->request->getPost();
         $files                                      = $this->request->getFiles();
+
         $categoryModel                              = new CategoryModel();
 
         $validation                                 = \Config\Services::validation();
@@ -371,9 +660,10 @@ class CategoryApi extends ApiController
         $validation->setRules([
             'i_cate_name' => [
                 'label'  => '카테고리명',
-                'rules'  => 'trim|required',
+                'rules'  => 'trim|required|regex_match[/^[a-zA-Z0-9가-힣\s\(\)\[\]\&\/]+$/]',
                 'errors' => [
                     'required' => '카테고리 이름을 입력하세요.',
+                    'regex_match' => '카테고리 이름은 특수문자를 허용하지 않습니다.',
                 ],
             ],
         ]);
@@ -432,13 +722,72 @@ class CategoryApi extends ApiController
         }
 
         #------------------------------------------------------------------
+        # TODO: 배너이미지 처리
+        #------------------------------------------------------------------
+        $config                                     = [
+            'path' => 'goods/category/banner',
+            'mimes' => 'pdf|jpg|gif|png|jpeg|svg',
+        ];
+        foreach( $files as $key => $file ){
+            if (is_array($file)) {
+                foreach ($file as $mKey => $multiFile) {
+                    if ($multiFile->getSize() > 0) {
+                        $file_return = $this->_upload($multiFile, $config);
+
+                        // 파일 처리 실패 시
+                        if (_elm($file_return, 'status') === false) {
+                            $this->db->transRollback();
+                            $response['status']     = 400;
+                            $response['alert']      = _elm($file_return, 'error');
+                            return $this->respond($response, 400);
+                        }
+
+                        // 파일 처리 성공 시 fileParam에 저장
+                        $fileParam = [
+                            'F_B_IDX'               => $aIdx, // 브랜드 ID
+                            'F_NAME'                => $multiFile->getClientName(),
+                            'F_LINK_URL'            => _elm( _elm(  $requests, 'i_link_url'), $mKey ),
+                            'F_PATH'                => _elm($file_return, 'uploaded_path'),
+                            'F_EXT'                 => $multiFile->getClientExtension(),
+                            'F_SIZE'                => $multiFile->getSize(),
+                            'F_TYPE'                => $multiFile->getClientMimeType(),
+                            'F_CREATE_AT'           => date('Y-m-d H:i:s'),
+                            'F_CREATE_IP'           => $this->request->getIPAddress(),
+                            'F_CREATE_MB_IDX'       => _elm( $this->session->get('_memberInfo') , 'member_idx' ), // 로그인한 사용자 ID
+                        ];
+                        #------------------------------------------------------------------
+                        # TODO: 파일 입력
+                        #------------------------------------------------------------------
+                        $f_idx                  = $categoryModel->insertCategoryFiles( $fileParam );
+                        if ( $this->db->transStatus() === false || $f_idx === false ) {
+                            $this->db->transRollback();
+                            $response['status']                     = 400;
+                            $response['alert']                      = '추가 파일 처리중 오류발생.. 다시 시도해주세요.';
+                            return $this->respond( $response );
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+
+        #------------------------------------------------------------------
         # TODO: 리뷰지문등록
         #------------------------------------------------------------------
 
         if( empty( _elm( $requests, 'questions' ) ) === false ){
             foreach( _elm( $requests, 'questions' ) as $qKey => $question ){
-                if( empty( _elm( $question, 'values' ) ) === false ){
+                if( empty( _elm( $question, 'values' ) ) === false  ){
+                    if( empty( _elm( $question, 'keyword' ) ) === true ){
+                        $response['status']         = 400;
+                        $response['alert']          = '키워드를 선택해주세요.';
+
+                        return $this->respond( $response );
+                    }
                     $qParam                         = [];
+                    $qParam['Q_KEYWORD']            = _elm( $question, 'keyword' );
                     $qParam['Q_QUESTION']           = _elm( $question, 'question' );
                     $qParam['Q_CATE_IDX']           = $aIdx;
                     $qParam['Q_SORT']               = $qKey;
@@ -480,7 +829,7 @@ class CategoryApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 등록 - data:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 등록 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -511,8 +860,9 @@ class CategoryApi extends ApiController
 
         $response                                   = $this->_initResponse();
         $requests                                   = $this->request->getPost();
-
+        $files                                      = $this->request->getFiles();
         $categoryModel                              = new CategoryModel();
+
 
         $validation                                 = \Config\Services::validation();
 
@@ -524,6 +874,7 @@ class CategoryApi extends ApiController
         #------------------------------------------------------------------
         # TODO: 필수 parameter 검사
         #------------------------------------------------------------------
+
         $validation->setRules([
             'i_parent_idx' => [
                 'label'  => '상위 IDX',
@@ -534,10 +885,10 @@ class CategoryApi extends ApiController
             ],
             'i_cate_name' => [
                 'label'  => '카테고리명',
-                'rules'  => 'trim|required|regex_match[/^[a-zA-Z0-9가-힣]+$/]',
+                'rules'  => 'trim|required|regex_match[/^[a-zA-Z0-9가-힣\s\(\)\[\]\&\/]+$/]',
                 'errors' => [
                     'required' => '카테고리 이름을 입력하세요.',
-                    'regex_match' => '카테고리 이름는 특수문자를 허용하지 않습니다.',
+                    'regex_match' => '카테고리 이름은 특수문자를 허용하지 않습니다.',
                 ],
             ],
         ]);
@@ -606,6 +957,61 @@ class CategoryApi extends ApiController
             $response['alert']                      = '처리중 오류발생.. 다시 시도해주세요.';
             return $this->respond( $response );
         }
+
+        #------------------------------------------------------------------
+        # TODO: 배너이미지 처리
+        #------------------------------------------------------------------
+        $config                                     = [
+            'path' => 'goods/category/banner',
+            'mimes' => 'pdf|jpg|gif|png|jpeg|svg',
+        ];
+        foreach( $files as $key => $file ){
+            if (is_array($file)) {
+                foreach ($file as $mKey => $multiFile) {
+                    if ($multiFile->getSize() > 0) {
+                        $file_return = $this->_upload($multiFile, $config);
+
+                        // 파일 처리 실패 시
+                        if (_elm($file_return, 'status') === false) {
+                            $this->db->transRollback();
+                            $response['status'] = 400;
+                            $response['alert']  = _elm($file_return, 'error');
+                            return $this->respond($response, 400);
+                        }
+
+                        // 파일 처리 성공 시 fileParam에 저장
+                        $fileParam = [
+                            'F_B_IDX'           => _elm( $requests, 'i_cate_idx' ), // 브랜드 ID
+                            'F_NAME'            => $multiFile->getClientName(),
+                            'F_LINK_URL'        => _elm( _elm(  $requests, 'i_link_url'), $mKey ),
+                            'F_PATH'            => _elm($file_return, 'uploaded_path'),
+                            'F_EXT'             => $multiFile->getClientExtension(),
+                            'F_SIZE'            => $multiFile->getSize(),
+                            'F_TYPE'            => $multiFile->getClientMimeType(),
+                            'F_CREATE_AT'       => date('Y-m-d H:i:s'),
+                            'F_CREATE_IP'       => $this->request->getIPAddress(),
+                            'F_CREATE_MB_IDX'   => _elm( $this->session->get('_memberInfo') , 'member_idx' ), // 로그인한 사용자 ID
+                        ];
+
+                        #------------------------------------------------------------------
+                        # TODO: 파일 입력
+                        #------------------------------------------------------------------
+                        $f_idx                  = $categoryModel->insertCategoryFiles( $fileParam );
+                        if ( $this->db->transStatus() === false || $f_idx === false ) {
+                            $this->db->transRollback();
+                            $response['status']                     = 400;
+                            $response['alert']                      = '추가 파일 처리중 오류발생.. 다시 시도해주세요.';
+                            return $this->respond( $response );
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+
+
         #------------------------------------------------------------------
         # TODO: 기존 질문 목록 가져오기
         #------------------------------------------------------------------
@@ -621,13 +1027,19 @@ class CategoryApi extends ApiController
         if (!empty(_elm($requests, 'questions'))) {
             foreach (_elm($requests, 'questions') as $qKey => $question) {
                 $qIdx                               = _elm($question, 'q_idx'); // 수정할 지문 ID
+                if( empty( _elm( $question, 'keyword' ) ) === true ){
+                    $response['status']         = 400;
+                    $response['alert']          = '키워드를 선택해주세요.';
 
+                    return $this->respond( $response );
+                }
                 // 1. 질문(Q_QUESTION) 존재 여부 확인
                 if (!empty($qIdx)) {
                     // 기존 질문을 업데이트
                     $submittedQuestionIds[]         = $qIdx;
                     $qParam                         = [];
                     $qParam['Q_IDX']                = $qIdx;
+                    $qParam['Q_KEYWORD']            = _elm( $question, 'keyword' );
                     $qParam['Q_QUESTION']           = _elm($question, 'question');
                     $qParam['Q_CATE_IDX']           = _elm( $requests, 'i_cate_idx' );
                     $qParam['Q_SORT']               = $qKey;
@@ -645,6 +1057,7 @@ class CategoryApi extends ApiController
                 } else {
                     // 새 질문 추가 (등록 로직 활용)
                     $qParam                         = [];
+                    $qParam['Q_KEYWORD']            = _elm( $question, 'keyword' );
                     $qParam['Q_QUESTION']           = _elm($question, 'question');
                     $qParam['Q_CATE_IDX']           = _elm( $requests, 'i_cate_idx' );
                     $qParam['Q_SORT']               = $qKey;
@@ -669,17 +1082,22 @@ class CategoryApi extends ApiController
                 $submittedExamples                  = _elm($question, 'values');
                 $submittedExampleIds                = array_column($submittedExamples, 'e_idx'); // 제출된 예시 ID 목록
 
-                // 2-1. 기존 예시 중 제출되지 않은 예시는 삭제
-                foreach ($existingExamples as $existingExample) {
-                    if (!in_array( _elm( $existingExample, 'E_IDX'), $submittedExampleIds)) {
-                        $deleteStatus               = $categoryModel->deleteQuestionExample( _elm( $existingExample, 'E_IDX') );
-                        if ($this->db->transStatus() === false || $deleteStatus === false) {
-                            $this->db->transRollback();
-                            $response['status']     = 400;
-                            $response['alert']      = '예제 삭제 중 오류 발생.. 다시 시도해주세요.';
-                            return $this->respond($response);
+
+                if( !empty($existingExamples) ){
+
+                    // 2-1. 기존 예시 중 제출되지 않은 예시는 삭제
+                    foreach ($existingExamples as $existingExample) {
+                        if (!in_array( _elm( $existingExample, 'E_IDX'), $submittedExampleIds)) {
+                            $deleteStatus           = $categoryModel->deleteQuestionExample( _elm( $existingExample, 'E_IDX') );
+                            if ($this->db->transStatus() === false || $deleteStatus === false) {
+                                $this->db->transRollback();
+                                $response['status'] = 400;
+                                $response['alert']  = '예제 삭제 중 오류 발생.. 다시 시도해주세요.';
+                                return $this->respond($response);
+                            }
                         }
                     }
+
                 }
 
                 // 2-2. 제출된 예시 업데이트 또는 새로 추가
@@ -726,38 +1144,66 @@ class CategoryApi extends ApiController
                     }
                 }
             }
-
             #------------------------------------------------------------------
             # TODO: 기존 지문 중 제출되지 않은 지문 삭제
             #------------------------------------------------------------------
             foreach ($existingQuestionIds as $existingQuestionId) {
-                if (!in_array($existingQuestionId, $submittedQuestionIds)) {
+                if (!in_array( $existingQuestionId, $submittedQuestionIds, true) ) {
                     // 기존에 존재하지만 제출되지 않은 지문 삭제
-                    $deleteStatus                   = $categoryModel->deleteQuestion($existingQuestionId);
+                    $deleteStatus = $categoryModel->deleteQuestion($existingQuestionId);
                     if ($this->db->transStatus() === false || $deleteStatus === false) {
                         $this->db->transRollback();
-                        $response['status']         = 400;
-                        $response['alert']          = '지문 삭제 중 오류 발생.. 다시 시도해주세요.';
+                        $response['status'] = 400;
+                        $response['alert'] = '지문 삭제 중 오류 발생.. 다시 시도해주세요.';
                         return $this->respond($response);
                     }
 
                     // 해당 지문에 연결된 보기도 삭제
-                    $deleteExamplesStatus           = $categoryModel->deleteQuestionExampleAll($existingQuestionId);
+                    $deleteExamplesStatus = $categoryModel->deleteQuestionExampleAll($existingQuestionId);
                     if ($this->db->transStatus() === false || $deleteExamplesStatus === false) {
                         $this->db->transRollback();
-                        $response['status']         = 400;
-                        $response['alert']          = '예제 삭제 중 오류 발생.. 다시 시도해주세요.';
+                        $response['status'] = 400;
+                        $response['alert'] = '예제 삭제 중 오류 발생.. 다시 시도해주세요.';
                         return $this->respond($response);
                     }
                 }
             }
+        }else{
+            if( empty( $existingQuestionIds ) === false ){
+                foreach ($existingQuestionIds as $existingQuestionId) {
+                    // 기존에 존재하지만 제출되지 않은 지문 삭제
+                    $deleteStatus = $categoryModel->deleteQuestion($existingQuestionId);
+                    if ($this->db->transStatus() === false || $deleteStatus === false) {
+                        $this->db->transRollback();
+                        $response['status'] = 400;
+                        $response['alert'] = '지문 삭제 중 오류 발생.. 다시 시도해주세요.';
+                        return $this->respond($response);
+                    }
+
+                    // 해당 지문에 연결된 보기도 삭제
+                    $deleteExamplesStatus = $categoryModel->deleteQuestionExampleAll($existingQuestionId);
+                    if ($this->db->transStatus() === false || $deleteExamplesStatus === false) {
+                        $this->db->transRollback();
+                        $response['status'] = 400;
+                        $response['alert'] = '예제 삭제 중 오류 발생.. 다시 시도해주세요.';
+                        return $this->respond($response);
+                    }
+
+                }
+            }
         }
+
+
+
+
+
+
 
         #------------------------------------------------------------------
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 수정 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ) . ' // newData:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE )  ;
+        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 수정 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) . ' // newData:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE )  ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -781,7 +1227,92 @@ class CategoryApi extends ApiController
         return $this->respond( $response );
     }
 
+    public function updateCategoryFileLink()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $categoryModel                              = new CategoryModel();
 
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'idx' => [
+                'label'  => '고유값',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '고유값누락. 다시 시도해주세요.',
+                ],
+            ],
+            'value' => [
+                'label'  => '링크주소',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '링크주소를 입력해주세요.',
+                ],
+            ],
+
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $messages                               = [];
+            foreach( $validation->getErrors() as $field => $message ){
+                $messages[]                         = $message;
+            }
+            $response['alert']                      = join( PHP_EOL, $messages);
+
+            return $this->respond($response);
+        }
+        $modelParam                                 = [];
+        $modelParam['F_IDX']                        = _elm( $requests, 'idx' );
+        $modelParam['F_LINK_URL']                   = _elm( $requests, 'value' );
+        $aData                                      = $categoryModel->getCategoryFileDataByIdx( _elm( $requests, 'idx' ) );
+        $this->db->transBegin();
+
+        $aStatus                                    = $categoryModel->updateCagegoryFileData($modelParam);
+        if ( $this->db->transStatus() === false || $aStatus === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 배너링크 수정 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) . ' // newData:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE )  ;
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        if ( $this->db->transStatus() === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '로그 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+        $this->db->transCommit();
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '수정되었습니다.';
+
+        return $this->respond( $response );
+
+    }
 
     public function deleteCategory()
     {
@@ -823,12 +1354,32 @@ class CategoryApi extends ApiController
             return $this->respond( $response );
         }
 
+        #------------------------------------------------------------------
+        # TODO: 파일 삭제
+        #------------------------------------------------------------------
+
+        $aFiles                                     = $categoryModel->getCategoryFilesByParentIdx(  _elm( $requests, 'cate_idx' ) );
+        if( empty( $aFiles ) == false ){
+            foreach( $aFiles as $aKey => $file ){
+                $aDelStatus                         = $categoryModel->deleteCategoryFileDataByIdx( _elm( $file, 'F_IDX' ) );
+                if ( $this->db->transStatus() === false || $aStatus == false ) {
+                    $this->db->transRollback();
+                    $response['status']             = 400;
+                    $response['alert']              = '삭제 처리중 오류발생.. 다시 시도해주세요.';
+                    return $this->respond( $response );
+                }
+                $finalFilePath                       = WRITEPATH . _elm( $file, 'F_PATH' );
+                if (file_exists($finalFilePath)) {
+                    @unlink($finalFilePath);
+                }
+            }
+        }
 
         #------------------------------------------------------------------
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 삭제 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '상품 카테고리 삭제 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );

@@ -14,10 +14,19 @@ use Module\core\Controllers\ApiController;
 use Module\membership\Models\MembershipModel;
 use Module\membership\Models\MileageModel;
 use Module\setting\Models\CodeModel;
+use Module\promotion\Models\CouponModel;
+use Module\order\Models\OrderModel;
+use Module\board\Models\BoardModel;
+
 use App\Libraries\MemberLib;
 use App\Libraries\OwensView;
 use Module\membership\Config\Config as membershipConfig;
 use Config\Site as SiteConfig;
+
+use Module\goods\Models\GoodsModel;
+use Module\goods\Models\CategoryModel;
+use Module\goods\Models\BrandModel;
+use Shared\Config as SharedConfig;
 
 
 class MembershipApi extends ApiController
@@ -25,16 +34,59 @@ class MembershipApi extends ApiController
     protected $memberlib;
     protected $db;
     protected $membershipModel;
-    protected $mileageModel;
+    protected $mileageModel, $couponModel;
+    protected $codeModel, $orderModel, $boardModel;
+
+    protected $goodsModel, $categoryModel, $brandModel;
+    protected $sharedConfig;
 
     public function __construct()
     {
         parent::__construct();
+
+        $this->sharedConfig                         = new SharedConfig();
+
         $this->memberlib                            = new MemberLib();
         $this->db                                   = \Config\Database::connect();
         $this->membershipModel                      = new MembershipModel();
         $this->mileageModel                         = new MileageModel();
+        $this->couponModel                          = new CouponModel();
+        $this->codeModel                            = new CodeModel();
+
+        $this->goodsModel                           = new GoodsModel();
+        $this->categoryModel                        = new CategoryModel();
+        $this->brandModel                           = new BrandModel();
+        $this->orderModel                           = new OrderModel();
+        $this->boardModel                           = new BoardModel();
     }
+    public function simpleSearch()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = _trim($this->request->getGet());
+        if( !empty( _trim( _elm( $requests, 'query' ) ) ) ){
+            $query                                  = str_replace('-', '', _elm($requests, 'query'));
+
+            $modelParam                             = [] ;
+            $modelParam['MB_USERID']                = $query;
+            $modelParam['MB_NM']                    = $query;
+            $modelParam['MB_NICK_NM']               = $query;
+            $modelParam['MB_MOBILE_NUM']            = $this->_aesEncrypt( preg_replace('/[^0-9]/', '', $query ) );
+            $lists                                  = $this->membershipModel->getSimpleSearch( $modelParam );
+            if( empty( $lists ) === false ){
+                foreach( $lists as $key => $data ){
+                    $lists[$key]['MB_MOBILE_NUM']   = $this->_aesDecrypt(_elm($data, 'MB_MOBILE_NUM'));
+                }
+            }
+
+            $response                               = $this->_unset($response);
+            $response['status']                     = 200;
+            $response['data']                       = $lists;
+        }
+
+
+        return $this->respond( $response );
+    }
+
     public function getMileageHistoryList( $param = [] )
     {
         $response                                   = $this->_initResponse();
@@ -53,7 +105,7 @@ class MembershipApi extends ApiController
         {
             $page                                   = 1;
         }
-        $per_page                                   = 10;
+        $per_page                                   = 5;
 
         if (empty( _elm( $requests, 'per_page' ) ) === false)
         {
@@ -131,6 +183,16 @@ class MembershipApi extends ApiController
 
             $page_datas['detail']                   = view( '\Module\membership\Views\mileage_history_lists_row' , ['owensView' => $owensView] );
 
+            $paging_param                           = [];
+            $paging_param['num_links']              = 5;
+            $paging_param['per_page']               = $per_page;
+            $paging_param['total_rows']             = $total_count;
+            $paging_param['base_url']               = rtrim( _link_url( '/membership/lists' ), '/');
+            $paging_param['ajax']                   = true;
+            $paging_param['cur_page']               = $page;
+
+            $page_datas['pagination']               = $this->_pagination($paging_param);
+
 
         }
 
@@ -205,7 +267,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 삭제 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 삭제 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -346,7 +408,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '포인트 '.$type_txt.' - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ) .'newData:'.json_encode( $sumParam, JSON_UNESCAPED_UNICODE ) ;
+        $logParam['MB_HISTORY_CONTENT']             = '포인트 '.$type_txt.' - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) .'newData:'.json_encode( $sumParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) ;
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -411,7 +473,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 삭제 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 삭제 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -473,6 +535,280 @@ class MembershipApi extends ApiController
         return $this->respond($response);
     }
 
+    public function changePointReason()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'opIdx' => [
+                'label'  => '포인트 고유값',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '포인트 고유값 누락.',
+                ],
+            ],
+            'a_m_type' => [
+                'label'  => '',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '타입 누락',
+                ],
+            ],
+            'a_reason_gbn' => [
+                'label'  => '',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '사유구분 누락',
+                ],
+            ],
+            'a_reason' => [
+                'label'  => '',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '사유 누락',
+                ],
+            ],
+
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $messages                               = [];
+            foreach( $validation->getErrors() as $field => $message ){
+                $messages[]                         = $message;
+            }
+            $response['alert']                      = join( PHP_EOL, $messages);
+
+            return $this->respond($response);
+        }
+
+        $aData                                      = $this->mileageModel->getUserMileageHistoryDataByIdx( _elm( $requests, 'opIdx' ) );
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '데이터가 없습니다.';
+
+            return $this->respond( $response );
+        }
+
+        $modelParam                                 = [];
+        $modelParam['M_IDX']                        = _elm( $requests, 'opIdx' );
+
+
+        $modelParam['M_TYPE']                       = _elm( $requests, 'a_m_type' );
+        $modelParam['M_REASON_CD']                  = _elm( $requests, 'a_reason_gbn' );
+        $modelParam['M_REASON_MSG']                 = _elm( $requests, 'a_reason' );
+
+        $modelParam['M_ADM_IDX']                    =  _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->db->transBegin();
+        $aStatus                                    = $this->mileageModel->updateMileageHistoryData( $modelParam );
+
+        if ( $this->db->transStatus() === false || $aStatus === false) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '사유 수정 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '회원 포인트 히스토리 수정  - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ) . '// newData:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+        $this->db->transCommit();
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '저장 되었습니다.';
+
+        return $this->respond( $response );
+    }
+
+    public function getCounselLists()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $owensView                                  = new OwensView();
+
+        #------------------------------------------------------------------
+        # TODO: 데티어 로드
+        #------------------------------------------------------------------
+        $view_datas                                 = [];
+        $aConfig                                    = new membershipConfig;
+        $aConfig                                    = $aConfig->member;
+
+        #------------------------------------------------------------------
+        # TODO: 데이터 세팅
+        #------------------------------------------------------------------
+        $_member_grade                              = $this->membershipModel->getMembershipGrade();
+        $member_grade                               = [];
+        if( empty( $_member_grade ) === false ){
+            foreach ($_member_grade as $item) {
+                $member_grade[$item['G_IDX']]       = $item['G_NAME'];
+            }
+        }
+        $view_datas['member_grades']                = $member_grade;
+
+
+        #------------------------------------------------------------------
+        # TODO: AJAX 뷰 처리
+        #------------------------------------------------------------------
+
+        $view_datas['aConfig']                      = $aConfig;
+        $view_datas['memIdx']                       = _elm( $requests, 'memIdx' );
+        $owensView->setViewDatas( $view_datas );
+
+        $page_datas['detail']                       = view( '\Module\membership\Views\_counsel_lists' , ['owensView' => $owensView] );
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        return $this->respond($response);
+    }
+    public function insertCounsel()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $modelParam                                 = [];
+        $modelParam['C_MB_IDX']                     = _elm( $requests, 'memIdx' );
+        $modelParam['C_CONTENT']                    =  htmlspecialchars( nl2br( _elm( $requests, 'content' ) ) );
+        $modelParam['C_CREATE_AT']                  = date( 'Y-m-d H:i:s' );
+        $modelParam['C_CREATE_IP']                  = $this->request->getIPAddress();
+        $modelParam['C_CREATE_MB_IDX']              = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->db->transBegin();
+
+        $aIdx                                       = $this->membershipModel->insertCounsel( $modelParam );
+
+        if ( $this->db->transStatus() === false || $aIdx == false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '저장 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        $this->db->transCommit();
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                               = [];
+        $logParam['MB_HISTORY_CONTENT']         = '상담내역 저장 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
+        $logParam['MB_IDX']                     = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '저장 되었습니다.';
+
+        return $this->respond( $response );
+    }
+
+    public function deleteCounsel()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $modelParam                                 = [];
+        $modelParam['C_IDX']                        = _elm( $requests, 'c_idx' );
+        $aData                                      = $this->membershipModel->getCounselDataByIdx( _elm( $requests, 'c_idx' ) );
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '데이터가 없습니다.';
+
+            return $this->respond( $response );
+        }
+
+        $this->db->transBegin();
+
+        $aStatus                                    = $this->membershipModel->deleteCounsel( $modelParam );
+
+        if ( $this->db->transStatus() === false || $aStatus == false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '삭제 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        $this->db->transCommit();
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '상담내역 삭제 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+        $response['alert']                          = '삭제 되었습니다.';
+
+        return $this->respond( $response );
+    }
+
+    public function getCounselListsRow()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $owensView                                  = new OwensView();
+
+        #------------------------------------------------------------------
+        # TODO: 데티어 로드
+        #------------------------------------------------------------------
+        $view_datas                                 = [];
+        $aLists                                     = $this->membershipModel->getCounselLists( _elm( $requests, 'memIdx' ) );
+
+        #------------------------------------------------------------------
+        # TODO: AJAX 뷰 처리
+        #------------------------------------------------------------------
+
+        $view_datas['lists']                        = $aLists;
+
+
+
+        $owensView->setViewDatas( $view_datas );
+
+        $page_datas['rows']                         = view( '\Module\membership\Views\_counsel_row' , ['owensView' => $owensView] );
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        return $this->respond($response);
+    }
+
     public function detail()
     {
         $response                                   = $this->_initResponse();
@@ -486,8 +822,50 @@ class MembershipApi extends ApiController
             return $this->respond( $response );
         }
 
+        $view_datas                                 = [];
+
         #------------------------------------------------------------------
-        # TODO: 데티어 로드
+        # TODO: AJAX 뷰 처리
+        #------------------------------------------------------------------
+        $_header                                    = $this->headerInfo();
+        $page_datas['header']                       = _elm( $_header, 'detail');
+
+        switch( _elm( $requests, 'tab' ) ){
+            case 'summery' :
+                $_body                              = $this->summery();
+                $page_datas['detail']               = _elm( $_body, 'detail' );
+                break;
+            case 'info' :
+                $_body                              = $this->memberInfo();
+                $page_datas['detail']               = _elm( $_body, 'detail' );
+                break;
+            case 'orderList' :
+                $_body                              = $this->orderLists();
+                $page_datas['detail']               = _elm( $_body, 'detail' );
+                break;
+            case 'point' :
+                $_body                              = $this->pointLists();
+                $page_datas['detail']               = _elm( $_body, 'detail' );
+                break;
+            case 'coupon' :
+                $_body                              = $this->couponLists();
+                $page_datas['detail']               = _elm( $_body, 'detail' );
+                break;
+        }
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        return $this->respond($response);
+    }
+
+    public function headerInfo()
+    {
+        $aReturn                                    = [];
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+        #------------------------------------------------------------------
+        # TODO: 데이터 로드
         #------------------------------------------------------------------
         $view_datas                                 = [];
         $aConfig                                    = new membershipConfig;
@@ -513,29 +891,595 @@ class MembershipApi extends ApiController
             $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
             return $this->respond( $response );
         }
+        #------------------------------------------------------------------
+        # TODO: 총 주문금액, 총 결제금액
+        #------------------------------------------------------------------
+        $orderTotalAmt                              = $this->orderModel->getSummeryOrderAmt( _elm($requests, 'memIdx' ) );
+        $aData['orderTotalAmt']                     = _elm( $orderTotalAmt, 'ORDER_PRICE', 0 );
+        $aData['billTotalAmt']                      = _elm( $orderTotalAmt, 'BILL_PRICE', 0 );
+
+        #------------------------------------------------------------------
+        # TODO: 총 주문 상품건수
+        #------------------------------------------------------------------
+        $aData['orderProductCnt']                   = _elm( $this->orderModel->getSummeryOrderProductCount(  _elm($requests, 'memIdx' )  ), 'total_product_count' );
+
+        #------------------------------------------------------------------
+        # TODO: 총 상담건수
+        #------------------------------------------------------------------
+        $aData['counselCnt']                         = _elm( $this->membershipModel->getUserCounselCount( _elm($requests, 'memIdx' ) ), 'total_counsel_count' );
+
+        #------------------------------------------------------------------
+        # TODO: 1:1 문의건수
+        #------------------------------------------------------------------
+        $aData['qnaCnt']                             = $this->boardModel->getPostsCountByBidInMbIdx( ['P_B_ID'=>'QNA', 'P_WRITER_IDX'=>_elm($requests, 'memIdx' )] );
+        #------------------------------------------------------------------
+        # TODO: 총 리뷰건수
+        #------------------------------------------------------------------
+
 
         $aData['MB_MOBILE_NUM_DEC']                 = _add_dash_tel_num( $this->_aesDecrypt( _elm(  $aData, 'MB_MOBILE_NUM' ) ) );
         $aData['MB_EMAIL_DEC']                      = $this->_aesDecrypt( _elm(  $aData, 'MB_EMAIL' ) );
 
-        #------------------------------------------------------------------
-        # TODO: AJAX 뷰 처리
-        #------------------------------------------------------------------
+        $aData['pointData']                         = $this->mileageModel->getMileageSummeryDataByMbIdx( [ 'S_MB_IDX' => _elm($requests, 'memIdx' )] );
+        $aData['couponCnt']                         = $this->couponModel->getUserCpnCount(  _elm($requests, 'memIdx' )  );
 
-        $result                                     = $aData;
-
-        $view_datas['aData']                        = $result;
+        $view_datas['aData']                        = $aData;
         $view_datas['aConfig']                      = $aConfig;
 
         $owensView->setViewDatas( $view_datas );
 
-        $page_datas['detail']                       = view( '\Module\membership\Views\_detail' , ['owensView' => $owensView] );
-
-        $response['status']                         = 'true';
-        $response['page_datas']                     = $page_datas;
-
-        return $this->respond($response);
+        $aReturn['detail']                          = view( '\Module\membership\Views\_header' , ['owensView' => $owensView] );
+        return $aReturn;
     }
 
+    public function memberInfo()
+    {
+        $aReturn                                    = [];
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+        #------------------------------------------------------------------
+        # TODO: 데이터 로드
+        #------------------------------------------------------------------
+        $view_datas                                 = [];
+        $aConfig                                    = new membershipConfig;
+        $aConfig                                    = $aConfig->member;
+
+        $_member_grade                              = $this->membershipModel->getMembershipGrade();
+        $member_grade                               = [];
+        if( empty( $_member_grade ) === false ){
+            foreach ($_member_grade as $item) {
+                $member_grade[$item['G_IDX']]       = $item['G_NAME'];
+            }
+        }
+        $view_datas['member_grades']                = $member_grade;
+        $aData                                      = $this->membershipModel->getMembershipDataByIdx( _elm($requests, 'memIdx' ) );
+
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        $aData['MB_MOBILE_NUM_DEC']                 = _add_dash_tel_num( $this->_aesDecrypt( _elm(  $aData, 'MB_MOBILE_NUM' ) ) );
+        $aData['MB_EMAIL_DEC']                      = $this->_aesDecrypt( _elm(  $aData, 'MB_EMAIL' ) );
+
+        $view_datas['aData']                        = $aData;
+        $view_datas['aConfig']                      = $aConfig;
+
+        $owensView->setViewDatas( $view_datas );
+
+        $aReturn['detail']                          = view( '\Module\membership\Views\_detail' , ['owensView' => $owensView] );
+        return $aReturn;
+
+
+    }
+    public function summery()
+    {
+        $aReturn                                    = [];
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+        #------------------------------------------------------------------
+        # TODO: 데이터 로드
+        #------------------------------------------------------------------
+        $view_datas                                 = [];
+        $aConfig                                    = new membershipConfig;
+        $aConfig                                    = $aConfig->member;
+        $orderStatus                                = $this->sharedConfig::$orderStatus;
+
+        $_member_grade                              = $this->membershipModel->getMembershipGrade();
+        $member_grade                               = [];
+        if( empty( $_member_grade ) === false ){
+            foreach ($_member_grade as $item) {
+                $member_grade[$item['G_IDX']]       = $item['G_NAME'];
+            }
+        }
+        $view_datas['member_grades']                = $member_grade;
+        $aData                                      = $this->membershipModel->getMembershipDataByIdx( _elm($requests, 'memIdx' ) );
+
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        $aData['MB_MOBILE_NUM_DEC']                 = _add_dash_tel_num( $this->_aesDecrypt( _elm(  $aData, 'MB_MOBILE_NUM' ) ) );
+        $aData['MB_EMAIL_DEC']                      = $this->_aesDecrypt( _elm(  $aData, 'MB_EMAIL' ) );
+        #------------------------------------------------------------------
+        # TODO:  주문리스트 latest 5
+        #------------------------------------------------------------------
+        $aData['orderList']                         = $this->orderModel->getLatestOrderListByUserIdx( _elm($requests, 'memIdx' ) );
+
+
+        #------------------------------------------------------------------
+        # TODO: 상담내역 latest 5
+        #------------------------------------------------------------------
+        $aData['counselList']                       = $this->membershipModel->getLatestCounselListByUserIdx( _elm($requests, 'memIdx' ) );
+
+        #------------------------------------------------------------------
+        # TODO: 리뷰 latest 5
+        #------------------------------------------------------------------
+        //$aData['reviewList']                      = $this->reviewModel->getLatestReviewListByUserIdx( _elm($requests, 'memIdx' ) );
+
+        #------------------------------------------------------------------
+        # TODO: 1:1 문의 latest 5
+        #------------------------------------------------------------------
+        $aData['qnaList']                           = $this->boardModel->getLatestQnaListByUserIdx( _elm($requests, 'memIdx' ) );
+
+        $view_datas['aData']                        = $aData;
+        $view_datas['aConfig']                      = $aConfig;
+        $view_datas['aOrderStatus']                 = $orderStatus;
+
+        $owensView->setViewDatas( $view_datas );
+
+        $aReturn['detail']                          = view( '\Module\membership\Views\_summery' , ['owensView' => $owensView] );
+        return $aReturn;
+
+    }
+
+    public function orderLists()
+    {
+        $aReturn                                    = [];
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+        $view_datas                                 = [];
+        $aData                                      = $this->membershipModel->getMembershipDataByIdx( _elm($requests, 'memIdx' ) );
+
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        $orderStatus                                = $this->sharedConfig::$orderStatus;
+        $view_datas['orderStatus']                  = $orderStatus;
+        $view_datas['o_mb_idx']                     = _elm($requests, 'memIdx' );
+        $owensView->setViewDatas( $view_datas );
+
+        $aReturn['detail']                          = view( '\Module\membership\Views\_order' , ['owensView' => $owensView] );
+        return $aReturn;
+
+    }
+
+    public function getOrderLists()
+    {
+
+        $aReturn                                    = [];
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+
+
+        $page                                       = (int)_elm($requests, 'page', 1);
+
+        if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
+        {
+            $page                                   = 1;
+        }
+        $per_page                                   = 10;
+
+        if (empty( _elm( $requests, 'per_page' ) ) === false)
+        {
+            $per_page                               = (int)_elm( $requests, 'per_page' );
+        }
+
+        if ($per_page < 0 || is_numeric( $per_page ) === false)
+        {
+            $per_page                               = 10;
+        }
+
+        $limit                                      = $per_page;
+        $start                                      = ($page - 1) * $limit;
+        $modelParam                                 = [];
+        $modelParam['limit']                        = $limit;
+        $modelParam['start']                        = $start;
+        if( empty( _elm( $modelParam, 's_condition' ) ) === false && empty( _elm( $modelParam, 's_keyword' ) ) === false ){
+            switch( _elm( $modelParam, 's_condition' ) ){
+                case 'orderNo':
+                    $modelParam['O_ORDID']          = _elm( $modelParam, 's_keyword' );
+            }
+        }
+        $modelParam['START_DATE']                   = _elm( $requests, 's_start_date' );
+        $modelParam['END_DATE']                     = _elm( $requests, 's_end_date' );
+        $modelParam['O_STATUS']                     = _elm( $requests, 's_status' );
+
+        $modelParam['O_MB_IDX']                     = _elm( $requests, 'mb_idx' );
+        $modelParam['order']                        = ' O_ORDER_AT DESC';
+
+        $aResult                                    = $this->orderModel->getUserOrderLists( $modelParam );
+
+        $total_count                                = _elm($aResult, 'total_count', 0);
+        $total_page                                 = ceil( $total_count / $per_page );
+        $page_datas                                 = [];
+
+
+
+        // ---------------------------------------------------------------------
+        // 서브뷰 처리
+        // ---------------------------------------------------------------------
+        // 리스트
+        $view_datas                                 = [];
+
+        $list_result                                = _elm( $aResult , 'lists', [] );
+
+
+        $view_datas['total_rows']                   = $total_count;
+        $view_datas['row']                          = $start;
+        $view_datas['lists']                        = $list_result;
+        $view_datas['aOrderStatus']                 = $this->sharedConfig::$orderStatus;;
+
+
+        $owensView->setViewDatas( $view_datas );
+        $aReturn                                    = [];
+        $aReturn['lists_row']                       = view( '\Module\membership\Views\_order_row' , ['owensView' => $owensView] );
+
+        $paging_param                               = [];
+        $paging_param['num_links']                  = 5;
+        $paging_param['per_page']                   = $per_page;
+        $paging_param['total_rows']                 = $total_count;
+        $paging_param['base_url']                   = rtrim( _link_url( '/membership/lists' ), '/');
+        $paging_param['ajax']                       = true;
+        $paging_param['cur_page']                   = $page;
+
+        $aReturn['pagination']                      = $this->_pagination($paging_param);
+        $response['status']                         = 200;
+        $response['page_datas']                     = $aReturn;
+
+        return $this->respond( $response );
+    }
+
+    public function pointLists()
+    {
+        $aReturn                                    = [];
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+
+        $aData                                      = $this->membershipModel->getMembershipDataByIdx( _elm($requests, 'memIdx' ) );
+
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        $codeParam                                  = [];
+        $codeParam['C_NAME']                        = '지급/삭감';
+        $_aCodeDatas                                = $this->codeModel->getCodesByNameTop( $codeParam );
+        $aCodeDatasOption                           = [];
+        if( empty( $_aCodeDatas ) === false){
+            foreach( $_aCodeDatas as $aKey => $code ){
+                $aCodeDatasOption[ _elm( $code, 'C_IDX' ) ] =  _elm( $code, 'C_NAME' );
+            }
+        }
+
+        $view_datas['reason_gbn']                   = $aCodeDatasOption;
+        $view_datas['m_mb_idx']                     = _elm($requests, 'memIdx' );
+        $owensView->setViewDatas( $view_datas );
+
+        $aReturn['detail']                          = view( '\Module\membership\Views\_point' , ['owensView' => $owensView] );
+        return $aReturn;
+
+    }
+
+
+    public function getPointLists()
+    {
+
+        $aReturn                                    = [];
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+
+
+        $page                                       = (int)_elm($requests, 'page', 1);
+
+        if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
+        {
+            $page                                   = 1;
+        }
+        $per_page                                   = 10;
+
+        if (empty( _elm( $requests, 'per_page' ) ) === false)
+        {
+            $per_page                               = (int)_elm( $requests, 'per_page' );
+        }
+
+        if ($per_page < 0 || is_numeric( $per_page ) === false)
+        {
+            $per_page                               = 10;
+        }
+
+        $limit                                      = $per_page;
+        $start                                      = ($page - 1) * $limit;
+        $modelParam                                 = [];
+        $modelParam['limit']                        = $limit;
+        $modelParam['start']                        = $start;
+
+        $modelParam['s_condition']                  = _elm( $requests, 's_condition' );
+        $modelParam['s_keyword']                    = _elm( $requests, 's_keyword' );
+        $modelParam['s_start_date']                 = _elm( $requests, 's_start_date' );
+        $modelParam['s_end_date']                   = _elm( $requests, 's_end_date' );
+        $modelParam['s_reason_gbn']                 = _elm( $requests, 's_reason_gbn' );
+        $modelParam['s_gbn']                        = _elm( $requests, 's_gbn' );
+
+        $modelParam['M_MB_IDX']                     = _elm( $requests, 'mb_idx' );
+        $modelParam['order']                        = ' M_CREATE_AT DESC';
+
+        $aResult                                    = $this->mileageModel->getUserMileageHistoryLists( $modelParam );
+
+        $total_count                                = _elm($aResult, 'total_count', 0);
+        $total_page                                 = ceil( $total_count / $per_page );
+        $page_datas                                 = [];
+
+
+
+        // ---------------------------------------------------------------------
+        // 서브뷰 처리
+        // ---------------------------------------------------------------------
+        // 리스트
+        $view_datas                                 = [];
+
+        $list_result                                = _elm( $aResult , 'lists', [] );
+
+
+        $view_datas['total_rows']                   = $total_count;
+        $view_datas['row']                          = $start;
+        $view_datas['lists']                        = $list_result;
+        $aConfig                                    = new membershipConfig();
+        $view_datas['aConfig']                      = $aConfig->member;
+        $codeParam                                  = [];
+        $codeParam['C_NAME']                        = '지급/삭감';
+        $_aCodeDatas                                = $this->codeModel->getCodesByNameTop( $codeParam );
+        $aCodeDatasOption                           = [];
+        if( empty( $_aCodeDatas ) === false){
+            foreach( $_aCodeDatas as $aKey => $code ){
+                $aCodeDatasOption[ _elm( $code, 'C_IDX' ) ] =  _elm( $code, 'C_NAME' );
+            }
+        }
+
+        $view_datas['reason_gbn']                   = $aCodeDatasOption;
+
+
+        $owensView->setViewDatas( $view_datas );
+        $aReturn                                    = [];
+        $aReturn['lists_row']                       = view( '\Module\membership\Views\_point_row' , ['owensView' => $owensView] );
+
+        $paging_param                               = [];
+        $paging_param['num_links']                  = 5;
+        $paging_param['per_page']                   = $per_page;
+        $paging_param['total_rows']                 = $total_count;
+        $paging_param['base_url']                   = rtrim( _link_url( '/membership/lists' ), '/');
+        $paging_param['ajax']                       = true;
+        $paging_param['cur_page']                   = $page;
+
+        $aReturn['pagination']                      = $this->_pagination($paging_param);
+        $response['status']                         = 200;
+        $response['page_datas']                     = $aReturn;
+
+        return $this->respond( $response );
+    }
+    public function couponLists()
+    {
+        $aReturn                                    = [];
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+
+        $aData                                      = $this->membershipModel->getMembershipDataByIdx( _elm($requests, 'memIdx' ) );
+
+        if( empty( $aData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '잘못된 접근입니다. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        $view_datas['m_mb_idx']                     = _elm($requests, 'memIdx' );
+        $owensView->setViewDatas( $view_datas );
+
+        $aReturn['detail']                          = view( '\Module\membership\Views\_coupon' , ['owensView' => $owensView] );
+        return $aReturn;
+
+    }
+
+    public function getCouponLists()
+    {
+
+        $aReturn                                    = [];
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $owensView                                  = new OwensView();
+
+
+        $page                                       = (int)_elm($requests, 'page', 1);
+
+        if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
+        {
+            $page                                   = 1;
+        }
+        $per_page                                   = 10;
+
+        if (empty( _elm( $requests, 'per_page' ) ) === false)
+        {
+            $per_page                               = (int)_elm( $requests, 'per_page' );
+        }
+
+        if ($per_page < 0 || is_numeric( $per_page ) === false)
+        {
+            $per_page                               = 10;
+        }
+
+        $limit                                      = $per_page;
+        $start                                      = ($page - 1) * $limit;
+        $modelParam                                 = [];
+        $modelParam['limit']                        = $limit;
+        $modelParam['start']                        = $start;
+
+        $modelParam['s_start_date']                 = _elm( $requests, 's_start_date' );
+        $modelParam['s_end_date']                   = _elm( $requests, 's_end_date' );
+        $modelParam['s_status']                     = _elm( $requests, 's_status' );
+
+        $modelParam['M_MB_IDX']                     = _elm( $requests, 'mb_idx' );
+        $modelParam['order']                        = ' I_ISSUE_AT DESC';
+
+        $aResult                                    = $this->couponModel->getUserCouponAndIssueLists( $modelParam );
+
+        $total_count                                = _elm($aResult, 'total_count', 0);
+        $total_page                                 = ceil( $total_count / $per_page );
+        $page_datas                                 = [];
+
+
+
+        // ---------------------------------------------------------------------
+        // 서브뷰 처리
+        // ---------------------------------------------------------------------
+        // 리스트
+        $view_datas                                 = [];
+
+        $list_result                                = _elm( $aResult , 'lists', [] );
+
+
+        $view_datas['total_rows']                   = $total_count;
+        $view_datas['row']                          = $start;
+        $view_datas['lists']                        = $list_result;
+        $aConfig                                    = new membershipConfig();
+        $view_datas['aConfig']                      = $aConfig->member;
+
+
+        $owensView->setViewDatas( $view_datas );
+        $aReturn                                    = [];
+        $aReturn['lists_row']                       = view( '\Module\membership\Views\_coupon_row' , ['owensView' => $owensView] );
+
+        $paging_param                               = [];
+        $paging_param['num_links']                  = 5;
+        $paging_param['per_page']                   = $per_page;
+        $paging_param['total_rows']                 = $total_count;
+        $paging_param['base_url']                   = rtrim( _link_url( '/membership/lists' ), '/');
+        $paging_param['ajax']                       = true;
+        $paging_param['cur_page']                   = $page;
+
+        $aReturn['pagination']                      = $this->_pagination($paging_param);
+        $response['status']                         = 200;
+        $response['page_datas']                     = $aReturn;
+
+        return $this->respond( $response );
+    }
+
+    public function getCouponUseRange()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $owensView                                  = new OwensView();
+
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'cIdx' => [
+                'label'  => 'cIdx',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => '쿠폰번호 누락. 새로고침 후 이용해주세요.',
+                ],
+            ],
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $messages                               = [];
+            foreach( $validation->getErrors() as $field => $message ){
+                $messages[]                         = $message;
+            }
+            $response['alert']                      = join( PHP_EOL, $messages);
+
+            return $this->respond($response);
+        }
+
+        $cpnData                                    = $this->couponModel->getCouponDataByIdx( _elm( $requests, 'cIdx' ) );
+        $txt                                        = '';
+        if( empty( $cpnData ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '쿠폰 데이터가 없습니다.';
+
+            return $this->respond( $response );
+        }
+        if( _elm( $cpnData, 'C_PUB_GBN' ) == 'P' ){
+            $txt                                   .= '<h4> 쿠푠형식 : 지정발행</h4>';
+        }else if( _elm( $cpnData, 'C_PUB_GBN' ) == 'D' ){
+            $txt                                   .= '<h4> 쿠푠형식 : 다운로드</h4>';
+        }else{
+            $txt                                   .= '<h4> 쿠푠형식 : 자동발행</h4>';
+        }
+        if( _elm( $cpnData, 'C_SCOPE_GBN' ) == 'all' ){
+            $txt                                   .= '<h4> 전체 상품 적용 쿠폰 ( 상품 자체에서 제외시 적용되지 않습니다. )</h4>';
+            if( empty( _elm( $cpnData, 'C_EXCEPT_PRODUCT_IDXS' ) ) === false ){
+                $txt                               .= '<p> * 제외상품 * </p>';
+                $exProductIdxs                      = explode( ',', _elm( $cpnData, 'C_EXCEPT_PRODUCT_IDXS' ) );
+                foreach( $exProductIdxs as $exproductIdx ){
+                    $goodsInfo                      = $this->goodsModel->getGoodsDataSelectFieldByIdx( $exproductIdx , ['G_NAME']);
+                    $txt                           .= '&nbsp;<a href="'._link_url('/goods/goodsDetail/'.$exproductIdx).'">'._elm( $goodsInfo, 'G_NAME' ).'</a>&nbsp;';
+                }
+            }
+        }else if( _elm( $cpnData, 'C_SCOPE_GBN' ) == 'brand' ){
+            $txt                                   .= '<br><br><p>브랜드 적용 쿠폰 ( 상품 자체에서 제외시 적용되지 않습니다. )</p><br>';
+            if( empty( _elm( $cpnData, 'C_PICK_ITEMS' ) ) === false){
+                $brandIdxs                          = explode( ',', _elm( $cpnData, 'C_PICK_ITEMS' ) );
+                foreach( $brandIdxs as $brandIdx ){
+                    $brandInfo                      = $this->brandModel->getBrandDataSelectFieldByIdx( $brandIdx, ['C_BRAND_NAME']  );
+                    $txt                           .= '&nbsp;'._elm( $brandInfo, 'C_BRAND_NAME' ).'&nbsp;';
+                }
+            }
+        }
+        else if( _elm( $cpnData, 'C_SCOPE_GBN' ) == 'category' ){
+            $txt                                   .= '<br><br><p>카테고리 적용 쿠폰 ( 상품 자체에서 제외시 적용되지 않습니다. )</p><br>';
+            if( empty( _elm( $cpnData, 'C_PICK_ITEMS' ) ) === false){
+                $cateIdxs                           = explode( ',', _elm( $cpnData, 'C_PICK_ITEMS' ) );
+                foreach( $cateIdxs as $cateIdx ){
+                    $cateInfo                       = $this->categoryModel->getCategoryDataSelectFieldByIdx( $cateIdx, ['C_CATE_NAME']  );
+                    $txt                           .= '&nbsp;'._elm( $cateInfo, 'C_CATE_NAME' ).'&nbsp;';
+                }
+            }
+        }
+        else if( _elm( $cpnData, 'C_SCOPE_GBN' ) == 'product' ){
+            $txt                                   .= '<br><br><p>일부 상품 적용 쿠폰 ( 상품 자체에서 제외시 적용되지 않습니다. )</p>';
+            if( empty( _elm( $cpnData, 'C_PICK_ITEMS' ) ) === false){
+                $txt                               .= '<br><p> * 일부상품 * </p>';
+                $productIdxs                        = explode( ',', _elm( $cpnData, 'C_PICK_ITEMS' ) );
+                foreach( $productIdxs as $productIdx ){
+                    $goodsInfo                      = $this->goodsModel->getGoodsDataSelectFieldByIdx( $productIdx, ['G_NAME']);
+                    $txt                           .= '&nbsp;<a href="'._link_url('/goods/goodsDetail/'.$productIdx).'">'._elm( $goodsInfo, 'G_NAME' ).'</a>&nbsp;';
+                }
+            }
+        }
+
+        $response['status']                         = '200';
+        $response['txt']                            = $txt;
+        return $this->respond( $response );
+    }
 
     public function mileageRegister()
     {
@@ -1259,7 +2203,7 @@ class MembershipApi extends ApiController
             # TODO: 관리자 로그남기기 S
             #------------------------------------------------------------------
             $logParam                               = [];
-            $logParam['MB_HISTORY_CONTENT']         = '회원 상태 변경 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ). ' // newData::'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+            $logParam['MB_HISTORY_CONTENT']         = '회원 상태 변경 - orgdata:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ). ' // newData::'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
             $logParam['MB_IDX']                     = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
             $this->LogModel->insertAdminLog( $logParam );
@@ -1513,9 +2457,9 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 등록 - Data:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 등록 - Data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         if( empty( $addrParam ) === false ){
-            $logParam['MB_HISTORY_CONTENT']        .= ' // 기본배송지 등록 : '.json_encode( $addrParam, JSON_UNESCAPED_UNICODE );
+            $logParam['MB_HISTORY_CONTENT']        .= ' // 기본배송지 등록 : '.json_encode( $addrParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         }
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
@@ -1731,9 +2675,9 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 수정 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ).' / newData:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 수정 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ).' / newData:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         if( empty( $addrParam ) === false ){
-            $logParam['MB_HISTORY_CONTENT']        .= ' // 기본배송지변경 : '.json_encode( $addrParam, JSON_UNESCAPED_UNICODE );
+            $logParam['MB_HISTORY_CONTENT']        .= ' // 기본배송지변경 : '.json_encode( $addrParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         }
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 

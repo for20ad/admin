@@ -22,9 +22,9 @@
 ?>
 <tr data-idx="<?php echo _elm( $vData , 'A_IDX' )?>">
     <td class="body2-c nowrap"><?php echo $no?></td>
-    <td class="body2-c nowrap"><a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'A_IDX' ) ?>', 'dataModal')" ><?php echo  _elm( $vData , 'A_TITLE' )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'A_IDX' ) ?>', 'dataModal')" ><?php echo  _elm( $vData , 'A_TITLE' )?></a></td>
     <td class="body2-c nowrap">
-        <a href='#' onclick="javascript:openLayer('<?php echo _elm( $vData , 'A_IDX' ) ?>', 'dataModal')">
+        <a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'A_IDX' ) ?>', 'dataModal')">
             <?php echo date( 'Y-m-d', strtotime( _elm( $vData, 'A_PERIOD_START_AT' ) ) )?> ~ <?php echo date( 'Y-m-d', strtotime( _elm( $vData, 'A_PERIOD_END_AT' ) ) )?>
         </a>
     </td>

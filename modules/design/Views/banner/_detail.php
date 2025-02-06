@@ -126,7 +126,7 @@
                         <span class="image-container">
                         <img src="/<?php echo _elm( $aData, 'B_IMG_PATH' )?>">
                             <svg class="delete-button" xmlns="http://www.w3.org/2000/svg" onclick="deleteBannerImgConfirm( '<?php echo _elm( $aData, 'B_IDX' )?>' )" viewBox="0 0 24 24" width="24" height="24" fill="red">
-                                <path d="M18 6L6 18M6 6l12 12" stroke="black"></path>
+                                <path d="M18 6L6 18M6 6l12 12" stroke="white"></path>
                             </svg>
                         </span>
                     </div>

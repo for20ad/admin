@@ -67,6 +67,7 @@ function getSearchList( parentIdx = 0 ){
 
             $('#category-list').empty().html( response.page_datas.lists_row );
             initSortable();
+            bindEventListeners();
             //restoreAccordionState();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -242,3 +243,57 @@ function deleteBrand( brand_idx ){
         complete: function() { }
     });
 }
+
+let rowCount = 0; // To keep track of the rows
+
+function addRows() {
+
+    var row = `
+        <div class="file-row" data-idx="" style="margin-bottom:10px; display:flex; align-items:center; gap:10px;">
+            <select name="device_type[]" class="form-select" style="width:120px;">
+                <option value="PC">PC</option>
+                <option value="MOBILE">MOBILE</option>
+            </select>
+            <input type="file" name="files[]" class="form-control" style="width:200px;">
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteRows( $(this).parent() )">삭제</button>
+        </div>
+    `;
+    $('#fileArea').append( row );
+}
+
+
+function deleteRowsConfirm( $row ){
+    box_confirm( '추가 파일을 삭제하시겠습니까?', 'q', '', deleteRows, $row);
+}
+function deleteRows($row) {
+    const dataIdx = $row.data('idx'); // Get data-idx attribute
+
+    if (dataIdx) {
+        // If data-idx exists, perform an AJAX call to delete from the server
+        $.ajax({
+            url: '/apis/goods/deleteBrandImages', // Replace with the actual API URL
+            method: 'POST',
+            data: { f_idx: dataIdx },
+            dataType: 'json',
+            beforeSend: function () {
+                $('#preloader').show();
+            },
+            success: function (response) {
+                $('#preloader').hide();
+                if (response.status ===200) {
+                    $row.remove(); // Remove from DOM
+                } else {
+                    alert('삭제 실패: ' + response.message);
+                }
+            },
+            error: function () {
+                $('#preloader').hide();
+                alert('삭제 요청 중 오류가 발생했습니다.');
+            },
+        });
+    } else {
+        // If no data-idx, just remove the row from DOM
+        $row.remove();
+    }
+}
+

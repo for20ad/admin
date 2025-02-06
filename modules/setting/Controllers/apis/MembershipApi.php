@@ -125,7 +125,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원등급 추가 - newData:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원등급 추가 - newData:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -252,7 +252,7 @@ class MembershipApi extends ApiController
             # TODO: 관리자 로그남기기 S
             #------------------------------------------------------------------
             $logParam                               = [];
-            $logParam['MB_HISTORY_CONTENT']         = '회원등급 수정 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ). ' // newData::'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+            $logParam['MB_HISTORY_CONTENT']         = '회원등급 수정 - orgdata:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ). ' // newData::'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
             $logParam['MB_IDX']                     = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
             $this->LogModel->insertAdminLog( $logParam );
@@ -356,7 +356,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 등급 삭제 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 등급 삭제 - orgdata:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -463,7 +463,7 @@ class MembershipApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '회원 등급 아이콘 삭제 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '회원 등급 아이콘 삭제 - orgdata:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );

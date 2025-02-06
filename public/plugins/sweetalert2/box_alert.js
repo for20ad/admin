@@ -307,6 +307,47 @@ function box_confirm(boxText, boxType, subTxt, callbackMethod, jsonData)
         });
     }, 150);
 }
+function box_confirm_cancel(boxText, boxType, subTxt, callbackMethod, jsonData, cancelCallback) {
+    if (boxType == '' || boxType == undefined) boxType = null;
+    if (boxText == undefined) boxText = '알림';
+
+    $(':focus').blur();
+
+    setTimeout(function() {
+        const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
+        Swal.fire({
+            icon: typeShort[boxType],
+            title: boxText,
+            html: subTxt,
+            allowOutsideClick: false,
+            showCancelButton: true,
+            confirmButtonColor: color,
+            confirmButtonText: '확인',
+            cancelButtonText: '취소',
+            reverseButtons: true,
+            customClass: {
+                popup: 'custom-popup',
+                cancelButton: 'custom-cancel-button'
+            },
+            didOpen: () => {
+                const color = typeColors[typeShort[boxType]] || '#2FB344'; // 기본 색상으로 #2FB344 사용
+                const styleElement = document.createElement('style');
+                styleElement.innerHTML = `.custom-popup::before { background-color: ${color} !important; }`;
+                document.head.appendChild(styleElement);
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (callbackMethod) {
+                    callbackMethod(jsonData); // 확인 버튼 클릭 시 호출
+                }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                if (cancelCallback) {
+                    cancelCallback(jsonData); // 취소 버튼 클릭 시 호출
+                }
+            }
+        });
+    }, 150);
+}
 
 function box_loading(boxText, boxType, subTxt)
 {

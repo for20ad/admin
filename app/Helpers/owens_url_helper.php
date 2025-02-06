@@ -137,3 +137,27 @@ if (! function_exists('_remove_query_string'))
         return ($url);
     }
 }
+
+if (! function_exists('shop_url')) {
+    /**
+     * Returns the base URL as defined by the App config.
+     * Base URLs are trimmed site URLs without the index page.
+     *
+     * @param array|string $relativePath URI string or array of URI segments.
+     * @param string|null  $scheme       URI scheme. E.g., http, ftp. If empty
+     *                                   string '' is set, a protocol-relative
+     *                                   link is returned.
+     */
+    function shop_url($relativePath = '', ?string $scheme = null): string
+    {
+        $baseURL = 'https://shop.brav.co.kr'; // 기본 URL 설정
+        $relativePath = ltrim(is_array($relativePath) ? implode('/', $relativePath) : $relativePath, '/');
+        $url = rtrim($baseURL, '/') . '/' . $relativePath;
+
+        if ($scheme !== null) {
+            $url = parse_url($url, PHP_URL_SCHEME) . ':' . str_replace(parse_url($url, PHP_URL_SCHEME) . ':', '', $url);
+        }
+
+        return $url;
+    }
+}

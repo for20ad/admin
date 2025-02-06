@@ -70,18 +70,26 @@ $(document).ready(function() {
                     'object-fit': 'cover'
                 });
 
-                const $deleteButton = $('<button>').addClass('delete-button').html('&times;').css({
+                const $deleteButton = $('<button>').addClass('delete-button').html(
+                `
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_286_1517)">
+                <path d="M12.5 3.5L3.5 12.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.5 12.5L3.5 3.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_286_1517">
+                <rect width="16" height="16" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>
+                `
+                ).css({
                     'position': 'absolute',
                     'top': '5px',
                     'right': '5px',
-                    'background-color': 'red',
-                    'padding-top':'7px',
-                    'color': 'white',
-                    'border': 'none',
-                    'cursor': 'pointer',
-                    'border-radius': '50%',
-                    'width': '20px',
-                    'height': '20px',
+                    'background-color': '#616876',
+
                     'display': 'none'
                 }).click(function() {
                     removeFile(index); // 파일 삭제 함수 호출 시 인덱스를 사용

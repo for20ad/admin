@@ -1,7 +1,11 @@
-function getSearchList( $page ) {
+function getSearchList( page ) {
 
     const frm = $("#frm_search");
-    frm.find( '[name=page]' ).val( $page );
+    const urlParams = new URLSearchParams(window.location.search);
+    if (page === undefined) {
+        page = urlParams.get('page') || 1; // 기본값 1
+    }
+    frm.find( '[name=page]' ).val( page );
     var inputs = frm.find('input, button, select');
     $.ajax({
         url: '/apis/goods/getIconsLists',
@@ -27,7 +31,7 @@ function getSearchList( $page ) {
             }
 
             $('#listsTable tbody').empty().html( response.page_datas.lists_row );
-            $("#paginatoon").empty().html( response.page_datas.pagination );
+            $("#pagination").empty().html( response.page_datas.pagination );
         },
         error: function (jqXHR, textStatus, errorThrown) {
             submitError(jqXHR.status, errorThrown);

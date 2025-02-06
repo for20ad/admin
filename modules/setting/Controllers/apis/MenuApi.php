@@ -119,7 +119,7 @@ class MenuApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '메뉴 등록 - data:'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '메뉴 등록 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -202,7 +202,7 @@ class MenuApi extends ApiController
             # TODO: 관리자 로그남기기 S
             #------------------------------------------------------------------
             $logParam                               = [];
-            $logParam['MB_HISTORY_CONTENT']         = '메뉴 수정 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE ). ' // newData::'.json_encode( $modelParam, JSON_UNESCAPED_UNICODE );
+            $logParam['MB_HISTORY_CONTENT']         = '메뉴 수정 - orgdata:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE ). ' // newData::'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
             $logParam['MB_IDX']                     = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
             $this->LogModel->insertAdminLog( $logParam );
@@ -265,7 +265,7 @@ class MenuApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '메뉴 삭제 - orgdata:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '메뉴 삭제 - orgdata:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );

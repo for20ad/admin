@@ -81,23 +81,47 @@
                 <div class="table-responsive">
                     <table class="table table-vcenter" id="aListsTable">
                         <colgroup>
+                            <col style="width:10%;">
+                            <col style="width:5%;">
                             <col style="width:30%;">
                             <col style="*">
                             <col style="width:5%;">
                         </colgroup>
                         <thead>
                             <tr>
+                                <th>이동</th>
+                                <th>순번</th>
                                 <th>항목</th>
                                 <th>내용</th>
                                 <th>삭제</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableSort">
                         <?php
                         if( empty( _elm( $aData, 'detail' ) ) === false ){
                             foreach( _elm( $aData, 'detail' ) as $key => $subData ){
                         ?>
-                            <tr>
+                            <tr onmouseover="$(this).find('.group-move-icons').show()" onmouseout="$(this).find('.group-move-icons').hide()">
+                                <td>
+                                    <div class="group-move-icons" style="display:none;cursor:pointer" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" fill="none">
+                                            <g clip-path="url(#clip0_492_18580)">
+                                                <path d="M11.5 9C12.3284 9 13 8.32843 13 7.5C13 6.67157 12.3284 6 11.5 6C10.6716 6 10 6.67157 10 7.5C10 8.32843 10.6716 9 11.5 9Z" fill="#616876"/>
+                                                <path d="M20.5 9C21.3284 9 22 8.32843 22 7.5C22 6.67157 21.3284 6 20.5 6C19.6716 6 19 6.67157 19 7.5C19 8.32843 19.6716 9 20.5 9Z" fill="#616876"/>
+                                                <path d="M11.5 17.5C12.3284 17.5 13 16.8284 13 16C13 15.1716 12.3284 14.5 11.5 14.5C10.6716 14.5 10 15.1716 10 16C10 16.8284 10.6716 17.5 11.5 17.5Z" fill="#616876"/>
+                                                <path d="M20.5 17.5C21.3284 17.5 22 16.8284 22 16C22 15.1716 21.3284 14.5 20.5 14.5C19.6716 14.5 19 15.1716 19 16C19 16.8284 19.6716 17.5 20.5 17.5Z" fill="#616876"/>
+                                                <path d="M11.5 26C12.3284 26 13 25.3284 13 24.5C13 23.6716 12.3284 23 11.5 23C10.6716 23 10 23.6716 10 24.5C10 25.3284 10.6716 26 11.5 26Z" fill="#616876"/>
+                                                <path d="M20.5 26C21.3284 26 22 25.3284 22 24.5C22 23.6716 21.3284 23 20.5 23C19.6716 23 19 23.6716 19 24.5C19 25.3284 19.6716 26 20.5 26Z" fill="#616876"/>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_492_18580">
+                                                <rect width="32" height="32" fill="white"/>
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td><span class="numbering"><?php echo $key + 1?></span></td>
                                 <td><input type="text" class="form-control" name="keys[]" value="<?php echo _elm( $subData, 'D_KEY' ) ?>"></td>
                                 <td><input type="text" class="form-control" name="values[]" value="<?php echo _elm( $subData, 'D_VALUE' ) ?>"></td>
                                 <td>
@@ -163,4 +187,16 @@
 
 <?php echo form_close() ?>
 <script>
+    $('#tableSort').sortable({
+        handle: '.group-move-icons',
+        update: function(event, ui) {
+            var idsInOrder = $('#tableSort').sortable('toArray',{ attribute : 'data-idx'});
+
+            console.log(idsInOrder);
+            // 재정렬된 순서대로 .numbering 요소를 업데이트
+            $('#tableSort tr').each(function(index) {
+                $(this).find('.numbering').text(index + 1);
+            });
+        }
+    });
 </script>

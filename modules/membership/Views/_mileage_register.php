@@ -81,7 +81,7 @@
                     </table>
                 </div>
                 <!--페이징-->
-                <div class="pagination-wrapper" id="paginatoon">
+                <div class="pagination-wrapper" id="pagination">
                 </div>
                 <?php echo form_close()?>
             </div>

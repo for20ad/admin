@@ -87,7 +87,7 @@ if(strpos(_elm($_SERVER, 'HTTP_REFERER'), 'goodsRegister') === false){
                 <input type="text" class="form-control" name="i_brand_name_eng" id="i_brand_name_eng" value="<?php echo _elm( $aData, 'C_BRAND_NAME_ENG' ) ?>"/>
             </div>
 
-            <div class="input-group required">
+            <!-- <div class="input-group required">
                 <label class="label body2-c">
                         PC브랜드<br>이미지 등록
                     <span>*</span>
@@ -103,7 +103,7 @@ if(strpos(_elm($_SERVER, 'HTTP_REFERER'), 'goodsRegister') === false){
             </div>
             <?php
             }
-            ?>
+            ?> -->
             <div class="input-group required">
                 <label class="label body2-c">
                         모바일브랜드<br>이미지 등록
@@ -121,37 +121,54 @@ if(strpos(_elm($_SERVER, 'HTTP_REFERER'), 'goodsRegister') === false){
             <?php
             }
             ?>
+            <div class="input-group required">
+                <label class="label body2-c">
+                    배너<br>이미지 등록
+                </label>
+                <span style="padding:5px 5px">
+                    <?php
+                        echo getIconButton([
+                            'txt' => '파일 추가',
+                            'icon' => 'box_plus',
+                            'buttonClass' => 'btn',
+                            'buttonStyle' => 'width:130px; height: 36px',
+                            'width' => '21',
+                            'height' => '20',
+                            'stroke' => 'black',
+                            'extra' => [
+                                'type' => 'button',
+                                'onclick' => 'addRows();',
+                            ]
+                        ]);
+                    ?>
+                </span>
+            </div>
+            <div id="fileArea">
+                <?php
+                if( empty( _elm( $aData, 'files' ) ) === false  ){
+                    foreach( _elm( $aData, 'files' ) as $aKey => $file ):
+                ?>
+                <div class="file-row" data-parent-idx="<?php echo _elm( $aData, 'C_PARENT_IDX' )?>" data-idx="<?php echo _elm( $file, 'F_IDX' )?>" style="margin-bottom:10px; display:flex; align-items:center; gap:10px;">
+                    <?php
+                        $options  = ['PC'=>'PC', 'MOBILE'=>'MOBILE'];
+                        $extras   = ['id' => 'device_type', 'class' => 'form-select', 'style' => 'max-width: 120px;'];
+                        $selected = _elm( $file, 'F_VIEW_TYPE' );
+                        echo getSelectBox('device_type['._elm( $file, 'F_IDX' ).']', $options, $selected, $extras);
+                    ?>
+                    <!-- <input type="file" name="files[]" class="form-control" style="width:200px;"> -->
 
-            <div class="input-group required">
-                <label class="label body2-c">
-                        PC배너<br>이미지 등록
-                </label>
-                <input type="file" class="form-control" name="i_brand_pc_banner">
+                    <div class="">
+                        <a href="/<?php echo _elm( $file, 'F_PATH' )?>" target="_blank"><img src="/<?php echo _elm( $file, 'F_PATH' )?>"  class="icon-image" style="width:50px"></a>
+                    </div>
+
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteRowsConfirm( $(this).parent() )">삭제</button>
+
+                </div>
+                <?php
+                    endforeach;
+                }
+                ?>
             </div>
-            <?php
-            if( !empty( _elm( $aData, 'C_BRAND_PC_BANNER' ) ) ){
-            ?>
-            <div class="input-group required">
-                <img src="/<?php echo _elm( $aData, 'C_BRAND_PC_BANNER' )?>"  class="icon-image" >
-            </div>
-            <?php
-            }
-            ?>
-            <div class="input-group required">
-                <label class="label body2-c">
-                        모바일배너<br>이미지 등록
-                </label>
-                <input type="file" class="form-control" name="i_brand_mobile_banner">
-            </div>
-            <?php
-            if( !empty( _elm( $aData, 'C_BRAND_MOBILE_BANNER' ) )  ){
-            ?>
-            <div class="input-group required">
-                <img src="/<?php echo _elm( $aData, 'C_BRAND_MOBILE_BANNER' )?>"  class="icon-image" >
-            </div>
-            <?php
-            }
-            ?>
 
             <div class="input-group" style="margin-bottom:0">
                 <label class="label body2-c ">

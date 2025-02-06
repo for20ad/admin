@@ -50,21 +50,21 @@ class ApiController extends ResourceController
         #------------------------------------------------------------------
         # TODO: 요청 API 데이터 저장
         #------------------------------------------------------------------
-        $reciveParam                                = [];
+        // $reciveParam                                = [];
 
-        $reciveParam['REQUEST_URI']                 = (string) current_url(true);
-        $reciveParam['METHOD']                      = $this->request->getMethod();
-        $_params                                    = json_encode( $this->request->getVar(), JSON_UNESCAPED_UNICODE) ;
-        $_params                                    = (array)json_decode( str_replace( '\n____', '', $_params ) );
+        // $reciveParam['REQUEST_URI']                 = (string) current_url(true);
+        // $reciveParam['METHOD']                      = $this->request->getMethod();
+        // $_params                                    = json_encode( $this->request->getVar(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) ;
+        // $_params                                    = (array)json_decode( str_replace( '\n____', '', $_params ) );
 
 
-        $reciveParam['PARAMETERS']                  = json_encode( $_params, JSON_UNESCAPED_UNICODE );
+        // $reciveParam['PARAMETERS']                  = json_encode( $_params, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
 
-        $reciveParam['SENDER_IP']                   = $this->request->getIPAddress();
-        $reciveParam['AGENT']                       = (string) $this->request->getUserAgent();
-        $reciveParam['SEND_AT']                     = date( 'Y-m-d H:i:s' );
+        // $reciveParam['SENDER_IP']                   = $this->request->getIPAddress();
+        // $reciveParam['AGENT']                       = (string) $this->request->getUserAgent();
+        // $reciveParam['SEND_AT']                     = date( 'Y-m-d H:i:s' );
 
-        $this->LogModel->setRequestApiLog( $reciveParam );
+        // $this->LogModel->setRequestApiLog( $reciveParam );
 
 
         //$this->member = new Member();
@@ -298,26 +298,197 @@ class ApiController extends ResourceController
         $resizedImages                              = [];
 
         foreach ($sizes as $size) {
-            list($targetWidth, $targetHeight) = $size;
-            $resizedFilename = "{$targetWidth}x{$targetHeight}_{$originalFilename}";
+            $width = $size[0];
+            $height = $size[1];
+            $resizedFilename = pathinfo($originalFilename, PATHINFO_FILENAME) . "_{$width}x{$height}." . pathinfo($originalFilename, PATHINFO_EXTENSION);
             $resizedPath = $destinationPath . '/' . $resizedFilename;
+            $realResizedPath = str_replace('/home/admin/writable/','',$destinationPath) . '/' . $resizedFilename;
 
             // 리사이즈 작업 수행
-            $resized = $this->_createResizedImage($sourcePath, $targetWidth, $targetHeight, $resizedPath);
-
-            if ($resized) {
-                $relativePath = 'uploads/' . _elm($_config, 'path').'/'. $resizedFilename;
-
+            if ($this->_performResize($sourcePath, $resizedPath, $width, $height)) {
                 $resizedImages[] = [
                     'name'  => $resizedFilename,
-                    'path'  => $relativePath,  // '/uploads/'로 시작하는 경로 반환
-                    'size'  => "{$targetWidth}",
+                    'path' => $relativePath,
+                    'size' => "{$width}"
                 ];
             }
         }
 
+        // foreach ($sizes as $size) {
+        //     list($targetWidth, $targetHeight) = $size;
+        //     $resizedFilename = "{$targetWidth}x{$targetHeight}_{$originalFilename}";
+        //     $resizedPath = $destinationPath . '/' . $resizedFilename;
+
+        //     // 리사이즈 작업 수행
+
+        //     if ($this->_performResize($sourcePath, $resizedPath, $targetWidth, $targetHeight)) {
+        //         $resizedImages[] = [
+        //             'name'  => $resizedFilename,
+        //             'path' => $relativePath,
+        //             'size' => "{$targetWidth}"
+        //         ];
+        //     }
+        //     // $resized = $this->_createResizedImage($sourcePath, $targetWidth, $targetHeight, $resizedPath);
+
+        //     // if ($resized) {
+        //     //     $relativePath = 'uploads/' . _elm($_config, 'path').'/'. $resizedFilename;
+
+        //     //     $resizedImages[] = [
+        //     //         'name'  => $resizedFilename,
+        //     //         'path'  => $relativePath,  // '/uploads/'로 시작하는 경로 반환
+        //     //         'size'  => "{$targetWidth}",
+        //     //     ];
+        //     // }
+        // }
+
         return $resizedImages;
     }
+
+    protected function _performResize($sourcePath, $destPath, $width, $height)
+    {
+        $extension = strtolower(pathinfo($destPath, PATHINFO_EXTENSION));
+        $sourceImage = null;
+
+        // 원본 이미지 로드
+        if ($extension === 'jpg' || $extension === 'jpeg') {
+            $sourceImage = imagecreatefromjpeg($sourcePath);
+        } elseif ($extension === 'png') {
+            $sourceImage = imagecreatefrompng($sourcePath);
+        } elseif ($extension === 'gif') {
+            $sourceImage = imagecreatefromgif($sourcePath);
+        }
+
+        if ($sourceImage === false) {
+            return false;
+        }
+
+        // 원본 이미지 크기 가져오기
+        $sourceWidth = imagesx($sourceImage);
+        $sourceHeight = imagesy($sourceImage);
+
+        // 원본 비율 유지하여 새 크기 계산
+        $aspectRatio = $sourceWidth / $sourceHeight;
+
+        if ($width / $height > $aspectRatio) {
+            $newWidth = $height * $aspectRatio;
+            $newHeight = $height;
+        } else {
+            $newWidth = $width;
+            $newHeight = $width / $aspectRatio;
+        }
+
+        // 새 캔버스 생성
+        $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+        // 투명 배경 처리 (PNG, GIF)
+        if ($extension === 'png' || $extension === 'gif') {
+            imagealphablending($resizedImage, false);
+            imagesavealpha($resizedImage, true);
+            $transparentColor = imagecolorallocatealpha($resizedImage, 255, 255, 255, 127);
+            imagefill($resizedImage, 0, 0, $transparentColor);
+        } else {
+            // 비투명 이미지의 경우 흰색 배경 채우기
+            $white = imagecolorallocate($resizedImage, 255, 255, 255);
+            imagefill($resizedImage, 0, 0, $white);
+        }
+
+        // 이미지 복사 및 리사이징
+        $result = imagecopyresampled(
+            $resizedImage,
+            $sourceImage,
+            0, 0, 0, 0,
+            $newWidth, $newHeight,
+            $sourceWidth,
+            $sourceHeight
+        );
+
+        if (!$result) {
+            imagedestroy($sourceImage);
+            imagedestroy($resizedImage);
+            return false;
+        }
+
+        // 리사이즈된 이미지 저장
+        $saveResult = false;
+        if ($extension === 'jpg' || $extension === 'jpeg') {
+            $saveResult = imagejpeg($resizedImage, $destPath, 90); // 품질 90
+        } elseif ($extension === 'png') {
+            $saveResult = imagepng($resizedImage, $destPath, 6); // 압축 레벨 6
+        } elseif ($extension === 'gif') {
+            $saveResult = imagegif($resizedImage, $destPath);
+        }
+
+        imagedestroy($sourceImage);
+        imagedestroy($resizedImage);
+
+        return $saveResult;
+    }
+
+
+    // protected function _performResize($sourcePath, $destPath, $width, $height)
+    // {
+    //     $extension = strtolower(pathinfo($destPath, PATHINFO_EXTENSION));
+    //     $sourceImage = null;
+
+    //     // 원본 이미지 로드
+    //     if ($extension === 'jpg' || $extension === 'jpeg') {
+    //         $sourceImage = imagecreatefromjpeg($sourcePath);
+    //     } elseif ($extension === 'png') {
+    //         $sourceImage = imagecreatefrompng($sourcePath);
+    //     } elseif ($extension === 'gif') {
+    //         $sourceImage = imagecreatefromgif($sourcePath);
+    //     }
+
+    //     if ($sourceImage === false) {
+    //         return false;
+    //     }
+
+    //     // 새 캔버스 생성
+    //     $resizedImage = imagecreatetruecolor($width, $height);
+
+    //     // 투명 배경 처리 (PNG, GIF)
+    //     if ($extension === 'png' || $extension === 'gif') {
+    //         imagealphablending($resizedImage, false);
+    //         imagesavealpha($resizedImage, true);
+    //         $transparentColor = imagecolorallocatealpha($resizedImage, 255, 255, 255, 127);
+    //         imagefill($resizedImage, 0, 0, $transparentColor);
+    //     } else {
+    //         // 비투명 이미지의 경우 흰색 배경 채우기
+    //         $white = imagecolorallocate($resizedImage, 255, 255, 255);
+    //         imagefill($resizedImage, 0, 0, $white);
+    //     }
+
+    //     // 이미지 복사 및 리사이징
+    //     $result = imagecopyresampled(
+    //         $resizedImage,
+    //         $sourceImage,
+    //         0, 0, 0, 0,
+    //         $width, $height,
+    //         imagesx($sourceImage),
+    //         imagesy($sourceImage)
+    //     );
+
+    //     if (!$result) {
+    //         imagedestroy($sourceImage);
+    //         imagedestroy($resizedImage);
+    //         return false;
+    //     }
+
+    //     // 리사이즈된 이미지 저장
+    //     $saveResult = false;
+    //     if ($extension === 'jpg' || $extension === 'jpeg') {
+    //         $saveResult = imagejpeg($resizedImage, $destPath, 90); // 품질 90
+    //     } elseif ($extension === 'png') {
+    //         $saveResult = imagepng($resizedImage, $destPath, 6); // 압축 레벨 6
+    //     } elseif ($extension === 'gif') {
+    //         $saveResult = imagegif($resizedImage, $destPath);
+    //     }
+
+    //     imagedestroy($sourceImage);
+    //     imagedestroy($resizedImage);
+
+    //     return $saveResult;
+    // }
 
     // 실제 리사이즈 작업을 수행하는 함수 (GD 라이브러리 사용)
     protected function _createResizedImage($sourcePath, $targetWidth, $targetHeight, $destinationPath)
@@ -496,10 +667,8 @@ class ApiController extends ResourceController
      * @return string
      */
 
-
     protected function _pagination($param = [])
     {
-
         $pager                                      = \Config\Services::pager();
 
         $currentPage                                = $param['cur_page'] ?? 1;
@@ -509,13 +678,18 @@ class ApiController extends ResourceController
 
         $totalPages                                 = ceil($totalRows / $perPage);
 
+        // 페이지 그룹당 표시할 최대 페이지 수
+        $pageGroupSize                              = 10;
+        $currentGroupStart                          = (ceil($currentPage / $pageGroupSize) - 1) * $pageGroupSize + 1;
+        $currentGroupEnd                            = min($currentGroupStart + $pageGroupSize - 1, $totalPages);
+
         $html                                       = '<ul class="pagination align-items-center body2-c">';
 
-        // 이전 페이지 버튼
-        if ($currentPage > 1) {
-            $prev                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage - 1) : 'javascript:void(0);';
+        // 이전 그룹 버튼
+        if ($currentGroupStart > 1) {
+            $prevGroup                              = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentGroupStart - 1) : 'javascript:void(0);';
             $html                                  .= '<li class="page-item">
-                                                        <a href="' . $prev . '" data-page="'.($currentPage - 1).'" class="page-link">
+                                                        <a href="' . $prevGroup . '" data-page="'.($currentGroupStart - 1).'" class="page-link">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M10 4L6 8L10 12" stroke="#ADB5BD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
@@ -524,7 +698,7 @@ class ApiController extends ResourceController
         }
 
         // 페이지 번호
-        for ($i = 1; $i <= $totalPages; $i++) {
+        for ($i = $currentGroupStart; $i <= $currentGroupEnd; $i++) {
             if ($i == $currentPage) {
                 $html                              .= '<li class="page-item active"><a href="javascript:void(0);" class="">' . $i . '</a></li>';
             } else {
@@ -533,11 +707,11 @@ class ApiController extends ResourceController
             }
         }
 
-        // 다음 페이지 버튼
-        if ($currentPage < $totalPages) {
-            $next                                   = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentPage + 1) : 'javascript:void(0);';
+        // 다음 그룹 버튼
+        if ($currentGroupEnd < $totalPages) {
+            $nextGroup                              = _elm( $param, 'ajax' ) === false ? $baseUrl . '?page=' . ($currentGroupEnd + 1) : 'javascript:void(0);';
             $html                                  .= '<li class="page-item">
-                                                        <a href="' . $next .'" data-page="'.( $currentPage + 1 ).'" class="">
+                                                        <a href="' . $nextGroup .'" data-page="'.( $currentGroupEnd + 1 ).'" class="page-link">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M6 4L10 8L6 12" stroke="#616876" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
@@ -647,4 +821,6 @@ class ApiController extends ResourceController
         $writer->save('php://output');
         exit;
     }
+
+
 }

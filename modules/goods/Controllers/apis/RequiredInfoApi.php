@@ -153,7 +153,7 @@ class RequiredInfoApi extends ApiController
 
         if (_elm($requests, 'raw_return') === true)
         {
-            $response['result']                     = $aLISTS_RESULT;
+            $response                               = $aLISTS_RESULT;
         }
         unset($aLISTS_RESULT);
 
@@ -164,6 +164,223 @@ class RequiredInfoApi extends ApiController
 
         return $this->respond($response);
     }
+
+    public function getPopRequiredLists( $param = [] )
+    {
+        $response                                   = $this->_initResponse();
+        $owensView                                  = new OwensView();
+
+        $requests                                   = _trim($this->request->getPost());
+
+        $param['post']                              = $requests;
+        $param['post']['raw_return']                = true;
+
+
+        $aLISTS_RESULT                              = $this->getRequiredInfoLists( $param );
+
+
+        $lists                                      = _elm( $aLISTS_RESULT, 'lists' );
+
+        $search_count                               = _elm( $aLISTS_RESULT, 'search_count', 0 );
+
+        $total_count                                = _elm( $aLISTS_RESULT, 'total_count', 0 );
+
+        $page_datas                                 = [];
+
+        $page                                       = (int)_elm($requests, 'page', 1);
+
+        if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
+        {
+            $page                                   = 1;
+        }
+        $per_page                                   = 10;
+
+        if (empty( _elm( $requests, 'per_page' ) ) === false)
+        {
+            $per_page                               = (int)_elm( $requests, 'per_page' );
+        }
+
+        if ($per_page < 0 || is_numeric( $per_page ) === false)
+        {
+            $per_page                               = 10;
+        }
+
+
+
+        $limit                                      = $per_page;
+        $start                                      = ($page - 1) * $limit;
+
+        #############################################################
+        if (_elm($requests, 'page_return') === true || $this->request->isAjax() === true)
+        {
+
+            // ---------------------------------------------------------------------
+            // 서브뷰 처리
+            // ---------------------------------------------------------------------
+            // 리스트
+            $view_datas                             = [];
+            $view_datas['total_rows']               = $total_count;
+            $view_datas['row']                      = $start;
+            $view_datas['lists']                    = $lists;
+
+            $owensView->setViewDatas( $view_datas );
+            $page_datas['lists_row']                = view( '\Module\goods\Views\requiredInfo\pop_lists' , ['owensView' => $owensView] );
+
+            $paging_param                           = [];
+            $paging_param['num_links']              = 5;
+            $paging_param['per_page']               = $per_page;
+            $paging_param['total_rows']             = $total_count;
+            $paging_param['base_url']               = rtrim( _link_url( '/goods/goodsRequiredInfo' ), '/');
+            $paging_param['ajax']                   = true;
+            $paging_param['cur_page']               = $page;
+
+            $page_datas['pagination']               = $this->_pagination($paging_param);
+
+
+        }
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        $response['total_count']                    = $total_count;
+
+        return $this->respond($response);
+    }
+
+
+    public function getPopRequiredListsRow( $param = [] )
+    {
+        $response                                   = $this->_initResponse();
+        $owensView                                  = new OwensView();
+        $infoModel                                  = new RequiredInfoModel();
+        $requests                                   = _trim($this->request->getPost());
+
+
+        if (empty( _elm($param, 'post') ) === false)
+        {
+            $requests                               = _elm($param, 'post');
+        }
+
+        $page                                       = (int)_elm($requests, 'page', 1);
+
+        if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
+        {
+            $page                                   = 1;
+        }
+        $per_page                                   = 20;
+
+        if (empty( _elm( $requests, 'per_page' ) ) === false)
+        {
+            $per_page                               = (int)_elm( $requests, 'per_page' );
+        }
+
+        if ($per_page < 0 || is_numeric( $per_page ) === false)
+        {
+            $per_page                               = 20;
+        }
+
+
+
+        $limit                                      = $per_page;
+        $start                                      = ($page - 1) * $limit;
+
+        #------------------------------------------------------------------
+        # TODO:  리스트 가져오기
+        #------------------------------------------------------------------
+        $modelParam                                 = [];
+        $modelParam['R_TITLE']                      = _elm( $requests, 's_title' );
+
+        if( empty( _elm( $requests , 's_keyword' ) ) === false )
+        {
+            switch( _elm( $requests , 's_condition' ) )
+            {
+                case 'mb_id' :
+                    $modelParam['MB_USERID']        = _elm( $requests , 's_keyword' );
+                    break;
+                case 'mb_name' :
+                    $modelParam['MB_USERNAME']      = _elm( $requests , 's_keyword' );
+                    break;
+                case 'title' :
+                    $modelParam['F_TITLE']          = _elm( $requests , 's_keyword' );
+                    break;
+            }
+        }
+
+        switch(  _elm( $requests , 'ordering' ) )
+        {
+            case 'regdate_desc' :
+                $modelParam['order']                = ' R_CREATE_AT DESC';
+                break;
+            case 'regdate_asc' :
+                $modelParam['order']                = ' R_CREATE_AT ASC';
+                break;
+            case 'update_desc' :
+                $modelParam['order']                = ' R_UPDATE_AT DESC';
+                break;
+            case 'update_asc' :
+                $modelParam['order']                = ' R_UPDATE_AT ASC';
+                break;
+            default :
+                $modelParam['order']                = ' R_CREATE_AT ASC';
+                break;
+        }
+
+
+
+        $aLISTS_RESULT                              = $infoModel->getRequiredInfoLists($modelParam);
+
+        $total_count                                = _elm($aLISTS_RESULT, 'total_count', 0);
+
+        $page_datas                                 = [];
+
+        if (_elm($requests, 'page_return') === true || $this->request->isAjax() === true)
+        {
+
+            // ---------------------------------------------------------------------
+            // 서브뷰 처리
+            // ---------------------------------------------------------------------
+            // 리스트
+            $view_datas                             = [];
+
+            $list_result                            = _elm( $aLISTS_RESULT , 'lists', [] );
+
+            $view_datas['aConfig']                  = $this->aConfig;
+            $view_datas['total_rows']               = $total_count;
+            $view_datas['row']                      = $start;
+            $view_datas['lists']                    = $list_result;
+
+            $owensView->setViewDatas( $view_datas );
+
+
+            $page_datas['lists_row']                = view( '\Module\goods\Views\requiredInfo\pop_lists_row' , ['owensView' => $owensView] );
+
+
+            $paging_param                           = [];
+            $paging_param['num_links']              = 5;
+            $paging_param['per_page']               = $per_page;
+            $paging_param['total_rows']             = $total_count;
+            $paging_param['base_url']               = rtrim( _link_url( '/goods/goodsRequiredInfo' ), '/');
+            $paging_param['ajax']                   = true;
+            $paging_param['cur_page']               = $page;
+
+            $page_datas['pagination']               = $this->_pagination($paging_param);
+
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 데이터만 리턴요청이면
+        #------------------------------------------------------------------
+
+
+
+        $response['status']                         = 'true';
+        $response['page_datas']                     = $page_datas;
+
+        $response['total_count']                    = $total_count;
+
+        return $this->respond($response);
+    }
+
 
     public function requiredInfoDetail()
     {
@@ -336,6 +553,7 @@ class RequiredInfoApi extends ApiController
                     $subModelParam['D_PARENT_IDX']  = $aIdx;
                     $subModelParam['D_KEY']         = $key;
                     $subModelParam['D_VALUE']       = _elm( _elm( $requests, 'values' ), $index);
+                    $subModelParam['D_SORT']        = $index+1;
                     $subModelParam['D_CREATE_AT']   = date( 'Y-m-d H:i:s' );
                     $subModelParam['D_CREATE_IP']   = $this->request->getIPAddress();
                     $subModelParam['D_CREATE_MB_IDX']= _elm( $this->session->get('_memberInfo') , 'member_idx' );
@@ -356,7 +574,7 @@ class RequiredInfoApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 필수정보 등록 - data:'.json_encode( $requests, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '상품 필수정보 등록 - data:'.json_encode( $requests, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -388,6 +606,8 @@ class RequiredInfoApi extends ApiController
         $requests                                   = $this->request->getPost();
         $infoModel                                  = new RequiredInfoModel();
 
+        // print_r( $requests );
+        // die;
         $validation                                 = \Config\Services::validation();
         #------------------------------------------------------------------
         # TODO: 검사 변수 true로 설정
@@ -484,6 +704,7 @@ class RequiredInfoApi extends ApiController
                     $subModelParam['D_PARENT_IDX']  = _elm( $requests, 'i_idx' ) ;
                     $subModelParam['D_KEY']         = $key;
                     $subModelParam['D_VALUE']       = _elm( _elm( $requests, 'values' ), $index);
+                    $subModelParam['D_SORT']        = $index+1;
                     $subModelParam['D_CREATE_AT']   = date( 'Y-m-d H:i:s' );
                     $subModelParam['D_CREATE_IP']   = $this->request->getIPAddress();
                     $subModelParam['D_CREATE_MB_IDX']= _elm( $this->session->get('_memberInfo') , 'member_idx' );
@@ -504,7 +725,7 @@ class RequiredInfoApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 필수정보 수정 - data:'.json_encode( $requests, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '상품 필수정보 수정 - data:'.json_encode( $requests, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -534,7 +755,7 @@ class RequiredInfoApi extends ApiController
     {
         $response                                   = $this->_initResponse();
         $requests                                   = $this->request->getPost();
-        $iconsModel                                 = new IconsModel();
+        $infoModel                                  = new RequiredInfoModel();
         if( empty( _elm($requests, 'i_idx') ) === true ){
             $response['status']                     = 400;
             $response['alert']                      = '데이터가 없습니다. 다시 시도해주세요.';
@@ -547,7 +768,7 @@ class RequiredInfoApi extends ApiController
         #------------------------------------------------------------------
         $modelParam                                 = [];
         $modelParam['R_IDX']                        = _elm( $requests, 'i_idx' );
-        $aData                                      = $iconsModel->getRequiredInfoDataByIdx( _elm( $requests, 'i_idx' ) );
+        $aData                                      = $infoModel->getRequiredInfoDataByIdx( _elm( $requests, 'i_idx' ) );
         if( empty( $aData ) === true ){
             $response['status']                     = 400;
             $response['alert']                      = '데이터가 없습니다. 다시 시도해주세요.';
@@ -562,7 +783,7 @@ class RequiredInfoApi extends ApiController
         #------------------------------------------------------------------
         # TODO: 상위 데이터 삭제
         #------------------------------------------------------------------
-        $aStatus                                    = $iconsModel->deleteInfo( $modelParam );
+        $aStatus                                    = $infoModel->deleteInfo( $modelParam );
         if ( $this->db->transStatus() === false || $aStatus === false ) {
             $this->db->transRollback();
             $response['status']                     = 400;
@@ -573,7 +794,7 @@ class RequiredInfoApi extends ApiController
         #------------------------------------------------------------------
         # TODO: 하위 데이터 삭제
         #------------------------------------------------------------------
-        $bStatus                                    = $iconsModel->deleteInfoDetail( $modelParam );
+        $bStatus                                    = $infoModel->deleteInfoDetail( $modelParam );
         if ( $this->db->transStatus() === false || $bStatus === false ) {
             $this->db->transRollback();
             $response['status']                     = 400;
@@ -585,7 +806,7 @@ class RequiredInfoApi extends ApiController
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                                   = [];
-        $logParam['MB_HISTORY_CONTENT']             = '상품 필수정보 삭제 - orgData:'.json_encode( $aData, JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']             = '상품 필수정보 삭제 - orgData:'.json_encode( $aData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -612,4 +833,75 @@ class RequiredInfoApi extends ApiController
 
     }
 
+    public function addRequiredRow()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+        $infoModel                                  = new RequiredInfoModel();
+        helper('owens_form_helper');
+
+        if( empty( _elm( $requests, 'checkedItems' ) ) === true ){
+            $response['status']                     = 400;
+            $response['alert']                      = '선택된 항목이 없습니다.';
+
+            return $this->respond( $response );
+        }
+
+
+
+        $checkedItems                               = explode( ',', _elm( $requests, 'checkedItems' ) );
+
+
+        $rows                                       = '';
+        foreach( $checkedItems as $item ){
+            $detailLists                            = $infoModel->geRequiredDetails( $item );
+            #------------------------------------------------------------------
+            # TODO: detail 리스트를 html로 변환한다
+            #------------------------------------------------------------------
+            if( empty( $detailLists ) === false ){
+                foreach( $detailLists as $aKey => $aDetail ){
+                    $rows                           .= '
+                        <tr>
+                            <td><input type="text" class="form-control" name="i_req_info_keys[]" value="'._elm( $aDetail, 'D_KEY' ).'"></td>
+                    ';
+                    #------------------------------------------------------------------
+                    # TODO: 형식이 text면 input을 이미지면 image를
+                    #------------------------------------------------------------------
+                    if( _elm( $aDetail, 'D_TYPE' ) == 'text' ){
+                        $rows                       .='
+                            <td><input type="text" class="form-control" name="i_req_info_values[]"  value="'._elm( $aDetail, 'D_VALUE' ).'"></td>
+
+                        ';
+                    }else{
+                        $rows                       .='
+                            <td><input type="hidden" class="form-control" name="i_req_info_values[]" value=""><img src="'.base_url()._elm( $aDetail, 'D_VALUE' ).'" width="120px"></td>
+                        ';
+                    }
+
+
+                    $rows                         .='
+                        <td>'.  getIconAnchor([
+                        'txt' => '',
+                        'icon' => 'delete',
+                        'buttonClass' => '',
+                        'buttonStyle' => '',
+                        'width' => '24',
+                        'height' => '24',
+                        'stroke' => '#616876',
+                        'extra' => [
+                            'onclick' => 'deleteRows(this);',
+                        ]
+                    ]).'</td>';
+
+                    $rows    .='</tr>';
+                }
+            }
+
+
+        }
+        $response['status']                       = 200;
+        $response['details']                      = $rows;
+
+        return $this->respond( $response );
+    }
 }

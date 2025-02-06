@@ -12,12 +12,15 @@ use Config\Site;
 use App\Libraries\MemberLib;
 use Config\Site as SiteConfig;
 
+use Shared\Config as SharedConfig;
+
 class LoginApi extends ApiController
 {
-
+    protected $sharedConfig;
     public function __construct()
     {
         parent::__construct();
+        $this->sharedConfig                        = new SharedConfig();
     }
 
     public function loginAuth()
@@ -133,7 +136,7 @@ class LoginApi extends ApiController
         #------------------------------------------------------------------
         $talkParam                                  = [];
         $talkParam['mobile_num']                    = $this->_aesDecrypt( _elm( $memberInfo, 'MB_MOBILE_NUM' ) );
-        $talkParam['temp_name']                     = '인증번호3';
+        $talkParam['temp_name']                     = '인증번호3분';
 
         $smsResponse                                = $this->pushSms( $talkParam );
         if( _elm( $smsResponse, 'status' ) !== 200 ){
@@ -213,7 +216,7 @@ class LoginApi extends ApiController
         #------------------------------------------------------------------
         $talkParam                                  = [];
         $talkParam['mobile_num']                    = $this->_aesDecrypt( _elm( $memberInfo, 'MB_MOBILE_NUM' ) );
-        $talkParam['temp_name']                     = '인증번호3';
+        $talkParam['temp_name']                     = '인증번호3분';
 
         $smsResponse                                = $this->pushSms( $talkParam );
         if( _elm( $smsResponse, 'status' ) !== 200 ){
@@ -242,13 +245,17 @@ class LoginApi extends ApiController
         #------------------------------------------------------------------
         # TODO: 알림톡 데이터 세팅
         #------------------------------------------------------------------
-        $config                                     = new Talk();
-        $KakaoInfo                                  = _elm( $config->talk, 'KakaoInfo' );
-        $kakaoTemplateInfo                          = _elm( $config->talk, 'kakaoTemplate' );
+        $config = $this->sharedConfig::$talk;
+
+        $talk   = _elm( $config , 'item' );
+
+        $KakaoInfo                                  = _elm( $config, 'KakaoInfo' );
+        $kakaoTemplateInfo                          = _elm( $config, 'kakaoTemplate' );
 
         $kakao                                      = new KakaoLib;
         $talkParam                                  = [];
         $template_code                              = array_search( _elm( $param, 'temp_name' ), $kakaoTemplateInfo);
+
         if( empty( $template_code ) === true ){
             $returnData['status']                   = 200;
             $returnData['error']                    = '템플릿 데이터가 없습니다.';
@@ -263,6 +270,7 @@ class LoginApi extends ApiController
             'REQTIME'                               => '00000000000000',
             //'AGENT_FLAG'    => rand(0,4),
             'typeValues'                            => [
+                'mall_name'                         => '산수유람',
                 'auth_num'                          => $auth_num
             ]
         ];
@@ -281,7 +289,8 @@ class LoginApi extends ApiController
             $response['status']                     = '400';
             $response['alert']                      = $e->getMessage();
 
-           return $this->fail( $e->getMessage(), 401, '303' );
+
+            return $this->fail( $e->getMessage(), 401, '303' );
         }
 
 

@@ -39,14 +39,15 @@
         ?>
         </div>
     </td>
-    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'memberModal')" ><?php echo _elm( $vData , 'MB_USERID' )?></a></td>
-    <td class="body2-c nowrap" ><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'memberModal')"><?php echo _elm( $vData , 'MB_NM' )?></a></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'dataModal')" ><?php echo _elm( $vData , 'MB_USERID' )?></a></td>
+    <td class="body2-c nowrap" ><a href='javascript:;' onclick="javascript:openLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'dataModal')"><?php echo _elm( $vData , 'MB_NM' )?></a></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'G_NAME' )?> </td>
     <td class="body2-c nowrap"><?php echo empty( _elm( $vData, 'MB_COM_NAME') ) ? '일반' : '공급처'?></td>
-    <td class="body2-c nowrap"><?php echo _elm( $vData, 'ADD_MILEAGE', 0, true )?> 원</td>
+    <td class="body2-c nowrap"><?php echo number_format( _elm( $vData, 'ADD_MILEAGE', 0, true ) - (_elm( $vData, 'USE_MILEAGE', 0, true ) + _elm( $vData, 'DED_MILEAGE', 0, true ) + _elm( $vData, 'EXP_MILEAGE', 0, true )  ) )?> 원</td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'MB_SALE_CNT', 0, true )?> 건</td>
     <td class="body2-c nowrap"><?php echo _elm( $vData, 'MB_SALE_AMT', 0, true )?> 원</td>
     <td class="body2-c nowrap"><?php echo  _elm( $aConfig , _elm($vData , 'MB_STATUS' ) )?></td>
+    <td class="body2-c nowrap"><a href='javascript:;' onclick="javascript:openCounselLayer('<?php echo _elm( $vData , 'MB_IDX' ) ?>', 'counselModal')">내역보기</a></td>
     <td class="body2-c nowrap"><?php echo date( 'Y-m-d H:i' , strtotime( _elm( $vData , 'MB_REG_AT' ) ) )?></td>
     <td class="body2-c nowrap"><?php echo empty( _elm( $vData , 'MB_LAST_LOGIN' ) ) === false ? date( 'Y-m-d H:i' , strtotime( _elm( $vData , 'MB_LAST_LOGIN' ) ) ) : '-'?></td>
 </tr>
@@ -57,7 +58,7 @@
     {
 ?>
 <tr>
-    <td colspan="11">
+    <td colspan="12">
         "등록된 회원 목록이 없습니다."
     </td>
 </tr>
