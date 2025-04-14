@@ -1,0 +1,364 @@
+CRITICAL - 2024-06-14 00:16:52 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:26 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:26 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:27 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:28 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:28 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:28 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:29 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:29 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:30 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:30 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:30 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:30 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:39 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:39 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:39 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:41 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:51:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:51:52 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:52:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:52:04 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:52:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:52:06 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 01:52:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 01:52:10 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 02:11:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 02:11:18 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-14 02:22:33 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 03:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 03:31:10 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-14 03:39:23 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-14 06:08:15 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 06:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 06:16:39 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 06:16:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 06:16:41 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 06:38:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 06:38:42 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-14 07:42:14 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 09:09:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 09:09:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 09:09:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 09:09:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 09:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 09:30:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:15:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:15:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:15:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:15:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:16:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:16:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:16:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:17:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:17:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:17:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:17:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:17:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:18:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 10:18:10 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 10:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:19:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:19:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:21:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:27:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:27:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:39:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:50:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:50:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:50:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:50:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:50:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:50:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:51:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:53:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:53:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:53:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:55:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:55:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:56:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:56:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:56:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:57:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:57:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:57:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:57:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:57:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:57:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 10:58:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:00:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:00:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:00:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:00:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:00:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:01:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:01:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:01:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:02:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:07:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:12:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:13:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:13:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:21:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 11:21:31 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 11:21:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 11:21:32 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-14 11:32:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 11:33:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-14 12:30:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-14 12:30:59 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

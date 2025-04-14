@@ -1,7 +1,6 @@
 /.vscode
-
-/writable/*
+/public/uploads/*
+/writeble/*
 /.git/*
-/.github/*
-/vendor
-
+/.github
+/app/Config/Database.*

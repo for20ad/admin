@@ -1,0 +1,310 @@
+CRITICAL - 2024-04-02 07:25:37 --> Error: Class "Module\core\Controllers\ApiController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:25:38 --> Error: Class "Module\core\Controllers\ApiController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:25:39 --> Error: Class "Module\core\Controllers\ApiController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:25:39 --> Error: Class "Module\core\Controllers\ApiController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:27:26 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:27:27 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:27:28 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:30:32 --> ErrorException: Undefined global variable $_SESSION
+in ROOTPATH/modules/test/Config/Routes.php on line 3.
+ 1 ROOTPATH/modules/test/Config/Routes.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined global variable $_SESSION', '/Users/timber/workspace/web/admin/modules/test/Config/Routes.php', 3)
+ 2 APPPATH/Config/Routes.php(45): require('/Users/timber/workspace/web/admin/modules/test/Config/Routes.php')
+ 3 SYSTEMPATH/Router/RouteCollection.php(345): require('/Users/timber/workspace/web/admin/app/Config/Routes.php')
+ 4 SYSTEMPATH/CodeIgniter.php(811): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:30:34 --> ErrorException: Undefined global variable $_SESSION
+in ROOTPATH/modules/test/Config/Routes.php on line 3.
+ 1 ROOTPATH/modules/test/Config/Routes.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined global variable $_SESSION', '/Users/timber/workspace/web/admin/modules/test/Config/Routes.php', 3)
+ 2 APPPATH/Config/Routes.php(45): require('/Users/timber/workspace/web/admin/modules/test/Config/Routes.php')
+ 3 SYSTEMPATH/Router/RouteCollection.php(345): require('/Users/timber/workspace/web/admin/app/Config/Routes.php')
+ 4 SYSTEMPATH/CodeIgniter.php(811): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:30:56 --> ErrorException: Undefined global variable $_SESSION
+in ROOTPATH/modules/test/Config/Routes.php on line 3.
+ 1 ROOTPATH/modules/test/Config/Routes.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined global variable $_SESSION', '/Users/timber/workspace/web/admin/modules/test/Config/Routes.php', 3)
+ 2 APPPATH/Config/Routes.php(45): require('/Users/timber/workspace/web/admin/modules/test/Config/Routes.php')
+ 3 SYSTEMPATH/Router/RouteCollection.php(345): require('/Users/timber/workspace/web/admin/app/Config/Routes.php')
+ 4 SYSTEMPATH/CodeIgniter.php(811): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:31:08 --> ErrorException: Undefined global variable $_SESSION
+in ROOTPATH/modules/test/Config/Routes.php on line 3.
+ 1 ROOTPATH/modules/test/Config/Routes.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined global variable $_SESSION', '/Users/timber/workspace/web/admin/modules/test/Config/Routes.php', 3)
+ 2 APPPATH/Config/Routes.php(45): require('/Users/timber/workspace/web/admin/modules/test/Config/Routes.php')
+ 3 SYSTEMPATH/Router/RouteCollection.php(345): require('/Users/timber/workspace/web/admin/app/Config/Routes.php')
+ 4 SYSTEMPATH/CodeIgniter.php(811): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:31:09 --> ErrorException: Undefined global variable $_SESSION
+in ROOTPATH/modules/test/Config/Routes.php on line 3.
+ 1 ROOTPATH/modules/test/Config/Routes.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined global variable $_SESSION', '/Users/timber/workspace/web/admin/modules/test/Config/Routes.php', 3)
+ 2 APPPATH/Config/Routes.php(45): require('/Users/timber/workspace/web/admin/modules/test/Config/Routes.php')
+ 3 SYSTEMPATH/Router/RouteCollection.php(345): require('/Users/timber/workspace/web/admin/app/Config/Routes.php')
+ 4 SYSTEMPATH/CodeIgniter.php(811): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:31:56 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:04 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:05 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:05 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:06 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:34 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:35 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:35 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:36 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:36 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 11.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:32:54 --> Error: Class "Module\core\Controllers\CoreController" not found
+in ROOTPATH/modules/test/Controllers/Test.php on line 9.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(311): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 5 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 6 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:35:35 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:35:35 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:35:36 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:35:36 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:36:07 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:36:08 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:36:08 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:36:08 --> Error: Call to a member function setSiteLayout() on null
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 49.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 2 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:37:24 --> Error: Call to undefined method Module\test\Controllers\Test::loadLibrary()
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 28.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:37:25 --> Error: Call to undefined method Module\test\Controllers\Test::loadLibrary()
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 28.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 07:37:25 --> Error: Call to undefined method Module\test\Controllers\Test::loadLibrary()
+in ROOTPATH/modules/core/Controllers/CoreController.php on line 28.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

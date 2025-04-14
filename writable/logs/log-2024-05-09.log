@@ -1,0 +1,61 @@
+INFO - 2024-05-09 00:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-05-09 00:54:28 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 00:54:28 --> ErrorException: Attempt to read property "saveData" on null
+in APPPATH/Libraries/OwensView.php on line 43.
+ 1 APPPATH/Libraries/OwensView.php(43): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Libraries/OwensView.php(336): App\Libraries\OwensView->view()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(19): App\Libraries\OwensView->loadLayoutView()
+ 4 SYSTEMPATH/CodeIgniter.php(943): Module\core\Controllers\Errors->show404()
+ 5 SYSTEMPATH/CodeIgniter.php(972): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors()
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-09 01:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-05-09 01:05:21 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 01:05:21 --> ErrorException: Attempt to read property "saveData" on null
+in APPPATH/Libraries/OwensView.php on line 43.
+ 1 APPPATH/Libraries/OwensView.php(43): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Libraries/OwensView.php(336): App\Libraries\OwensView->view()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(19): App\Libraries\OwensView->loadLayoutView()
+ 4 SYSTEMPATH/CodeIgniter.php(943): Module\core\Controllers\Errors->show404()
+ 5 SYSTEMPATH/CodeIgniter.php(972): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors()
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 01:29:36 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-09 01:43:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-05-09 01:43:49 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 01:43:49 --> ErrorException: Attempt to read property "saveData" on null
+in APPPATH/Libraries/OwensView.php on line 43.
+ 1 APPPATH/Libraries/OwensView.php(43): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Libraries/OwensView.php(336): App\Libraries\OwensView->view()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(19): App\Libraries\OwensView->loadLayoutView()
+ 4 SYSTEMPATH/CodeIgniter.php(943): Module\core\Controllers\Errors->show404()
+ 5 SYSTEMPATH/CodeIgniter.php(972): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors()
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

@@ -1,0 +1,724 @@
+CRITICAL - 2024-04-03 00:43:25 --> TypeError: password_hash(): Argument #2 ($algo) must be of type string|int|null, array given
+in ROOTPATH/modules/test/Controllers/Test.php on line 24.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(24): password_hash(Object(SensitiveParameterValue), [...])
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 00:47:37 --> ValueError: Invalid bcrypt cost parameter specified: 50
+in ROOTPATH/modules/test/Controllers/Test.php on line 25.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(25): password_hash(Object(SensitiveParameterValue), '2y', [...])
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 00:47:45 --> TypeError: password_hash(): Argument #2 ($algo) must be of type string|int|null, array given
+in ROOTPATH/modules/test/Controllers/Test.php on line 25.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(25): password_hash(Object(SensitiveParameterValue), [...])
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 00:47:46 --> TypeError: password_hash(): Argument #2 ($algo) must be of type string|int|null, array given
+in ROOTPATH/modules/test/Controllers/Test.php on line 25.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(25): password_hash(Object(SensitiveParameterValue), [...])
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 00:47:55 --> TypeError: password_hash(): Argument #2 ($algo) must be of type string|int|null, array given
+in ROOTPATH/modules/test/Controllers/Test.php on line 25.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(25): password_hash(Object(SensitiveParameterValue), [...])
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 00:48:11 --> TypeError: password_hash(): Argument #2 ($algo) must be of type string|int|null, array given
+in ROOTPATH/modules/test/Controllers/Test.php on line 25.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(25): password_hash(Object(SensitiveParameterValue), [...])
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:49:55 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:49:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:49:58 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:49:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:49:58 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:49:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:49:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:49:59 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:50:48 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:50:48 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 01:50:56 --> ErrorException: Undefined variable $aResult
+in ROOTPATH/modules/test/Controllers/Test.php on line 26.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $aResult', '/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php', 26)
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:52:37 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:52:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:52:38 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:52:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:52:38 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:52:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:52:38 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:52:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:52:38 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:52:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(25): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:54:01 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(28): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(28): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:54:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(28): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 01:56:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 01:56:25 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 01:56:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 01:56:32 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-03 01:56:32 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'timbertr1401_go...', 3306, '', 0)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(30): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#8 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Users/timber/workspace/web/admin/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+#4 /Users/timber/workspace/web/admin/modules/test/Controllers/Test.php(30): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.c...')
+#5 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+#6 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+#7 /Users/timber/workspace/web/admin/vendor/codeigniter4/framework/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/timber/workspace/web/admin/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-04-03 01:56:32 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `es_member`
+WHERE `memId` = :memId:', [...], false)
+ 3 ROOTPATH/modules/test/Models/TestModel.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 4 ROOTPATH/modules/test/Controllers/Test.php(30): Module\test\Models\TestModel->getMemberInfo('for20ad@naver.com')
+ 5 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 6 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 7 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 01:59:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 01:59:51 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 01:59:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 01:59:53 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:01:09 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:30 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:31 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:31 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:31 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:31 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:37 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:38 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:38 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:38 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:02:39 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:05:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:05:45 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-03 02:05:45 --> [DEPRECATED] password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in ROOTPATH/modules/test/Controllers/Test.php on line 35.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(35): password_verify(Object(SensitiveParameterValue), null)
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-03 02:06:08 --> ParseError: syntax error, unexpected token "echo"
+in ROOTPATH/modules/test/Controllers/Test.php on line 37.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/timber/workspace/web/admin/modules/test/Controllers/Test.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Module\\test\\Controllers\\Test')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Module\\test\\Controllers\\Test')
+ 4 SYSTEMPATH/CodeIgniter.php(901): class_exists('\\Module\\test\\Controllers\\Test', true)
+ 5 SYSTEMPATH/CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:06:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:06:18 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-03 02:06:18 --> [DEPRECATED] password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in ROOTPATH/modules/test/Controllers/Test.php on line 35.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(35): password_verify(Object(SensitiveParameterValue), null)
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:06:19 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-03 02:06:19 --> [DEPRECATED] password_verify(): Passing null to parameter #2 ($hash) of type string is deprecated in ROOTPATH/modules/test/Controllers/Test.php on line 35.
+ 1 ROOTPATH/modules/test/Controllers/Test.php(35): password_verify(Object(SensitiveParameterValue), null)
+ 2 SYSTEMPATH/CodeIgniter.php(943): Module\test\Controllers\Test->index()
+ 3 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\test\Controllers\Test))
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:06:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:06:46 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-03 02:07:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-03 02:07:10 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/test/Controllers/Test.php(15): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\test\Controllers\Test->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

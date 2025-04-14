@@ -1,0 +1,12 @@
+INFO - 2024-05-10 00:01:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-10 00:01:31 --> Error: Undefined constant "CodeIgniter\Database\MySQLi\MYSQLI_STORE_RESULT"
+in SYSTEMPATH/Database/Database.php on line 137.
+ 1 SYSTEMPATH/Database/Database.php(55): CodeIgniter\Database\Database->initDriver()
+ 2 SYSTEMPATH/Database/Config.php(82): CodeIgniter\Database\Database->load()
+ 3 SYSTEMPATH/Model.php(154): CodeIgniter\Database\Config::connect()
+ 4 ROOTPATH/modules/core/Controllers/ApiController.php(30): CodeIgniter\Model->__construct()
+ 5 ROOTPATH/modules/login/Controllers/Signin.php(20): Module\core\Controllers\ApiController->__construct()
+ 6 SYSTEMPATH/CodeIgniter.php(915): Module\login\Controllers\Signin->__construct()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->createController()
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

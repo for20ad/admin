@@ -1,0 +1,419 @@
+CRITICAL - 2024-06-04 04:22:25 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-04 06:00:22 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-04 08:02:45 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-04 10:17:08 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-04 01:40:54 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:40:54 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:40:55 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:40:55 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:40:55 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:40:55 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:41:14 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:41:14 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:41:21 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:41:46 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:41:46 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:44:34 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:44:34 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:44:35 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:44:35 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:46:54 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:46:54 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:46:55 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:46:55 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:46:58 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:05 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:06 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:06 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:06 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:33 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:34 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:34 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:34 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:34 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:35 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:47:35 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:48:18 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:48:18 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:48:19 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:48:19 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/public/index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 01:55:36 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:55:37 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:55:38 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:55:38 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:55:39 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 01:55:39 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 FCPATH/index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 02:15:00 --> Error: Class "Locale" not found
+in SYSTEMPATH/CodeIgniter.php on line 218.
+ 1 ROOTPATH/spark(88): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-06-04 02:15:00 --> ErrorException: Uncaught Error: Class "Locale" not found in /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php:74
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/I18n/TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 /home/api/vendor/codeigniter4/framework/system/Debug/ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /home/api/spark(88): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH/I18n/TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 11:37:38 --> CodeIgniter\Exceptions\ConfigException: Config\App::$baseURL ":/" is not a valid URL.
+in SYSTEMPATH/HTTP/SiteURI.php on line 201.
+ 1 SYSTEMPATH/HTTP/SiteURI.php(145): CodeIgniter\HTTP\SiteURI->normalizeBaseURL()
+ 2 SYSTEMPATH/HTTP/SiteURI.php(100): CodeIgniter\HTTP\SiteURI->determineBaseURL()
+ 3 SYSTEMPATH/HTTP/CLIRequest.php(78): CodeIgniter\HTTP\SiteURI->__construct()
+ 4 SYSTEMPATH/Config/Services.php(144): CodeIgniter\HTTP\CLIRequest->__construct()
+ 5 SYSTEMPATH/Config/BaseService.php(258): CodeIgniter\Config\Services::clirequest()
+ 6 SYSTEMPATH/Config/BaseService.php(199): CodeIgniter\Config\BaseService::__callStatic()
+ 7 SYSTEMPATH/Config/Services.php(139): CodeIgniter\Config\BaseService::getSharedInstance()
+ 8 SYSTEMPATH/Config/BaseService.php(258): CodeIgniter\Config\Services::clirequest()
+ 9 SYSTEMPATH/Config/Services.php(537): CodeIgniter\Config\BaseService::__callStatic()
+10 SYSTEMPATH/Config/BaseService.php(258): CodeIgniter\Config\Services::createRequest()
+11 SYSTEMPATH/CLI/Console.php(37): CodeIgniter\Config\BaseService::__callStatic()
+12 ROOTPATH/spark(102): CodeIgniter\CLI\Console->run()
+CRITICAL - 2024-06-04 11:37:38 --> ErrorException: Uncaught CodeIgniter\Exceptions\ConfigException: Config\App::$baseURL ":/" is not a valid URL. in /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURI.php:201
+Stack trace:
+#0 /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURI.php(145): CodeIgniter\HTTP\SiteURI->normalizeBaseURL()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURI.php(100): CodeIgniter\HTTP\SiteURI->determineBaseURL()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURIFactory.php(224): CodeIgniter\HTTP\SiteURI->__construct()
+#3 /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURIFactory.php(45): CodeIgniter\HTTP\SiteURIFactory->createURIFromRoutePath()
+#4 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(805): CodeIgniter\HTTP\SiteURIFactory->createFromGlobals()
+#5 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::uri()
+#6 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(199): CodeIgniter\Config\BaseService::__callStatic()
+#7 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(798): CodeIgniter\Config\BaseService::getSharedInstance()
+#8 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::uri()
+#9 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(566): CodeIgniter\Config\BaseService::__callStatic()
+#10 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::incomingrequest()
+#11 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(524): CodeIgniter\Config\BaseService::__callStatic()
+#12 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::request()
+#13 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(199): CodeIgniter\Config\BaseService::__callStatic()
+#14 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(520): CodeIgniter\Config\BaseService::getSharedInstance()
+#15 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::request()
+#16 /home/api/vendor/codeigniter4/framework/system/Debug/Exceptions.php(150): CodeIgniter\Config\BaseService::__callStatic()
+#17 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#18 {main}
+  thrown
+【Previous Exception】
+CodeIgniter\Exceptions\ConfigException
+Config\App::$baseURL ":/" is not a valid URL.
+#0 /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURI.php(145): CodeIgniter\HTTP\SiteURI->normalizeBaseURL()
+#1 /home/api/vendor/codeigniter4/framework/system/HTTP/SiteURI.php(100): CodeIgniter\HTTP\SiteURI->determineBaseURL()
+#2 /home/api/vendor/codeigniter4/framework/system/HTTP/CLIRequest.php(78): CodeIgniter\HTTP\SiteURI->__construct()
+#3 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(144): CodeIgniter\HTTP\CLIRequest->__construct()
+#4 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::clirequest()
+#5 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(199): CodeIgniter\Config\BaseService::__callStatic()
+#6 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(139): CodeIgniter\Config\BaseService::getSharedInstance()
+#7 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::clirequest()
+#8 /home/api/vendor/codeigniter4/framework/system/Config/Services.php(537): CodeIgniter\Config\BaseService::__callStatic()
+#9 /home/api/vendor/codeigniter4/framework/system/Config/BaseService.php(258): CodeIgniter\Config\Services::createRequest()
+#10 /home/api/vendor/codeigniter4/framework/system/CLI/Console.php(37): CodeIgniter\Config\BaseService::__callStatic()
+#11 /home/api/spark(102): CodeIgniter\CLI\Console->run()
+#12 {main}
+in SYSTEMPATH/HTTP/SiteURI.php on line 201.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 11:39:07 --> Swoole\Exception: failed to listen server port[0.0.0.0:8080], Error: Address already in use[98]
+in APPPATH/Commands/WebSocketCommand.php on line 16.
+ 1 APPPATH/Commands/WebSocketCommand.php(16): Swoole\Server->__construct()
+ 2 SYSTEMPATH/CLI/Commands.php(65): App\Commands\WebSocketCommand->run()
+ 3 SYSTEMPATH/CLI/Console.php(46): CodeIgniter\CLI\Commands->run()
+ 4 ROOTPATH/spark(102): CodeIgniter\CLI\Console->run()
+CRITICAL - 2024-06-04 11:41:02 --> Swoole\Exception: failed to listen server port[0.0.0.0:8910], Error: Address already in use[98]
+in APPPATH/Commands/WebSocketCommand.php on line 16.
+ 1 APPPATH/Commands/WebSocketCommand.php(16): Swoole\Server->__construct()
+ 2 SYSTEMPATH/CLI/Commands.php(65): App\Commands\WebSocketCommand->run()
+ 3 SYSTEMPATH/CLI/Console.php(46): CodeIgniter\CLI\Commands->run()
+ 4 ROOTPATH/spark(102): CodeIgniter\CLI\Console->run()
+CRITICAL - 2024-06-04 14:50:00 --> ErrorException: Uncaught Error: Call to undefined function App\Commands\curl_init() in /home/api/app/Commands/WebSocketCommand.php:89
+Stack trace:
+#0 /home/api/app/Commands/WebSocketCommand.php(80): App\Commands\WebSocketCommand->sendHttpRequest()
+#1 /home/api/app/Commands/WebSocketCommand.php(36): App\Commands\WebSocketCommand->handleAction()
+#2 [internal function]: App\Commands\WebSocketCommand->App\Commands\{closure}()
+#3 {main}
+  thrown
+in APPPATH/Commands/WebSocketCommand.php on line 89.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 14:50:00 --> Swoole\ExitException: swoole exit
+in SYSTEMPATH/Debug/ExceptionHandler.php on line 116.
+ 1 SYSTEMPATH/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+ 2 SYSTEMPATH/Debug/Exceptions.php(245): CodeIgniter\Debug\Exceptions->exceptionHandler()
+ 3 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 14:50:49 --> ErrorException: Uncaught Error: Call to undefined function App\Commands\curl_init() in /home/api/app/Commands/WebSocketCommand.php:89
+Stack trace:
+#0 /home/api/app/Commands/WebSocketCommand.php(80): App\Commands\WebSocketCommand->sendHttpRequest()
+#1 /home/api/app/Commands/WebSocketCommand.php(36): App\Commands\WebSocketCommand->handleAction()
+#2 [internal function]: App\Commands\WebSocketCommand->App\Commands\{closure}()
+#3 {main}
+  thrown
+in APPPATH/Commands/WebSocketCommand.php on line 89.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-04 14:50:49 --> Swoole\ExitException: swoole exit
+in SYSTEMPATH/Debug/ExceptionHandler.php on line 116.
+ 1 SYSTEMPATH/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+ 2 SYSTEMPATH/Debug/Exceptions.php(245): CodeIgniter\Debug\Exceptions->exceptionHandler()
+ 3 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

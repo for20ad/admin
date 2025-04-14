@@ -1,0 +1,1242 @@
+CRITICAL - 2024-06-10 00:05:39 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 00:27:39 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 02:46:20 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:19 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:21 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:25 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:26 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:27 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:28 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:29 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:30 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:33 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:33 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:34 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:23:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:23:35 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:24:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:24:00 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:24:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:24:01 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:24:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:24:02 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:24:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:24:07 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:24:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:24:38 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:25:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:25:17 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:25:24 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:25:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:25:35 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:28:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:28:51 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:40:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:40:44 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 05:40:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 05:40:45 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 07:25:11 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: ";stok="
+in SYSTEMPATH/Router/Router.php on line 704.
+ 1 SYSTEMPATH/Router/Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(825): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 07:48:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 07:48:27 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 08:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 08:15:48 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 08:15:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 08:15:50 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:01:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:06 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:01:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:01:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:37 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:40 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:01:42 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:24:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:25:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:25:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:33:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:33:09 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:36:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:38:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:38:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:38:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:38:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:38:59 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:01 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:08 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:12 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:16 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:28 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:34 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:36 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:39:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:39:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:39:38 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:41:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:41:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:41:21 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:41:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:42:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:42:44 --> [DEPRECATED] Creation of dynamic property App\Libraries\OwensView::$session is deprecated in APPPATH/Libraries/OwensView.php on line 36.
+ 1 ROOTPATH/modules/core/Controllers/CoreController.php(48): App\Libraries\OwensView->__construct(Object(Config\View))
+ 2 ROOTPATH/modules/core/Controllers/CoreController.php(28): Module\core\Controllers\CoreController->loadLibrary()
+ 3 ROOTPATH/modules/core/Controllers/Errors.php(10): Module\core\Controllers\CoreController->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(915): Module\core\Controllers\Errors->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(971): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(370): CodeIgniter\CodeIgniter->display404errors(Object(CodeIgniter\Exceptions\PageNotFoundException))
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:50:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:50:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:43 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:50:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:50:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:45 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:50:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:50:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:50:47 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:51:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:51:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:51:27 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-10 09:52:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-10 09:52:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 09:52:18 --> [DEPRECATED] htmlspecialchars_decode(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Libraries/ChatService.php on line 150.
+ 1 APPPATH/Libraries/ChatService.php(150): htmlspecialchars_decode(null)
+ 2 ROOTPATH/modules/comm/chat/Controllers/Chat.php(297): App\Libraries\ChatService->getMyRoomLists([...])
+ 3 SYSTEMPATH/CodeIgniter.php(943): Module\comm\chat\Controllers\Chat->getRoomLists()
+ 4 SYSTEMPATH/CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(Module\comm\chat\Controllers\Chat))
+ 5 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 09:54:19 --> ErrorException: Uncaught ErrorException: Undefined array key "data" in /home/api/app/Commands/WebSocketCommand.php:88
+Stack trace:
+#0 /home/api/app/Commands/WebSocketCommand.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/api/app/Commands/WebSocketCommand.php(51): App\Commands\WebSocketCommand->handleAction()
+#2 [internal function]: App\Commands\WebSocketCommand->App\Commands\{closure}()
+#3 {main}
+  thrown
+in APPPATH/Commands/WebSocketCommand.php on line 88.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-10 09:54:19 --> Swoole\ExitException: swoole exit
+in SYSTEMPATH/Debug/ExceptionHandler.php on line 116.
+ 1 SYSTEMPATH/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+ 2 SYSTEMPATH/Debug/Exceptions.php(245): CodeIgniter\Debug\Exceptions->exceptionHandler()
+ 3 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-10 09:54:23 --> ErrorException: Uncaught ErrorException: Undefined array key "data" in /home/api/app/Commands/WebSocketCommand.php:88
+Stack trace:
+#0 /home/api/app/Commands/WebSocketCommand.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/api/app/Commands/WebSocketCommand.php(51): App\Commands\WebSocketCommand->handleAction()
+#2 [internal function]: App\Commands\WebSocketCommand->App\Commands\{closure}()
+#3 {main}
+  thrown
+in APPPATH/Commands/WebSocketCommand.php on line 88.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-10 09:54:23 --> Swoole\ExitException: swoole exit
+in SYSTEMPATH/Debug/ExceptionHandler.php on line 116.
+ 1 SYSTEMPATH/Debug/Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+ 2 SYSTEMPATH/Debug/Exceptions.php(245): CodeIgniter\Debug\Exceptions->exceptionHandler()
+ 3 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
