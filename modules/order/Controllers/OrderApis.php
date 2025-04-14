@@ -13,7 +13,7 @@ use Module\goods\Models\CategoryModel;
 use Module\goods\Models\IconsModel;
 use Module\goods\Models\BrandModel;
 use Module\goods\Models\GoodsAddInfoModel;
-
+use Module\promotion\Models\CouponModel;
 
 use App\Libraries\MemberLib;
 use App\Libraries\OwensView;
@@ -27,7 +27,7 @@ class OrderApis extends ApiController
 {
     protected $db, $boardModel, $memberModel, $memberlib, $owensView;
     protected $goodsModel, $categoryModel, $iconsModel, $brandModel, $goodsAddInfoModel;
-    protected $orderModel;
+    protected $orderModel, $couponModel;
     public function __construct()
     {
         parent::__construct();
@@ -44,6 +44,7 @@ class OrderApis extends ApiController
         $this->memberlib                            = new MemberLib();
         $this->owensView                            = new OwensView();
         $this->orderModel                           = new OrderModel();
+        $this->couponModel                          = new CouponModel();
     }
     public function pushSms( $param )
     {

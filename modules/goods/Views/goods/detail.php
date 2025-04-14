@@ -1809,12 +1809,16 @@ href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-p
                                             <col style="width:10%;">
                                             <col style="width:10%;">
                                             <col style="width:10%;">
+                                            <col style="width:10%;">
+                                            <col style="width:10%;">
                                             <col style="width:5%;">
                                         </colgroup>
                                         <thead>
                                             <tr>
                                                 <th>옵션명</th>
                                                 <th>옵션값</th>
+                                                <th>다해스팩</th>
+                                                <th>다해바코드</th>
                                                 <th>재고수량</th>
                                                 <th>추가금액</th>
                                                 <th>노출여부</th>
@@ -1829,8 +1833,10 @@ href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-p
                                         ?>
                                             <tr>
                                                 <input type="hidden" name="i_option_idx[]" value="<?php echo _elm( $oLists, 'O_IDX' );?>">
-                                                <td><?php echo _elm( $oLists, 'O_DAH_SPEC' ) ?><input type="text" class="form-control option-key" name="i_option_keys[]" value="<?php echo _elm( $oLists, 'O_KEYS' )?>"></td>
+                                                <td><input type="text" class="form-control option-key" name="i_option_keys[]" value="<?php echo _elm( $oLists, 'O_KEYS' )?>"></td>
                                                 <td><input type="text" class="form-control option-value" name="i_option_value[]" value="<?php echo _elm( $oLists, 'O_VALUES' )?>"></td>
+                                                <td><input type="text" class="form-control option-value" name="i_option_spec[]" value="<?php echo _elm( $oLists, 'O_DAH_SPEC' )?>"></td>
+                                                <td><input type="text" class="form-control option-barcode" name="i_option_barcode[]" value="<?php echo _elm( $oLists, 'O_PRD_BARCODE' ) ?>"></td>
                                                 <td><input type="text" class="form-control option-stock" name="i_option_stock[]" value="<?php echo _elm( $oLists, 'O_STOCK' )?>"></td>
                                                 <td><input type="text" class="form-control option-add_amt" numberwithcomma name="i_option_add_price[]" value="<?php echo _elm( $oLists, 'O_ADD_PRICE' )?>"></td>
                                                 <td>
@@ -4278,6 +4284,8 @@ function addRows( gbn ){
         <tr>
             <td><input type="text" class="form-control option-key" name="i_option_keys[]"></td>
             <td><input type="text" class="form-control option-value" name="i_option_value[]"></td>
+            <td><input type="text" class="form-control option-spec" name="i_option_spec[]"></td>
+            <td><input type="text" class="form-control option-barcode" name="i_option_barcode[]"></td>
             <td><input type="text" class="form-control option-stock" name="i_option_stock[]"></td>
             <td><input type="text" class="form-control option-add_amt" numberwithcomma name="i_option_add_price[]"></td>
             <td>

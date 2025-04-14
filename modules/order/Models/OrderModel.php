@@ -145,9 +145,24 @@ class OrderModel extends Model
         return $aReturn;
     }
 
+    public function orderStatusChangeByOrdId( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'ORDER_INFO' );
+        $builder->set( 'O_CHANGE_BEFORE_STATUS',    'O_STATUS', false);
+        $builder->where( 'O_ORDID',                 _elm( $param, 'O_ORDID' ) );
+        $builder->set( 'O_STATUS',                  _elm( $param, 'O_STATUS' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
     public function orderStatusChangeMultiple( $param = [] )
     {
-        $aReturn                                    = [];
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
@@ -303,10 +318,10 @@ class OrderModel extends Model
     }
 
 
-    public function getMemoLists( $ordIdx )
+    public function getMemoLists( $o_id )
     {
         $aReturn                                    = [];
-        if( empty( $ordIdx ) === true ){
+        if( empty( $o_id ) === true ){
             return $aReturn;
         }
 
@@ -315,7 +330,7 @@ class OrderModel extends Model
         $builder->select('DATE(M.M_CREATE_AT) as memo_date');
         $builder->select( 'ADM.MB_USERNAME M_WRITER_NAME' );
         $builder->join( 'ADMIN_MEMBER ADM', 'ADM.MB_IDX=M.M_CREATE_MB_IDX', 'left' );
-        $builder->where( 'M.M_ORD_IDX',            $ordIdx );
+        $builder->where( 'M.M_ORD_ID',              $o_id );
         $builder->orderBy('M.M_CREATE_AT', 'DESC');
         $query                                      = $builder->get();
         if ($this->db->affectedRows())
@@ -326,17 +341,17 @@ class OrderModel extends Model
 
     }
 
-    public function getLastMemo( $o_idx )
+    public function getLastMemo( $o_id )
     {
         $aReturn                                    = [];
-        if( empty( $o_idx ) === true ){
+        if( empty( $o_id ) === true ){
             return $aReturn;
         }
         $builder                                    = $this->db->table( 'ORDER_MEMO M' );
         $builder->select( 'M.*' );
         $builder->select( 'ADM.MB_USERNAME M_WRITER_NAME' );
         $builder->join( 'ADMIN_MEMBER ADM', 'ADM.MB_IDX=M_CREATE_MB_IDX', 'left' );
-        $builder->where( 'M.M_ORD_IDX',             $o_idx );
+        $builder->where( 'M.M_ORD_ID',             $o_id );
 
         $builder->orderBy( 'M.M_CREATE_AT', 'DESC' );
 
@@ -351,30 +366,42 @@ class OrderModel extends Model
         return $aReturn;
 
     }
-    public function getMemoCnt( $o_idx )
+    public function getMemoCnt( $o_id )
     {
         $aReturn                                    = [];
         if( empty( $o_idx ) === true ){
             return $aReturn;
         }
         $builder                                    = $this->db->table( 'ORDER_MEMO M' );
-        $builder->where( 'M.M_ORD_IDX',             $o_idx );
+        $builder->where( 'M.M_ORD_ID',              $o_id );
 
         return $builder->countAllResults(false);
+    }
+
+    public function changeMemoStatus( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'ORDER_MEMO' );
+        $builder->where( 'M_IDX',                   _elm( $param, 'M_IDX' ) );
+
+        $builder->set( 'M_STATUS',                  _elm( $param, 'M_STATUS' ) );
+        $aReturn                                    = $builder->update();
+        return $aReturn;
     }
 
 
     public function insertMemo( $param = [] )
     {
-        $aReturn                                    = [];
+        $aReturn                                    = false;
         if( empty( $param ) === true ){
             return $aReturn;
         }
 
         $builder                                    = $this->db->table( 'ORDER_MEMO' );
-        $builder->set( 'M_ORD_IDX',                 _elm( $param, 'M_ORD_IDX' ) );
-        $builder->set( 'M_ORD_INFO_IDXS',           _elm( $param, 'M_ORD_INFO_IDXS' ) );
-        $builder->set( 'M_ORD_INFO_TXT',            _elm( $param, 'M_ORD_INFO_TXT' ) );
+        $builder->set( 'M_ORD_ID',                  _elm( $param, 'M_ORD_ID' ) );
         $builder->set( 'M_CONTENT',                 _elm( $param, 'M_CONTENT' ) );
         $builder->set( 'M_STATUS',                  _elm( $param, 'M_STATUS' ) );
         $builder->set( 'M_CREATE_AT',               _elm( $param, 'M_CREATE_AT' ) );
@@ -466,11 +493,11 @@ class OrderModel extends Model
         }
 
         $builder =                                  $this->db->table('ORDER_ORIGIN OO');
-        $builder->select('OO.O_IDX, OO.O_ORDER_AT, OO.O_ORDID, OO.O_TITLE, OO.O_TOTAL_PRICE, OO.O_PG_PRICE, OO.O_STATUS, OO.O_PAY_METHOD');
-        $builder->select('OO.O_SHIP_PRICE, OO.O_ADD_SHIP_PRICE, OO.O_CPN_MINUS_PRICE, O_CPN_PLUS_MINUS_PRICE');
+        $builder->select('OO.O_IDX, OO.O_ORDER_AT, OO.O_ORDID, OO.O_TITLE, OO.O_TOTAL_PRICE, OO.O_PG_PRICE, OO.O_STATUS, OO.O_PAY_METHOD, OO.O_DEVICE, OO.O_PG_BANK_CODE, OO.O_PG_ACCOUNT_NUM, OO.O_SAVE_MILEAGE');
+        $builder->select('OO.O_SHIP_PRICE, OO.O_ADD_SHIP_PRICE, OO.O_CPN_MINUS_PRICE, OO.O_CPN_PLUS_MINUS_PRICE, OO.O_USE_MILEAGE');
 
         $builder->select('GROUP_CONCAT(OG.P_NUM ORDER BY OG.P_PRID SEPARATOR \',\') as P_QTYS');
-        $builder->select( 'MB.MB_USERID, MB.MB_NM' );
+        $builder->select( 'MB.MB_USERID, MB.MB_NM, MG.G_NAME' );
         $builder->select( 'OI.STATUSES' );
         // 첫 주문 날짜를 서브쿼리로 가져오기
         $subQuery =                                 $this->db->table('ORDER_ORIGIN')
@@ -483,6 +510,7 @@ class OrderModel extends Model
         $builder->join('ORDER_GOODS OG', 'OO.O_ORDID = OG.P_ORDID', 'left');
         $builder->join( 'MEMBERSHIP MB', 'MB.MB_IDX=OO.O_MB_IDX', 'left' );
         $builder->join( '(SELECT O_ORDID, GROUP_CONCAT(O_STATUS ORDER BY O_STATUS SEPARATOR \',\') AS STATUSES FROM ORDER_INFO GROUP BY O_ORDID) OI', 'OO.O_ORDID = OI.O_ORDID', 'left' );
+        $builder->join( 'MEMBER_GRADE MG', 'MB.MB_GRADE_IDX = MG.G_IDX', 'left' );
 
         // ORDER_INFO의 O_STATUS 조건
         if (!empty(_elm($param, 'O_STATUS'))) {
@@ -498,21 +526,35 @@ class OrderModel extends Model
                 $builder->having("FIND_IN_SET('$status', OI.STATUSES) > 0");
             }
         }
+        $builder->where( '1=1');
 
-        if (!empty(_elm($param, 'ORDID'))) {
-            $builder->where('OO.O_ORDID',           _elm($param, 'ORDID'));
-        }
+        if (!empty(_elm($param, 'ORDID')) || !empty(_elm($param, 'MB_USERID')) || !empty(_elm($param, 'MB_NM')) || !empty(_elm($param, 'MB_MOBILE_NUM')) || !empty(_elm($param, 'GOODS_NAME')) ) {
+            $builder->groupStart();
+            if (!empty(_elm($param, 'ORDID'))) {
 
-        if( !empty( _elm( $param, 'MB_USERID' ) ) ){
-            $builder->like( 'MB.MB_USERID',         _elm( $param, 'MB_USERID' ), 'both' );
-        }
-        if( !empty( _elm( $param, 'MB_NM' ) ) ){
-            $builder->like( 'MB.MB_NM',             _elm( $param, 'MB_NM' ), 'both'  );
-        }
-        if( !empty( _elm( $param, 'MB_MOBILE_NUM' ) ) ){
-            $builder->where( 'MB.MB_MOBILE_NUM',    _elm( $param, 'MB_MOBILE_NUM' ) );
-        }
+                $builder->where('OO.O_ORDID',       _elm($param, 'ORDID'));
+            }
+            if( !empty( _elm( $param, 'MB_USERID' ) ) ){
+                $builder->orLike( 'MB.MB_USERID',   _elm( $param, 'MB_USERID' )  );
+            }
 
+            if( !empty( _elm( $param, 'GOODS_NAME' ) ) ){
+                $splitKeyword                       = explode( ' ', _elm( $param, 'GOODS_NAME' ) );
+
+                foreach( $splitKeyword as $goodsKeyword ){
+                    $builder->like( 'OG.P_NAME',    $goodsKeyword );
+                }
+            }
+
+            if( !empty( _elm( $param, 'MB_NM' ) ) ){
+                $builder->orLike( 'MB.MB_NM',             _elm( $param, 'MB_NM' )   );
+            }
+            if( !empty( _elm( $param, 'MB_MOBILE_NUM' ) ) ){
+                $builder->orWhere( 'MB.MB_MOBILE_NUM',    _elm( $param, 'MB_MOBILE_NUM' ) );
+
+            }
+            $builder->groupEnd();
+        }
 
 
         if( empty( _elm( $param, 'O_PAY_METHOD' ) ) === false ){
@@ -529,7 +571,7 @@ class OrderModel extends Model
         // }
         $builder->groupBy('OO.O_ORDID');
 
-        $aReturn['total_count'] =                   $builder->countAllResults(false);
+        $aReturn['total_count']                     = $builder->countAllResults(false);
 
         // 정렬
         if (!empty(_elm($param, 'order'))) {
@@ -542,6 +584,7 @@ class OrderModel extends Model
         }
 
         $query =                                    $builder->get();
+        // echo $this->db->getLastQuery().PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL;
 
         if ($this->db->affectedRows()) {
             $results =                              $query->getResultArray();
@@ -553,12 +596,10 @@ class OrderModel extends Model
 
             $aReturn['lists'] = $results;
         }
-
         return $aReturn;
-
     }
 
-    public function getOrderStatusCnt( $param = [] )
+    public function getOrderStatusCnt( $statusParam = [], $param =[] )
     {
         $aReturn                                    = [];
 
@@ -573,8 +614,8 @@ class OrderModel extends Model
         $builder->join( '(SELECT O_ORDID, GROUP_CONCAT(O_STATUS ORDER BY O_STATUS SEPARATOR \',\') AS STATUSES FROM ORDER_INFO GROUP BY O_ORDID) OI', 'OO.O_ORDID = OI.O_ORDID', 'left' );
 
        // ORDER_INFO의 O_STATUS 조건
-        if (!empty(_elm($param, 'O_STATUS'))) {
-            $status = _elm($param, 'O_STATUS');
+        if (!empty(_elm($statusParam, 'O_STATUS'))) {
+            $status = _elm($statusParam, 'O_STATUS');
             if (is_array($status)) {
                 // O_STATUS가 배열인 경우
                 $havingCondition = implode(' OR ', array_map(function ($value) {
@@ -586,15 +627,38 @@ class OrderModel extends Model
                 $builder->having("FIND_IN_SET('$status', OI.STATUSES) > 0");
             }
         }
+
+        if (!empty(_elm($param, 'START_DATE')) && !empty(_elm($param, 'END_DATE'))) {
+            $builder->where('DATE_FORMAT(OO.O_ORDER_AT, \'%Y-%m-%d\') >=', _elm($param, 'START_DATE'));
+            $builder->where('DATE_FORMAT(OO.O_ORDER_AT, \'%Y-%m-%d\') <=', _elm($param, 'END_DATE'));
+        }
+
         $builder->groupBy('OO.O_ORDID');
 
         $aReturn                                    = $builder->countAllResults(false);
-        //echo $this->db->getLastQuery();
+        // echo $this->db->getLastQuery().PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL;
         return $aReturn;
 
 
     }
+    public function getOrderClaim( $oInfoIdx )
+    {
+        $aReturn                                    = [];
+        if( empty( $oInfoIdx ) === true ){
+            return $aReturn;
+        }
 
+        $builder                                    = $this->db->table( 'ORDER_HANDLE' );
+        $builder->where( 'H_ORDINFO_IDX',           $oInfoIdx  );
+        $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+
+        return $aReturn;
+    }
     public function getOrderInfoStatusCnt( $param = [] )
     {
         //print_R( $param );

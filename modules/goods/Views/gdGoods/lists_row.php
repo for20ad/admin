@@ -20,11 +20,18 @@
             $row++;
             $no = $total_rows - $row + 1;
 ?>
-<tr data-idx="<?php echo _elm( $vData , 'goodsNo' )?>">
+<!-- <tr data-idx="<?php echo _elm( $vData , 'goodsNo' )?>">
     <td class="body2-c nowrap"><a href="https://gdadmin.sansuyuram.com/goods/goods_register.php?popupMode=yes&goodsNo=<?php echo _elm( $vData , 'goodsNo' )?>#goodsImage" target="_blank"><?php echo _elm($vData, 'goodsNo')?></a></td>
     <td class="body2-c nowrap"><a href="https://gdadmin.sansuyuram.com/goods/goods_register.php?popupMode=yes&goodsNo=<?php echo _elm( $vData , 'goodsNo' )?>#goodsImage" target="_blank"><?php echo _elm( $vData, 'goodsNm' )?></a></td>
     <td class="body2-c nowrap"><?php echo _elm( $vData , 'cates' ) ?></td>
     <td class="body2-c nowrap"><input type="text" name="newCateNm" class="form-control" data-org-value="<?php echo _elm( $vData, 'newCateNm' );?>" value="<?php echo _elm( $vData, 'newCateNm' );?>"></td>
+</tr> -->
+<tr data-idx="<?php echo _elm( $vData , 'C_IDX' )?>">
+    <td class="body2-c nowrap"><?php echo $no .' - ' ._elm( $vData, 'C_CATE_BIG')?></td>
+    <td class="body2-c nowrap"><?php echo _elm( $vData, 'C_CATE_MID' )?></td>
+    <td class="body2-c nowrap"><?php echo _elm( $vData , 'C_CATE_SMALL' ) ?></td>
+    <td class="body2-c nowrap"><?php echo _elm( $vData , 'cates' ) ?></td>
+    <td class="body2-c nowrap"><input type="text" name="newCateNm" class="form-control" data-org-value="<?php echo _elm( $vData, 'C_RESULT_LOCAL_CATE_NM' );?>" value="<?php echo _elm( $vData, 'C_RESULT_LOCAL_CATE_NM' );?>"></td>
 </tr>
 <?php
         }
@@ -34,7 +41,7 @@
 ?>
 <tr>
     <td colspan="9">
-        "등록된 아이콘 목록이 없습니다."
+        "등록된 카테고리 목록이 없습니다."
     </td>
 </tr>
 <?php

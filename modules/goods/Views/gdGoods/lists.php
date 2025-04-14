@@ -29,7 +29,7 @@
                         <circle cx="2" cy="2" r="2" fill="#206BC4" />
                     </svg>
                     <p class="body1-c ms-2 mt-1">
-                        아이콘 목록
+                        다해 카테고리 목록
                     </p>
                 </div>
                 <!-- 아코디언 토글 버튼 -->
@@ -76,11 +76,19 @@
             <div style="border:1px solid #E6E7E9; border-top: 0px; border-radius:0 0 4px 4px">
                 <div class="table-responsive">
                     <table class="table table-vcenter" id="listsTable">
+                        <colgroup>
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:30%">
+                            <col style="width:30%">
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th>고도몰 상품번호</th>
-                                <th>상품이름</th>
-                                <th>상품 카테고리</th>
+                                <th>1차</th>
+                                <th>2차</th>
+                                <th>3차</th>
+                                <th>전체</th>
                                 <th>신규 카테고리</th>
                             </tr>
                         </thead>
@@ -172,13 +180,13 @@ function openLayer( iconIdx, id ){
 }
 $(document).on('blur', '[name=newCateNm]', function(){
     if( $.trim( $(this).val() ) != $.trim( $(this).data('org-value') ) ){
-        updateGodoGoods( $(this).closest('tr').data('idx'), $(this).val() );
+        updateDahaeCate( $(this).closest('tr').data('idx'), $(this).val() );
     }
 });
-function updateGodoGoods( goodsNo, textValue ){
+function updateDahaeCate( c_idx, textValue ){
 
-    var data = 'goodsNo='+goodsNo+'&textValue='+textValue;
-    var url  = '/apis/goods/updateGodoGoods';
+    var data = 'c_idx='+c_idx+'&textValue='+textValue;
+    var url  = '/apis/goods/updateDahaeCate';
 
     $.ajax({
         url: url,

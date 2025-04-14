@@ -70,6 +70,7 @@ class MembershipApi extends ApiController
         $modelParam                                 = [];
 
         $modelParam['G_NAME']                       = _elm( $requests, 'i_name' );
+        $modelParam['G_DC_RATE']                    = _elm( $requests, 'i_dc_rate' );
         $modelParam['G_SAVE_RATE']                  = _elm( $requests, 'i_save_rate' );
         $modelParam['G_DELIVERY_FREE']              = _elm( $requests, 'i_delivery_free' );
         $modelParam['G_SORT']                       = (int) $max_sort + 1;
@@ -187,6 +188,7 @@ class MembershipApi extends ApiController
             $aData                                  = $membershipModel->getMembershipGradeListsByIdx($vGradeIdx);
             $modelParam                             = [];
             $modelParam['G_NAME']                   = _elm(_elm($requests, 'i_name', []), $vGradeIdx, '');
+            $modelParam['G_DC_RATE']                = _elm(_elm($requests, 'i_dc_rate', []), $vGradeIdx, '');
             $modelParam['G_SAVE_RATE']              = _elm(_elm($requests, 'i_save_rate', []), $vGradeIdx, '');
             $modelParam['G_DELIVERY_FREE']          = _elm(_elm($requests, 'i_delivery_free', []), $vGradeIdx, '');
 

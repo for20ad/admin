@@ -278,14 +278,13 @@ class OrderApi extends OrderApis
                 $kakaoParam['fields']               = [];
                 $kakaoParam['fields']['mall_name']  = '산수유람';
                 $kakaoParam['fields']['order_name'] = _elm( _elm( $aDatas, 0 ), 'O_NAME' );
-                $kakaoParam['fields']['oder_status']= _elm( $orderStatus,_elm( $requests, 'i_status' ) );
+                $kakaoParam['fields']['order_status']= _elm( $orderStatus,_elm( $requests, 'i_status' ) );
                 $kakaoParam['fields']['order_num']  = implode( ', ', $orderNumTxt );
                 $kakaoParam['fields']['short_url']  = shop_url().'mypage/order-history';
                 if( _elm( $requests, 'i_aTalkWithSendFlag' ) == 'Y' ){
                     $kakaoParam['MB_IDX']           = _elm( $memberInfo, 'MB_IDX' );
                     $kakaoParam['FCM_SEND']         = true;
                 }
-
 
             }
 
@@ -1201,7 +1200,9 @@ class OrderApi extends OrderApis
     {
         $response                                   = $this->_initResponse();
         $requests                                   = _trim($this->request->getPost());
-
+        $orderStatusConfig                          = $this->sharedConfig::$orderStatus;
+        $payMethodConfig                            = $this->sharedConfig::$paymentMethods;
+        $bankCode                                   = $this->sharedConfig::$portOneBankCode;
         $page                                       = (int)_elm($requests, 'page', 1);
 
         if (empty($page) === true || $page <= 0 || is_numeric($page) === false)
@@ -1220,6 +1221,67 @@ class OrderApi extends OrderApis
             $per_page                               = 20;
         }
 
+
+        $odrStatus                                  = [
+            #------------------------------------------------------------------
+            # TODO: 결제대기
+            #------------------------------------------------------------------
+            'payWait'                               => [
+                'PayRequest', 'PayWaiting', 'PayChecking',
+            ],
+            #------------------------------------------------------------------
+            # TODO: 상품준비중
+            #------------------------------------------------------------------
+            'prdWait'                               => [
+                'ProductWaiting',
+            ],
+            #------------------------------------------------------------------
+            # TODO: 취소접수
+            #------------------------------------------------------------------
+            'cancel'                                => [
+                'PayFailed', 'PayCancelRequest', 'PayCancelComplete', 'UnpaidCancelComplete', 'OrderCancelComplete', 'ShippingRefundRequest', 'ShippingRefundFailed',
+                'ShippingRefundComplete', 'ShippingCancelRequestBuyer', 'ShippingCancelRequestSeller',
+            ],
+            #------------------------------------------------------------------
+            # TODO: 반품접수
+            #------------------------------------------------------------------
+            'return'                                => [
+                'ReturnPending', 'ReturnShippingProgress', 'ReturnRequest', 'ReturnPickupRequest', 'ReturnApproved', 'ReturnShippingComplete', 'ReturnCancelRequest',
+                'ReturnCancelComplete', 'ReturnRefundRequest', 'ReturnRefundWaiting', 'ReturnRefundFailed', 'ReturnRefundComplete', ''
+            ],
+            #------------------------------------------------------------------
+            # TODO: 교환접수
+            #------------------------------------------------------------------
+            'exchange'                              => [
+                'ExchangeRequest', 'ExchangePickupRequest', 'ExchangeApproved', 'ExchangePending', 'ExchangeReturning', 'ExchangeReturnComplete', 'ExchangeShippingProgress',
+                'ExchangeShippingComplete', 'ExchangeRejected'
+            ],
+            #------------------------------------------------------------------
+            # TODO: 배송대기
+            #------------------------------------------------------------------
+            'shipWait'                              => [
+                'ShippingRequest', 'ShippingWaiting',
+            ],
+            #------------------------------------------------------------------
+            # TODO: 배송중
+            #------------------------------------------------------------------
+            'shippingProgress'                      => [
+                'ShippingProgress'
+            ],
+            #------------------------------------------------------------------
+            # TODO: 배송완료
+            #------------------------------------------------------------------
+            'shippingComplate'                      => [
+                'ShippingComplete'
+            ],
+            #------------------------------------------------------------------
+            # TODO: 구매결정
+            #------------------------------------------------------------------
+            'buyDecision'                           => [
+                'BuyDecision',
+            ],
+        ];
+
         $limit                                      = $per_page;
         $start                                      = ($page - 1) * $limit;
 
@@ -1234,23 +1296,36 @@ class OrderApi extends OrderApis
             switch( _elm( $requests, 's_condition' ) ){
                 case 'orderNo' :
                     $modelParam['ORDID']            = _elm( $requests, 's_keyword' );
+                    break;
                 case 'memberId' :
                     $modelParam['MB_USERID']        = _elm( $requests, 's_keyword' );
+                    break;
+                case 'prdName':
+                    $modelParam['GOODS_NAME']       = _elm( $requests, 's_keyword' );
+                    break;
                 case 'memberName' :
                     $modelParam['MB_NM']            = _elm( $requests, 's_keyword' );
+                    break;
                 case 'mobile' :
-                    $modelParam['MB_MOBILE_NUM']    = $this->_aesEncrypt( _elm( $requests, 's_keyword' ) );
+                    $modelParam['MB_MOBILE_NUM']    = $this->_aesEncrypt( preg_replace('/[-\s]/', '',_elm( $requests, 's_keyword' ) ) );
+                    break;
 
             }
         }
 
         if( empty( _elm( $requests, 's_status' ) ) === false ){
             $modelParam['O_STATUS']                 = _elm( $requests, 's_status' );
+        }else if( empty( _elm( $requests, 's_ordStatus' ) ) === false ){
+            $modelParam['O_STATUS']                 = _elm( $odrStatus, _elm( $requests, 's_ordStatus' ) );
+
         }
 
         if( empty( _elm( $requests, 's_start_date' ) ) === false && empty( _elm( $requests, 's_end_date' ) ) === false ){
             $modelParam['START_DATE']               = date( 'Y-m-d', strtotime( _elm( $requests, 's_start_date' ) ) );
             $modelParam['END_DATE']                 = date( 'Y-m-d', strtotime( _elm( $requests, 's_end_date' ) ) );
+        }else{
+            $modelParam['START_DATE']               = date( 'Y-m-d' );
+            $modelParam['END_DATE']                 = date( 'Y-m-d' );
         }
 
         $modelParam['order']                        = 'OO.O_ORDER_AT DESC';
@@ -1259,132 +1334,197 @@ class OrderApi extends OrderApis
         $modelParam['start']                        = $start;
 
         $aLISTS_RESULT                              = $this->orderModel->getOrderLists($modelParam);
-        $readys                                     = [
-            'ShippingRequest',
-            'ShippingWaiting',
-            'TicketRequest',
-        ];
-        $ings                                       = [
-            'ShippingProgress',
-            'ReturnShippingProgress',
-            'ExchangeShippingProgress',
-        ];
+        //print_R( $aLISTS_RESULT );
+        #------------------------------------------------------------------
+        # TODO: 상태별 카운트 를 위한 상태 배열
+        #------------------------------------------------------------------
+        $memberGradeInfo                            = $this->memberModel->getMembershipGrade();
 
-        $complates                                  = [
-            'ShippingComplete',
-            'TicketSendComplete',
-            'ExchangeShippingComplete',
-            'BuyDecision',
-        ];
-        $cancels                                    = [
-            'PayCancelRequest',
-            'PayCancelComplete',
-            'UnpaidCancelComplete',
-            'ShippingCancelRequest',
-            'ShippingCancelComplete',
-            'ShippingCancelRequestBuyer',
-            'ShippingCancelRequestSeller',
-            'TicketCancelRequest',
-            'TicketCancelComplete',
-            'TicketCancelRequestBuyer',
-            'TicketCancelRequestSeller',
-        ];
-        $exchanges                                  = [
-            'ExchangeRequest',
-            'ExchangeApproved',
-            'ExchangeReturning',
-            'ExchangeReturnComplete',
 
-        ];
-        $returns                                    = [
-            'ReturnRequest',
-            'ReturnApproved',
-            'ReturnShippingProgress',
-            'ReturnShippingComplete',
-            'ReturnCancelRequest',
-            'ReturnCancelComplete',
-            'ReturnRefundRequest',
-            'ReturnRefundWaiting',
-            'ReturnRefundFailed',
-            'ReturnRefundComplete',
-        ];
-        $refunds                                    = [
-            'RefundRequest',
-            'RefundWaiting',
-            'RefundFailed',
-            'RefundComplete',
-            'ShippingRefundWaiting',
-            'ShippingRefundFailed',
-            'ShippingRefundComplete',
-            'TicketRefundRequest',
-            'TicketRefundWaiting',
-            'TicketRefundFailed',
-            'TicketRefundComplete',
-        ];
-        if( _elm( $aLISTS_RESULT, 'lists' ) ){
+
+
+        $allCnt                                     = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => [] ], $modelParam);
+        $payWaitCnt                                 = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'payWait' ) ], $modelParam );            //결제대기
+        $prdWaitCnt                                 = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'prdWait' ) ], $modelParam );            //상품준비중
+        $cancelCnt                                  = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'cancel' ) ], $modelParam );             //취소접수
+        $returnCnt                                  = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'return' ) ], $modelParam );             //반품접수
+        $exchangeCnt                                = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'exchange' ) ], $modelParam );           //교환접수
+        $shipWaitCnt                                = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'shipWait' ) ], $modelParam );           //배송대기
+        $ShipProgressCnt                            = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'shippingProgress' ) ], $modelParam );   //배송중
+        $shipComplateCnt                            = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'shippingComplate' ) ], $modelParam );   //배송완료
+        $buyDecisionCnt                             = $this->orderModel->getOrderStatusCnt( [ 'O_STATUS' => _elm( $odrStatus, 'buyDecision' ) ], $modelParam );        //구매결정
+        if( empty( _elm( $aLISTS_RESULT, 'lists' ) ) === false ){
 
             foreach( _elm( $aLISTS_RESULT, 'lists' ) as $aKey => $lists ){
-                $readyCnt                           = 0;        //미배송
-                $ingCnt                             = 0;        //배송중
-                $cancelCnt                          = 0;        //취소
-                $complateCnt                        = 0;        //배송완료
-                $exchangeCnt                        = 0;        //교환
-                $returnCnt                          = 0;        //반품
-                $refundCnt                          = 0;        //환불
+                // 상태별로 그룹화된 상품 정보를 저장할 배열
+                $groupedGoodsInfo = [];
+                $pgInfo                             = [];
+                $priceInfo                          = [];
+                $goodsInfo                          = [];
+                $deliveryInfo                       = [];
+                $orderStatus                        = [];
+                $thumb                              = [];
+                $orderClaim                         = [];
                 #------------------------------------------------------------------
                 # TODO: 주문건별 ORDER_INFO 데이터 로드
                 #------------------------------------------------------------------
-                $goodsInfos                         = $this->orderModel->getOrderInfoByOrdID( _elm( $lists, 'O_ORDID' ) );
-                if( empty( $goodsInfos ) === true ){
+                $orderInfos                         = $this->orderModel->getOrderInfoByOrdID( _elm( $lists, 'O_ORDID' ) );
+
+                $memGrande = array_filter($memberGradeInfo, function ($item) use ($lists) {
+                    return _elm($item, 'G_NAME') == _elm($lists, 'G_NAME');
+                });
+
+                $pgInfo['payMethod']                = empty( _elm( $lists, 'O_PAY_METHOD' ) ) == false || _elm( $lists, 'O_PG_PRICE' ) > 0 ? _elm( $payMethodConfig, _elm( $lists, 'O_PAY_METHOD', null, true ), null, true ) : ( _elm( $lists, 'O_USE_MILEAGE' ) > 0 ? '포인트' : '기타' ) ?? '기타' ;
+                $pgInfo['totalPrdAmt']              = _elm( $lists, 'O_TOTAL_PRICE' );
+                $pgInfo['totalPgAmt']               = _elm( $lists, 'O_PG_PRICE' );
+                $pgInfo['usePoint']                 = _elm( $lists, 'O_USE_MILEAGE' );
+                if( _elm( $lists, 'O_PAY_METHOD' ) == 'VirtualBank' ){
+                    $pgInfo['virtualBankInfo']      = [
+                        'bankNm'                    => empty( _elm( $lists, 'O_PG_BANK_CODE' ) ) === true ? '' : array_search( _elm( $lists, 'O_PG_BANK_CODE' ), $bankCode ),
+                        'accountNum'            => _elm( $lists, 'O_PG_ACCOUNT_NUM' ),
+                    ];
+                }
+                else if( _elm( $lists, 'O_PAY_METHOD' ) == 'AccountTransfer' ){
+                    $pgInfo['virtualBankInfo']      = [
+                        'bankNm'                    => empty( _elm( $lists, 'O_PG_BANK_CODE' ) ) === true ? '' : array_search( _elm( $lists, 'O_PG_BANK_CODE' ), $bankCode ),
+                        'accountNum'            => _elm( $lists, 'O_PG_ACCOUNT_NUM' ),
+                    ];
+                }
+
+                $pgInfo['savePoint']            = _elm( $lists, 'O_SAVE_MILEAGE' );
+
+
+                if( empty( $orderInfos ) === true ){
                     $response['status']             = 400;
                     $response['alert']              = '연결된 주문 데이터가 없습니다.';
 
                     return $this->respond( $response );
                 }
-                foreach( $goodsInfos as $gKey => $goodsInfo ){
-                    // 상태에 따라 카운트 증가
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $readys)) {
-                        $readyCnt++;
+
+                foreach( $orderInfos as $gKey => $orderInfo ){
+                    $orderGoodsInfo                 = $this->orderModel->getOrderGoodsByParentOdrIdx( _elm($orderInfo, 'O_IDX') );
+
+                    if( empty( $orderGoodsInfo ) === true ){
+                        $response['status']         = 400;
+                        $response['alert']          = '연결된 주문상품 데이터가 없습니다.';
+
+                        return $this->respond( $response );
                     }
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $ings)) {
-                        $ingCnt++;
+                    $claimInfo                      = $this->orderModel->getOrderClaim( _elm($orderInfo, 'O_IDX') );
+                    if( empty( $claimInfo ) === false  ){
+
+                        $orderClaim[$gKey]          = [
+                            'type'                  => _elm( $claimInfo, 'H_TYPE' ),
+                            'status'                => _elm( $claimInfo, 'H_STATUS' ),
+                            'resultAmt'             => _elm( $claimInfo, 'H_RESULT_AMT' ),
+                        ];
                     }
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $complates)) {
-                        $complateCnt++;
+                    $goodsData                      = $this->goodsModel->getGoodsDataByIdx( _elm( $orderGoodsInfo, 'P_PRID') );
+
+                    if( _elm( $goodsInfo, 'G_GRADE_DISCOUNT_FLAG' ) == 'Y' ){
+                        $mDcAmtPer                  = _elm( $memGrande, 'dcRate' ) / 100;
+                        $mDcAmt                     = _elm( $orderInfo, 'O_ORIGIN_PRICE' ) * $mDcAmtPer;
+                        $mDcAmt                     = round( $mDcAmt, -1 );
+                        $priceInfo[ $gKey ]['gradeDcAmt'] = $mDcAmt;
                     }
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $cancels)) {
-                        $cancelCnt++;
+                    if( empty( _elm( $orderInfo, 'O_USE_CPN_IDX' ) ) === false ){
+                        $priceInfo[ $gKey ]['cpnDcAmt'] = _elm( $orderInfo, 'O_USE_CPN_MINUS_PRICE' );
                     }
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $exchanges)) {
-                        $exchangeCnt++;
+
+                    if( empty( _elm( $orderInfo, 'O_USE_PLUS_CPN_INFO' ) ) === false ){
+                        $priceInfo[ $gKey ]['plusCpnDcAmt'] = _elm( $orderInfo, 'O_USE_PLUS_CPN_MINUS_PRICE' );
                     }
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $returns)) {
-                        $returnCnt++;
+
+                    $goodsImg                       = $this->goodsModel->getGoodsInImagesFixSize( _elm( $orderGoodsInfo, 'P_PRID' ), 100 );
+
+                    $thumb[]                        = base_url()._elm( $goodsImg, 'I_IMG_PATH' );
+                    // $goodsInfo[$gKey]               = [
+                    //     'orderStatus'               => _elm($orderStatusConfig, _elm( $orderInfo, 'O_STATUS' ) ),
+                    //     'thumb'                     => base_url()._elm( $goodsImg, 'I_IMG_PATH' ),
+                    //     'cnt'                       => _elm($orderGoodsInfo, 'P_NUM'),
+                    //     'title'                     => _elm($orderGoodsInfo, 'P_NAME'),
+                    //     'option'                    => _elm($orderGoodsInfo, 'P_OPTION_NAME'),
+                    //     'orderPrice'                => _elm( $orderInfo, 'O_TOTAL_PRICE' ),
+                    // ];
+
+                     // 상품 상태별로 그룹화
+
+                    // 상태가 그룹화된 배열에 상품 정보를 추가
+                    if (!isset($groupedGoodsInfo[_elm($orderInfo, 'O_STATUS')])) {
+                        // 상태별로 배열이 존재하지 않으면 초기화
+                        $groupedGoodsInfo[_elm($orderInfo, 'O_STATUS')] = [];
                     }
-                    if (in_array(_elm($goodsInfo, 'O_STATUS'), $refunds)) {
-                        $refundCnt++;
+                    // 상태가 그룹화된 배열에 상품 정보를 추가
+                    $groupedGoodsInfo[_elm($orderInfo, 'O_STATUS')][] = [
+                        'ordIdx'      => _elm($orderInfo, 'O_IDX'),
+                        'orderStatus' => _elm($orderStatusConfig, _elm($orderInfo, 'O_STATUS')),
+                        'thumb' => base_url() . _elm($goodsImg, 'I_IMG_PATH'),
+                        'cnt' => _elm($orderGoodsInfo, 'P_NUM'),
+                        'title' => _elm($orderGoodsInfo, 'P_NAME'),
+                        'option' => _elm($orderGoodsInfo, 'P_OPTION_NAME'),
+                        'orderPrice' => _elm($orderInfo, 'O_TOTAL_PRICE'),
+                    ];
+
+
+                    $orderStatus[]                  = _elm( $orderInfo, 'O_STATUS' );
+                    $deliveryInfo                   = [
+                        'O_RCV_INFO'                => _elm( $orderInfo, 'O_RCV_NAME' ).' · '.$this->_aesDecrypt( _elm( $orderInfo, 'O_RCV_MOBILE_NUM' ) ) ,
+                        'O_ADDRESS'                 => '('._elm( $orderInfo, 'O_ZIPCODE' ).') '._elm( $orderInfo, 'O_ADDRESS1' ). '  ' ._elm( $orderInfo, 'O_ADDRESS2' ),
+                        'O_SHIP_MSG'                => _elm( $orderInfo, 'O_SHIP_MSG' ),
+                    ];
+
+
+                }
+                $resultPriceInfo = [
+                    'gradeDcAmt' => 0,
+                    'cpnDcAmt' => 0,
+                    'plusCpnDcAmt' => 0
+                ];
+                if( empty( $priceInfo ) === false ){
+                    foreach ($priceInfo as $pKey => $info) {
+                        if (isset($info['gradeDcAmt'])) {
+                            $resultPriceInfo['gradeDcAmt']   += $info['gradeDcAmt']; // gradeDcAmt 합산
+                        }
+                        if (isset($info['cpnDcAmt'])) {
+                            $resultPriceInfo['cpnDcAmt']     += $info['cpnDcAmt']; // cpnDcAmt 합산
+                        }
+                        if (isset($info['plusCpnDcAmt'])) {
+                            $resultPriceInfo['plusCpnDcAmt'] += $info['plusCpnDcAmt']; // plusCpnDcAmt 합산
+                        }
                     }
                 }
-
-                $aLISTS_RESULT['lists'][$aKey]['readyCnt']      = $readyCnt;
-                $aLISTS_RESULT['lists'][$aKey]['ingCnt']        = $ingCnt;
-                $aLISTS_RESULT['lists'][$aKey]['cancelCnt']     = $cancelCnt;
-                $aLISTS_RESULT['lists'][$aKey]['complateCnt']   = $complateCnt;
-                $aLISTS_RESULT['lists'][$aKey]['exchangeCnt']   = $exchangeCnt;
-                $aLISTS_RESULT['lists'][$aKey]['returnCnt']     = $returnCnt;
-                $aLISTS_RESULT['lists'][$aKey]['refundCnt']     = $refundCnt;
+                $pgInfo['priceInfo']                            = $resultPriceInfo;
+                $aLISTS_RESULT['lists'][$aKey]['delivery']      = $deliveryInfo;
+                $aLISTS_RESULT['lists'][$aKey]['status']        = $orderStatus;
+                $aLISTS_RESULT['lists'][$aKey]['thumb']         = $thumb;
+                $aLISTS_RESULT['lists'][$aKey]['goodsInfo']     = $groupedGoodsInfo;
+                $aLISTS_RESULT['lists'][$aKey]['pgInfo']        = $pgInfo;
+                $aLISTS_RESULT['lists'][$aKey]['claim']         = $orderClaim;
                 #------------------------------------------------------------------
                 # TODO: 메모 마지막꺼만 가져오기
                 #------------------------------------------------------------------
-                $aLISTS_RESULT['lists'][$aKey]['aMemo']         = $this->orderModel->getLastMemo( _elm( $lists, 'O_IDX' ) );
-                $aLISTS_RESULT['lists'][$aKey]['aMemoCnt']      = $this->orderModel->getMemoCnt( _elm( $lists, 'O_IDX' ) );
+                $aLISTS_RESULT['lists'][$aKey]['aMemo']         = $this->orderModel->getMemoLists( _elm( $lists, 'O_ORDID' ) );
+                // print_r( $aLISTS_RESULT['lists'][$aKey]['aMemo']   );
+                $aLISTS_RESULT['lists'][$aKey]['aMemoCnt']      = $this->orderModel->getMemoCnt( _elm( $lists, 'O_ORDID' ) );
+
             }
         }
 
+        $page_datas                                 = [];
 
+        $page_datas['allCnt']                       = empty($allCnt)           ? 0 : number_format($allCnt);
+        $page_datas['payWaitCnt']                   = empty($payWaitCnt)       ? 0 : number_format($payWaitCnt);
+        $page_datas['prdWaitCnt']                   = empty($prdWaitCnt)       ? 0 : number_format($prdWaitCnt);
+        $page_datas['cancelCnt']                    = empty($cancelCnt)        ? 0 : number_format($cancelCnt);
+        $page_datas['returnCnt']                    = empty($returnCnt)        ? 0 : number_format($returnCnt);
+        $page_datas['exchangeCnt']                  = empty($exchangeCnt)      ? 0 : number_format($exchangeCnt);
+        $page_datas['shipWaitCnt']                  = empty($shipWaitCnt)      ? 0 : number_format($shipWaitCnt);
+        $page_datas['shipProgressCnt']              = empty($shipProgressCnt)  ? 0 : number_format($shipProgressCnt);
+        $page_datas['shipCompleteCnt']              = empty($shipCompleteCnt)  ? 0 : number_format($shipCompleteCnt);
+        $page_datas['buyDecisionCnt']               = empty($buyDecisionCnt)   ? 0 : number_format($buyDecisionCnt);
         $total_count                                = _elm($aLISTS_RESULT, 'total_count', 0);
 
-        $page_datas                                 = [];
+
 
 
         if (_elm($requests, 'page_return') === true || $this->request->isAjax() === true)
@@ -1396,7 +1536,7 @@ class OrderApi extends OrderApis
 
             $list_result                            = _elm( $aLISTS_RESULT , 'lists', [] );
 
-            $view_datas['aOrderConf']               = $this->sharedConfig::$orderStatus;
+            $view_datas['aOrderConf']               = $orderStatusConfig;
             $view_datas['aPayMethodConf']           = $this->sharedConfig::$paymentMethods;
             $view_datas['total_rows']               = $total_count;
             $view_datas['row']                      = $start;
@@ -1405,7 +1545,7 @@ class OrderApi extends OrderApis
             $this->owensView->setViewDatas( $view_datas );
 
 
-            $page_datas['lists_row']                = view( '\Module\order\Views\order\lists_row' , ['owensView' => $this->owensView] );
+            $page_datas['lists_row']                = view( '\Module\order\Views\order\lists_v2_row' , ['owensView' => $this->owensView] );
 
 
             $paging_param                           = [];
@@ -2196,7 +2336,7 @@ class OrderApi extends OrderApis
                 $orderOriginInfo                                = $this->orderModel->getOrderOriginByOrdID( _elm( $lists, 'ORDER_ID' ) );
                 $aLISTS_RESULT['lists'][$aKey]['ORDER_IDX']     = _elm( $orderOriginInfo, 'O_IDX' );
                 $aLISTS_RESULT['lists'][$aKey]['aMemo']         = $this->orderModel->getLastMemo( _elm( $orderOriginInfo, 'O_IDX' ) );
-                $aLISTS_RESULT['lists'][$aKey]['aMemoCnt']      = $this->orderModel->getMemoCnt( _elm( $orderOriginInfo, 'O_IDX' ) );
+                $aLISTS_RESULT['lists'][$aKey]['aMemoCnt']      = $this->orderModel->getMemoCnt( _elm( $lists, 'ORDER_ID' ) );
             }
         }
 
@@ -2499,8 +2639,8 @@ class OrderApi extends OrderApis
         # TODO: 데티어 로드
         #------------------------------------------------------------------
         $view_datas                                 = [];
-        $aLists                                     = $this->orderModel->getMemoLists( _elm( $requests, 'ordIdx' ) );
-
+        $aLists                                     = $this->orderModel->getMemoLists( _elm( $requests, 's_ordid' ) );
+        $aMemoCnt                                   = $this->orderModel->getMemoCnt( _elm( $requests, 's_ordid' ) );
         #------------------------------------------------------------------
         # TODO: AJAX 뷰 처리
         #------------------------------------------------------------------
@@ -2510,9 +2650,9 @@ class OrderApi extends OrderApis
         $aConfig                                    = $this->sharedConfig::$orderStatus;
         $view_datas['aOdrStatus']                   = $aConfig;
         $this->owensView->setViewDatas( $view_datas );
-
+        $view_datas['M_ORDID']                      = _elm( $requests, 's_ordid' );
         $page_datas['rows']                         = view( '\Module\order\Views\order\_memo_row' , ['owensView' => $this->owensView] );
-
+        $page_data['memoCnt']                       = $aMemoCnt;
         $response['status']                         = 'true';
         $response['page_datas']                     = $page_datas;
 
@@ -2525,8 +2665,8 @@ class OrderApi extends OrderApis
         $requests                                   = $this->request->getPost();
 
         $modelParam                                 = [];
-        $modelParam['M_IDX']                        = _elm( $requests, 'm_idx' );
-        $aData                                      = $this->orderModel->getMemoDataByIdx( _elm( $requests, 'm_idx' ) );
+        $modelParam['M_IDX']                        = _elm( $requests, 'i_memoIdx' );
+        $aData                                      = $this->orderModel->getMemoDataByIdx( _elm( $requests, 'i_memoIdx' ) );
         if( empty( $aData ) === true ){
             $response['status']                     = 400;
             $response['alert']                      = '데이터가 없습니다.';
@@ -2561,7 +2701,7 @@ class OrderApi extends OrderApis
 
         $response                                   = $this->_unset($response);
         $response['status']                         = 200;
-        $response['alert']                          = '삭제 되었습니다.';
+
 
         return $this->respond( $response );
     }
@@ -2572,12 +2712,10 @@ class OrderApi extends OrderApis
         $requests                                   = $this->request->getPost();
 
         $modelParam                                 = [];
-        $modelParam['M_ORD_IDX']                    = _elm( $requests, 'ordIdx' );
+        $modelParam['M_ORD_ID']                    = _elm( $requests, 'i_ordid' );
 
-        $modelParam['M_ORD_INFO_IDXS']              = json_encode( _elm( $requests, 'o_i_idx' ) );
-        $modelParam['M_ORD_INFO_TXT']               =  _elm( $requests, 'ordIdPrdTxt' );
-        $modelParam['M_CONTENT']                    =  htmlspecialchars( nl2br( _elm( $requests, 'content' ) ) );
-        $modelParam['M_STATUS']                     =  _elm( $requests, 'i_status' );
+        $modelParam['M_CONTENT']                    = htmlspecialchars( nl2br( _elm( $requests, 'i_memo' ) ) );
+        $modelParam['M_STATUS']                     = 'READY';
         $modelParam['M_CREATE_AT']                  = date( 'Y-m-d H:i:s' );
         $modelParam['M_CREATE_IP']                  = $this->request->getIPAddress();
         $modelParam['M_CREATE_MB_IDX']              = _elm( $this->session->get('_memberInfo') , 'member_idx' );
@@ -2599,7 +2737,7 @@ class OrderApi extends OrderApis
         # TODO: 관리자 로그남기기 S
         #------------------------------------------------------------------
         $logParam                               = [];
-        $logParam['MB_HISTORY_CONTENT']         = '주문 저장 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
+        $logParam['MB_HISTORY_CONTENT']         = '매모 저장 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         $logParam['MB_IDX']                     = _elm( $this->session->get('_memberInfo') , 'member_idx' );
 
         $this->LogModel->insertAdminLog( $logParam );
@@ -2609,14 +2747,87 @@ class OrderApi extends OrderApis
 
         $response                                   = $this->_unset($response);
         $response['status']                         = 200;
-        $response['alert']                          = '저장 되었습니다.';
+
 
         return $this->respond( $response );
     }
 
 
 
+    public function changeMemoStatus()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
 
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'i_memoIdx' => [
+                'label'  => 'i_memoIdx',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => 'i_memoIdx 누락.',
+                ],
+            ],
+            'i_status' => [
+                'label'  => 'i_status',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => 'i_status 누락.',
+                ],
+            ],
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $response['messages']                   = $validation->getErrors();
+
+            return $this->respond($response);
+        }
+
+        $modelParam                                 = [];
+        $modelParam['M_IDX']                        = _elm( $requests, 'i_memoIdx' );
+        $modelParam['M_STATUS']                     = _elm( $requests, 'i_status' );
+
+        $this->db->transBegin();
+        $aStatus                                    = $this->orderModel->changeMemoStatus( $modelParam );
+
+        if ( $this->db->transStatus() === false || $aStatus == false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['messages']                   = '상태변경 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '주문 메모 상태변경 - data:'.json_encode( $modelParam, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+        $this->db->transCommit();
+        $response                                   = $this->_unset($response);
+        $response['status']                         = 200;
+
+
+        return $this->respond( $response );
+    }
 
 
 
@@ -3200,6 +3411,291 @@ class OrderApi extends OrderApis
         return $this->respond( $response );
     }
 
+    public function changeOrderInfoStatus(){
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
 
 
+
+        print_r( $requests );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function changeOrderStatus()
+    {
+        $response                                   = $this->_initResponse();
+        $requests                                   = $this->request->getPost();
+
+        $validation                                 = \Config\Services::validation();
+        #------------------------------------------------------------------
+        # TODO: 검사 변수 true로 설정
+        #------------------------------------------------------------------
+        $isRule                                     = true;
+
+        #------------------------------------------------------------------
+        # TODO: 필수 parameter 검사
+        #------------------------------------------------------------------
+        $validation->setRules([
+            'i_status' => [
+                'label'  => 'i_status',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => 'i_status 값 누락.',
+                ],
+            ],
+            'i_ordid' => [
+                'label'  => 'i_ordid',
+                'rules'  => 'trim|required',
+                'errors' => [
+                    'required' => 'i_ordid 값 누락.',
+                ],
+            ],
+        ]);
+        #------------------------------------------------------------------
+        # TODO: parameter 검사 수행
+        #------------------------------------------------------------------
+        if ( $isRule === true && $validation->run($requests) === false )
+        {
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $response['messages']                   = $validation->getErrors();
+
+            return $this->respond($response);
+        }
+        $orderOrigin                                = $this->orderModel->getOrderOriginByOrdID( _elm( $requests, 'i_ordid' ) );
+        if( empty( $orderOrigin ) === true ){
+            $response['status']                     = 400;
+            $response['error']                      = 400;
+            $response['messages']                   = '주문정보가 없습니다.';
+
+            return $this->respond( $response );
+        }
+
+        $this->db->transBegin();
+        #------------------------------------------------------------------
+        # TODO: ORDER_INFO 주문 상태값 변경
+        #------------------------------------------------------------------
+        $infoParam                                  = [];
+        $infoParam['O_STATUS']                      = _elm( $requests, 'i_status' );
+        $infoParam['O_ORDID']                       = _elm( $requests, 'i_ordid' );
+
+        $oInfoStatus                                = $this->orderModel->orderStatusChangeByOrdId( $infoParam );
+
+        if ( $this->db->transStatus() === false || $oInfoStatus === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['messages']                   = 'INFO 상태변경 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 1.origin 상태값 변경
+        # TODO: 2. 입금전 취소이고  origin의 PAY_METHOD가 BankTransfer일 경우 재고 복구 상품
+        # TODO: 2-1. 기존 상태가 PayComplete이상일 경우 - 회원 구매수량, 총 결제금액 차감.
+        # TODO: 3. 입금확인( 결제완료 )  회원 구매수량, 총 결제금액 증가.
+        #------------------------------------------------------------------
+        $checkingStatus                             = [
+            'PayWaiting', 'PayChecking', 'Created', 'PayCancelRequest', 'PayCancelComplete'
+        ];
+        #------------------------------------------------------------------
+        # TODO: 취소처리
+        #------------------------------------------------------------------
+        if( _elm( $requests, 'i_status' ) == 'PrePayCancelComplate' ){
+            $messages                               = '입금전 취소처리';
+            if( _elm( $orderOrigin, 'O_PAY_METHOD' ) == 'BankTransfer' ){
+                $rollbackStatus                     = $this->rollbackOrderBenefits( _elm( $requests, 'i_ordid' ) );
+                if( _elm($rollbackStatus, 'status') != 200 ){
+                    $this->db->transRollback();
+                    return $this->respond( $rollbackStatus );
+                }
+            }
+            if( !in_array( _elm( $orderOrigin, 'O_STATUS' ) , $checkingStatus ) ){
+                #------------------------------------------------------------------
+                # TODO: 회원 결제 총 금액 삭감 업데이트
+                #------------------------------------------------------------------
+                $memberParam                        = [];
+                $memberParam['MB_IDX']              = _elm( $orderOrigin, 'O_MB_IDX' );
+                $memberParam['MB_SALES_CNT']        = 1;
+                //2025-02-21 홍사억 팀장 문의 후 전체 상품금액으로 결정
+                $memberParam['MB_SALES_AMT']        = _elm( $orderOrigin, 'O_PG_PRICE' );
+
+                $mStatus                            = $this->memberModel->unsetPurchaseAmt( $memberParam );
+                if ( $this->db->transStatus() === false || $mStatus === false ) {
+                    $this->db->transRollback();
+                    $response['status']                     = 400;
+                    $response['messages']                   = '회원 정보 업데이트 처리중 오류발생.. 다시 시도해주세요.';
+                    return $this->respond( $response );
+                }
+
+            }
+
+        }else if( _elm( $requests, 'i_status' ) == 'PayComplete' ){
+            $messages                               = '입금확인처리';
+            if( in_array( _elm( $orderOrigin, 'O_STATUS' ) , $checkingStatus ) ){
+                #------------------------------------------------------------------
+                # TODO: 회원 결제 총 금액 증가 업데이트
+                #------------------------------------------------------------------
+                $memberParam                        = [];
+                $memberParam['MB_IDX']              = _elm( $orderOrigin, 'O_MB_IDX' );
+                $memberParam['MB_SALES_CNT']        = 1;
+                //2025-02-21 홍사억 팀장 문의 후 전체 상품금액으로 결정
+                $memberParam['MB_SALES_AMT']        = _elm( $orderOrigin, 'O_PG_PRICE' );
+
+                $mStatus                            = $this->memberModel->setPurchaseAmt( $memberParam );
+                if ( $this->db->transStatus() === false || $mStatus === false ) {
+                    $this->db->transRollback();
+                    $response['status']                     = 400;
+                    $response['messages']                   = '회원 정보 업데이트 처리중 오류발생.. 다시 시도해주세요.';
+                    return $this->respond( $response );
+                }
+            }
+        }
+
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 S
+        #------------------------------------------------------------------
+        $logParam                                   = [];
+        $logParam['MB_HISTORY_CONTENT']             = '상테변경 ( '.$messages.' ) - orderId :'._elm( $requests, 'i_ordid' ) ;
+        $logParam['MB_IDX']                         = _elm( $this->session->get('_memberInfo') , 'member_idx' );
+
+        $this->LogModel->insertAdminLog( $logParam );
+        if ( $this->db->transStatus() === false ) {
+            $this->db->transRollback();
+            $response['status']                     = 400;
+            $response['alert']                      = '로그 처리중 오류발생.. 다시 시도해주세요.';
+            return $this->respond( $response );
+        }
+
+        #------------------------------------------------------------------
+        # TODO: 관리자 로그남기기 E
+        #------------------------------------------------------------------
+
+
+        $this->db->transCommit();
+        $response['status']                         = 200;
+        $response['alert']                          = $messages.' 가 완료되었습니다.';
+
+
+        return $this->respond( $response );
+    }
+
+    public function rollbackOrderBenefits( $ordId )
+    {
+        if( empty( $ordId ) === true ){
+            return ['status' => '400', 'messages'=> '주문번호 누락'];
+        }
+
+        $orderData                                  = $this->orderModel->getOrderOriginByOrdId( $ordId );
+
+        $memberInfo                                 = $this->memberModel->getMemberInfoByIdx( _elm( $orderData, 'O_MB_IDX' ) );
+
+        if( _elm( $orderData, 'O_CPN_PLUS' ) != '[]' ){
+            $cpnInfo                                = json_decode( _elm( $orderData, 'O_CPN_PLUS' ), true );
+            if( empty($cpnInfo) === false ){
+                foreach( $cpnInfo as $cpnIdx){
+                    $aCpnIsInfo                     = $this->couponModel->getCouponIssueDataByIdx( $cpnIdx );
+                    if( _elm( $orderData, 'O_MB_IDX' ) == _elm( $aCpnIsInfo, 'I_MB_IDX' ) ){
+                        if( _elm( $aCpnIsInfo, 'I_STATUS' ) !== 'Y' ){
+                            $cpnParam                       = [];
+                            $cpnParam['I_IDX']              = $cpnIdx;
+                            $cpnParam['I_STATUS']           = 'N';
+                            $cpnParam['I_RECOVERY_AT']      = date('Y-m-d H:i:s');
+                            $cpnParam['I_RECOVERY_REASON']  = _elm( $aCpnIsInfo, 'I_RECOVERY_REASON' ).PHP_EOL.'//일시:'.date('Y-m-d H:i:s')."::".'결제 취소 복구';
+                            $cStatus                        = $this->couponModel->returnCpnIssueStatus( $cpnParam );
+                            if ( $this->db->transStatus() === false || $cStatus === false ) {
+                                $this->db->transRollback();
+                                $response['status']         = 400;
+                                $response['messages']       = '쿠폰 복원 중 에러발생';
+                                return $response ;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        $_userHavePoint                             = $this->memberModel->userPointSummery( _elm( $orderData, 'O_MB_IDX' ) );
+        $ADD_MILEAGE                                = _elm( $_userHavePoint, 'ADD_MILEAGE', 0 );
+        $USE_MILEAGE                                = _elm( $_userHavePoint, 'USE_MILEAGE', 0 );
+        $DED_MILEAGE                                = _elm( $_userHavePoint, 'DED_MILEAGE', 0 );
+        $EXP_MILEAGE                                = _elm( $_userHavePoint, 'EXP_MILEAGE', 0 );
+
+        $userHavePoint                              = $ADD_MILEAGE - ( $USE_MILEAGE + $DED_MILEAGE + $EXP_MILEAGE);
+        #------------------------------------------------------------------
+        # TODO: 포인트 복원
+        #------------------------------------------------------------------
+        if( empty( _elm($orderData, 'O_USE_MILEAGE') ) === false ){
+            $usePointParam                          = [];
+            $usePointParam['M_MB_IDX']              = _elm( $orderData, 'O_MB_IDX' );
+            $usePointParam['M_TYPE']                = 'o';
+            $usePointParam['M_TYPE_CD']             = _elm($orderData, 'O_ORDID');
+            $usePointParam['M_GBN']                 = 'add';
+            $usePointParam['M_BEFORE_MILEAGE']      = $userHavePoint;
+            $usePointParam['M_AFTER_MILEAGE']       = $userHavePoint + (int)_elm( $orderData, 'O_USE_MILEAGE' ) ;
+            $usePointParam['M_MILEAGE']             = (int)_elm( $orderData, 'O_USE_MILEAGE' );
+            $usePointParam['M_REASON_CD']           = '122';
+            $usePointParam['M_REASON_MSG']          = '결제 취소 복원';
+            $usePointParam['M_CREATE_AT']           = date('Y-m-d H:i:s');
+            $usePointParam['M_CREATE_IP']           = $this->request->getIPAddress();
+
+            $pStauts                                = $this->memberModel->insertUserPointHistory( $usePointParam );
+
+            if ( $this->db->transStatus() === false || $pStauts === false ) {
+                $this->db->transRollback();
+                $response['status']                 = 400;
+                $response['messages']               = '포인트 복원 등록 중 에러발생';
+                return $response;
+            }
+
+
+            #------------------------------------------------------------------
+            # TODO: 포인트 summery 업데이트
+            #------------------------------------------------------------------
+            $pSummeryParam                          = [];
+            $pSummeryParam['S_MB_IDX']              = _elm( $orderData, 'O_MB_IDX' ) ;
+            $pSummeryParam['ADD_MILEAGE']           = _elm( $_userHavePoint, 'ADD_MILEAGE', 0 )+ (int)_elm( $orderData, 'O_USE_MILEAGE' );
+            $pSummeryParam['USE_MILEAGE']           = _elm( $_userHavePoint, 'USE_MILEAGE', 0 );
+            $pSummeryParam['DED_MILEAGE']           = _elm( $_userHavePoint, 'DED_MILEAGE', 0 );
+            $pSummeryParam['EXP_MILEAGE']           = _elm( $_userHavePoint, 'EXP_MILEAGE', 0 );
+            $pSummeryParam['LAST_UPDATE_AT']        = date('Y-m-d H:i:s');
+            $pSummeryParam['LAST_UPDATE_IP']        = $this->request->getIPAddress();
+            $pSummeryParam['LAST_MB_IDX]']          = _elm( $orderData, 'O_MB_IDX' ) ;
+            $psStauts                               = $this->memberModel->updateUserSummeryPoint( $pSummeryParam );
+
+            if ( $this->db->transStatus() === false || $pStauts === false ) {
+                $this->db->transRollback();
+                $response['status']                 = 400;
+                $response['messages']               = '포인트 summery 복원 등록 중 에러발생';
+                return $response ;
+            }
+        }
+        $response['status']                         = 200;
+        $response['messages']                       = 'success';
+        return $response;
+    }
 }
+

@@ -8,7 +8,14 @@ $routes->group('goods', ['namespace' => 'Module\goods\Controllers'], static func
     $routes->get( 'goodsCategory',                  'Category::lists' );
     $routes->get( 'goodsLists',                     'Lists::lists' );
     $routes->get( 'goodsRegister',                  'GoodsRegister::index' );
-    $routes->get( 'goodsDetail/(:num)',             'GoodsDetail::index/$1');
+    $routes->get( 'goodsDetail/(:num)',             'GoodsDetail::index2/$1');
+
+///
+    //$routes->get( 'goodsDetail2/(:num)',            'GoodsDetail::index2/$1');
+
+    $routes->get( 'goodsRestock',                   'Lists::restockLists' );
+
+
     $routes->get( 'goodsRequiredInfo',              'GoodsRequiredInfo::lists' );
     $routes->get( 'goodsBrand',                     'Brand::lists' );
     $routes->get( 'bestGoods',                      'GoodsBundle::bestGoods' );
@@ -26,11 +33,17 @@ $routes->group('goods', ['namespace' => 'Module\goods\Controllers'], static func
     $routes->get( 'hotKeywordDetail/(:num)',        'GoodsBundle::hotKeywordDetail/$1' );
 
     $routes->get( 'hotBrand',                       'GoodsBundle::hotBrand' );
+    $routes->get( 'dOptionColors',                   'DaHae::optionsLists' );
+
+
+});
+$routes->group('goods/dahae', ['namespace' => 'Module\goods\Controllers'], static function($routes)
+{
+    $routes->get( 'bridgeLists',                    'DaHae::bridgeLists' );
 
 
 
 });
-
 $routes->group('apis/goods', ['namespace' => 'Module\goods\Controllers\apis'], static function($routes)
 {
     $routes->post( 'getIconsLists',                 'IconsApi::getIconsLists' );
@@ -55,9 +68,6 @@ $routes->group('apis/goods', ['namespace' => 'Module\goods\Controllers\apis'], s
     $routes->post( 'deleteCategoryImages',          'CategoryApi::deleteCategoryImages' );
     $routes->post( 'updateCategoryFileLink',        'CategoryApi::updateCategoryFileLink' );
 
-
-
-
     $routes->post( 'brandRegister',                 'BrandApi::brandRegister' );
     $routes->post( 'brandDetail',                   'BrandApi::brandDetail' );
     $routes->post( 'brandRegisterProc',             'BrandApi::brandRegisterProc' );
@@ -73,9 +83,6 @@ $routes->group('apis/goods', ['namespace' => 'Module\goods\Controllers\apis'], s
     $routes->post( 'getPopBrandListsRow',           'BrandApi::getPopBrandListsRow' );
     $routes->post( 'brandAddRows',                  'BrandApi::brandAddRows' );
 
-
-
-
     $routes->post( 'goodsRegisterProc',             'GoodsApi::goodsRegisterProc' );
     $routes->post( 'getPopProductLists',            'GoodsApi::getPopProductLists' );
     $routes->post( 'goodsAddRows',                  'GoodsApi::goodsAddRows' );
@@ -84,6 +91,10 @@ $routes->group('apis/goods', ['namespace' => 'Module\goods\Controllers\apis'], s
     $routes->post( 'copyGoods',                     'GoodsApi::copyGoods' );
     $routes->post( 'deleteGoods',                   'GoodsApi::deleteGoods' );
     $routes->post( 'goodsDetailProc',               'GoodsApi::goodsDetailProc' );
+    $routes->post( 'changeGoodsRealColor',          'GoodsApi::changeGoodsRealColor' );
+
+    $routes->post( 'goodsDetailProc2',               'GoodsApi::goodsDetailProc2' );
+
     $routes->post( 'reloadGroupGoods',              'GoodsApi::reloadGroupGoods' );
     $routes->post( 'deleteToCopyGoods',             'GoodsApi::deleteToCopyGoods' );
     $routes->post( 'allReloadGroupGoods',           'GoodsApi::allReloadGroupGoods' );
@@ -93,6 +104,9 @@ $routes->group('apis/goods', ['namespace' => 'Module\goods\Controllers\apis'], s
     $routes->post( 'getGodoGoods',                  'GoodsApi::getGodoGoods' );
     $routes->post( 'updateGodoGoods',               'GoodsApi::updateGodoGoods' );
 
+    $routes->post( 'getDahaeCate',                  'GoodsApi::getDahaeCate' );
+    $routes->post( 'updateDahaeCate',               'GoodsApi::updateDahaeCate' );
+    $routes->post( 'getGoodsRestockAlimLists',      'GoodsApi::getGoodsRestockAlimLists' );
 
 
 
@@ -146,9 +160,25 @@ $routes->group('apis/goods', ['namespace' => 'Module\goods\Controllers\apis'], s
     $routes->post( 'hotBrandRegister',              'BundleApi::hotBrandRegister' );
 
 
+    $routes->post( 'updateCategoryFileLink',        'CategoryApi::updateCategoryFileLink' );
+
+    $routes->post( 'getDaHaeGoodsHeader',           'DaHaeApi::getDaHaeGoodsHeader' );
+    $routes->post( 'registerDahaeProduct',          'DaHaeApi::registerDahaeProduct' );
 
 
+    $routes->post( 'getDahaeOptionCode',            'DaHaeApi::getDahaeOptionCode' );
+    $routes->post( 'updateDahaeOptionCode',         'DaHaeApi::updateDahaeOptionCode' );
+    $routes->post( 'dahaeOptionCodeRegister',       'DaHaeApi::dahaeOptionCodeRegister' );
+    $routes->post( 'dahaeOptionCodeDetail',         'DaHaeApi::dahaeOptionCodeDetail' );
+    $routes->post( 'dahaeOptionCodeRegisterProc',   'DaHaeApi::dahaeOptionCodeRegisterProc' );
 
+    $routes->post( 'dahaeOptionCodeDetailProc',     'DaHaeApi::dahaeOptionCodeDetailProc' );
+
+    $routes->post( 'deleteDahaeOptionCode',         'DaHaeApi::deleteDahaeOptionCode' );
+
+    $routes->post( 'goodsRestockDetailList',        'GoodsApi::goodsRestockDetailList' );
+    $routes->post( 'sendRestockAlim',               'GoodsApi::sendRestockAlim' );
+    $routes->post( 'getPopGoodsRestockAlimDetailLists','GoodsApi::getPopGoodsRestockAlimDetailLists' );
 
 
 });

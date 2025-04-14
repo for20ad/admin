@@ -33,22 +33,34 @@
                     <?php
                         $options  = [''=>'전체'];
                         $options += _elm( $aConfig, 'viewGbn' );
-                        $extras   = ['id' => 'i_view_gbn', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;', 'onChange'=>'changeLocation( this.value, \'#i_locate\' )'];
+                        $extras   = ['id' => 'i_view_gbn', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;', 'onChange'=>'changeLocation( this.value, \'#i_locate\' );$(this).val() != \'SHOP\' ? $(\'#banner_position img\').hide() : $(\'#banner_position img\').show(); '];
                         $selected = '';
                         echo getSelectBox('i_view_gbn', $options, $selected, $extras);
                     ?>
                 </div>
-                <div class="input-group required">
+                <div class="input-group required" style="position: relative;">
                     <label class="label body2-c">
                         노출위치
                         <span>*</span>
                     </label>
                     <?php
-                        $options  = [''=>'노출분류 선택'];
-                        $extras   = ['id' => 'i_locate', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;'];
+
+                        $options  = _elm( _elm( $aConfig, 'viewLoc' ), 'SHOP' );
+                        $extras   = ['id' => 'i_locate', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;', 'onchange' => '$(\'#banner_position img\').attr( \'src\', \'/dist/img/\'+$(this).val()+\'.gif\' )'];
                         $selected = '';
                         echo getSelectBox('i_locate', $options, $selected, $extras);
+                        $viewLocShop = _elm(_elm($aConfig, 'viewLoc'), 'SHOP'); // 배열인지 확인
+                        $firstKey = is_array($viewLocShop) ? array_keys($viewLocShop)[0] : ''; // 첫 번째 키값 가져오기
                     ?>
+                    <div id="banner_position" style="position: absolute; left: calc(48% + 10px); top: 40%; transform: translateY(-50%);border:1px solid rgba(0, 0, 0, 0.15); margin:40px; padding:9px; border-radius:5px;">
+                        <img src="/dist/img/<?php echo $firstKey?>.gif" alt="노출분류 아이콘" style="width: 280px; ">
+                    </div>
+
+                    <style>
+                        .a {
+                            color:##6C7A91;
+                        }
+                    </style>
                 </div>
                 <div class="input-group required">
                     <label class="label body2-c">

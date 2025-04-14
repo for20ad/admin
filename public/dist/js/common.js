@@ -161,7 +161,7 @@ function formatMobileNumber(numbersOnly) {
     return formattedNumber;
 }
 
-$('input[data-max-length]').each(function() {
+$('input[data-max-length], textarea[data-max-length]').each(function() {
     const $inputField = $(this);
     const $wordCount = $inputField.siblings('.wordCount');
     const maxLength = $inputField.data('max-length');
@@ -175,7 +175,7 @@ $('input[data-max-length]').each(function() {
     const initialLength = $inputField.val().length;
     $wordCount.text(`${initialLength}/${maxLength}`);
 });
-$(document).on('input', 'input[data-max-length]', function() {
+$(document).on('input, textarea', 'input[data-max-length]', function() {
     const $inputField = $(this);
     const $wordCount = $inputField.siblings('.wordCount');
     const maxLength = $inputField.data('max-length');
@@ -598,38 +598,38 @@ function getPagesFromCookie() {
 
 // 페이지 기록을 화면에 표시
 function displayPageHistory() {
-  const pageHistory = document.querySelector(".page-history");
-  const pages = getPagesFromCookie();
-  const pageTitleElement = document.querySelector(".page-title");
-  const currentTitle = pageTitleElement
+    const pageHistory = document.querySelector(".page-history");
+    const pages = getPagesFromCookie();
+    const pageTitleElement = document.querySelector(".page-title");
+    const currentTitle = pageTitleElement
     ? pageTitleElement.textContent
     : document.title;
 
-  pages.forEach((page, index) => {
-    const item = document.createElement("div");
-    item.className = "item";
+    pages.forEach((page, index) => {
+        const item = document.createElement("div");
+        item.className = "item";
 
-    if (page.title === currentTitle) {
-      item.classList.add("active");
-    }
+        if (page.title === currentTitle) {
+            item.classList.add("active");
+        }
 
-    const link = document.createElement("a");
-    link.href = page.url;
-    link.className = "name";
-    link.textContent = page.title;
-    item.appendChild(link);
+        const link = document.createElement("a");
+        link.href = page.url;
+        link.className = "name";
+        link.textContent = page.title;
+        item.appendChild(link);
 
-    const deleteButton = document.createElement("button");
-    deleteButton.type = "button";
-    deleteButton.textContent = "삭제";
-    deleteButton.addEventListener("click", () => {
-      removePageFromCookie(index);
-      item.remove();
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "삭제";
+        deleteButton.addEventListener("click", () => {
+        removePageFromCookie(index);
+        item.remove();
+        });
+        item.appendChild(deleteButton);
+
+        pageHistory.appendChild(item);
     });
-    item.appendChild(deleteButton);
-
-    pageHistory.appendChild(item);
-  });
 }
 
 function toggleForm( obj ){

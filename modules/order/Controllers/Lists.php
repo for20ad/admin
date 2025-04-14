@@ -49,13 +49,16 @@ class Lists extends Order
 
         $requests                                   = $this->request->getGet();
         $pageDatas['aOrderConf']                    = $this->sharedConfig::$orderStatus;
+
+        $pageDatas['aPayMethodConf']                = $this->sharedConfig::$paymentMethods;
+
         #------------------------------------------------------------------
         # TODO: 메인 뷰 처리
         #------------------------------------------------------------------
 
         $pageParam                                  = [];
 
-        $pageParam['file']                          = '\Module\order\Views\order\lists';
+        $pageParam['file']                          = '\Module\order\Views\order\lists_v2';
         $pageParam['pageLayout']                    = '';
         $pageParam['pageDatas']                     = $pageDatas;
 

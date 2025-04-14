@@ -237,7 +237,7 @@ class MembershipModel extends Model
         $aReturn                                    = [];
 
         $builder                                    = $this->db->table( 'MEMBER_GRADE' );
-        $builder->select( 'G_IDX, G_NAME' );
+        $builder->select( 'G_IDX, G_NAME, G_DC_RATE, G_DC_UNIT' );
         $builder->orderBy( 'G_SORT', 'ASC' );
 
         $query                                      = $builder->get();
@@ -543,6 +543,120 @@ class MembershipModel extends Model
         return $aReturn;
 
     }
+    public function setPurchaseAmt( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBERSHIP' );
+        $builder->set( 'MB_SALES_CNT',              'MB_SALES_CNT+'._elm( $param, 'MB_SALES_CNT' ), false );
+        $builder->set( 'MB_SALES_AMT',              'MB_SALES_AMT+'._elm( $param, 'MB_SALES_AMT' ), false );
+
+        $builder->where( 'MB_IDX',                  _elm( $param, 'MB_IDX' ) );
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
+    public function ussetPurchaseAmt( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBERSHIP' );
+        $builder->set( 'MB_SALES_CNT',              'MB_SALES_CNT-'._elm( $param, 'MB_SALES_CNT' ), false );
+        $builder->set( 'MB_SALES_AMT',              'MB_SALES_AMT-'._elm( $param, 'MB_SALES_AMT' ), false );
+
+        $builder->where( 'MB_IDX',                  _elm( $param, 'MB_IDX' ) );
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
+    public function getMemberInfoByIdx( $mb_idx )
+    {
+        $aReturn = [];
+        $builder = $this->db->table( 'MEMBERSHIP MB' );
+        $builder->where( 'MB.MB_IDX',               $mb_idx );
+
+        $query = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn = $query->getRowArray();
+        }
+
+        return $aReturn;
+
+    }
+    public function userPointSummery( $mb_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $mb_idx ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBER_MILEAGE_SUMMERY' );
+        $builder->select( 'ADD_MILEAGE, USE_MILEAGE, DED_MILEAGE, EXP_MILEAGE, LAST_UPDATE_AT' );
+        $builder->where( 'S_MB_IDX',                $mb_idx );
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
 
 
+    }
+
+    public function insertUserPointHistory( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBER_MILEAGE' );
+        $builder->set( 'M_MB_IDX',                  _elm( $param, 'M_MB_IDX' ) );
+        $builder->set( 'M_TYPE',                    _elm( $param, 'M_TYPE' ) );
+        $builder->set( 'M_TYPE_CD',                 _elm( $param, 'M_TYPE_CD' ) );
+        $builder->set( 'M_GBN',                     _elm( $param, 'M_GBN' ) );
+        $builder->set( 'M_BEFORE_MILEAGE',          _elm( $param, 'M_BEFORE_MILEAGE' ) );
+        $builder->set( 'M_AFTER_MILEAGE',           _elm( $param, 'M_AFTER_MILEAGE' ) );
+        $builder->set( 'M_MILEAGE',                 _elm( $param, 'M_MILEAGE' ) );
+        $builder->set( 'M_REASON_CD',               _elm( $param, 'M_REASON_CD' ) );
+        $builder->set( 'M_REASON_MSG',              _elm( $param, 'M_REASON_MSG' ) );
+        $builder->set( 'M_EXPIRE_DATE',             _elm( $param, 'M_EXPIRE_DATE' ) );
+        $builder->set( 'M_CREATE_AT',               _elm( $param, 'M_CREATE_AT' ) );
+        $builder->set( 'M_CREATE_IP',               _elm( $param, 'M_CREATE_IP' ) );
+
+        $aResult                                    = $builder->insert();
+        if( $aResult ){
+            $aReturn                                = $this->db->insertID();
+        }
+        return $aReturn;
+    }
+
+    public function updateUserSummeryPoint( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'MEMBER_MILEAGE_SUMMERY' );
+        $builder->where( 'S_MB_IDX',                _elm( $param, 'S_MB_IDX' ) );
+        $builder->set( 'ADD_MILEAGE',               _elm( $param, 'ADD_MILEAGE' ) );
+        $builder->set( 'USE_MILEAGE',               _elm( $param, 'USE_MILEAGE' ) );
+        $builder->set( 'DED_MILEAGE',               _elm( $param, 'DED_MILEAGE' ) );
+        $builder->set( 'EXP_MILEAGE',               _elm( $param, 'EXP_MILEAGE' ) );
+        $builder->set( 'LAST_UPDATE_AT',            _elm( $param, 'LAST_UPDATE_AT' ) );
+        $builder->set( 'LAST_UPDATE_IP',            _elm( $param, 'LAST_UPDATE_IP' ) );
+        $builder->set( 'LAST_MB_IDX',               _elm( $param, 'LAST_MB_IDX' ) );
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
 }

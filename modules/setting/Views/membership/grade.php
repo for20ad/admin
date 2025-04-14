@@ -50,13 +50,15 @@
                             <tbody>
                                 <colgroup>
                                     <col style="width:10%;">
-                                    <col style="width:60%;">
+                                    <col style="width:20%;">
+                                    <col style="width:15%;">
                                     <col style="width:15%;">
                                     <col style="width:15%;">
                                 </colgroup>
                                 <tr>
                                     <th style="padding-left:2em">회원등급</th>
                                     <th style="padding-left:2em">등급아이콘</th>
+                                    <th style="padding-left:2em">구매 할인율</th>
                                     <th style="padding-left:2em">포인트 적립율</th>
                                     <th style="padding-left:2em">배송비 무료</th>
                                 </tr>
@@ -69,6 +71,15 @@
                                     <td>
                                         <div class="form-inline">
                                             <input type="file" class="form-control" name="i_icon" id="i_icon">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" styel="width:90px" name="i_dc_rate" style="max-width:100%;margin:0px !important;">
+                                            <span class="wordCount input-group-text"
+                                                style="border-top-left-radius:0px; border-bottom-left-radius: 0px;margin-left:0px !important">
+                                                %
+                                            </span>
                                         </div>
                                     </td>
                                     <td>
@@ -167,8 +178,9 @@
                             <colgroup>
                                 <col styel="width:5%;">
                                 <col style="width:10%;">
-                                <col style="width:40;">
+                                <col style="width:*%;">
                                 <col style="width:15%;">
+                                <col style="width:10%;">
                                 <col style="width:15%;">
                                 <col style="width:10%;">
                             </colgroup>
@@ -194,6 +206,7 @@
                                 </th>
                                 <th style="padding-left:2em">회원등급</th>
                                 <th style="padding-left:2em">등급아이콘</th>
+                                <th style="padding-left:2em">구매 할인율</th>
                                 <th style="padding-left:2em">포인트 적립율</th>
                                 <th style="padding-left:2em">배송비 무료</th>
                                 <th style="padding-left:2em">삭제</th>
@@ -243,6 +256,15 @@
                                         <?php
                                         }
                                         ?>
+                                    </div>
+                                </td>
+                                 <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="form-control" style="max-width:100%;margin:0px !important;" name="i_dc_rate[<?php echo _elm( $lists, 'G_IDX' )?>]" value="<?php echo _elm( $lists, 'G_DC_RATE' )?>" >
+                                        <span class="wordCount input-group-text"
+                                            style="border-top-left-radius:0px; border-bottom-left-radius: 0px;margin:0;">
+                                            %
+                                        </span>
                                     </div>
                                 </td>
                                 <td>

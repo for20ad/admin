@@ -39,23 +39,29 @@
                     <?php
                         $options  = [''=>'전체'];
                         $options += _elm( $aConfig, 'viewGbn' );
-                        $extras   = ['id' => 'i_view_gbn', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;', 'onChange'=>'changeLocation( this.value, \'#i_locate\' )'];
+                        $extras   = ['id' => 'i_view_gbn', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;', 'onChange'=>'changeLocation( this.value, \'#i_locate\' );$(this).val() != \'SHOP\' ? $(\'#banner_position img\').hide() : $(\'#banner_position img\').show();'];
                         $selected = _elm( $aData, 'B_VIEW_GBN' );
                         echo getSelectBox('i_view_gbn', $options, $selected, $extras);
                     ?>
                 </div>
-                <div class="input-group required">
+                <div class="input-group required" style="position: relative;">
                     <label class="label body2-c">
                         노출위치
                         <span>*</span>
                     </label>
                     <?php
                         $options  = _elm( _elm( $aConfig, 'viewLoc' ), _elm( $aData, 'B_VIEW_GBN' ) );
-                        $extras   = ['id' => 'i_locate', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;'];
+                        $extras   = ['id' => 'i_locate', 'class' => 'form-select', 'style' => 'max-width: 150px;margin-right:0.235em;', 'onchange' => '$(\'#banner_position img\').attr( \'src\', \'/dist/img/\'+$(this).val()+\'.gif\' )'];
                         $selected = _elm( $aData, 'B_LOCATE' );
                         echo getSelectBox('i_locate', $options, $selected, $extras);
+
+                        $firstKey = _elm( $aData, 'B_LOCATE' );
                     ?>
+                    <div id="banner_position" style="position: absolute; left: calc(48% + 10px); top: 40%; transform: translateY(-50%);border:1px solid rgba(0, 0, 0, 0.15); margin:40px; padding:9px; border-radius:5px;">
+                        <img src="/dist/img/<?php echo $firstKey?>.gif" alt="노출분류 아이콘" style="width: 280px; ">
+                    </div>
                 </div>
+
                 <div class="input-group required">
                     <label class="label body2-c">
                         노출기간(시작)
@@ -191,6 +197,7 @@
         dateFormat: 'Y-m-d H:i',
         time_24hr: true
     });
+
 
 
 var imgDeleteFlg = <?php echo empty( _elm( $aData, 'B_IMG_PATH' ) ) === false ? 'false' : 'true'?>;

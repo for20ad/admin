@@ -9,8 +9,8 @@
     $sQueryString = (empty($_SERVER['QUERY_STRING']) === true) ? '' : '?' . $_SERVER['QUERY_STRING'];
 
     $aConfig = _elm($view_datas, 'aConfig', []);
-    $aLists = _elm($view_datas, 'lists', []);
-    $row           = _elm($view_datas, 'row', []);
+    // $aLists = _elm($view_datas, 'lists', []);
+    // $row           = _elm($view_datas, 'row', []);
     $total_rows    = _elm($view_datas, 'total_rows', []);
 ?>
     <div class="modal-header">
@@ -274,7 +274,7 @@ function addRequiedItem()
 
 function getSearchList( page ){
     const urlParams = new URLSearchParams(window.location.search);
-    if (page === undefined) {
+    if(urlParams.get('page') != undefined) {
         page = urlParams.get('page') || 1; // 기본값 1
     }
     $('#frm_search [name=page]').val( page );

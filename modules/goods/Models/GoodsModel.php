@@ -10,6 +10,185 @@ class GoodsModel extends Model
     {
         $this->db = \Config\Database::connect();
     }
+
+
+    public function updateGoodsRealColor( $param = [] )
+    {
+        $aReturn                                    = false;
+
+        $builder                                    = $this->db->table( 'GOODS' );
+        $builder->where( 'G_IDX',                   _elm( $param, 'G_IDX' ) );
+        $builder->set( 'G_REAL_COLOR',              _elm( $param, 'G_REAL_COLOR' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+
+    }
+    public function getDahaeOptionCodeLists( $param = [] )
+    {
+        $aReturn                                    = [
+            'total_count'                           => 0,
+            'lists'                                 => [],
+        ];
+
+        $builder                                    = $this->db->table( '_D_OPTION_CODES' );
+        $builder->select( '*' );
+        if( empty( _elm( $param, 'd_g_name' ) ) === false ){
+            $builder->like( 'd_option_g_name', _elm( $param, 'd_g_name' ), 'after' );
+            $builder->orLike( 'd_option_name', _elm( $param, 'd_g_name' ), 'after' );
+        }
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
+        //$builder->orderBy( 'newCateCd', 'ASC' );
+        // 정렬
+        if (!empty( _elm( $param, 'order') ) ) {
+            $builder->orderBy( _elm( $param, 'order' ) );
+        }
+
+        // 페이징 처리
+        if (!empty( _elm( $param, 'limit' ) ) ) {
+            $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
+        }
+
+        $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn['lists']                       = $query->getResultArray();
+        }
+
+        return $aReturn;
+    }
+    public function updateDahaeOptionCode( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( '_D_OPTION_CODES' );
+        $builder->where( 'idx',                     _elm( $param, 'idx' ) );
+        if( _elm( $param, 'd_option_g_name' ) ){
+            $builder->set( 'd_option_g_name',       _elm( $param, 'd_option_g_name' ) );
+        }
+        if( _elm( $param, 'd_option_name' ) ){
+            $builder->set( 'd_option_name',         _elm( $param, 'd_option_name' ) );
+        }
+        if( _elm( $param, 'd_result' ) ){
+            $builder->set( 'd_result',              _elm( $param, 'd_result' ) );
+        }
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
+    public function deleteDahaeOptionCode( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( '_D_OPTION_CODES' );
+        $builder->where( 'idx',                     _elm( $param, 'idx' ) );
+        $aReturn                                    = $builder->delete();
+
+        return $aReturn;
+
+    }
+
+    public function getDahaeOptionCodeByIdx( $idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( '_D_OPTION_CODES' );
+        $builder->where( 'idx',                     $idx );
+
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+
+    }
+
+    public function insertDahaeOptionCode( $param = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( '_D_OPTION_CODES' );
+        $builder->set( 'd_option_g_name',           _elm( $param, 'd_option_g_name' ) );
+        $builder->set( 'd_option_name',             _elm( $param, 'd_option_name' ) );
+        $builder->set( 'd_result',                  _elm( $param, 'd_result' ) );
+
+        $aResult                                    = $builder->insert();
+        if( $aResult ){
+            $aReturn                                = $this->db->insertID();
+        }
+        return $aReturn;
+
+    }
+
+
+    public function getDahaeCateLists( $param = [] )
+    {
+        $aReturn                                    = [
+            'total_count'                           => 0,
+            'lists'                                 => [],
+        ];
+
+        $builder                                    = $this->db->table( '_DAHAE_CATE_CODES' );
+        $builder->select( '*' );
+        if( empty( _elm( $param, 'cate' ) ) === false ){
+            $builder->like( 'C_CATE_BIG', _elm( $param, 'cate' ), 'after' );
+            $builder->orLike( 'C_CATE_MID', _elm( $param, 'cate' ), 'after' );
+            $builder->orLike( 'C_CATE_SMALL', _elm( $param, 'cate' ), 'after' );
+        }
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
+        //$builder->orderBy( 'newCateCd', 'ASC' );
+        // 정렬
+        if (!empty( _elm( $param, 'order') ) ) {
+            $builder->orderBy( _elm( $param, 'order' ) );
+        }
+
+        // 페이징 처리
+        if (!empty( _elm( $param, 'limit' ) ) ) {
+            $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
+        }
+
+        $query                                      = $builder->get();
+
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn['lists']                       = $query->getResultArray();
+        }
+
+        return $aReturn;
+    }
+
+    public function updateDahaeCate( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( '_DAHAE_CATE_CODES' );
+        $builder->set( 'C_RESULT_LOCAL_CATE_NM', _elm( $param, 'C_RESULT_LOCAL_CATE_NM' ) );
+        $builder->set( 'C_RESULT_LOCAL_CATE_CD', _elm( $param, 'C_RESULT_LOCAL_CATE_CD' ) );
+        $builder->where( 'C_IDX', _elm( $param, 'C_IDX' ) );
+
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
+
     public function updateGodoGoods( $param = [] )
     {
         $aReturn                                    = false;
@@ -145,6 +324,27 @@ class GoodsModel extends Model
         }
         return $aReturn;
     }
+
+
+    public function getGoodsStockOverOptions( $goods_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $goods_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        $builder->where( 'O_GOODS_IDX',             $goods_idx );
+        $builder->where("O_STOCK <= (SELECT G_SAFETY_STOCK FROM GOODS WHERE G_IDX='{$goods_idx}')");
+
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
     public function getReqInfos( $goods_idx )
     {
         $aReturn                                    = [];
@@ -348,6 +548,128 @@ class GoodsModel extends Model
         return $aReturn;
     }
 
+    public function getGoodsOptionsByIdxs( $idxs )
+    {
+        $aReturn                                    = [];
+        if( empty( $idxs ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        $builder->whereIn( 'O_IDX', $idxs );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
+    public function getGoodsOptionsByIdx( $idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        $builder->whereIn( 'O_IDX',                 $idx );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function restockAlimChangeStatus( $a_idx )
+    {
+        $aReturn                                    = false;
+        if( empty( $a_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_RESTOCK_ALIM' );
+        $builder->where( 'A_IDX',                   $a_idx );
+        $builder->set( 'A_ALIM_SEND_AT',          'now()', false );
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+
+    }
+    public function getGoodsOptionsByOptionText( $g_idx, $texts = []  )
+    {
+
+        $aReturn                                    = [];
+        if( empty( $texts ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        if( is_array( $texts ) ){
+
+            foreach( $texts as $text ){
+                $builder->orGroupStart();
+                $_text                                  = explode(' ', trim($text));
+                if( empty( $_text ) === false ){
+                    foreach( $_text as $aKey => $t ){
+                        $builder->like( 'O_KEYS', str_replace(':','',$t) );
+                        $builder->like( 'O_VALUES', $t );
+                    }
+                }
+                $builder->groupEnd();
+            }
+        }else{
+            $_text                                  = explode(':', trim($texts));
+            if( empty( $_text ) === false ){
+                foreach( $_text as $aKey => $t ){
+                    if( $aKey == 0 ){
+                        $builder->like( 'O_KEYS', str_replace(':','',$t) );
+                    }else{
+                        $builder->like( 'O_VALUES', $t );
+                    }
+                }
+            }
+        }
+
+
+        $builder->where( 'O_GOODS_IDX',             $g_idx );
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+    public function getGoodsOptionsCombinationByOptionText( $g_idx, $texts = [] )
+    {
+        $aReturn                                    = [];
+        if( empty( $texts ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        foreach( $texts as $text ){
+            $builder->orGroupStart();
+            $_text                                  = explode(' ', trim($text));
+            if( empty( $_text ) === false ){
+                foreach( $_text as $aKey => $t ){
+                    if( $aKey == 0 ){
+                        $builder->like( 'O_VALUES', $t );
+                    }else{
+                        $builder->like( 'O_VALUES'.($aKey+1), $t );
+                    }
+
+                }
+            }
+            $builder->groupEnd();
+        }
+
+        $builder->where( 'O_GOODS_IDX',             $g_idx );
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
     public function getGoodsDataSelectFieldByIdx( $idx, $fields = []  )
     {
         $aReturn                                    = [];
@@ -533,6 +855,8 @@ class GoodsModel extends Model
             }
         }
 
+        $builder->where( 'G_GROUP_MAIN',            'Y' );
+
         $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
         $aReturn['search_count']                    = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
 
@@ -558,6 +882,190 @@ class GoodsModel extends Model
 
     }
 
+    public function getGoodsRestockLists( $param = [] )
+    {
+        $aReturn                                    = [
+            'total_count'                           => 0,
+            'search_count'                          => 0,
+            'lists'                                 => [],
+        ];
+
+        $builder                                    = $this->db->table( 'GOODS_RESTOCK_ALIM GRA' );
+        //$builder->select( 'GRA.*, count(GRA.A_MB_IDX) ALIM_CNT, CASE WHEN GRA.A_SEND_AT IS NOT NULL THEN COUNT( GRA.A_SEND_AT ) END SEND_CNT, GRA.A_SEND_AT IS NULL THEN COUNT( GRA.A_SEND_AT ) END NOT_SEND_CNT' );
+        $builder->select( 'GRA.*, count(GRA.A_MB_IDX) ALIM_CNT,  COUNT(GRA.A_ALIM_SEND_AT) AS SEND_CNT, COUNT(CASE WHEN GRA.A_ALIM_SEND_AT IS NULL THEN 1 ELSE NULL END) AS NOT_SEND_CNT');
+        $builder->select('G.*');
+        $builder->select('GI.I_IMG_PATH');
+        $builder->select('BR.C_BRAND_NAME');
+        $builder->where( 'G.G_DELETE_STATUS',       'N' );
+        $builder->join( 'MEMBERSHIP MB', 'MB.MB_IDX=GRA.A_MB_IDX', 'left' );
+        $builder->join( 'GOODS G', 'GRA.A_PRD_IDX=G.G_IDX', 'left' );
+
+        // 총 결과 수
+
+        //$builder->resetQuery(); // 빌더 초기화
+        $builder->join( 'GOODS_IMAGES GI', 'G.G_IDX = GI.I_GOODS_IDX AND I_SORT=1 AND I_IS_ORIGIN = \'Y\'', 'left' );
+        $builder->join( 'GOODS_BRAND BR', 'BR.C_IDX = G.G_BRAND_IDX', 'left' );
+
+
+        if( !empty( _elm( $param, 'G_NAME' ) ) ){
+            $builder->groupStart();
+            $builder->like('G.G_NAME', _elm( $param, 'G_NAME' ), 'both' );
+            $builder->orLike('G.G_NAME_ENG', _elm( $param, 'G_NAME_ENG' ), 'both' );
+            $builder->groupEnd();
+        }
+
+
+        if( empty( _elm( $param, 'MB_USERID' ) ) === false ){
+            $builder->like( 'MB.MB_USERID', _elm( $param, 'MB_USERID' ), 'both' );
+        }
+        if( empty( _elm( $param, 'MB_NAME' ) ) === false ){
+            $builder->like( 'MB.MB_NM', _elm( $param, 'MB_NAME' ), 'both' );
+        }
+
+        if( !empty( _elm( $param, 'S_START_DATE' ) ) && !empty( _elm( $param, 'S_END_DATE' ) ) ){
+            $builder->where( 'GRA.A_CREATE_AT >=', _elm( $param, 'S_START_DATE' ) );
+            $builder->where( 'GRA.A_CREATE_AT <=', _elm( $param, 'S_END_DATE' ) );
+        }
+
+        if( !empty( _elm( $param, 'IS_NOT_CATEGORY' ) ) ){
+            $builder->groupStart();
+            $builder->where( 'G_CATEGORY_MAIN IS NULL' );
+            $builder->orWhere( 'G.G_CATEGORYS IS NULL' );
+            $builder->groupEnd();
+        }
+
+        if( !empty( _elm( $param, 'G_CATEGORY_MAIN_IDX' ) ) ){
+            $builder->where( 'G_CATEGORY_MAIN_IDX', _elm( $param, 'G_CATEGORY_MAIN_IDX' ) );
+        }
+        $builder->groupBy( 'GRA.A_PRD_IDX' );
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+        $aReturn['search_count']                    = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
+        // 정렬
+        if (!empty( _elm( $param, 'order') ) ) {
+            $builder->orderBy( _elm( $param, 'order' ) );
+        }
+
+        // 페이징 처리
+        if (!empty( _elm( $param, 'limit' ) ) ) {
+            $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
+        }
+
+        $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn['lists']                       = $query->getResultArray();
+        }
+
+        return $aReturn;
+    }
+
+    public function getGoodsRestockAlimDetailInfo( $param = [] )
+    {
+        $aReturn                                     = [];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+
+        $builder                                    = $this->db->table( 'GOODS_RESTOCK_ALIM GRA' );
+        //$builder->select( 'GRA.*, count(GRA.A_MB_IDX) ALIM_CNT, CASE WHEN GRA.A_SEND_AT IS NOT NULL THEN COUNT( GRA.A_SEND_AT ) END SEND_CNT, GRA.A_SEND_AT IS NULL THEN COUNT( GRA.A_SEND_AT ) END NOT_SEND_CNT' );
+        $builder->select( 'GRA.*, count(GRA.A_MB_IDX) ALIM_CNT,  COUNT(GRA.A_ALIM_SEND_AT) AS SEND_CNT, COUNT(CASE WHEN GRA.A_ALIM_SEND_AT IS NULL THEN 1 ELSE NULL END) AS NOT_SEND_CNT');
+        $builder->select('G.*');
+        $builder->select('GI.I_IMG_PATH');
+        $builder->select('BR.C_BRAND_NAME');
+        $builder->where( 'G.G_DELETE_STATUS',       'N' );
+        $builder->join( 'MEMBERSHIP MB', 'MB.MB_IDX=GRA.A_MB_IDX', 'left' );
+        $builder->join( 'GOODS G', 'GRA.A_PRD_IDX=G.G_IDX', 'left' );
+
+        // 총 결과 수
+
+        //$builder->resetQuery(); // 빌더 초기화
+        $builder->join( 'GOODS_IMAGES GI', 'G.G_IDX = GI.I_GOODS_IDX AND I_SORT=1 AND I_IS_ORIGIN = \'Y\'', 'left' );
+        $builder->join( 'GOODS_BRAND BR', 'BR.C_IDX = G.G_BRAND_IDX', 'left' );
+
+        $builder->where( 'GRA.A_PRD_IDX',               _elm( $param, 'A_PRD_IDX' ) );
+
+        $builder->groupBy( 'GRA.A_PRD_IDX' );
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getRestockAlimData( $a_idx )
+    {
+        $aReturn                                    = [];
+        if( empty( $a_idx ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_RESTOCK_ALIM GRA' );
+        $builder->select( 'GRA.A_CREATE_AT, GRA.A_ALIM_SEND_AT, GRA.A_IDX, GRA.A_PRD_NAME, GRA.A_PRD_IDX, GRA.A_OPTIONS_IDX, GRA.A_OPTIONS_TEXT, A_MB_IDX' );
+        $builder->select( 'MB.MB_NM, MB.MB_MOBILE_NUM, MB_USERID' );
+        $builder->select( 'G.G_NAME, G.G_OPTION_COMBINATION_FLAG' );
+        $builder->join( 'MEMBERSHIP MB', 'MB.MB_IDX=GRA.A_MB_IDX', 'left' );
+        $builder->join( 'GOODS G', 'GRA.A_PRD_IDX = G.G_IDX', 'left' );
+        $builder->where( 'GRA.A_IDX',               $a_idx );
+
+        $query                                      = $builder->get();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function getGoodsRestockAlimDetailLists( $param = [] )
+    {
+
+        $aReturn                                    = [
+            'totalCount'                            => 0,
+            'lists'                                 => []
+        ];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS_RESTOCK_ALIM GRA' );
+        $builder->select( 'GRA.A_CREATE_AT, GRA.A_ALIM_SEND_AT, GRA.A_IDX' );
+        $builder->select( 'MB.MB_NM, MB.MB_MOBILE_NUM, MB_USERID' );
+        $builder->select( 'GR.G_NAME' );
+        $builder->join( 'MEMBERSHIP MB', 'MB.MB_IDX=GRA.A_MB_IDX', 'left' );
+        $builder->join( 'MEMBER_GRADE GR', 'MB.MB_GRADE_IDX= GR.G_IDX', 'left' );
+        $builder->where( 'GRA.A_PRD_IDX',               _elm( $param, 'A_PRD_IDX' ) );
+        if( empty( _elm( $param, 'A_SEND_GBN' ) ) === false ){
+            if( _elm( $param, 'A_SEND_GBN' ) == 'Y' ){
+                $builder->where( 'GRA.A_ALIM_SEND_AT IS NOT NULL' );
+            }else if( _elm( $param, 'A_SEND_GBN' ) == 'N' ){
+                $builder->where( 'GRA.A_ALIM_SEND_AT IS NULL' );
+            }
+        }
+
+        $aReturn['totalCount']                      = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
+        // 정렬
+        if (!empty( _elm( $param, 'order') ) ) {
+            $builder->orderBy( _elm( $param, 'order' ) );
+        }
+
+        // 페이징 처리
+        if (!empty( _elm( $param, 'limit' ) ) ) {
+            $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
+        }
+
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn['lists']                       = $query->getResultArray();
+        }
+
+        return $aReturn;
+    }
+
+
     public function updateGoodsGroup( $param = [] )
     {
         $aReturn                                    = false;
@@ -582,7 +1090,7 @@ class GoodsModel extends Model
         $builder                                    = $this->db->table( 'GOODS' );
         $builder->set( 'G_PRID',                    _elm( $param, 'G_PRID' ) );
         $builder->set( 'G_GROUP',                   _elm( $param, 'G_GROUP' ,NULL, true ) );
-
+        $builder->set( 'G_DAHAE_P_CODE',            _elm( $param, 'G_DAHAE_P_CODE' ,NULL, true ) );
         $builder->set( 'G_CATEGORY_MAIN',           _elm( $param, 'G_CATEGORY_MAIN' ) );
         $builder->set( 'G_CATEGORY_MAIN_IDX',       _elm( $param, 'G_CATEGORY_MAIN_IDX' ) );
         $builder->set( 'G_CATEGORYS',               _elm( $param, 'G_CATEGORYS' ) );
@@ -599,6 +1107,7 @@ class GoodsModel extends Model
         $builder->set( 'G_SELL_PERIOD_START_AT',    _elm( $param, 'G_SELL_PERIOD_START_AT' ) );
         $builder->set( 'G_SELL_PERIOD_END_AT',      _elm( $param, 'G_SELL_PERIOD_END_AT' ) );
         $builder->set( 'G_COLOR',                   _elm( $param, 'G_COLOR' ) );
+        $builder->set( 'G_REAL_COLOR',              _elm( $param, 'G_REAL_COLOR' ) );
         $builder->set( 'G_SELL_PRICE',              _elm( $param, 'G_SELL_PRICE' ) );
         $builder->set( 'G_SELL_UNIT',               _elm( $param, 'G_SELL_UNIT' ) );
         $builder->set( 'G_BUY_PRICE',               _elm( $param, 'G_BUY_PRICE' ) );
@@ -606,6 +1115,7 @@ class GoodsModel extends Model
         $builder->set( 'G_PRICE_RATE',              _elm( $param, 'G_PRICE_RATE' ) );
         $builder->set( 'G_TAX_TYPE',                _elm( $param, 'G_TAX_TYPE' ) );
         $builder->set( 'G_DISCOUNT_CD',             _elm( $param, 'G_DISCOUNT_CD' ) );
+        $builder->set( 'G_GRADE_DISCOUNT_FLAG',     _elm( $param, 'G_GRADE_DISCOUNT_FLAG' ) );
         $builder->set( 'G_SELL_POINT_FLAG',         _elm( $param, 'G_SELL_POINT_FLAG' ) );
         $builder->set( 'G_RELATION_GOODS_FLAG',     _elm( $param, 'G_RELATION_GOODS_FLAG' ) );
         $builder->set( 'G_RELATION_GOODS',          _elm( $param, 'G_RELATION_GOODS' ) );
@@ -615,6 +1125,7 @@ class GoodsModel extends Model
         $builder->set( 'G_STOCK_FLAG',              _elm( $param, 'G_STOCK_FLAG' ) );
         $builder->set( 'G_STOCK_CNT',               _elm( $param, 'G_STOCK_CNT' ) );
         $builder->set( 'G_SAFETY_STOCK',            _elm( $param, 'G_SAFETY_STOCK' ) );
+        $builder->set( 'G_IS_RESTOCK_ALIM_FLAG',    _elm( $param, 'G_IS_RESTOCK_ALIM_FLAG' ) );
         $builder->set( 'G_TEXT_OPTION',             _elm( $param, 'G_TEXT_OPTION' ) );
         $builder->set( 'G_TEXT_OPTION_USE_FLAG',    _elm( $param, 'G_TEXT_OPTION_USE_FLAG' ) );
         $builder->set( 'G_DELIVERY_PAY_CD',         _elm( $param, 'G_DELIVERY_PAY_CD' ) );
@@ -682,15 +1193,20 @@ class GoodsModel extends Model
         $builder->set( 'G_PRICE_RATE',              _elm( $param, 'G_PRICE_RATE' ) );
         $builder->set( 'G_TAX_TYPE',                _elm( $param, 'G_TAX_TYPE' ) );
         $builder->set( 'G_DISCOUNT_CD',             _elm( $param, 'G_DISCOUNT_CD' ) );
+        $builder->set( 'G_GRADE_DISCOUNT_FLAG',     _elm( $param, 'G_GRADE_DISCOUNT_FLAG' ) );
         $builder->set( 'G_SELL_POINT_FLAG',         _elm( $param, 'G_SELL_POINT_FLAG' ) );
         $builder->set( 'G_RELATION_GOODS_FLAG',     _elm( $param, 'G_RELATION_GOODS_FLAG' ) );
         $builder->set( 'G_RELATION_GOODS',          _elm( $param, 'G_RELATION_GOODS' ) );
         $builder->set( 'G_ADD_GOODS_FLAG',          _elm( $param, 'G_ADD_GOODS_FLAG' ) );
         $builder->set( 'G_ADD_GOODS',               _elm( $param, 'G_ADD_GOODS' ) );
         $builder->set( 'G_OPTION_USE_FLAG',         _elm( $param, 'G_OPTION_USE_FLAG' ) );
+        $builder->set( 'G_OPTION_NAMES',            _elm( $param, 'G_OPTION_NAMES' ) );
+        $builder->set( 'G_OPTION_INFO',             _elm( $param, 'G_OPTION_INFO' ) );
+        $builder->set( 'G_OPTION_COMBINATION_FLAG', _elm( $param, 'G_OPTION_COMBINATION_FLAG' ) );
         $builder->set( 'G_STOCK_FLAG',              _elm( $param, 'G_STOCK_FLAG' ) );
         $builder->set( 'G_STOCK_CNT',               _elm( $param, 'G_STOCK_CNT' ) );
         $builder->set( 'G_SAFETY_STOCK',            _elm( $param, 'G_SAFETY_STOCK' ) );
+        $builder->set( 'G_IS_RESTOCK_ALIM_FLAG',    _elm( $param, 'G_IS_RESTOCK_ALIM_FLAG' ) );
         $builder->set( 'G_TEXT_OPTION',             _elm( $param, 'G_TEXT_OPTION' ) );
         $builder->set( 'G_TEXT_OPTION_USE_FLAG',    _elm( $param, 'G_TEXT_OPTION_USE_FLAG' ) );
         $builder->set( 'G_DELIVERY_PAY_CD',         _elm( $param, 'G_DELIVERY_PAY_CD' ) );
@@ -786,8 +1302,8 @@ class GoodsModel extends Model
         $builder->set( 'D_GOODS_IDX',               _elm( $param, 'D_GOODS_IDX' ) );
         $builder->set( 'D_MB_GROUP_IDX',            _elm( $param, 'D_MB_GROUP_IDX' ) );
         $builder->set( 'D_MB_GROUP_NAME',           _elm( $param, 'D_MB_GROUP_NAME' ) );
-        $builder->set( 'D_MB_GROUP_DC_AMT',         _elm( $param, 'D_MB_GROUP_DC_AMT' ) );
-        $builder->set( 'D_MB_GOURP_DC_UNIT',        _elm( $param, 'D_MB_GOURP_DC_UNIT' ) );
+        $builder->set( 'D_MB_GROUP_SV_AMT',         _elm( $param, 'D_MB_GROUP_SV_AMT' ) );
+        $builder->set( 'D_MB_GOURP_SV_UNIT',        _elm( $param, 'D_MB_GOURP_SV_UNIT' ) );
         $builder->set( 'D_DC_PERIOD_START_AT',      _elm( $param, 'D_DC_PERIOD_START_AT' ) );
         $builder->set( 'D_DC_PERIOD_END_AT',        _elm( $param, 'D_DC_PERIOD_END_AT' ) );
         $builder->set( 'D_CREATE_AT',               _elm( $param, 'D_CREATE_AT' ) );
@@ -808,17 +1324,12 @@ class GoodsModel extends Model
         }
 
         $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
-        $builder->set( 'O_GOODS_IDX',               _elm( $param, 'O_GOODS_IDX' ) );
-        $builder->set( 'O_KEYS',                    _elm( $param, 'O_KEYS' ) );
-        $builder->set( 'O_VALUES',                  _elm( $param, 'O_VALUES' ) );
-        $builder->set( 'O_STOCK',                   _elm( $param, 'O_STOCK' ) );
-        $builder->set( 'O_ADD_PRICE',               _elm( $param, 'O_ADD_PRICE' ) );
-        $builder->set( 'O_VIEW_STATUS',             _elm( $param, 'O_VIEW_STATUS' ) );
-        $builder->set( 'O_CREATE_AT',               _elm( $param, 'O_CREATE_AT' ) );
-        $builder->set( 'O_CREATE_IP',               _elm( $param, 'O_CREATE_IP' ) );
-        $builder->set( 'O_CREATE_MB_IDX',           _elm( $param, 'O_CREATE_MB_IDX' ) );
+        foreach( $param as $key => $val ){
+            $builder->set( $key,                    $val );
+        }
 
         $aResult                                    = $builder->insert();
+        //echo $this->db->getLastQuery();
         if( $aResult ){
             $aReturn                                = $this->db->insertID();
         }
@@ -831,17 +1342,15 @@ class GoodsModel extends Model
             return $aReturn;
         }
         $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
-        $builder->set( 'O_GOODS_IDX',               _elm( $param, 'O_GOODS_IDX' ) );
-        $builder->set( 'O_KEYS',                    _elm( $param, 'O_KEYS' ) );
-        $builder->set( 'O_VALUES',                  _elm( $param, 'O_VALUES' ) );
-        $builder->set( 'O_STOCK',                   _elm( $param, 'O_STOCK' ) );
-        $builder->set( 'O_ADD_PRICE',               _elm( $param, 'O_ADD_PRICE' ) );
-        $builder->set( 'O_VIEW_STATUS',             _elm( $param, 'O_VIEW_STATUS' ) );
-        $builder->set( 'O_UPDATE_AT',               _elm( $param, 'O_UPDATE_AT' ) );
-        $builder->set( 'O_UPDATE_IP',               _elm( $param, 'O_UPDATE_IP' ) );
-        $builder->set( 'O_UPDATE_MB_IDX',           _elm( $param, 'O_UPDATE_MB_IDX' ) );
 
-        $builder->where( 'O_IDX',                   _elm( $param, 'O_IDX' ) );
+        foreach( $param as $key => $val ){
+            if( $key == 'O_IDX' ){
+                $builder->where( $key,              $val );
+            }else{
+                $builder->set( $key,                $val );
+            }
+
+        }
 
         $aReturn                                    = $builder->update();
         return $aReturn;

@@ -2,7 +2,7 @@ function getSearchList( page ) {
 
     const frm = $("#frm_search");
     const urlParams = new URLSearchParams(window.location.search);
-    if (page === undefined) {
+    if (urlParams.get('page') != undefined) {
         page = urlParams.get('page') || 1; // 기본값 1
     }else{
         let newUrl = window.location.origin + window.location.pathname + '?page=' + page;
@@ -63,6 +63,11 @@ $(function(){
 setTimeout(function(){
     getSearchList();
 }, 300);
+window.addEventListener('popstate', function (event) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page') || 1;
+    getSearchList(page);
+});
 
 
 function deleteGoodsConfirm(i_idx){

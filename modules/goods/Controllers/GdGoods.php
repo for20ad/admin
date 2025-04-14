@@ -29,7 +29,7 @@ class GdGoods extends Goods
         #------------------------------------------------------------------
         if ($this->memberlib->isLogin() === true)
         {
-            if ($this->menulib->isGrant(82) === false)
+            if ($this->menulib->isGrant(87) === false)
             {
                 $this->response->redirect(_link_url('/main'));
             }
@@ -41,7 +41,7 @@ class GdGoods extends Goods
         // 권한 체크
         if ($this->memberlib->isSuperAdmin() === false)
         {
-            if ($this->menulib->isGrant(82) === false)
+            if ($this->menulib->isGrant(87) === false)
             {
                 $this->response->redirect(_link_url('/main'));
             }

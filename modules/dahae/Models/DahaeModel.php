@@ -545,4 +545,76 @@ class DahaeModel extends Model
     }
 
 
+    public function getRealGoodsListsA( $param = [] )
+    {
+        $aReturn                                    = [
+            'lists'                                 => [],
+            'total_count'                           => 0,
+        ];
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS' );
+        $builder->select( 'G_IDX,G_OPTION_COMBINATION_FLAG' );
+        //$builder->where( 'G_PRID IS NULL');
+        if( empty( _elm( $param, 'G_IDX' ) ) === false ){
+            $builder->where( 'G_IDX', _elm( $param, 'G_IDX' ) );
+        }
+        $builder->where( 'G_IDX !=', '46'  );
+        $builder->orderBy( 'G_IDX', 'ASC' );
+
+        // 총 결과 수
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
+        // 정렬
+        if (!empty( _elm( $param, 'order') ) ) {
+            $builder->orderBy( _elm( $param, 'order' ) );
+        }
+
+        // 페이징 처리
+        if (!empty( _elm( $param, 'limit' ) ) ) {
+            $builder->limit((int)_elm( $param, 'limit' ), (int)( _elm( $param, 'start' )  ?? 0));
+        }
+
+        $query                                      = $builder->get();
+        echo $this->db->getLastQuery();
+        if ($this->db->affectedRows())
+        {
+            $aReturn['lists']                       = $query->getResultArray();
+        }
+
+        return $aReturn;
+    }
+
+    public function getGoodsOptionGroup( $goodsIdx )
+    {
+
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'GOODS_OPTIONS' );
+        $builder->select( 'O_KEYS,O_VALUES' );
+        $builder->where( 'O_GOODS_IDX', $goodsIdx );
+        // $builder->groupBy( 'O_KEYS' );
+        $query                                      = $builder->get();
+        //echo $this->db->getLastQuery();
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getResultArray();
+        }
+        return $aReturn;
+    }
+
+    public function updateGoodsCombinationsInfo( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'GOODS' );
+        $builder->where( 'G_IDX', _elm( $param, 'G_IDX' ) );
+        $builder->set( 'G_OPTION_COMBINATION_FLAG', _elm( $param, 'G_OPTION_COMBINATION_FLAG' ) );
+        $builder->set( 'G_OPTION_NAMES', _elm( $param, 'G_OPTION_NAMES' ) );
+        $builder->set( 'G_OPTION_INFO', _elm( $param, 'G_OPTION_INFO' ) );
+        $aReturn                                    = $builder->update();
+        return $aReturn;
+    }
 }

@@ -36,6 +36,7 @@ class KakaoLib
             }
         }
 
+
         $buttons = [];
         if(empty($template['BUTTONS']) === false ){
             $_button = json_decode( $template['BUTTONS'] , true );

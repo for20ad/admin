@@ -12,6 +12,8 @@
     $aLists = _elm($view_datas, 'lists', []);
     $row           = _elm($view_datas, 'row', []);
     $total_rows    = _elm($view_datas, 'total_rows', []);
+
+    print_R( $aLists );
 ?>
 
     <?php

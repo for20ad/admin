@@ -41,10 +41,13 @@ $routes->group('apis/order', ['namespace' => 'Module\order\Controllers\apis'], s
     $routes->post( 'orderExchangeProcessLists',     'OrderApi::orderExchangeProcessLists' );
     $routes->post( 'orderReturnProcessLists',       'OrderApi::orderReturnProcessLists' );
 
-
-
+    $routes->post( 'changeOrderStatus',             'OrderApi::changeOrderStatus' );
+    $routes->post( 'changeOrderInfoStatus',         'OrderApi::changeOrderInfoStatus' );
 
     $routes->post( 'getOrderTracking',              'OrderApi::getOrderShipTracking' );
     $routes->post( 'getOrderPayStatusLists',        'OrderApi::getOrderPayStatusLists' );
+
+    $routes->post( 'changeMemoStatus',              'OrderApi::changeMemoStatus' );
+
 
 });

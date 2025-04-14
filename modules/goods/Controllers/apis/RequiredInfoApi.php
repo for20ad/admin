@@ -108,6 +108,7 @@ class RequiredInfoApi extends ApiController
 
         $aLISTS_RESULT                              = $infoModel->getRequiredInfoLists($modelParam);
 
+
         $total_count                                = _elm($aLISTS_RESULT, 'total_count', 0);
 
         $page_datas                                 = [];
@@ -289,7 +290,8 @@ class RequiredInfoApi extends ApiController
         #------------------------------------------------------------------
         $modelParam                                 = [];
         $modelParam['R_TITLE']                      = _elm( $requests, 's_title' );
-
+        $modelParam['limit']                        = $limit;
+        $modelParam['start']                        = $start;
         if( empty( _elm( $requests , 's_keyword' ) ) === false )
         {
             switch( _elm( $requests , 's_condition' ) )

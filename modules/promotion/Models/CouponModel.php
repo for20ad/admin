@@ -426,4 +426,43 @@ class CouponModel extends Model
         return $aReturn;
 
     }
+    public function getCouponIssueDataByIdx( $i_idx )
+    {
+        $aReturn                                    = [];
+        $builder                                    = $this->db->table( 'COUPON_ISSUE' );
+        $builder->select( '*' );
+        $builder->where( 'I_IDX',                   $i_idx );
+
+
+        $query                                      = $builder->get();
+
+        if ($this->db->affectedRows())
+        {
+            $aReturn                                = $query->getRowArray();
+        }
+        return $aReturn;
+    }
+
+    public function returnCpnIssueStatus( $param = [] )
+    {
+        $aReturn                                    = false;
+        if( empty( $param ) === true ){
+            return $aReturn;
+        }
+        $builder                                    = $this->db->table( 'COUPON_ISSUE' );
+        foreach( $param as $key => $val ){
+            if( $key == 'I_IDX' ){
+                $builder->where( $key,              $val );
+            }else{
+                $builder->set( $key,                $val );
+            }
+        }
+
+        $aReturn                                    = $builder->update();
+
+        return $aReturn;
+
+
+    }
+
 }

@@ -256,7 +256,7 @@ function getSearchList( page ){
     var data = 'picLists='+brandPickList ;
     let frm = $('#frm_search');
     const urlParams = new URLSearchParams(window.location.search);
-    if (page === undefined) {
+    if (urlParams.get('page') != undefined) {
         page = urlParams.get('page') || 1; // 기본값 1
     }
     frm.find('[name=page]').val( page );

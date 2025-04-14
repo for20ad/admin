@@ -678,10 +678,32 @@
                             </div>
                             <div class="input-group required">
                                 <label class="label body2-c">
-                                    할인 기준
+                                    등급 할인 적용
+                                    <span>*</span>
                                 </label>
                                 <?php
-                                    $options  = ['N'=>'기본 설정에 따름', 'Y'=>'개별 할인 설정'];
+
+                                    $checked = true;
+
+                                    $setParam = [
+                                        'name' => 'i_grade_discount_flag',
+                                        'id' => 'i_grade_discount_flag',
+                                        'value' => 'Y' ,
+                                        'label' => '회원 등급에 따라 적용 가능',
+                                        'checked' => $checked,
+                                        'extraAttributes' => [
+                                            'class'=>'check-item',
+                                        ]
+                                    ];
+                                    echo getCheckBox( $setParam );
+                                ?>
+                            </div>
+                            <div class="input-group required">
+                                <label class="label body2-c">
+                                    적립금 지급 기준
+                                </label>
+                                <?php
+                                    $options  = ['N'=>'기본 설정에 따름', 'Y'=>'개별 적립 설정'];
                                     $extras   = ['id' => 'i_sell_point_flag', 'class' => 'form-select', 'style' => 'max-width: 250px;margin-right:0.235em;','onChange'=>'$(this).val() == \'Y\'? $(\'#point_save_wrap\').show() : $(\'#point_save_wrap\').hide()' ];
                                     $selected = '';
                                     echo getSelectBox('i_sell_point_flag', $options, $selected, $extras);
@@ -1184,6 +1206,62 @@
                                     echo getRadioButton($setParam);
                                 ?>
                             </div>
+                            <div class="input-group required">
+                                <label class="label body2-c">
+                                    재입고 알림
+                                </label>
+                                <?php
+                                    $checked = true;
+
+                                    $setParam = [
+                                        'name' => 'i_is_restock_alim_flag',
+                                        'id' => 'i_is_restock_alim_flag_Y',
+                                        'value' => 'Y',
+                                        'label' => '사용',
+                                        'checked' => $checked,
+                                        'extraAttributes' => [
+                                        ]
+                                    ];
+                                    echo getCheckBox($setParam);
+                                ?>
+                            </div>
+                            <div id="options_group_wrap" style="width:100%;padding:2.5rem;margin-bottom:1.3rem;border-radius: 4px;border: 1px solid var(----tblr-border-color, #E6E7E9);background: var(-----tblr-light, #F8FAFC);">
+                                <?php
+                                    echo getIconButton([
+                                        'txt' => '그룹추가',
+                                        'icon' => 'box_plus',
+                                        'buttonClass' => 'btn',
+                                        'buttonStyle' => 'width:120px; height: 36px',
+                                        'width' => '21',
+                                        'height' => '20',
+                                        'stroke' => 'black',
+                                        'extra' => [
+                                            'type' => 'button',
+                                            'onclick' => 'addRows( \'options_group\' );',
+                                        ]
+                                    ]);
+                                ?>
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter" id="aOptionGroupTable">
+                                        <colgroup>
+                                            <col style="width:15%;">
+                                            <col style="*">
+                                            <col style="width:15%;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>옵션명</th>
+                                                <th>옵션값</th>
+                                                <th>삭제</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="aTbody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                             <div id="options_wrap" style="width:100%;padding:2.5rem;margin-bottom:1.3rem;border-radius: 4px;border: 1px solid var(----tblr-border-color, #E6E7E9);background: var(-----tblr-light, #F8FAFC);">
                                 <?php
                                     echo getIconButton([
@@ -1202,9 +1280,30 @@
                                 ?>
                                 <div class="table-responsive">
                                     <table class="table table-vcenter" id="aOptionTable">
+                                        <div style="float:right;width:5.5rem;" class="input-group required">
+                                        <?php
+                                            $checked = false;
+
+                                            $setParam = [
+                                                'name' => 'i_option_combination_flag',
+                                                'id' => 'i_option_combination_flag_Y',
+                                                'value' => 'Y',
+                                                'label' => '조합형',
+                                                'checked' => $checked,
+                                                'extraAttributes' => [
+                                                    'aria-label' => 'Single checkbox One',
+                                                    'class'=>'check-item',
+                                                    'onclick'=>'addOptionRowsConfirm(tagData);'
+                                                ]
+                                            ];
+                                            echo getCheckBox( $setParam );
+                                        ?>
+                                        </div>
                                         <colgroup>
-                                            <col style="width:20%;">
+                                            <col style="width:15%;">
                                             <col style="*">
+                                            <col style="width:15%;">
+                                            <col style="width:15%;">
                                             <col style="width:10%;">
                                             <col style="width:10%;">
                                             <col style="width:10%;">
@@ -1214,6 +1313,8 @@
                                             <tr>
                                                 <th>옵션명</th>
                                                 <th>옵션값</th>
+                                                <th>다해스팩</th>
+                                                <th>다해바코드</th>
                                                 <th>재고수량</th>
                                                 <th>추가금액</th>
                                                 <th>노출여부</th>
@@ -2124,7 +2225,8 @@ const $uploadButton = $('#upload-button');
 let   filesArray = [];
 let   productPcikList = [];
 let   addProductPickList = [];
-
+let   tagData = {};
+var   optionGroupIndex = 0;
 
 function loadAddInfo(){
     let data = '';
@@ -2759,6 +2861,8 @@ function addRows( gbn ){
         <tr>
             <td><input type="text" class="form-control option-key" name="i_option_keys[]"></td>
             <td><input type="text" class="form-control option-value" name="i_option_value[]"></td>
+            <td><input type="text" class="form-control option-spec" name="i_option_spec[]"></td>
+            <td><input type="text" class="form-control option-barcode" name="i_option_barcode[]"></td>
             <td><input type="text" class="form-control option-stock" name="i_option_stock[]"></td>
             <td><input type="text" class="form-control option-add_amt" numberwithcomma name="i_option_add_price[]"></td>
             <td>
@@ -2789,6 +2893,31 @@ function addRows( gbn ){
         `;
         $("#aOptionTable tbody").append(html);
 
+    }else if( gbn == 'options_group' ){
+        var html = `
+        <tr class="options-group" data-group-index="${optionGroupIndex}">
+            <td><input type="text" class="form-control group-key-input" id="error_i_option_group_keys[]" name="i_option_group_keys[]"></td>
+            <td><div class="tag-input-container"><input type="text" class="tag-input form-control option-group-value" name="i_option_group_value[${optionGroupIndex}][]"></div></td>
+            <td>
+            <?php
+                echo getIconAnchor([
+                    'txt' => '',
+                    'icon' => 'delete',
+                    'buttonClass' => '',
+                    'buttonStyle' => '',
+                    'width' => '24',
+                    'height' => '24',
+                    'stroke' => '#616876',
+                    'extra' => [
+                        'onclick' => 'deleteOptionGroup(this);',
+                    ]
+                ]);
+            ?>
+            </td>
+        </tr>
+        `;
+        $("#aOptionGroupTable #aTbody").append(html);
+        optionGroupIndex++;
     }else if( gbn == 'text_options' ){
         var html = `
         <tr>
@@ -2818,6 +2947,322 @@ function addRows( gbn ){
     }
 
 }
+/// Enter 키 입력 감지
+$(document).on('keydown', '.option-group-value', function(event) {
+    if (event.keyCode === 13) {  // Enter key
+        event.preventDefault();
+        handleInput($(this));
+    }
+});
+// 포커스 아웃(blur) 감지
+$(document).on('blur', '.option-group-value', function() {
+    handleInput($(this));
+});
+// i_option_group_keys[] 값 변경 감지
+$(document).on('input', '.group-key-input', function () {
+    var $input = $(this);
+    var oldGroupKey = $input.data('old-value') || ''; // 이전 값 저장
+    var newGroupKey = $input.val().trim();
+
+    // 값이 변경되었을 경우에만 실행
+    if (oldGroupKey !== newGroupKey && newGroupKey !== "") {
+        if (tagData.hasOwnProperty(oldGroupKey)) {
+            tagData = renameKeyPreserveOrder(tagData, oldGroupKey, newGroupKey); // 키값 변경 및 순서 유지
+        }
+
+        console.log("Updated tagData::", tagData);
+
+        // 새로운 값을 old-value로 저장
+        $input.data('old-value', newGroupKey);
+
+        // 새로운 값을 old-value로 저장
+        applyCombinationHeaders( tagData );
+    }
+});
+
+function renameKeyPreserveOrder(obj, oldKey, newKey) {
+    let newObj = {};
+
+    Object.entries(obj).forEach(([key, value]) => {
+        if (key === oldKey) {
+            newObj[newKey] = value; // 키값 변경
+        } else {
+            newObj[key] = value; // 기존 키 유지
+        }
+    });
+
+    return newObj;
+}
+
+// 공통 로직 처리 함수
+function handleInput($input) {
+    var inputValue = $input.val().trim();
+    if (inputValue === "") return;  // 빈 값 무시
+
+    // i_option_group_keys의 값 가져오기
+    var groupKey = $input.closest('tr').find('.group-key-input').val().trim();
+    if (groupKey === "") {
+        box_alert("옵션 그룹 키를 입력하세요.", 'i');
+        return;
+    }
+
+    // tagData에 그룹 키가 없으면 배열 초기화
+    if (!tagData[groupKey]) {
+        tagData[groupKey] = [];
+    }
+
+    // 태그 데이터 추가 (배열에 객체로 추가)
+    tagData[groupKey].push({ value: inputValue });
+    console.log("tagData::", tagData);
+
+    // 태그 박스 생성
+    var tagHtml = `
+        <div class="tag" data-value="${inputValue}">
+            <span class="tag-text">${inputValue}</span>
+            <span class="remove-tag">×</span>
+        </div>
+    `;
+
+    // 태그 박스를 input 앞에 추가
+    $input.before(tagHtml);
+
+    // input 값 초기화
+    $input.val('');
+    addOptionRows(tagData);
+}
+// 태그 삭제 버튼 클릭 이벤트
+$(document).on('click', '.remove-tag', function() {
+    var tagDiv = $(this).parent('.tag');
+    var tagValue = tagDiv.find('.tag-text').text().trim();  // 수정된 부분
+    var groupKey = $(this).closest('tr').find('.group-key-input').val().trim();
+
+    // tagData에서 해당 값 삭제
+    if (tagData[groupKey]) {
+        tagData[groupKey] = tagData[groupKey].filter(item => item.value !== tagValue);
+
+        // 그룹이 비어있으면 삭제
+        if (tagData[groupKey].length === 0) {
+            delete tagData[groupKey];
+        }
+    }
+
+    console.log("tagData삭제::", tagData);
+
+    // 태그 박스 삭제
+
+    if( $('#aOptionTable tbody tr').length > 0 ){
+        if( confirm( '기존 데이터가 변경 됩니다. 진행하시겠습니까?' ) ){
+            addOptionRows(tagData);
+            tagDiv.remove();
+        }
+    }else{
+        tagDiv.remove();
+    }
+
+
+});
+
+
+
+function addOptionRowsConfirm(){
+    if( $('#aOptionTable tbody tr').length > 0 ){
+        box_confirm('기존 데이터가 변경 됩니다. 진행하시겠습니까?', 'q', '', addOptionRows, tagData);
+    }else{
+        addOptionRows();
+    }
+}
+let existingCombinations = [];  // 기존에 추가된 조합을 저장
+
+
+function addOptionRows(tagsObject) {
+    $("#aOptionTable tbody").empty();  // 기존 행 초기화
+
+    // 각 그룹 키에 대해 테이블 생성
+    if( $('[name=i_option_combination_flag]').is(':checked') === true ){
+        applyCombinationHeaders( tagData );
+
+
+         // 옵션 그룹을 배열로 변환
+        let optionGroups = Object.values(tagsObject).map(group => group.map(item => item.value));
+
+        // 조합 생성
+        let allCombinations = generateCombinations(optionGroups);
+
+        // 테이블 초기화
+        $("#aOptionTable tbody").empty();
+
+        // 조합을 테이블에 추가
+        allCombinations.forEach(combination => {
+            let html = '<tr>';
+
+            // 옵션 조합
+            combination.forEach((opt, i) => {
+                let inputName = `i_option_value${i > 0 ? i + 1 : ''}`;
+                html += `<td><input type="text" class="form-control" name="${inputName}[]" value="${opt}" readonly></td>`;
+            });
+
+            // 추가 필드 및 삭제 버튼
+            html += `
+                <td><input type="text" class="form-control option-spec" name="i_option_spec[]"></td>
+                <td><input type="text" class="form-control option-barcode" name="i_option_barcode[]"></td>
+                <td><input type="text" class="form-control option-stock" name="i_option_stock[]"></td>
+                <td><input type="text" class="form-control option-add_amt" numberwithcomma name="i_option_add_price[]"></td>
+                <td>
+                    <select name="i_option_status[]" class="form-select" style="max-width: 80px; margin-right: 2.235em;">
+                        <option value="Y">노출</option>
+                        <option value="N">비노출</option>
+                    </select>
+                </td>
+
+            </tr>`;
+
+            $("#aOptionTable tbody").append(html);
+        });
+    }else{
+        resetTableHeaders();
+        Object.keys(tagsObject).forEach(function(groupKey) {
+            tagsObject[groupKey].forEach(function(tag) {
+                var html = `
+                    <tr>
+                        <td><input type="text" class="form-control option-key" name="i_option_keys[]" value="${groupKey}" readonly></td>
+                        <td><input type="text" class="form-control option-value" name="i_option_value[]" value="${tag.value}" readonly></td>
+                        <td><input type="text" class="form-control option-spec" name="i_option_spec[]"></td>
+                        <td><input type="text" class="form-control option-barcode" name="i_option_barcode[]"></td>
+                        <td><input type="text" class="form-control option-stock" name="i_option_stock[]"></td>
+                        <td><input type="text" class="form-control option-add_amt" numberwithcomma name="i_option_add_price[]"></td>
+                        <td>
+                            <select name="i_option_status[]" class="form-select" style="max-width: 80px; margin-right: 2.235em;">
+                                <option value="Y">노출</option>
+                                <option value="N">비노출</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                `;
+                $("#aOptionTable tbody").append(html);
+            });
+        });
+    }
+    updateGoodsStock();
+}
+function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+    return a.every((val, idx) => val === b[idx]);
+}
+
+// 옵션 그룹 삭제 및 인덱스 재정렬
+function deleteOptionGroup(el) {
+
+    var groupKey = $(el).closest('tr').find('.group-key-input').val().trim();
+    // tagData에서 해당 값 삭제
+    if (tagData[groupKey]) {
+        // 그룹이 비어있으면 삭제
+        delete tagData[groupKey];
+    }
+
+    console.log("tagData그룹삭제::", tagData);
+    $(el).closest('tr').remove();
+    addOptionRows( tagData );
+    updateGoodsStock();
+    }
+
+    /**
+    * 조합형 선택 시 테이블 헤더와 컬럼을 조합 수에 맞춰 조정
+    */
+    function applyCombinationHeaders(tagData) {
+    let combinationKeys = Object.keys(tagData);
+    let theadHtml = '<tr>';
+    let colgroupHtml = '';
+
+    // 옵션명 헤더 추가
+    combinationKeys.forEach((key, index) => {
+        theadHtml += `<th>${key}</th>`;
+        colgroupHtml += '<col style="*">';
+    });
+
+    // 추가 고정 헤더들
+    theadHtml += `
+        <th>다해스팩</th>
+        <th>다해바코드</th>
+        <th>재고수량</th>
+        <th>추가금액</th>
+        <th>노출여부</th>
+    `;
+
+    // 추가 고정 컬럼들
+    colgroupHtml += `
+        <col style="width:15%;">
+        <col style="width:15%;">
+        <col style="width:10%;">
+        <col style="width:10%;">
+        <col style="width:10%;">
+    `;
+
+    theadHtml += '</tr>';
+
+    // 테이블에 적용
+    $("#aOptionTable colgroup").html(colgroupHtml);
+    $("#aOptionTable thead").html(theadHtml);
+}
+
+/**
+* 기본 테이블 헤더와 컬럼으로 리셋
+*/
+
+function resetTableHeaders() {
+    const defaultColgroup = `
+        <col style="*">
+        <col style="width:15%;">
+        <col style="width:15%;">
+        <col style="width:10%;">
+        <col style="width:10%;">
+        <col style="width:10%;">
+    `;
+
+    const defaultThead = `
+        <tr>
+            <th>옵션명</th>
+            <th>옵션값</th>
+            <th>다해스팩</th>
+            <th>다해바코드</th>
+            <th>재고수량</th>
+            <th>추가금액</th>
+            <th>노출여부</th>
+        </tr>
+    `;
+
+    $("#aOptionTable colgroup").html(defaultColgroup);
+    $("#aOptionTable thead").html(defaultThead);
+}
+
+
+
+
+// 옵션 행 삭제 버튼
+$(document).on('click', '.delete-option-row', function() {
+    $(this).closest('tr').remove();
+});
+/**
+ * 재귀적으로 모든 조합을 생성하는 함수
+ * @param {Array} arrays - 배열의 배열 (옵션 그룹들)
+ * @returns {Array} - 가능한 모든 조합
+ */
+function generateCombinations(arrays) {
+    if (arrays.length === 0) return [[]];
+
+    let result = [];
+    let rest = generateCombinations(arrays.slice(1));
+
+    arrays[0].forEach(item => {
+        rest.forEach(r => {
+            result.push([item, ...r]);
+        });
+    });
+
+    return result;
+}
+
+
 
 
 $(document).on('change', 'select[name="i_text_option_type[]"]', function() {

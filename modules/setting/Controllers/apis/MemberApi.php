@@ -129,11 +129,11 @@ class MemberApi extends ApiController
         $validation->setRules([
             'i_user_id' => [
                 'label'  => '아이디',
-                'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]|regex_match[/^[a-zA-Z]{6,}$/]',
+                'rules'  => 'trim|required|is_unique[ADMIN_MEMBER.MB_USERID]|regex_match[/^[a-zA-Z0-9]{6,}$/]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
                     'is_unique'     => '아이디가 이미 존재합니다.',
-                    'regex_match'   => '아이디는 영문자로만 구성되며, 최소 6자 이상이어야 합니다.',
+                    'regex_match'   => '아이디는 영문,숫자조합으로 구성되며, 최소 6자 이상이어야 합니다.',
                 ],
             ],
             'i_password' => [
@@ -515,10 +515,10 @@ class MemberApi extends ApiController
         $setRules                                   = [
             'i_user_id' => [
                 'label'  => '아이디',
-                'rules'  => 'trim|required|regex_match[/^[a-zA-Z]{6,}$/]',
+                'rules'  => 'trim|required|regex_match[/^[a-zA-Z0-9]{6,}$/]',
                 'errors' => [
                     'required'      => '아이디를 입력하세요.',
-                    'regex_match'   => '아이디는 영문자로만 구성되며, 최소 6자 이상이어야 합니다.',
+                    'regex_match'   => '아이디는 영문,숫자조합으로 구성되며, 최소 6자 이상이어야 합니다.',
                 ],
             ],
             'i_user_name' => [

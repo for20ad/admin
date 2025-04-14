@@ -2,7 +2,7 @@ function getSearchList( page ) {
 
     const frm = $("#frm_search");
     const urlParams = new URLSearchParams(window.location.search);
-    if (page === undefined) {
+    if (urlParams.get('page') != undefined) {
         page = urlParams.get('page') || 1; // 기본값 1
     }
     frm.find( '[name=page]' ).val( page );
@@ -94,6 +94,11 @@ $(function(){
 setTimeout(function(){
     getSearchList(1);
 }, 300);
+window.addEventListener('popstate', function (event) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page') || 1;
+    getSearchList(page);
+});
 
 function openMemoLayer( odr_idx, id, viewTab ){
     show_ord_idx = odr_idx;
@@ -288,57 +293,6 @@ function hideSelect( obj )
     obj.parent().hide(); obj.parent().parent().find('.orgStatus').show();
 }
 
-function openTrackingLayer( odr_idx, id, viewTab ){
-    show_ord_idx = odr_idx;
-    let data = 'ordIdx='+odr_idx;
-    let url  = '/apis/order/getOrderTracking';
-
-    $.ajax({
-        url: url,
-        type: 'post',
-        data: data,
-        processData: false,
-        cache: false,
-        beforeSend: function() {
-            $('#preloader').show();
-        },
-        success: function(response) {
-            submitSuccess(response);
-            $('#preloader').hide();
-            if (response.status == 'false')
-            {
-                var error_message = '';
-                error_message = error_lists.join('<br />');
-                if (error_message != '') {
-                    box_alert(error_message, 'e');
-                }
-
-                return false;
-            }
-
-            $('#'+id+' .viewData').empty().html(response.page_datas.detail);
-            var modalElement = document.getElementById(id);
-            var modal = new bootstrap.Modal(modalElement, {
-                backdrop: 'static', // 마스크 클릭해도 닫히지 않게 설정
-                keyboard: true     // esc 키로 닫히지 않게 설정
-            });
-            modal.show();
-
-
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            submitError(jqXHR.status, errorThrown);
-            $('#preloader').hide();
-            console.log(textStatus);
-
-            return false;
-        },
-        complete: function() { }
-    });
-        // 모달 열기
-
-}
 
 
 

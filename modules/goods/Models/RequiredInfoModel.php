@@ -73,6 +73,7 @@ class RequiredInfoModel extends Model
 
     public function getRequiredInfoLists( $param = [] )
     {
+
         $aReturn                                    = [
             'total_count'                           => 0,
             'lists'                                 => [],
@@ -85,13 +86,15 @@ class RequiredInfoModel extends Model
             $builder->where('R_TITLE', _elm( $param, 'R_TITLE' ) );
         }
 
-        // 총 결과 수
-        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
 
         // 정렬
         if (!empty( _elm( $param, 'order') ) ) {
             $builder->orderBy( _elm( $param, 'order' ) );
         }
+        // 총 결과 수
+        $aReturn['total_count']                     = $builder->countAllResults(false); // false는 쿼리 빌더를 초기화하지 않음
+
 
         // 페이징 처리
         if (!empty( _elm( $param, 'limit' ) ) ) {
@@ -99,6 +102,7 @@ class RequiredInfoModel extends Model
         }
 
         $query                                      = $builder->get();
+
 
         if ($this->db->affectedRows())
         {

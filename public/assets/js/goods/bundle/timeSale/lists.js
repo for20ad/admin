@@ -2,7 +2,7 @@ function getSearchList( page ) {
 
     const frm = $("#frm_search");
     const urlParams = new URLSearchParams(window.location.search);
-    if (page === undefined) {
+    if (urlParams.get('page') != undefined) {
         page = urlParams.get('page') || 1; // 기본값 1
     }
     frm.find( '[name=page]' ).val( page );
@@ -59,6 +59,11 @@ $(function(){
 setTimeout(function(){
     getSearchList(1);
 }, 300);
+window.addEventListener('popstate', function (event) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page') || 1;
+    getSearchList(page);
+});
 
 function deleteTimeSaleConfirm(i_idx){
     box_confirm('타임세일 목록을 삭제하시겠습니까?', 'q', '', deleteTimeSale, i_idx);
