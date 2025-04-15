@@ -3,4 +3,4 @@
 /writeble/*
 /.git/*
 /.github
-/app/Config/Database.*
+**/Database.*
